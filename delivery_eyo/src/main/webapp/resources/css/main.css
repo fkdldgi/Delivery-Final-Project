@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+#wrap{
+		width: 80%;
+		height: 1000px;
+		margin: auto;
+}
+
+#header{
+		width: 100%;
+		height: 10%;
+}
+/* header에 있는 logo의 css */
+#logo{
+		width: 130px;
+}
+
+#content{
+		width: 100%;
+		height: 85%;
+}
+#footer{
+		width: 100%;
+		height: 5%;
+		background-color: green;
+}

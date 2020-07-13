@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.OwnerMapper">
+	<insert id="insert" parameterType="owner">
+		insert into owner values(OWNER_SEQ.NEXTVAL,#{id},#{pwd},#{name},#{email},#{tel},2,sysdate)
+	</insert>
+	<select id="selectOne" parameterType="hashmap" resultType="owner">
+		select * from owner where id=#{id} and pwd=#{pwd}
+	</select>
+	<select id="idchk" parameterType="String" resultType="owner">
+		select * from owner where id=#{id}
+	</select>
+	<select id="shop_list" parameterType="String" resultType="com.jhta.delivery.member.vo.ShopVo">
+		select a.*
+		from shop a, owner b
+		where a.owner_num = b.num and b.id=#{id}
+	</select>
+	<select id="shop_select" parameterType="int" resultType="com.jhta.delivery.member.vo.ShopVo">
+		select *
+		from shop where num=#{num}
+	</select>
+</mapper>
