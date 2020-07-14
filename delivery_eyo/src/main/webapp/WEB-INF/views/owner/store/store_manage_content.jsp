@@ -112,23 +112,23 @@
 		
 		<!-- 메뉴카테고리 명 -->
 		<c:forEach var="list" items="${requestScope.menuCategoryList }">
-		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
-			<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
-			 	<div style="position: relative; text-align: center; height: 40px;">
-			 		<div style="display: inline-block; text-align: center;"><h2>${list.name }</h2></div>
-			 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
-			 	</div>
-			</div>			
-		</div>
-		<!-- 메뉴 -->
-		<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
-			<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-				<h2>메뉴이름</h2>
-				<span>menu_info</span>
-				<br>
-				<span>menu_price</span>
+			<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+				<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
+				 	<div style="position: relative; text-align: center; height: 40px;">
+				 		<div style="display: inline-block; text-align: center;"><h2>${list.name }</h2></div>
+				 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
+				 	</div>
+				</div>			
 			</div>
-		</div>
+			<!-- 메뉴 -->
+			<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+				<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+					<h2>메뉴이름</h2>
+					<span>menu_info</span>
+					<br>
+					<span>menu_price</span>
+				</div>
+			</div>
 		</c:forEach>
 	</div>
 	<div style="text-align: right;">
