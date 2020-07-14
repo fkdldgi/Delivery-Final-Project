@@ -22,4 +22,8 @@ public class Owner_MenuDao {
 	public List<Menu_OptionVo> menuOption(int num){
 		return session.selectList(NAMESPACE+".Menu_Option", num);
 	}
+	
+	public List<Menu_OptionVo> ShopNum_MenuOption(int num){
+		return session.selectList(NAMESPACE+"Shop_Num_Menu_Option", num);
+	}
 }

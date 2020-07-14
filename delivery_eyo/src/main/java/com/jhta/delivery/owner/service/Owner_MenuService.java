@@ -22,4 +22,8 @@ public class Owner_MenuService {
 	public List<Menu_OptionVo> menuOption(int num){
 		return dao.menuOption(num);
 	}
+	
+	public List<Menu_OptionVo> ShopNum_MenuOption(int num){
+		return dao.ShopNum_MenuOption(num);
+	}
 }

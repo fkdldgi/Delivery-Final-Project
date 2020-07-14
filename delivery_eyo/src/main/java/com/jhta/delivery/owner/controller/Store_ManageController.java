@@ -46,9 +46,11 @@ public class Store_ManageController {
 		ShopVo vo = service.shop_select(num);
 		List<MenuVo> mainMenuList = store_service.mainMenuList(num);
 		List<MenuCategoryVo> menuCategoryList = menu_service.menuCategory(num);
+		List<Menu_OptionVo> ShopNum_MenuOption = menu_service.ShopNum_MenuOption(num);
 		
 		model.addAttribute("mainMenuList",mainMenuList);
 		model.addAttribute("menuCategoryList", menuCategoryList);
+		model.addAttribute("ShopNum_MenuOption", ShopNum_MenuOption);
 		model.addAttribute("vo", vo);
 		
 		if(vo==null) {
