@@ -7,14 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jhta.delivery.member.vo.MenuVo;
 import com.jhta.delivery.member.vo.ShopVo;
 import com.jhta.delivery.owner.service.OwnerService;
+import com.jhta.delivery.owner.service.Owner_StoreService;
 
 @Controller
 public class Store_ManageController {
 	
 	@Autowired
 	private OwnerService service;
+	
+	@Autowired
+	private Owner_StoreService store_service;
 	
 	@RequestMapping("/owner/store_manage")
 	public String manage(Model model, String id) {
@@ -33,7 +38,6 @@ public class Store_ManageController {
 	public String manageHome(Model model, int num) {
 		
 		ShopVo vo = service.shop_select(num);
-		
 		model.addAttribute("vo", vo);
 		
 		if(vo==null) {

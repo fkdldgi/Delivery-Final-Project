@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="/delivery/resources/js/jquery-ui.js"></script>
 <style>
 	#menu_wrap{ margin: auto;
 				padding: auto;
@@ -39,8 +40,11 @@
 		});
 		
 		$("img").on('click',function(e){
-			
+			console.log('1');
 		});
+		
+		$("#accordion").accordion();
+		$("div[name=category_name]").accordion();
 	});
 </script>
 <body>
@@ -83,34 +87,49 @@
 		</div>
 		<br><br>
 		
-		<div name="category_name" style="margin: auto; margin-top: 20px; border: 3px solid #CC9966;width: 80%;height: 100%">
-			<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900;">대표 메뉴</h2>
-			
-			<div name="category_menu">
-				<div>
-					<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #CC9966;">
-						<input style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
-						<br>
-						<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성">
-						<br>
-						<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격">
-					</div>
-				</div>
-				<div style="margin-top: 20px; width: 50%; height: 200px; float:right; border-right: 3px solid #CC9966; text-align: center;">
-					<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;"src="/delivery/resources/images/plus2.png">				
+		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+			<div class="dropdown mr-1">
+				<button type="button" class="btn btn-secondary dropdown-toggle col-md-12" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+					메뉴카테고리명
+				</button>
+				<div class="dropdown-menu col-md-12" aria-labelledby="dropdownMenuOffset">
+					<a class="dropdown-item" href="#">메뉴카테고리 이름1</a>
+					<a class="dropdown-item" href="#">메뉴카테고리 이름2</a>
+					<a class="dropdown-item" href="#">메뉴카테고리 이름3</a>
 				</div>
 			</div>
 		</div>
-		<div style="text-align: center;">
-			<button id="add_category" style="width: 40%; margin-top: 20px;" class="btn btn-primary">
-				메인메뉴 추가
-			</button>
-			<button id="remove_category" style="width: 40%; margin-top: 20px;" class="btn btn-primary">
-				메인메뉴 삭제
-			</button>
+		
+		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+			<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900; background-color: light_gray;">메뉴카테고리명</h2>
+			
+			<div>
+			
+			</div>
+			
 		</div>
 		
-		
+		<h2>메뉴카테고리명</h2>
+		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+			<h3>메뉴카테고리 이름1</h3>
+			<div>
+				<p>
+					sdafsfsdf
+				</p>
+			</div>
+			<h3>메뉴카테고리 이름2</h3>
+			<div>
+				<p>
+					sdafsfsdf
+				</p>
+			</div>
+			<h3>메뉴카테고리 이름3</h3>
+			<div>
+				<p>
+					sdafsfsdf
+				</p>
+			</div>
+		</div>
 	</div>
 </body>
 
