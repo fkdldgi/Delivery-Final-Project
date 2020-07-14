@@ -13,17 +13,15 @@ public class NoticeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE="mybatis.NoticeMapper";
-	public int insert(NoticeVo vo) {
-		return sqlSession.insert(NAMESPACE+".insert",vo);
-	}
+
 	public int count(HashMap<String, Object>map) {
 		return sqlSession.selectOne(NAMESPACE+".count",map);
 	}
-	public List<NoticeVo> list(HashMap<String, Object> map) {
-		return sqlSession.selectList(NAMESPACE+".list",map);
+	public List<NoticeVo> noticeList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE+".noticeList",map);
 	}
 	public NoticeVo detail(int num) {
-		return sqlSession.selectOne(NAMESPACE+".list",num);
+		return sqlSession.selectOne(NAMESPACE+".detail",num);
 		
 	}
 	public NoticeVo next(int num) {
@@ -34,12 +32,5 @@ public class NoticeDao {
 		return sqlSession.selectOne(NAMESPACE+".pre",num);
 		
 	}
-	public int delete(int num) {
-		return sqlSession.delete(NAMESPACE+".delete",num);
-		
-	}
-	public int update(NoticeVo vo) {
-		return sqlSession.update(NAMESPACE+".update",vo);
-		
-	}
+
 }
