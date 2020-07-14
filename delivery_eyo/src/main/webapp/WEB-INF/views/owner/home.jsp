@@ -37,7 +37,7 @@
      				</a>
      			</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/delivery/owner/store_manage?id=${id }" 
+					<a class="nav-link" href="/delivery/owner/store_manage?id=${sessionScope.ownerId }" 
 								id="store_managehref">
 						가게운영
 					</a>
