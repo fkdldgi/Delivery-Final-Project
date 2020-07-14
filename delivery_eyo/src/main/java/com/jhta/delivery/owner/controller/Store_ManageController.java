@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.delivery.member.vo.ShopVo;
 import com.jhta.delivery.owner.service.OwnerService;
@@ -31,7 +30,16 @@ public class Store_ManageController {
 	}
 	
 	@RequestMapping("/owner/store_manage/home")
-	public String manageHome() {
-		return ".owner.store_manage_home";
+	public String manageHome(Model model, int num) {
+		
+		ShopVo vo = service.shop_select(num);
+		
+		model.addAttribute("vo", vo);
+		
+		if(vo==null) {
+			return ".owner.error";
+		}else {
+			return ".owner.store_manage_home";
+		}
 	}
 }
