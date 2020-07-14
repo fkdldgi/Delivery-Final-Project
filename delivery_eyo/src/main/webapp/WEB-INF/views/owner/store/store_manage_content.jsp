@@ -111,7 +111,8 @@
 		<br><br>
 		
 		<!-- 메뉴카테고리 명 -->
-		<c:forEach var="list" items="${requestScope.menuCategoryList }">
+		<c:forEach var="list" items="${menuCategoryList }" >
+			
 			<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
 				<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 				 	<div style="position: relative; text-align: center; height: 40px;">
@@ -120,15 +121,19 @@
 				 	</div>
 				</div>			
 			</div>
-			<!-- 메뉴 -->
-			<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
-				<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-					<h2>메뉴이름</h2>
-					<span>menu_info</span>
-					<br>
-					<span>menu_price</span>
-				</div>
-			</div>
+			<c:forEach var="menu" items="${menu }" >
+				<c:if test="${list.num == menu.menu_category_num }">
+					<!-- 메뉴 -->		
+					<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+						<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+							<h2>메뉴이름:${menu.name }</h2>
+							<span>메뉴설명:${menu.menu_info }</span>
+							<br>
+							<span>가격:${menu.price }</span>
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
 		</c:forEach>
 	</div>
 	<div style="text-align: right;">
