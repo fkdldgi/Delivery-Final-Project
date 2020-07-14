@@ -24,7 +24,10 @@
 		
 		// main_menu 밑에 있는 메뉴 추가를 눌렀을 때 div가 추가됨
 		$('#add_main_menu').on('click',function(){	
-			var div2 = $('div[name=main_menu]').first().clone();
+			var div2 = $('#copy_div').clone();
+			div2.css("display","block");
+			div2.attr("name","main_menu");
+			div2.removeAttr("id");
 			$("div[name=append_main_menu]").append(div2);
 		});
 		
@@ -35,19 +38,30 @@
 			if(div.length > 1){
 				div.last().remove();
 			}else{
-				alert("삭제 불가합니다.");
+				alert("더 이상 삭제 불가합니다.");
 			}
 		});
 		
 		$("img").on('click',function(e){
 			console.log('1');
 		});
-		
-		$("#accordion").accordion();
-		$("div[name=category_name]").accordion();
 	});
 </script>
 <body>
+	<div id="copy_div" style="display: none;">
+					<div>
+						<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
+							<input style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
+							<br>
+							<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성">
+							<br>
+							<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격">
+						</div>
+					</div>
+					<div style="margin-top: 20px; width: 50%; height: 200px; float:right; text-align: center; border-right: 3px solid #FC5230;">
+						<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;" src="/delivery/resources/images/plus2.png">										
+					</div>
+	</div>
 	<div id="menu_wrap">
 		<br>
 		<div>
@@ -61,21 +75,30 @@
 		
 		<div name="append_main_menu" style="margin: auto; margin-top: 20px; border: 3px solid #FC5230;width: 80%;height: 100%">
 			<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900;">대표 메뉴</h2>
-			
-			<div name="main_menu">
-				<div>
-					<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
-						<input style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
-						<br>
-						<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성">
-						<br>
-						<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격">
+			<c:forEach var="list" items="${requestScope.mainMenuList }">
+				<div name="main_menu">
+					<div>
+						<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
+							<input style="width: 70%; margin: 15px; margin-top: 30px;" type="text" value="${list.name }" placeholder="메뉴이름">
+							<br>
+							<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text"  value="${list.menu_info }" placeholder="메뉴구성">
+							<br>
+							<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" value="${list.price }" placeholder="가격">
+						</div>
+					</div>
+					<div style="margin-top: 20px; width: 50%; height: 200px; float:right; text-align: center; border-right: 3px solid #FC5230;">
+						<c:choose>
+							<c:when test="${empty list.img }">
+								<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;" src="/delivery/resources/images/plus2.png">										
+							</c:when>
+							<c:otherwise>	
+							<!-- DB에 들어있는 이미지 경로 src에 넣기 -->
+								<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;" src="${list.img } ">										
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
-				<div style="margin-top: 20px; width: 50%; height: 200px; float:right; text-align: center; border-right: 3px solid #FC5230;">	
-					<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;"src="/delivery/resources/images/plus2.png">			
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 		<div style="text-align: center;">
 			<button id="add_main_menu" style="width: 40%; margin-top: 20px;" class="btn btn-primary">
@@ -87,49 +110,27 @@
 		</div>
 		<br><br>
 		
+		<!-- 메뉴카테고리 명 -->
 		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
-			<div class="dropdown mr-1">
-				<button type="button" class="btn btn-secondary dropdown-toggle col-md-12" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-					메뉴카테고리명
-				</button>
-				<div class="dropdown-menu col-md-12" aria-labelledby="dropdownMenuOffset">
-					<a class="dropdown-item" href="#">메뉴카테고리 이름1</a>
-					<a class="dropdown-item" href="#">메뉴카테고리 이름2</a>
-					<a class="dropdown-item" href="#">메뉴카테고리 이름3</a>
-				</div>
+			<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
+			 	<div style="position: relative; text-align: center; height: 40px;">
+			 		<div style="display: inline-block; text-align: center;"><h2>메뉴카테고리명</h2></div>
+			 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
+			 	</div>
+			</div>			
+		</div>
+		<!-- 메뉴 -->
+		<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+			<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+				<h2>메뉴이름</h2>
+				<span>menu_info</span>
+				<br>
+				<span>menu_price</span>
 			</div>
 		</div>
-		
-		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
-			<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900; background-color: light_gray;">메뉴카테고리명</h2>
-			
-			<div>
-			
-			</div>
-			
-		</div>
-		
-		<h2>메뉴카테고리명</h2>
-		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
-			<h3>메뉴카테고리 이름1</h3>
-			<div>
-				<p>
-					sdafsfsdf
-				</p>
-			</div>
-			<h3>메뉴카테고리 이름2</h3>
-			<div>
-				<p>
-					sdafsfsdf
-				</p>
-			</div>
-			<h3>메뉴카테고리 이름3</h3>
-			<div>
-				<p>
-					sdafsfsdf
-				</p>
-			</div>
-		</div>
+	</div>
+	<div style="text-align: right;">
+		<button id="update_menu">수정완료</button>
 	</div>
 </body>
 

@@ -38,6 +38,8 @@ public class Store_ManageController {
 	public String manageHome(Model model, int num) {
 		
 		ShopVo vo = service.shop_select(num);
+		List<MenuVo> mainMenuList = store_service.mainMenuList(num);
+		model.addAttribute("mainMenuList",mainMenuList);
 		model.addAttribute("vo", vo);
 		
 		if(vo==null) {
