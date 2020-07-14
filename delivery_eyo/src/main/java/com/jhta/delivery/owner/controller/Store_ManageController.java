@@ -7,9 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jhta.delivery.member.vo.MenuCategoryVo;
 import com.jhta.delivery.member.vo.MenuVo;
+import com.jhta.delivery.member.vo.Menu_OptionVo;
 import com.jhta.delivery.member.vo.ShopVo;
 import com.jhta.delivery.owner.service.OwnerService;
+import com.jhta.delivery.owner.service.Owner_MenuService;
 import com.jhta.delivery.owner.service.Owner_StoreService;
 
 @Controller
@@ -20,6 +23,9 @@ public class Store_ManageController {
 	
 	@Autowired
 	private Owner_StoreService store_service;
+	
+	@Autowired
+	private Owner_MenuService menu_service;
 	
 	@RequestMapping("/owner/store_manage")
 	public String manage(Model model, String id) {
@@ -39,7 +45,12 @@ public class Store_ManageController {
 		
 		ShopVo vo = service.shop_select(num);
 		List<MenuVo> mainMenuList = store_service.mainMenuList(num);
+		List<MenuCategoryVo> menuCategoryList = menu_service.menuCategory(num);
+		List<Menu_OptionVo> ShopNum_MenuOption = menu_service.ShopNum_MenuOption(num);
+		
 		model.addAttribute("mainMenuList",mainMenuList);
+		model.addAttribute("menuCategoryList", menuCategoryList);
+		model.addAttribute("ShopNum_MenuOption", ShopNum_MenuOption);
 		model.addAttribute("vo", vo);
 		
 		if(vo==null) {
