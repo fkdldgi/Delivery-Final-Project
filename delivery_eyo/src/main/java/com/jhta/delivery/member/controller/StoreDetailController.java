@@ -18,6 +18,7 @@ public class StoreDetailController {
 	@RequestMapping("/member/storeDetail")
 	public String storeInfo(Model model,int num) {
 		model.addAttribute("info", mservice.storeInfo(num));
+		model.addAttribute("mainmenu", sservice.mainMenuList(num));
 		return ".member.storeDetail";
 	}
 }

@@ -15,18 +15,18 @@ public class MenuCategoryVo {
 	// 가게번호
 	private int shop_num;
 
-	// 카테고리그룹설명
-	private String info;
+	// 대표메뉴
+	private int main_menu;
 
 	public MenuCategoryVo() {}
 
-	public MenuCategoryVo(int num, String name, int priority, int shop_num, String info) {
+	public MenuCategoryVo(int num, String name, int priority, int shop_num, int main_menu) {
 		super();
 		this.num = num;
 		this.name = name;
 		this.priority = priority;
 		this.shop_num = shop_num;
-		this.info = info;
+		this.main_menu = main_menu;
 	}
 
 	public int getNum() {
@@ -61,11 +61,13 @@ public class MenuCategoryVo {
 		this.shop_num = shop_num;
 	}
 
-	public String getInfo() {
-		return info;
+	public int getMain_menu() {
+		return main_menu;
 	}
 
-	public void setInfo(String info) {
-		this.info = info;
+	public void setMain_menu(int main_menu) {
+		this.main_menu = main_menu;
 	}
+
+
 }

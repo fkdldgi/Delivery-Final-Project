@@ -26,13 +26,10 @@ public class MenuVo {
 	// 우선순위
 	private int priority;
 
-	// 대표메뉴 대표메뉴(1)
-	private Integer main_menu;
-
 	public MenuVo() {}
 
 	public MenuVo(int num, String name, String menu_info, int price, Integer status, String img, int menu_category_num,
-			int priority, Integer main_menu) {
+			int priority) {
 		super();
 		this.num = num;
 		this.name = name;
@@ -42,7 +39,6 @@ public class MenuVo {
 		this.img = img;
 		this.menu_category_num = menu_category_num;
 		this.priority = priority;
-		this.main_menu = main_menu;
 	}
 
 	public int getNum() {
@@ -107,13 +103,5 @@ public class MenuVo {
 
 	public void setPriority(int priority) {
 		this.priority = priority;
-	}
-
-	public Integer getMain_menu() {
-		return main_menu;
-	}
-
-	public void setMain_menu(Integer main_menu) {
-		this.main_menu = main_menu;
 	}
 }

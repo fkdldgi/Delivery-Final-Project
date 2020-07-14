@@ -6,13 +6,13 @@
 
 	<!-- 대표메뉴 리스트 가져오기 -->
 	<select id="mainMenuList" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuVo">
-		select * from menu where 
-			menu_category_num=(select num from MENU_CATEGORY 
-                                	where shop_num=(select num 
-													from shop 
-													where num=#{num}) 
-                                 				   and num=1) 
-           and main_menu=1 order by priority asc;
+		select * from menu
+		where menu_category_num=(select num from MENU_CATEGORY 
+                               	where shop_num=(select num 
+												from shop 
+												where num=#{num}) 
+                                and main_menu=1) 
+        order by priority asc
 	</select>
 	
 	<!-- 회원가입 -->
