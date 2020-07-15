@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.delivery.member.service.MemberService;
+import com.jhta.delivery.member.service.StoreService;
+import com.jhta.delivery.member.vo.Menu_OptionVo;
 import com.jhta.delivery.member.vo.ShopVo;
 
 @Controller
@@ -53,7 +55,6 @@ public class StoreListController {
 		map.put("endrow", endrow);
 		
 		List<ShopVo> shopList = service.shopList(map);
-		
 		return shopList;
 	}
 }
