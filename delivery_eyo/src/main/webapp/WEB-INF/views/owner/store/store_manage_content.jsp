@@ -42,6 +42,34 @@
 			}
 		});
 		
+		// 메뉴추가
+		$("button[name=add_menu]").on('click',function(){
+			
+			var copy_menu = $("#copy_menu").clone();
+			copy_menu.css('display','block');
+			copy_menu.attr('name','menu');
+			copy_menu.removeAttr('id');
+			
+			var a = $(this).parent();
+			a.prev().append(copy_menu);
+			
+		});
+		
+		// 메뉴삭제
+		/* $("button[name=remove_menu]").on('click',function(e){
+			
+			console.log('1');
+			
+			var a = $(this).parent();
+			console.log($(e));
+			console.log(a.prev().length);
+			if(a.prev().length > 1){
+				a.prev().last().remove();
+			}else{
+				alert("더 이상 삭제 불가합니다.");
+			}
+		}); */
+		
 		// 이미지 추가
 		$("img").on('click',function(e){
 			console.log('1');
@@ -50,15 +78,19 @@
 		// 카테고리 div 눌렀을 때 div숨기고, 나타내기
 		$("div[name=category_name]").on('click',function(){
 			var cate = $(this).nextAll();
-			console.log(cate);
 			
-			if(cate.css('display')=='none'){
-				cate.show();
-			}else{
-				cate.hide();
-			}
+			// 위 아래로 나타태는 효과
+			cate.animate({
+				height: 'toggle'
+			});
 		});
 	});
+	
+	function remove_menu(e){
+		var target = $(e).parent().prev().children("div[name=menu]:last");
+		console.log(target);
+		target.remove();
+	}
 </script>
 <body>
 	<!-- 복사할 메인메뉴 -->
@@ -82,24 +114,23 @@
 		<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
 			<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 				<div style="position: relative; text-align: center; height: 40px;">
-					<div style="display: inline-block; text-align: center;"><h2><input type="text" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
+					<div style="display: inline-block; text-align: center; width: 40%;"><h2><input style="text-align: center; width: 100%;" type="text" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
 					<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
 				</div>
 			</div>			
 		</div>
+	</div>
 	
-		<!-- 메뉴 -->		
-		<div id="copy_menu">
-			<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+		<!-- 복사할 메뉴 -->		
+			<div id="copy_menu"  style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 				<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-					<h2><input type="text" placeholder="메뉴이름을 입력해 주세요."></h2>
-					<span>메뉴설명:&nbsp;<input type="text" placeholder="메뉴설명을 입력해 주세요."></span>
+					<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;"></h2>
+					<span>메뉴설명:&nbsp;<input type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;"></span>
 					<br>
-					<span>가격:&nbsp;<input type="text" placeholder="메뉴가격을 입력해 주세요."></span>
+					<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
+							oninput="maxLengthCheck(this)" placeholer="가격">원</span>
 				</div>
 			</div>
-		</div>
-	</div>
 	
 	<div id="menu_wrap">
 		<br>
@@ -114,6 +145,7 @@
 		
 		<div name="append_main_menu" style="margin: auto; margin-top: 20px; border: 3px solid #FC5230;width: 80%;height: 100%">
 			<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900;">대표 메뉴</h2>
+			
 			<c:forEach var="list" items="${requestScope.mainMenuList }">
 				<div name="main_menu">
 					<div>
@@ -151,31 +183,54 @@
 		
 		<!-- 메뉴카테고리 명 -->
 		<c:forEach var="list" items="${menuCategoryList }" >
-			<div>
-			<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
-				<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
-				 	<div style="position: relative; text-align: center; height: 40px;">
-				 		<div style="display: inline-block; text-align: center;"><h2>'${list.name }'</h2></div>
-				 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
-				 	</div>
-				</div>			
-			</div>
-			
-			<c:forEach var="menu" items="${menu }" >
-				<c:if test="${list.num == menu.menu_category_num }">
-					<!-- 메뉴 -->		
-					<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
-						<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-							<h2>${menu.name }</h2>
-							<span>메뉴설명:&nbsp;${menu.menu_info }</span>
-							<br>
-							<span>가격:&nbsp;${menu.price }</span>
+			<div name="category">
+				<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+					<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
+					 	<div style="position: relative; text-align: center; height: 40px;">
+					 		<div style="display: inline-block; text-align: center; width: 40%;"><h2><input style="text-align: center; width: 100%;"type="text" placeholder="메뉴카테고리명을 입력해 주세요." 
+					 						value="${list.name }"></h2></div>
+					 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
+					 	</div>
+					</div>			
+				</div>
+				<div>
+				<c:forEach var="menu" items="${menu }" >
+					<c:if test="${list.num == menu.menu_category_num }">
+						<!-- 메뉴 -->		
+						<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+							<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+								<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
+								<span>메뉴설명:&nbsp;<input placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
+								<br>
+								<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
+									oninput="maxLengthCheck(this)" placeholder="가격"></span>
+							</div>
 						</div>
-					</div>
-				</c:if>
-			</c:forEach>
+					</c:if>
+				</c:forEach>
+				</div>
+			
+				<!-- 메뉴추가, 삭제 버튼 -->
+				<div style="text-align: center;">
+					<button name="add_menu" style="width: 40%; margin-top: 20px;" class="btn btn-primary">
+						메뉴 추가
+					</button>
+					<button name="remove_menu" style="width: 40%; margin-top: 20px;" class="btn btn-primary" onclick="remove_menu(this)">
+						메뉴 삭제
+					</button>
+				</div>
 			</div>
 		</c:forEach>
+		
+		<!-- 카테고리메뉴 추가, 삭제 버튼  -->
+		<div style="text-align: center; margin-top: 30px;">
+			<button id="add_category_menu" style="width: 40%; margin-top: 20px;" class="btn btn-primary">
+				카테고리메뉴 추가
+			</button>
+			<button id="remove_category_menu" style="width: 40%; margin-top: 20px;" class="btn btn-primary">
+				카테고리메뉴 삭제
+			</button>
+		</div>
 	</div>
 	<div style="text-align: right;">
 		<button id="update_menu">수정완료</button>
