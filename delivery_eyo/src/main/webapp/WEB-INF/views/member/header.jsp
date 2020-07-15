@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+  <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -88,10 +88,10 @@ display:flex
         <a class="nav-link" href="${pageContext.request.contextPath}/member/event_main">이벤트</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">마이페이지</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">고객센터</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/member/qna">고객센터</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">맛나푸드</a>
