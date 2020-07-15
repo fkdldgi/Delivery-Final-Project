@@ -30,4 +30,5 @@
 	<select id="idchk" parameterType="String" resultType="member">
 		select * from member where id=#{id}
 	</select>
+	
 </mapper>
