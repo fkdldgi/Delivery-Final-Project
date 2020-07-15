@@ -13,15 +13,12 @@ import com.jhta.delivery.member.vo.NoticeVo;
 public class NoticeService {
 	@Autowired
 	private NoticeDao dao;
-	public int insert(NoticeVo vo) {
-		return dao.insert(vo);
-	}
 	public int count(HashMap<String, Object>map) {
 		return dao.count(map);
 		
 	}
-	public List<NoticeVo> list(HashMap<String, Object> map) {
-		return dao.list(map);
+	public List<NoticeVo> noticeList(HashMap<String, Object> map) {
+		return dao.noticeList(map);
 		
 	}
 	public NoticeVo detail(int num) {
@@ -36,12 +33,5 @@ public class NoticeService {
 		return dao.pre(num);
 		
 	}
-	public int delete(int num) {
-		return dao.delete(num);
-		
-	}
-	public int update(NoticeVo vo) {
-		return dao.update(vo);
-		
-	}
+
 }
