@@ -1,4 +1,4 @@
-package com.jhta.delivery.member.dao;
+package com.jhta.delivery.owner.dao;
 
 import java.util.List;
 
@@ -9,14 +9,13 @@ import org.springframework.stereotype.Repository;
 import com.jhta.delivery.member.vo.MenuVo;
 
 @Repository
-public class StoreDao {
+public class Owner_StoreDao {
 	@Autowired
 	private SqlSession session;
-	private final String NAMESPACE = "mybatis.StoreMapper";
 	
-	//가게 메인메뉴 리스트 받아오기
+	private final String NAMESPACE="mybatis.StoreMapper";
+	
 	public List<MenuVo> mainMenuList(int num){
 		return session.selectList(NAMESPACE+".mainMenuList", num);
 	}
-	
 }
