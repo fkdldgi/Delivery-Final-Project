@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.MenuMapper">
+	<!-- 메뉴카테고리 얻어오기 -->
+	<select id="Menu_category" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuCategoryVo">
+		select * from menu_category where shop_num=#{num}
+        order by priority asc
+	</select>
+	
+	<!-- 가게번호로 메뉴옵션 알아오기 -->
+	<select id="Menu" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuVo">
+		select bb.*
+		from menu_category aa, menu bb
+		where aa.num = bb.menu_category_num
+    		and aa.shop_num = #{num}
+	</select>
+	
+	<!-- 가게번호로 메뉴옵션 알아오기 -->
+	<select id="Shop_Num_Menu_Option" parameterType="int" resultType="com.jhta.delivery.member.vo.Menu_OptionVo">
+		select cc.*
+		from menu_category aa, menu bb, menu_option cc
+		where aa.num = bb.menu_category_num
+			and bb.num = cc.menu_num
+    		and aa.shop_num = #{num}
+	</select>
+	
+	<!-- 메뉴옵션 얻어오기 -->
+	<select id="Menu_Option" parameterType="int" resultType="com.jhta.delivery.member.vo.Menu_OptionVo">
+		select * from menu_option where menu_num=#{num}
+	</select>
+</mapper>

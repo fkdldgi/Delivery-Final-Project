@@ -13,5 +13,6 @@
 		<mapper resource="com/jhta/delivery/mybatis/mapper/OwnerMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/MemberMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/StoreMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/MenuMapper.xml"/>
 	</mappers>
 </configuration>
