@@ -19,6 +19,7 @@
 				console.log(data);
 				if(data==1){
 					location.reload(); //로그인 성공 후 헤더 새로고침
+					location.href="${pageContext.request.contextPath}/owner/main";
 				}else{
 					alert("아이디 또는 비밀번호를 확인해주세요");
 				}
@@ -30,6 +31,7 @@
 			url:"${pageContext.request.contextPath}/owner/logout",
 			success:function(data){
 				location.reload();
+				location.href="${pageContext.request.contextPath}/owner/main";
 			}
 		});
 	}
@@ -49,6 +51,15 @@
 		         </li>			
 			</c:when>
 			<c:otherwise>
+				<li class="nav-item">
+					<a class="nav-link" href="">${sessionScope.ownerName } 님</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="">내정보</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="">고객센터</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="javascript:logout();">로그아웃</a>
 				</li>
@@ -87,8 +98,10 @@
 				</div>
 			</div>
 		</form>
-		<li class="nav-item">
-			<a class="nav-link" href="/delivery/owner/join">회원가입</a>
-		</li>
+		<c:if test="${empty sessionScope.ownerId }">
+			<li class="nav-item">
+				<a class="nav-link" href="/delivery/owner/join">회원가입</a>
+			</li>
+		</c:if>
 	</ul>
 </nav>		
