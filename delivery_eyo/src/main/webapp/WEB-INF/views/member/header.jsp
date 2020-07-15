@@ -91,7 +91,7 @@ display:flex
         <a class="nav-link" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">고객센터</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/member/qna">고객센터</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">맛나푸드</a>

@@ -43,7 +43,6 @@
     </li>
     <li class="page-item"><a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}">1</a></li>
     <li class="page-item"><a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}">2</a></li>
-
     </c:when>
    	 <c:otherwise>
       <a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Next">
