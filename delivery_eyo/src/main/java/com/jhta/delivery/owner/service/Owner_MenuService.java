@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.delivery.member.vo.MenuCategoryVo;
+import com.jhta.delivery.member.vo.MenuVo;
 import com.jhta.delivery.member.vo.Menu_OptionVo;
 import com.jhta.delivery.owner.dao.Owner_MenuDao;
 
@@ -25,5 +26,9 @@ public class Owner_MenuService {
 	
 	public List<Menu_OptionVo> ShopNum_MenuOption(int num){
 		return dao.ShopNum_MenuOption(num);
+	}
+	
+	public List<MenuVo> menu(int num){
+		return dao.menu(num);
 	}
 }
