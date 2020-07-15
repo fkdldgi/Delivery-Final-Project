@@ -27,6 +27,7 @@ public class OwnerLoginController {
 		OwnerVo vo=service.selectOne(map);
 		if(vo!=null) {
 			session.setAttribute("ownerId", id);
+			session.setAttribute("ownerName", vo.getName());
 			return 1;
 		}else {
 			return 0;
