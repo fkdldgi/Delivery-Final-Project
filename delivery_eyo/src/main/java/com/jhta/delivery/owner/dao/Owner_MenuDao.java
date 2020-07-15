@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.delivery.member.vo.MenuCategoryVo;
+import com.jhta.delivery.member.vo.MenuVo;
 import com.jhta.delivery.member.vo.Menu_OptionVo;
 @Repository
 public class Owner_MenuDao {
@@ -25,5 +26,9 @@ public class Owner_MenuDao {
 	
 	public List<Menu_OptionVo> ShopNum_MenuOption(int num){
 		return session.selectList(NAMESPACE+"Shop_Num_Menu_Option", num);
+	}
+	
+	public List<MenuVo> menu(int num){
+		return session.selectList(NAMESPACE+".Menu",num);
 	}
 }

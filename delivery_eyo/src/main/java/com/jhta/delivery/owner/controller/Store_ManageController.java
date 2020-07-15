@@ -46,11 +46,29 @@ public class Store_ManageController {
 		ShopVo vo = service.shop_select(num);
 		List<MenuVo> mainMenuList = store_service.mainMenuList(num);
 		List<MenuCategoryVo> menuCategoryList = menu_service.menuCategory(num);
-		List<Menu_OptionVo> ShopNum_MenuOption = menu_service.ShopNum_MenuOption(num);
+		// List<Menu_OptionVo> ShopNum_MenuOption = menu_service.ShopNum_MenuOption(num);
+		List<MenuVo> menu=menu_service.menu(num);
+		
+		
 		
 		model.addAttribute("mainMenuList",mainMenuList);
 		model.addAttribute("menuCategoryList", menuCategoryList);
-		model.addAttribute("ShopNum_MenuOption", ShopNum_MenuOption);
+		for(MenuCategoryVo vo1:menuCategoryList) {
+			System.out.println(vo1.getName());
+			System.out.println("11111111");
+		
+		}
+		System.out.println("ttttttttt");
+		for(MenuVo vo2:menu) {
+			System.out.println(vo2.getName());
+			System.out.println("22222222");
+			
+		}
+		System.out.println("6666666666");
+		model.addAttribute("menu",menu);
+		
+
+		// model.addAttribute("ShopNum_MenuOption", ShopNum_MenuOption);
 		model.addAttribute("vo", vo);
 		
 		if(vo==null) {
