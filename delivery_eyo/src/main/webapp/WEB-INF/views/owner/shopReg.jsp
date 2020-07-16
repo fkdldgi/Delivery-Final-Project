@@ -59,8 +59,7 @@
 	color: red;
 }
 
-
-
+/* 배달지역 css */
 #sel1{
 	margin-bottom:20px;
 }
@@ -71,8 +70,21 @@
 
 #chk1 label{
 	margin: 0px 15px 5px 0px;
-
 }
+
+#chk2 label{
+	margin: 0px 15px 5px 0px;
+}
+
+/* input file 가리기 */
+#file{
+	display: none;
+}
+
+.form-group label{
+	font-weight: 700;
+}
+
 </style>
 <script>
 	$(document).ready(function() {
@@ -182,7 +194,7 @@
 			sel2.empty();
 			$.ajax({
 				url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-				data:{accessToken:'d8cc0367-b39b-42e9-ac73-b327b574864d',cd:cityNum},
+				data:{accessToken:'32d04543-aad4-471e-963c-b6c382ddf4cc',cd:cityNum},
 				dataType:'json',
 				success:function(data){
 					sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -199,12 +211,12 @@
 			chk1.empty();
 			$.ajax({
 				url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-				data:{accessToken:'d8cc0367-b39b-42e9-ac73-b327b574864d',cd:cityNum},
+				data:{accessToken:'32d04543-aad4-471e-963c-b6c382ddf4cc',cd:cityNum},
 				dataType:'json',
 				success:function(data){
 					data.result.forEach(function(item,index,array){
 						chk1.append("<label class='btn btn-light border border-dark'>"+ 
-										"<input type='checkbox' autocomplete='off' name='addr_name[]'>"+item.addr_name+
+										"<input type='checkbox' autocomplete='off' name='addr_name' value='"+item.addr_name+"'>"+item.addr_name+
 									"</label>");
 					});
 					$("label.btn").on('click',function(){ //라벨을 클릭했을 때
@@ -217,6 +229,46 @@
 				}
 			});
 		});
+		//프로필사진 변경시 readURL함수 호출
+		$("#file").change(function() {
+	        readURL(this);
+	    });
+		
+		$("#priview").click(function(){
+			$("#file").click();
+		});
+		
+		//휴무일 클릭시 checkbox에 checked추가 삭제
+		$("label.btn").on('click',function(){ //라벨을 클릭했을 때
+			if($(this).hasClass('active')===true){ //체크를 해제했을 경우 (active클래스가 존재한다는 것) 
+				if($(this).children().val()=='연중무휴'){
+					$("#chk2").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
+						if(index>0){
+							$(this).removeAttr('disabled'); //라벨 비활성화
+							$(this).children().removeAttr('disabled');
+						}
+					});
+				}else{
+					$(this).children().removeAttr('checked');
+				}
+			}else if($(this).hasClass('active')===false){ //체크를 했을경우
+				if($(this).children().val()=='연중무휴'){
+					$("#chk2").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
+						if(index>0){
+							$(this).attr('disabled','disabled'); //라벨 비활성화
+							$(this).removeClass('active'); //active클래스 삭제
+							$(this).children().removeAttr('checked'); //체크박스의 checked삭제
+							$(this).children().attr('disabled','disabled');
+						}
+					});
+				}else{
+					if($(this).attr('disabled')!='disabled'){ //라벨이 disabled가 아닐경우
+						$(this).children().attr('checked', 'checked'); //체크박스에 checked 추가			
+					}
+				}
+				
+			}
+		});
 	});
 	
 	//최소주문금액 최대길이 검증
@@ -225,6 +277,20 @@
 			object.value = object.value.slice(0, object.maxLength);
 		}
 	}
+	
+	//프로필사진 선택시 미리보여주기
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#priview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    } 
+	
+	
+	
 </script>
 <div>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -257,17 +323,18 @@
 	결제방법, 가게소개, 안내, 휴무일, 리뷰안내, 가게상태, 울트라콜, 광고클릭수
  -->
 <div id="div_wrap">
-	<form id="form_wrap" action="/delivery/owner/shopReg" method="post">
+	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data">
 		
 		<div class="form-group under_border">
 			<h2>가게정보</h2>
 		</div>
 		<div class="form-group under_border">
-			<label for="">가게 프로필사진</label> <input type="text"
-				class="form-control" id="" placeholder="가게 프로필사진" name="" required>
+			<label for="">가게 프로필사진</label><br>
+			<img src="/delivery/resources/images/default.png" class="rounded-circle" id="priview" width="70" height="70">
+			<input type="file" name="file1" accept="image/*" id="file">
 		</div>
 		<div class="form-group under_border">
-			<label for="shop_name"><b>가게명</b></label> <input type="text"
+			<label for="shop_name">가게명</label> <input type="text"
 				class="form-control" id="shop_name" placeholder="가게명을 입력해주세요."
 				name="name" required>
 		</div>
@@ -276,7 +343,7 @@
 				id="" placeholder="가게소개" name="" required>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label for="shop_phone"><b>전화번호</b></label> <input type="text"
+			<label for="shop_phone">전화번호</label> <input type="text"
 				class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요."
 				name="shop_phone" required> <span id="shop_phone_err"
 				class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
@@ -286,7 +353,7 @@
 				id="" placeholder="건물관리번호" name="" required>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label for="address_detail"><b>상세주소</b></label> <input type="text"
+			<label for="address_detail">상세주소</label> <input type="text"
 				class="form-control" id="address_detail"
 				placeholder="상세주소를 입력해 주세요." name="address_detail" required>
 			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이
@@ -297,11 +364,11 @@
 				id="" placeholder="가게카테고리" name="" required>
 		</div>
 		<div class="form-group under_border">
-			<label for="min_price"><b>최소주문금액</b></label><br> 
+			<label for="min_price">최소주문금액</label><br> 
 			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)">원
 		</div>
 		<div class="form-group under_border">
-			<label><b>결제방법</b></label>
+			<label>결제방법</label>
 			<div class="form-check">
 				<label class="form-check-label"> 
 				<input type="radio"	class="form-check-input" name="payment_option">만나서결제
@@ -319,7 +386,9 @@
 			</div>
 		</div>
 		<div class="form-group under_border">
-			<label for="">안내</label> <input type="text" class="form-control"
+			<label for="">안내</label> 
+			<textarea class="form-control" rows="5" id="comment"></textarea>
+			<input type="text" class="form-control"
 				id="" placeholder="안내" name="" required>
 		</div>
 		<div class="form-group under_border">
@@ -327,14 +396,36 @@
 				id="" placeholder="리뷰안내" name="" required>
 		</div>
 		<div class="form-group under_border">
-			<label for="">휴무일</label>
-			<div class="row">
-				<input type="checkbox" class="form-control col-md-1" id=""
-					placeholder="휴무일" name="" required>
+			<label for="">휴무일</label><br>
+			<div class="btn-group-toggle" data-toggle="buttons" id="chk2">
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴'>연중무휴
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='월'>월
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='화'>화
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='수'>수
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='목'>목
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='금'>금
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='토'>토
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' autocomplete='off' name='personal_day' value='일'>일
+				</label>
 			</div>
 		</div>
 		<div class="form-group under_border">
-			<label><b>운영시간</b></label>
+			<label>운영시간</label>
 			<div>
 				<div class="row">
 					<a id="open_time" class="col-md-2">오픈시간: </a> <input type="text"
@@ -349,7 +440,7 @@
 		
 		
 		<div class="form-group under_border" id="deliveryArea">
-			<label for="sel1"><b>배달지역</b></label> 
+			<label for="sel1">배달지역</label> 
 			<select class="form-control" id="sel1">
 				<option value="null">-- 시,도를 선택해주세요 --</option>
 				<option value="11">서울특별시</option>
@@ -375,7 +466,7 @@
 			<div class="btn-group-toggle" data-toggle="buttons" id="chk1"></div>
 		</div>
 		<div class="form-group under_border">
-			<label for="mutual_name"><b>상호명</b></label> <input type="text"
+			<label for="mutual_name">상호명</label> <input type="text"
 				class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요."
 				name="mutual_name" required>
 		</div>
@@ -387,23 +478,12 @@
 				id="" placeholder="사업자주소" name="" required>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label for="reg_num"><b>사업자등록번호</b></label> <input type="text"
+			<label for="reg_num">사업자등록번호</label> <input type="text"
 				class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요."
 				name="reg_num" required> <span id="reg_num_err"
 				class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-
-		<!-- 
+	<!-- 
 	가게명, 최소주문금액, 운영시간, 전화번호, 배달지역, 상호명, 사업자주소, 사업자 등록번호
 	가게 프로필사진, 건물관리번호, 상세주소, 가게카테고리(한식,중식)(checkbox)
 	
