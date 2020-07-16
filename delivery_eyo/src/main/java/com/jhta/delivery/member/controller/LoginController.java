@@ -14,8 +14,11 @@ import com.jhta.delivery.member.vo.MemberVo;
 
 @Controller
 public class LoginController {
+	
 	@Autowired
 	private MemberService service;
+	
+	//로그인
 	@RequestMapping("/member/login")
 	@ResponseBody
 	public int login(String id,String pwd, HttpSession session) {
@@ -24,10 +27,18 @@ public class LoginController {
 		map.put("pwd", pwd);
 		MemberVo vo=service.selectOne(map);
 		if (vo!=null) {
-			session.setAttribute("id",id);
+			session.setAttribute("memberId",id);
+			session.setAttribute("memberName",vo.getName());
 			return 1;
 		}else {
 			return 0;
 		}
+	}
+	
+	//로그아웃
+	@RequestMapping("/member/logout")
+	@ResponseBody
+	public void logout(HttpSession session) {
+		session.invalidate();
 	}
 }
