@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://www.ibatis.com/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.QnaMapper">
+	<insert id="insert" parameterType="Qna">
+	<!-- comments는 null -->
+		insert into inquiry_board values(inquiry_board_seq.nextval,#{name},#{email},#{category},#{title},#{content},sysdate,#{adminNum},#{memberNum},null)
+	</insert>
+	
+	<select id="detail" parameterType="int" resultType="Qna">
+		select * from inquiry_board where num=#{num}
+	</select>
+	
+</mapper>
