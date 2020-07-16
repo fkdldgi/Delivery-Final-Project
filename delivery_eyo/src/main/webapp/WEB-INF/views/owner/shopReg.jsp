@@ -174,7 +174,7 @@
 		
 		
 		var chk1=$("#chk1");
-		//배달지역 시군구 얻어오기
+		//배달지역 시군구 얻어오기(accessToken은 4시간동안 유효)
 		$("#sel1").change(function(){
 			var cityNum=this.value;
 			var sel2=$("#sel2");
@@ -182,7 +182,7 @@
 			sel2.empty();
 			$.ajax({
 				url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-				data:{accessToken:'722974ee-1eca-4997-ad5d-95233b59e248',cd:cityNum},
+				data:{accessToken:'d8cc0367-b39b-42e9-ac73-b327b574864d',cd:cityNum},
 				dataType:'json',
 				success:function(data){
 					sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -193,34 +193,38 @@
 			});
 		});
 		
-		//배달지역  읍면동 얻어오기
+		//배달지역  읍면동 얻어오기(accessToken은 4시간동안 유효)
 		$("#sel2").change(function(){
 			var cityNum=this.value;
 			chk1.empty();
 			$.ajax({
 				url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-				data:{accessToken:'722974ee-1eca-4997-ad5d-95233b59e248',cd:cityNum},
+				data:{accessToken:'d8cc0367-b39b-42e9-ac73-b327b574864d',cd:cityNum},
 				dataType:'json',
 				success:function(data){
 					data.result.forEach(function(item,index,array){
 						chk1.append("<label class='btn btn-light border border-dark'>"+ 
-										"<input type='checkbox' autocomplete='off' class='btn11'>"+item.addr_name+
+										"<input type='checkbox' autocomplete='off' name='addr_name[]'>"+item.addr_name+
 									"</label>");
+					});
+					$("label.btn").on('click',function(){ //라벨을 클릭했을 때
+						if($(this).hasClass('active')===true){ //active클래스가 존재한다는 것은 체크를 해제한 것
+							$(this).children().removeAttr('checked');
+						}else if($(this).hasClass('active')===false){
+							$(this).children().attr('checked', 'checked');
+						}
 					});
 				}
 			});
 		});
 	});
 	
+	//최소주문금액 최대길이 검증
 	function maxLengthCheck(object) {
 		if (object.value.length > object.maxLength) {
 			object.value = object.value.slice(0, object.maxLength);
 		}
 	}
-	
-	
-	
-	
 </script>
 <div>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -254,16 +258,47 @@
  -->
 <div id="div_wrap">
 	<form id="form_wrap" action="/delivery/owner/shopReg" method="post">
-		<div class="form-group under_border">
-			<h2>사업자정보</h2>
-		</div>
+		
 		<div class="form-group under_border">
 			<h2>가게정보</h2>
+		</div>
+		<div class="form-group under_border">
+			<label for="">가게 프로필사진</label> <input type="text"
+				class="form-control" id="" placeholder="가게 프로필사진" name="" required>
 		</div>
 		<div class="form-group under_border">
 			<label for="shop_name"><b>가게명</b></label> <input type="text"
 				class="form-control" id="shop_name" placeholder="가게명을 입력해주세요."
 				name="name" required>
+		</div>
+		<div class="form-group under_border">
+			<label for="">가게소개</label> <input type="text" class="form-control"
+				id="" placeholder="가게소개" name="" required>
+		</div>
+		<div class="form-group has-feedback under_border">
+			<label for="shop_phone"><b>전화번호</b></label> <input type="text"
+				class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요."
+				name="shop_phone" required> <span id="shop_phone_err"
+				class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
+		</div>
+		<div class="form-group under_border">
+			<label for="">건물관리번호</label> <input type="text" class="form-control"
+				id="" placeholder="건물관리번호" name="" required>
+		</div>
+		<div class="form-group has-feedback under_border">
+			<label for="address_detail"><b>상세주소</b></label> <input type="text"
+				class="form-control" id="address_detail"
+				placeholder="상세주소를 입력해 주세요." name="address_detail" required>
+			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이
+				아닙니다. 다시 입력해 주세요.</span>
+		</div>
+		<div class="form-group under_border">
+			<label for="">가게카테고리</label> <input type="text" class="form-control"
+				id="" placeholder="가게카테고리" name="" required>
+		</div>
+		<div class="form-group under_border">
+			<label for="min_price"><b>최소주문금액</b></label><br> 
+			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)">원
 		</div>
 		<div class="form-group under_border">
 			<label><b>결제방법</b></label>
@@ -284,8 +319,19 @@
 			</div>
 		</div>
 		<div class="form-group under_border">
-			<label for="min_price"><b>최소주문금액</b></label><br> 
-			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)">원
+			<label for="">안내</label> <input type="text" class="form-control"
+				id="" placeholder="안내" name="" required>
+		</div>
+		<div class="form-group under_border">
+			<label for="">리뷰안내</label> <input type="text" class="form-control"
+				id="" placeholder="리뷰안내" name="" required>
+		</div>
+		<div class="form-group under_border">
+			<label for="">휴무일</label>
+			<div class="row">
+				<input type="checkbox" class="form-control col-md-1" id=""
+					placeholder="휴무일" name="" required>
+			</div>
 		</div>
 		<div class="form-group under_border">
 			<label><b>운영시간</b></label>
@@ -300,31 +346,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group has-feedback under_border">
-			<label for="shop_phone"><b>전화번호</b></label> <input type="text"
-				class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요."
-				name="shop_phone" required> <span id="shop_phone_err"
-				class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
-		</div>
-		<div class="form-group under_border">
-			<label for="mutual_name"><b>가게 상호명</b></label> <input type="text"
-				class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요."
-				name="mutual_name" required>
-		</div>
-		<div class="form-group has-feedback under_border">
-			<label for="reg_num"><b>사업자등록번호</b></label> <input type="text"
-				class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요."
-				name="reg_num" required> <span id="reg_num_err"
-				class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
-		</div>
-		<div class="form-group has-feedback under_border">
-			<label for="address_detail"><b>상세주소</b></label> <input type="text"
-				class="form-control" id="address_detail"
-				placeholder="상세주소를 입력해 주세요." name="address_detail" required>
-			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이
-				아닙니다. 다시 입력해 주세요.</span>
-		</div>
-
+		
+		
 		<div class="form-group under_border" id="deliveryArea">
 			<label for="sel1"><b>배달지역</b></label> 
 			<select class="form-control" id="sel1">
@@ -352,40 +375,33 @@
 			<div class="btn-group-toggle" data-toggle="buttons" id="chk1"></div>
 		</div>
 		<div class="form-group under_border">
+			<label for="mutual_name"><b>상호명</b></label> <input type="text"
+				class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요."
+				name="mutual_name" required>
+		</div>
+		<div class="form-group under_border">
+			<h2>사업자정보</h2>
+		</div>
+		<div class="form-group under_border">
 			<label for="">사업자주소</label> <input type="text" class="form-control"
 				id="" placeholder="사업자주소" name="" required>
 		</div>
-		<div class="form-group under_border">
-			<label for="">건물관리번호</label> <input type="text" class="form-control"
-				id="" placeholder="건물관리번호" name="" required>
+		<div class="form-group has-feedback under_border">
+			<label for="reg_num"><b>사업자등록번호</b></label> <input type="text"
+				class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요."
+				name="reg_num" required> <span id="reg_num_err"
+				class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
-		<div class="form-group under_border">
-			<label for="">가게카테고리</label> <input type="text" class="form-control"
-				id="" placeholder="가게카테고리" name="" required>
-		</div>
-		<div class="form-group under_border">
-			<label for="">가게 프로필사진</label> <input type="text"
-				class="form-control" id="" placeholder="가게 프로필사진" name="" required>
-		</div>
-		<div class="form-group under_border">
-			<label for="">가게소개</label> <input type="text" class="form-control"
-				id="" placeholder="가게소개" name="" required>
-		</div>
-		<div class="form-group under_border">
-			<label for="">안내</label> <input type="text" class="form-control"
-				id="" placeholder="안내" name="" required>
-		</div>
-		<div class="form-group under_border">
-			<label for="">휴무일</label>
-			<div class="row">
-				<input type="checkbox" class="form-control col-md-1" id=""
-					placeholder="휴무일" name="" required>
-			</div>
-		</div>
-		<div class="form-group under_border">
-			<label for="">리뷰안내</label> <input type="text" class="form-control"
-				id="" placeholder="리뷰안내" name="" required>
-		</div>
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
 
 		<!-- 
 	가게명, 최소주문금액, 운영시간, 전화번호, 배달지역, 상호명, 사업자주소, 사업자 등록번호
