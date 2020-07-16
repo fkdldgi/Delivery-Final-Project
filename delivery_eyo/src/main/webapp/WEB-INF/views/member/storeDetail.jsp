@@ -129,26 +129,39 @@
 	
 	//수량 증가 함수
 	function volumeUp(){
+		var price = 0 ;
+		var totalPrice = 0;
 		if($(".check").each(function(){
 			if($(this).is(":checked")){
-				console.log('총합:'+(parseInt($("#menuprice").text())+parseInt($(this).val()))*(parseInt($("#volumeText").val()) + 1));
-				$("#total").text((parseInt($("#menuprice").text())+parseInt($(this).val()))*(parseInt($("#volumeText").val()) + 1)+'원');
-			}else{
-				$("#total").text((parseInt($("#menuprice").text()))*(parseInt($("#volumeText").val()) + 1)+'원');
+				price =  (price + parseInt($(this).val()));
 			}
 		}))
-		$('#volumeText').val((parseInt($("#volumeText").val()) + 1)); 
+		if(price===0){
+			totalPrice = (parseInt($("#menuprice").text()))*(parseInt($("#volumeText").val()) + 1);
+		}else{
+			totalPrice = (price + parseInt($("#menuprice").text()))*(parseInt($("#volumeText").val()) + 1);
+		}
+		$('#volumeText').val((parseInt($("#volumeText").val()) + 1));
+		$("#total").text(totalPrice+'원');
 	}
 	
 	//수량 감소 함수
 	function volumeDown(){
+		var price = 0 ;
+		var totalPrice = 0;
 		if((parseInt($("#volumeText").val()) - 1) > 0){
 			if($(".check").each(function(){
 				if($(this).is(":checked")){
-					$("#total").text((parseInt($("#menuprice").text())+parseInt($(this).val()))*(parseInt($("#volumeText").val()) + -1)+'원');
+					price =  (price + parseInt($(this).val()));
 				}
 			}))
-			$('#volumeText').val((parseInt($("#volumeText").val()) - 1));
+			if(price===0){
+				totalPrice = (parseInt($("#menuprice").text()))*(parseInt($("#volumeText").val()) + -1);
+			}else{
+				totalPrice = (price + parseInt($("#menuprice").text()))*(parseInt($("#volumeText").val()) + -1);
+			}
+			$('#volumeText').val((parseInt($("#volumeText").val()) + -1));
+			$("#total").text(totalPrice+'원');
 		}
 	}
 	
@@ -164,15 +177,27 @@
 	
 	//주문표에 담기 눌렀을 때 실행되는 함수
 	function addCart(){
-		if($(".check").each(function(){
-			if($(this).is(":checked")){
-				console.log($(this).val())
-			}
-		}))
+		
+		
 		$('#volumeText').val(1);
 	}
 	
+	//옵션 메뉴 선택시 총금액 변경해주는 함수
 	function clickOption(){
-		
+		//메뉴 가격
+		var menuPrice = parseInt($("#menuprice").text());
+		//현재 선택한 수량
+		var volume = parseInt($("#volumeText").val());
+		//옵션가격
+		var optionPrice = 0 ;
+		if($(".check").each(function(){
+			if($(this).is(":checked")){
+				optionPrice =  (optionPrice + parseInt($(this).val()));
+			}
+		}))
+		//총 가격 넣어주기
+		var totalPrice = ((menuPrice + optionPrice)*volume);
+		$('#total').text(totalPrice + '원');
 	}
+	console.log(sessionStorage.getItem('id'));
 </script>
