@@ -15,10 +15,15 @@
         order by priority asc
 	</select>
 	
-	<!-- 회원가입 -->
-	<insert id="insert" parameterType="member">
-		insert into member values(MEMBER_SEQ.NEXTVAL,#{id},#{pwd},#{name},#{email},#{tel},2,null,null,null,sysdate,0,#{gender},#{birth})
-	</insert>
+	<!-- 메뉴번호로  메뉴 가져오기 -->
+	<select id="menuInfo" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuVo">
+		select * from menu where num=#{num}
+	</select>
+	
+	<!-- 메뉴번호로 메뉴옵션 얻어오기 -->
+	<select id="optionInfo" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuOptionVo">
+		select * from menu_option where menu_num=#{num}
+	</select>
 	
 	<!-- 가게 리스트 -->
 	<select id="shopList" parameterType="hashmap"
@@ -31,15 +36,5 @@
 	<!-- 가게 정보 -->
 	<select id="storeInfo" parameterType="int" resultType="com.jhta.delivery.member.vo.ShopVo">
 		select * from shop where num=#{num}
-	</select>
-	
-	<!-- 회원 조회 -->
-	<select id="selectOne" parameterType="hashmap" resultType="member">
-		select * from member where id=#{id} and pwd=#{pwd}
-	</select>
-	
-	<!-- 아이디 체크 -->
-	<select id="idchk" parameterType="String" resultType="member">
-		select * from member where id=#{id}
 	</select>
 </mapper>

@@ -68,6 +68,12 @@
             <span id="telErr" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
             <span class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
+        <div id="findaddr">
+	   		 <span>주소를 입력해주세요.</span>
+		     <button class="btn btn-outline-success" onclick="sample5_execDaumPostcode()" type="button">주소 검색</button>
+		     <input class="form-control mr-sm-2" type="text" placeholder="주소를 입력해주세요" id="building_nanagement_number" readonly="readonly">
+		     <input class="form-control mr-sm-2" type="text" placeholder="상세주소를 입력해주세요" id="address_detail">
+    	</div>
         
          <div class="mb-3">
                     <label for="gender">성별</label><br> 
@@ -202,4 +208,31 @@
         $("#myForm button[type=submit]")
                     .attr("disabled","disabled");
     }; 
+    
+    if(sessionStorage.getItem('addr')!=null){
+    	document.getElementById("sample5_address").value = sessionStorage.getItem('addr');
+    }
+    
+    </script>
+    
+      
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d85ff3401d499d8c4830a9da98833bd&libraries=services"></script>		
+		<script>
+			
+		//주소-좌표 변환 객체를 생성
+		var geocoder = new daum.maps.services.Geocoder();
+		function sample5_execDaumPostcode() {
+		    new daum.Postcode({ 
+		        oncomplete: function(data) {
+		            var addr = data.address; // 최종 주소 변수
+		            sessionStorage.setItem('addr', addr); //세션에 선택한 주소값 넣기 -> 페이지가 바뀌어도 값이 유지되도록 하기 위해
+		            // 주소 정보를 해당 필드에 넣는다.
+		            document.getElementById("building_nanagement_number").value = sessionStorage.getItem('addr');
+		            console.log('session : ' + sessionStorage.getItem('addr'));
+		            console.log('roadAddress : ' + data.roadAddress + ", jibunAddress : " + data.jibunAddress);
+		        }
+		    }).open();
+		}
+		</script>     
 </script> 
