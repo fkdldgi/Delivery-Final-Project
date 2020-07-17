@@ -58,15 +58,11 @@
 		// 메뉴 삭제
 		$("input[name=remove_menu]").on("click",function(){
 			var target = $(this).parent().prev().children("div[name=menu]:last");
-			console.log(target);
 			target.remove();
 		});
 		
 		// 카테고리 추가
 		$("#add_category_menu").on('click',function(){
-			
-			console.log('1');
-			
 			// 카테고리 메뉴 복사
 			var copy_category_menu = $("#copy_category_menu").clone();
 			copy_category_menu.css('display','block');
@@ -96,9 +92,26 @@
 			$("#add_menu_wrap").append(div1);
 		});
 		
+		// 카테고리 삭제
+		$("#remove_category_menu").on('click',function(){
+			// 전체 카테고리
+			var category = $("div[name=category]");
+			
+			// 전체 카테고리 중 마지막 div
+			var category1 = $("div[name=category]:last");
+			
+			// 전체 카테고리 크기가 2 이상일때만 삭제 가능
+			if(category.length > 2){
+				category1.remove();
+			}else{
+				alert("대표메뉴는 삭제가 불가능 합니다.");
+			}
+			
+		});
+		
 		// 이미지 추가
 		$("img").on('click',function(e){
-			console.log('1');
+			console.log('이미지 추가 버튼');
 		});
 		
 		// 카테고리 div 눌렀을 때 div숨기고, 나타내기
