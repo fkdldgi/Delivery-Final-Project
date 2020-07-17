@@ -76,7 +76,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		<div id="cart-footer" style="width: 100%; height: 30%; border: 0px solid black; margin-top: 10px;">
 			<div id="min-price" style="width: 100%; height: 30%; border: 1px solid black;">최소 결제금액<br>${info.min_price }원</div>
 			<div style="width: 100%; height: 30%; border: 1px solid black;">총 금액<div id="total-price">선택된 메뉴가 없습니다</div>원</div>
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%; height: 30%;" onclick="">주문하기</button>
+			<button type="button" id='orderBtn' class='btn btn-primary btn-lg' style="width: 100%; height: 30%;">주문하기</button>
 		</div>
 	</div>    
   </div> 
@@ -272,10 +272,6 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		console.log($(this).children('div').text()); //클릭한 요소의 자식 요소 중 div의 텍스트값을 가져오라는 뜻
 		var price = parseInt($(this).children('div').text().split('원')[0]);
 		var volume = parseInt($(this).children('div').text().split('원')[1]);
-		console.log('수량 : ' + parseInt(volume));
-		console.log('가격 : ' + parseInt(price));
-		console.log('총 금액  전: ' + $('#total-price').text());
-		
 		var delPrice =parseInt(price);
 		var orgPrice = parseInt($('#total-price').text());
 		if((orgPrice-delPrice)===0){
@@ -289,8 +285,10 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 	});
 	
 	//주문하기 누르면 실행되는 함수
-	$('#order').click(function(){
-		location.href='#';
+	$('#orderBtn').click(function(){
+		console.log($('#cart-body').find('.col').text());
+		$('#cart-body').find('.col').text();
+		//location.href='#';
 	});
 	
 </script>
