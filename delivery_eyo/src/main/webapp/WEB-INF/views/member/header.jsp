@@ -1,5 +1,4 @@
-  <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
@@ -22,7 +21,7 @@ display:flex
 }
 </style>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-			<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d85ff3401d499d8c4830a9da98833bd&libraries=services"></script>		
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d85ff3401d499d8c4830a9da98833bd&libraries=services"></script>		
 <script>
 		
     //주소-좌표 변환 객체를 생성
@@ -41,8 +40,17 @@ display:flex
     }
 </script>
 <div id="login">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >로그인</button>
-<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/join'" >회원가입</button>
+<!-- 오른쪽 위에 로그인,회원가입 부분(로그인이 되면 c:otherwise 부분을 출력함) -->
+<c:choose>
+	<c:when test="${empty sessionScope.memberId }">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >로그인</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/member/join'" >회원가입</button>
+	</c:when>
+	<c:otherwise>
+		<p><h6>${sessionScope.memberName }님 환영합니다</h6></p>
+		<a class="nav-link" href="javascript:logout();">로그아웃</a>
+	</c:otherwise>
+</c:choose>
 </div>
 <div id="mainlogo">
 	<a href="/delivery/member/main"><img
@@ -87,9 +95,12 @@ display:flex
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/member/event_main">이벤트</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
-      </li>
+      <!-- 로그인이 되면 마이페이지 탭이 생김 -->
+      <c:if test="${not empty sessionScope.memberId }">
+	      <li class="nav-item">
+	        <a class="nav-link" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
+	      </li>
+      </c:if>
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/member/qna">고객센터</a>
       </li>
@@ -100,6 +111,8 @@ display:flex
  
   </div>
 </nav>
+<ul class="navbar-nav">
+		<!-- 모달영역 -->
 		<form class="form-inline" method="post">
 			<div class="modal fade in" id="myModal" tabindex="-1" aria-labelledby="mySmallModalLabel">
 				<div class="modal-dialog">
@@ -110,6 +123,7 @@ display:flex
 								<span aria-hidden="true">x</span>
 							</button>
 						</div>
+						
 						<!-- 로그인 내용 입력(모달) -->
 						<div class="modal-body">
 							<div class="row">
@@ -118,10 +132,11 @@ display:flex
 							</div>
 							<div class="row">
 								<label for="inputPwd" class="col-xs-6 col-md-4">비밀번호</label>
-								<input type="text" name="login_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required>
+								<input type="password" name="login_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required>
 							</div>
 						</div>
-						<!-- 모달 footer -->
+						
+						<!-- 모달 fotter -->
 						<div class="modal-fotter">
 			                <button type="button" id="join_user" class="btn btn-link float-right" onclick="return check_form()">로그인</button>
 						</div>
@@ -129,8 +144,10 @@ display:flex
 				</div>
 			</div>
 		</form>
-
+	</ul>
 <script>
+
+//사용자 주소 세션 확인 부분
 console.log('세션값 보기 : ' + sessionStorage.getItem('addr'));
 if(sessionStorage.getItem('addr')!=null){
 	document.getElementById("sample5_address").value = sessionStorage.getItem('addr');
@@ -140,6 +157,8 @@ $(document).ready(function(){
 	   location.href="/delivery/member/main";
    });
 });
+
+//로그인 체크 함수
 function check_form(){
 	var id=$('#inputId').val();
 	var pwd=$('#inputPwd').val();
@@ -157,11 +176,14 @@ function check_form(){
 		}
 	});
 }
+
+//로그아웃 함수
 function logout(){
 	$.ajax({
 		url:"${pageContext.request.contextPath}/member/logout",
 		success:function(data){
 			location.reload();
+			location.href="${pageContext.request.contextPath}/member/main";
 		}
 	});
 }
