@@ -8,6 +8,7 @@
 		<typeAlias type="com.jhta.delivery.owner.vo.OwnerVo" alias="owner"/>
 		<typeAlias type="com.jhta.delivery.member.vo.MemberVo" alias="member"/>
 		<typeAlias type="com.jhta.delivery.member.vo.NoticeVo" alias="notice"/>
+		<typeAlias type="com.jhta.delivery.member.vo.QnaVo" alias="Qna"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/OwnerMapper.xml"/>
@@ -15,5 +16,6 @@
 		<mapper resource="com/jhta/delivery/mybatis/mapper/StoreMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/MenuMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/NoticeMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/QnaMapper.xml"/>
 	</mappers>
 </configuration>
