@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.delivery.member.vo.MenuCategoryVo;
@@ -26,7 +28,7 @@ public class Store_ManageController {
 	@Autowired
 	private Owner_MenuService menu_service;
 	
-	@RequestMapping("/owner/store_manage")
+	@GetMapping("/owner/store_manage")
 	public String manage(Model model, String id) {
 		
 		List<ShopVo> shopList = service.shop_list(id);
@@ -37,6 +39,11 @@ public class Store_ManageController {
 		}else {
 			return ".owner.store_manage";
 		}
+	}
+	
+	@PostMapping("/owner/store_manage") // 배열로 받아야함
+	public String manage_update(Model model) {
+		return ".owner.store_manage";
 	}
 	
 	@RequestMapping("/owner/store_manage/home")
