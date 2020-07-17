@@ -5,7 +5,7 @@
 <mapper namespace="mybatis.StoreMapper">
 
 	<!-- 대표메뉴 리스트 가져오기 -->
-	<select id="mainMenuList" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuVo">
+	<select id="mainMenuList" parameterType="int" resultType="com.jhta.delivery.vo.MenuVo">
 		select * from menu
 		where menu_category_num=(select num from MENU_CATEGORY 
                                	where shop_num=(select num 
@@ -16,25 +16,25 @@
 	</select>
 	
 	<!-- 메뉴번호로  메뉴 가져오기 -->
-	<select id="menuInfo" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuVo">
+	<select id="menuInfo" parameterType="int" resultType="com.jhta.delivery.vo.MenuVo">
 		select * from menu where num=#{num}
 	</select>
 	
 	<!-- 메뉴번호로 메뉴옵션 얻어오기 -->
-	<select id="optionInfo" parameterType="int" resultType="com.jhta.delivery.member.vo.MenuOptionVo">
+	<select id="optionInfo" parameterType="int" resultType="com.jhta.delivery.vo.MenuOptionVo">
 		select * from menu_option where menu_num=#{num}
 	</select>
 	
 	<!-- 가게 리스트 -->
 	<select id="shopList" parameterType="hashmap"
-		resultType="com.jhta.delivery.member.vo.ShopVo">
+		resultType="com.jhta.delivery.vo.ShopVo">
 		select * from (select aa.*,rownum rnum from (select * from shop order
 		by rownum desc) aa) where <![CDATA[ rnum>=#{startrow} and rnum<=#{endrow}]]>
 	</select>
 	
 	<!-- 가게 조회(상세페이지) -->
 	<!-- 가게 정보 -->
-	<select id="storeInfo" parameterType="int" resultType="com.jhta.delivery.member.vo.ShopVo">
+	<select id="storeInfo" parameterType="int" resultType="com.jhta.delivery.vo.ShopVo">
 		select * from shop where num=#{num}
 	</select>
 </mapper>

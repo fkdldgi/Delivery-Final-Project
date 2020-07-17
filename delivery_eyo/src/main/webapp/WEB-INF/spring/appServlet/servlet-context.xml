@@ -37,9 +37,5 @@
 		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
-	<context:component-scan base-package="com.jhta.delivery.start.controller" />
-	<context:component-scan base-package="com.jhta.delivery.owner.controller" />
-	<context:component-scan base-package="com.jhta.delivery.member.controller"/>
-	
-	
+	<context:component-scan base-package="com.jhta.delivery.controller" />
 </beans:beans>
