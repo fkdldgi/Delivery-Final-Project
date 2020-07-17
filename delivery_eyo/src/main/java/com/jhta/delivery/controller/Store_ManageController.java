@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,9 +47,10 @@ public class Store_ManageController {
 	}
 	
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
-	public String manage_update(Model model,@RequestParam HashMap<String, Object> map) {
+	public String manage_update(Model model,@RequestParam(value="menu_info") List<String> menu_info) {
 		
-		System.out.println(map.get("menu_info"));
+		System.out.println(menu_info.toString());
+		System.out.println(menu_info);
 
 		
 		return ".owner.store_manage";
