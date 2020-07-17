@@ -12,12 +12,12 @@
 	<select id="idchk" parameterType="String" resultType="owner">
 		select * from owner where id=#{id}
 	</select>
-	<select id="shop_list" parameterType="String" resultType="com.jhta.delivery.member.vo.ShopVo">
+	<select id="shop_list" parameterType="String" resultType="com.jhta.delivery.vo.ShopVo">
 		select a.*
 		from shop a, owner b
 		where a.owner_num = b.num and b.id=#{id}
 	</select>
-	<select id="shop_select" parameterType="int" resultType="com.jhta.delivery.member.vo.ShopVo">
+	<select id="shop_select" parameterType="int" resultType="com.jhta.delivery.vo.ShopVo">
 		select *
 		from shop where num=#{num}
 	</select>
