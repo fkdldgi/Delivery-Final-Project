@@ -22,11 +22,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
 	
-	<context:component-scan base-package="com.jhta.delivery.owner">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
-	
-	<context:component-scan base-package="com.jhta.delivery.member">
+	<context:component-scan base-package="com.jhta.delivery">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 </beans>
