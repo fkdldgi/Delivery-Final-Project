@@ -1,13 +1,17 @@
 package com.jhta.delivery.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.delivery.service.OwnerService;
 import com.jhta.delivery.service.Owner_MenuService;
@@ -42,7 +46,11 @@ public class Store_ManageController {
 	}
 	
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
-	public String manage_update(Model model) {
+	public String manage_update(Model model,@RequestParam HashMap<String, Object> map) {
+		
+		System.out.println(map.get("menu_info"));
+
+		
 		return ".owner.store_manage";
 	}
 	

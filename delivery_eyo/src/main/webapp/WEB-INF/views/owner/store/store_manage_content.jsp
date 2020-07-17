@@ -43,6 +43,7 @@
 		});
 		
 		// 메뉴추가
+		
 		$("input[name=add_menu]").on('click',function(){
 			
 			var copy_menu = $("#copy_menu").clone();
@@ -57,6 +58,9 @@
 		
 		// 메뉴 삭제
 		$("input[name=remove_menu]").on("click",function(){
+			
+			console.log('remove_menu');
+			
 			var target = $(this).parent().prev().children("div[name=menu]:last");
 			target.remove();
 		});
@@ -66,7 +70,7 @@
 			// 카테고리 메뉴 복사
 			var copy_category_menu = $("#copy_category_menu").clone();
 			copy_category_menu.css('display','block');
-			copy_category_menu.attr('name','category_name')
+			copy_category_menu.attr('name','category_name');
 			// copy_category_menu.name='category_name';
 			copy_category_menu.removeAttr('id');
 			
@@ -90,6 +94,27 @@
 			div1.append(copy_menu);
 			div1.append(copy_button);
 			$("#add_menu_wrap").append(div1);
+			
+			$("input[name=add_menu]").on('click',function(){
+				var copy_menu = $("#copy_menu").clone();
+				copy_menu.css('display','block');
+				copy_menu.css('width','100%');
+				copy_menu.attr('name','menu');
+				copy_menu.removeAttr('id');
+				
+				var a = $(this).parent();
+				a.prev().append(copy_menu);
+			});
+			
+			// 카테고리 div 눌렀을 때 div숨기고, 나타내기
+			$("div[name=category_name]").on('click',function(){
+				var cate = $(this).nextAll();
+				// 위 아래로 나타태는 효과
+				cate.animate({
+					height: 'toggle'
+				});
+			});
+			
 		});
 		
 		// 카테고리 삭제
@@ -157,7 +182,7 @@
 	<div id="copy_menu"  style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 		<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 			<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;"></h2>
-			<span>메뉴설명:&nbsp;<input type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;"></span>
+			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;"></span>
 			<br>
 			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
 				oninput="maxLengthCheck(this)" placeholer="가격">원</span>
@@ -174,7 +199,7 @@
 	
 	<div id="div1" name="category" style="display: none;"></div>
 	
-	<form action="/delivery/owner/store_manage?id=${sessionScope.ownerId }" method="post">
+	<form action="/delivery/owner/store_manage" method="post">
 		<div id="menu_wrap">
 		<div id="add_menu_wrap">
 			<br>
@@ -242,7 +267,8 @@
 							<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 									<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
-									<span>메뉴설명:&nbsp;<input placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
+									<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
+						
 									<br>
 									<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
 										oninput="maxLengthCheck(this)" placeholder="가격"></span>
