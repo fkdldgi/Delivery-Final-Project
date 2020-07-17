@@ -295,21 +295,20 @@
 <div>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand">가게추가</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarColor01" aria-controls="navbarColor01"
-			aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#"> <span
-						class="sr-only"> (current) </span>
-				</a></li>
+				<li class="nav-item active">
+					<a class="nav-link" href="#"> 
+						<span class="sr-only"> (current) </span>
+					</a>
+				</li>
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<button id="add_store" class="btn btn-primary btn-lg">가게
-						등록</button>
+					<button id="add_store" class="btn btn-primary btn-lg">가게등록</button>
 				</li>
 			</ul>
 		</div>
@@ -324,7 +323,6 @@
  -->
 <div id="div_wrap">
 	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data">
-		
 		<div class="form-group under_border">
 			<h2>가게정보</h2>
 		</div>
@@ -334,23 +332,21 @@
 			<input type="file" name="file1" accept="image/*" id="file">
 		</div>
 		<div class="form-group under_border">
-			<label for="shop_name">가게명</label> <input type="text"
-				class="form-control" id="shop_name" placeholder="가게명을 입력해주세요."
-				name="name" required>
+			<label for="shop_name">가게명</label> 
+			<input type="text" class="form-control" placeholder="가게명을 입력해주세요." name="name" required>
 		</div>
 		<div class="form-group under_border">
-			<label for="">가게소개</label> <input type="text" class="form-control"
-				id="" placeholder="가게소개" name="" required>
+			<label for="">가게소개</label> 
+			<input type="text" class="form-control" placeholder="가게소개" name="introduce" required>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label for="shop_phone">전화번호</label> <input type="text"
-				class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요."
-				name="shop_phone" required> <span id="shop_phone_err"
-				class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
+			<label for="shop_phone">전화번호</label> 
+			<input type="text" class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요." name="shop_phone" required> 
+			<span id="shop_phone_err" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
 		<div class="form-group under_border">
-			<label for="">건물관리번호</label> <input type="text" class="form-control"
-				id="" placeholder="건물관리번호" name="" required>
+			<label for="">건물관리번호</label>
+			<input type="text" class="form-control" placeholder="건물관리번호" name="" required>
 		</div>
 		<div class="form-group has-feedback under_border">
 			<label for="address_detail">상세주소</label> <input type="text"
@@ -386,12 +382,11 @@
 			</div>
 		</div>
 		<div class="form-group under_border">
-			<label for="">안내</label> 
-			<textarea class="form-control" rows="5" id="comment"></textarea>
-			<input type="text" class="form-control"
-				id="" placeholder="안내" name="" required>
+			<label for="info">안내</label> 
+			<textarea class="form-control" cols="30" rows="5" placeholder="가게안내에 대한 내용을 입력하세요" id="info" name="info" required></textarea>
 		</div>
 		<div class="form-group under_border">
+			<textarea class="form-control" cols="30" rows="5" placeholder="리뷰이벤트 또는 리뷰안내에 대한 내용을 입력하세요" id="review_info" name="review_info" required></textarea>
 			<label for="">리뷰안내</label> <input type="text" class="form-control"
 				id="" placeholder="리뷰안내" name="" required>
 		</div>
@@ -428,12 +423,11 @@
 			<label>운영시간</label>
 			<div>
 				<div class="row">
-					<a id="open_time" class="col-md-2">오픈시간: </a> <input type="text"
-						class="form-control col-md-3" id="shop_open_time" name="open_time">
-					<a id="open_close" class="col-md-1">~</a> <a id="close_time"
-						class="col-md-2">마감시간: </a> <input type="text"
-						class="form-control col-md-3" id="shop_close_time"
-						name="close_time">
+					<a id="open_time" class="col-md-2">오픈시간: </a> 
+					<input type="text" class="form-control col-md-3" id="shop_open_time" name="open_time">
+					<a id="open_close" class="col-md-1">~</a> 
+					<a id="close_time" class="col-md-2">마감시간: </a> 
+					<input type="text" class="form-control col-md-3" id="shop_close_time" name="close_time">
 				</div>
 			</div>
 		</div>
