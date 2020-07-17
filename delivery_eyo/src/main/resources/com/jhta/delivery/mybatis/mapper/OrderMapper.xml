@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.OrderMapper">
+<!--/////////////// insert 부분 //////////////////////-->	
+	<!-- 주문  -->
+	<insert id="Order_MainVo_insert" parameterType="com.jhta.delivery.vo.Order_MainVo">
+	
+	</insert>
+	
+	<!-- 주문메뉴 옵션   -->
+	<insert id="Order_Menu_OptionVo_insert" parameterType="com.jhta.delivery.vo.Order_Menu_OptionVo">
+	
+	</insert>
+	
+	<!-- 주문메뉴  -->
+	<insert id="Order_MenuVo_insert" parameterType="com.jhta.delivery.vo.Order_MenuVo">
+	
+	</insert>
+<!--/////////////////////////// //////////////////////-->	
+	
+<!--/////////////// selectList 부분 //////////////////////-->	
+	<!-- 주문  -->
+	
+	
+	<!-- 주문메뉴 옵션   -->
+	
+	
+	<!-- 주문메뉴  -->
+	
+<!--/////////////////////////// //////////////////////-->	
+</mapper>
