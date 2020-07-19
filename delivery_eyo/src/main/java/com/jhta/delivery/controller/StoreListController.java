@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.delivery.service.MemberService;
 import com.jhta.delivery.service.StoreService;
-import com.jhta.delivery.vo.Menu_OptionVo;
 import com.jhta.delivery.vo.ShopVo;
 
 @Controller

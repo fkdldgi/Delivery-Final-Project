@@ -156,7 +156,7 @@
 	<div id="copy_main_menu" style="display: none;">
 		<div>
 			<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
-				<input style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
+				<input name="menu_name" style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
 				<br>
 				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성">
 				<br>
@@ -198,7 +198,12 @@
 	</div>
 	
 	<div id="div1" name="category" style="display: none;"></div>
-	
+<!-- 
+	주문안내 shop_info
+	메뉴이름 menu_name
+	메뉴설명 menu_info
+	메뉴가격 min_price
+ -->
 	<form action="/delivery/owner/store_manage" method="post">
 		<div id="menu_wrap">
 		<div id="add_menu_wrap">
@@ -210,7 +215,7 @@
 			<div id="menu_bar">
 				<h3 style="text-align: center;">메뉴관리</h3>
 			</div>
-			<h4 style="margin-left: 15px; ">주문안내: &nbsp;&nbsp;<input style="width: 30%; " type="text" placeholder="주문안내" value="${requestScope.vo.info }"></h4>
+			<h4 style="margin-left: 15px; ">주문안내: &nbsp;&nbsp;<input name="shop_info" style="width: 30%; " type="text" placeholder="주문안내" value="${requestScope.vo.info }"></h4>
 			
 			<div name="append_main_menu" style="margin: auto; margin-top: 20px; border: 3px solid #FC5230;width: 80%;height: 100%">
 				<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900;">대표 메뉴</h2>
@@ -266,7 +271,7 @@
 							<!-- 메뉴 -->		
 							<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-									<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
+									<h2><input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
 									<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
 						
 									<br>

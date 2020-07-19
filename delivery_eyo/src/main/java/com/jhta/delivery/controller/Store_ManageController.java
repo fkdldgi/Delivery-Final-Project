@@ -1,16 +1,12 @@
 package com.jhta.delivery.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,11 +43,30 @@ public class Store_ManageController {
 	}
 	
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
-	public String manage_update(Model model,@RequestParam(value="menu_info") List<String> menu_info) {
+	public String manage_update(Model model,
+						@RequestParam(value="shop_info") String shop_info,
+						@RequestParam(value="menu_name") List<String> menu_name,
+						@RequestParam(value="menu_info") List<String> menu_info,
+						@RequestParam(value="min_price") List<String> min_price) {
 		
-		System.out.println(menu_info.toString());
-		System.out.println(menu_info);
+		System.out.println(shop_info); // 주문안내 가져옴
+		System.out.println(menu_name); // 메뉴이름
+		System.out.println(menu_info); // 메뉴설명
+		System.out.println(min_price); // 메뉴가격
 
+		/*
+		List<MenuCategoryVo> categoryList = null;
+		List<MenuVo> menuList = null;
+		
+		for(String menu_nameVo:menu_name) {
+			MenuVo vo = new MenuVo();
+			vo.setName(menu_nameVo);
+			menuList.add(vo);
+		}
+		for(MenuVo vo1: menuList) {
+			System.out.println(vo1.getName());
+		}
+		 */
 		
 		return ".owner.store_manage";
 	}
