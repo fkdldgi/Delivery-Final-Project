@@ -18,7 +18,7 @@
 				<a class="nav-link" href="/delivery/owner/store_manage/home?num=${vo.num }">메뉴관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">광고관리</a>
+				<a class="nav-link" href="/delivery/owner/store_manage/advertisement?num=${vo.num }">광고관리</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">리뷰관리</a>

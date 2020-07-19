@@ -1,5 +1,7 @@
 package com.jhta.delivery.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,28 +47,37 @@ public class Store_ManageController {
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
 	public String manage_update(Model model,
 						@RequestParam(value="shop_info") String shop_info,
+						@RequestParam(value="menu_category_name") List<String> menu_category_name,
 						@RequestParam(value="menu_name") List<String> menu_name,
 						@RequestParam(value="menu_info") List<String> menu_info,
 						@RequestParam(value="min_price") List<String> min_price) {
 		
 		System.out.println(shop_info); // 주문안내 가져옴
+		System.out.println(menu_category_name); // 메뉴카테고리명
 		System.out.println(menu_name); // 메뉴이름
 		System.out.println(menu_info); // 메뉴설명
-		System.out.println(min_price); // 메뉴가격
-
-		/*
-		List<MenuCategoryVo> categoryList = null;
-		List<MenuVo> menuList = null;
+		System.out.println(min_price); // 메뉴가격		
 		
-		for(String menu_nameVo:menu_name) {
+		List<MenuVo> list = new ArrayList<>();
+		
+		for(int i = 0; i<menu_name.size(); i++) {
 			MenuVo vo = new MenuVo();
+			
+			String menu_nameVo = menu_name.get(i);
+			String menu_infoVo = menu_info.get(i);
+			int min_priceVo = Integer.parseInt(min_price.get(i));
+			
 			vo.setName(menu_nameVo);
-			menuList.add(vo);
+			vo.setMenu_info(menu_infoVo);
+			vo.setPrice(min_priceVo);
+			 list.add(vo);
 		}
-		for(MenuVo vo1: menuList) {
+		for(MenuVo vo1: list) {
 			System.out.println(vo1.getName());
+			System.out.println(vo1.getMenu_info());
+			System.out.println(vo1.getPrice());
+			System.out.println();
 		}
-		 */
 		
 		return ".owner.store_manage";
 	}
@@ -75,16 +86,14 @@ public class Store_ManageController {
 	public String manageHome(Model model, int num) {
 		
 		ShopVo vo = service.shop_select(num);
+		
 		List<MenuVo> mainMenuList = store_service.mainMenuList(num);
 		List<MenuCategoryVo> menuCategoryList = menu_service.menuCategory(num);
-		// List<Menu_OptionVo> ShopNum_MenuOption = menu_service.ShopNum_MenuOption(num);
 		List<MenuVo> menu=menu_service.menu(num);		
+		
 		model.addAttribute("mainMenuList",mainMenuList);
 		model.addAttribute("menuCategoryList", menuCategoryList);
 		model.addAttribute("menu",menu);
-		
-
-		// model.addAttribute("ShopNum_MenuOption", ShopNum_MenuOption);
 		model.addAttribute("vo", vo);
 		
 		if(vo==null) {

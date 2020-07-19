@@ -259,7 +259,7 @@
 					<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
 						<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 						 	<div style="position: relative; text-align: center; height: 40px;">
-						 		<div style="display: inline-block; text-align: center; width: 40%;"><h2><input style="text-align: center; width: 100%;"type="text" placeholder="메뉴카테고리명을 입력해 주세요." 
+						 		<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;"type="text" placeholder="메뉴카테고리명을 입력해 주세요." 
 						 						value="${list.name }"></h2></div>
 						 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
 						 	</div>
