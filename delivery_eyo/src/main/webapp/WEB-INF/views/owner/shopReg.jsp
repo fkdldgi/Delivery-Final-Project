@@ -72,7 +72,8 @@
 	margin: 0px 15px 5px 0px;
 }
 
-#chk2 label{
+/*  */
+#personal_days label,#shop_categories label{
 	margin: 0px 15px 5px 0px;
 }
 
@@ -216,7 +217,7 @@
 				success:function(data){
 					data.result.forEach(function(item,index,array){
 						chk1.append("<label class='btn btn-light border border-dark'>"+ 
-										"<input type='checkbox' autocomplete='off' name='addr_name' value='"+item.addr_name+"'>"+item.addr_name+
+										"<input type='checkbox' name='addr_name' value='"+item.addr_name+"'>"+item.addr_name+
 									"</label>");
 					});
 					$("label.btn").on('click',function(){ //라벨을 클릭했을 때
@@ -239,10 +240,10 @@
 		});
 		
 		//휴무일 클릭시 checkbox에 checked추가 삭제
-		$("label.btn").on('click',function(){ //라벨을 클릭했을 때
+		$("#personal_days label.btn").on('click',function(){ //라벨을 클릭했을 때
 			if($(this).hasClass('active')===true){ //체크를 해제했을 경우 (active클래스가 존재한다는 것) 
 				if($(this).children().val()=='연중무휴'){
-					$("#chk2").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
+					$("#personal_days").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
 						if(index>0){
 							$(this).removeAttr('disabled'); //라벨 비활성화
 							$(this).children().removeAttr('disabled');
@@ -253,7 +254,7 @@
 				}
 			}else if($(this).hasClass('active')===false){ //체크를 했을경우
 				if($(this).children().val()=='연중무휴'){
-					$("#chk2").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
+					$("#personal_days").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
 						if(index>0){
 							$(this).attr('disabled','disabled'); //라벨 비활성화
 							$(this).removeClass('active'); //active클래스 삭제
@@ -331,38 +332,75 @@
 			<img src="/delivery/resources/images/default.png" class="rounded-circle" id="priview" width="70" height="70">
 			<input type="file" name="file1" accept="image/*" id="file">
 		</div>
+		
 		<div class="form-group under_border">
 			<label for="shop_name">가게명</label> 
-			<input type="text" class="form-control" placeholder="가게명을 입력해주세요." name="name" required>
+			<input type="text" class="form-control" placeholder="가게명을 입력해주세요." id="shop_name" name="name" required>
 		</div>
+		
 		<div class="form-group under_border">
-			<label for="">가게소개</label> 
-			<input type="text" class="form-control" placeholder="가게소개" name="introduce" required>
+			<label for="shop_introduce">가게소개</label> 
+			<input type="text" class="form-control" placeholder="가게소개" id="shop_introduce" name="introduce" required>
 		</div>
+		
 		<div class="form-group has-feedback under_border">
 			<label for="shop_phone">전화번호</label> 
 			<input type="text" class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요." name="shop_phone" required> 
 			<span id="shop_phone_err" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
+		
 		<div class="form-group under_border">
 			<label for="">건물관리번호</label>
 			<input type="text" class="form-control" placeholder="건물관리번호" name="" required>
 		</div>
+		
 		<div class="form-group has-feedback under_border">
-			<label for="address_detail">상세주소</label> <input type="text"
-				class="form-control" id="address_detail"
-				placeholder="상세주소를 입력해 주세요." name="address_detail" required>
-			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이
-				아닙니다. 다시 입력해 주세요.</span>
+			<label for="address_detail">상세주소</label> 
+			<input type="text" class="form-control" id="address_detail" placeholder="상세주소를 입력해 주세요." name="address_detail" required>
+			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
+		
 		<div class="form-group under_border">
-			<label for="">가게카테고리</label> <input type="text" class="form-control"
-				id="" placeholder="가게카테고리" name="" required>
+			<label for="">가게카테고리</label> 
+			<div class="btn-group-toggle" data-toggle="buttons" id="shop_categories">
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='프랜차이즈'>프랜차이즈
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='치킨'>치킨
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='중국집'>중국집
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='양식'>양식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='한식'>한식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='카페'>카페
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='일식'>일식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='족발/보쌈'>족발/보쌈
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='야식'>야식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='분식'>분식
+				</label>
+			</div>
 		</div>
+		
 		<div class="form-group under_border">
 			<label for="min_price">최소주문금액</label><br> 
 			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)">원
 		</div>
+		
 		<div class="form-group under_border">
 			<label>결제방법</label>
 			<div class="form-check">
@@ -381,44 +419,48 @@
 				</label>
 			</div>
 		</div>
+		
 		<div class="form-group under_border">
 			<label for="info">안내</label> 
 			<textarea class="form-control" cols="30" rows="5" placeholder="가게안내에 대한 내용을 입력하세요" id="info" name="info" required></textarea>
 		</div>
+		
 		<div class="form-group under_border">
 			<textarea class="form-control" cols="30" rows="5" placeholder="리뷰이벤트 또는 리뷰안내에 대한 내용을 입력하세요" id="review_info" name="review_info" required></textarea>
 			<label for="">리뷰안내</label> <input type="text" class="form-control"
 				id="" placeholder="리뷰안내" name="" required>
 		</div>
+		
 		<div class="form-group under_border">
 			<label for="">휴무일</label><br>
-			<div class="btn-group-toggle" data-toggle="buttons" id="chk2">
+			<div class="btn-group-toggle" data-toggle="buttons" id="personal_days">
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴'>연중무휴
+					<input type='checkbox' name='personal_day' value='연중무휴'>연중무휴
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='월'>월
+					<input type='checkbox' name='personal_day' value='월'>월
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='화'>화
+					<input type='checkbox' name='personal_day' value='화'>화
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='수'>수
+					<input type='checkbox' name='personal_day' value='수'>수
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='목'>목
+					<input type='checkbox' name='personal_day' value='목'>목
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='금'>금
+					<input type='checkbox' name='personal_day' value='금'>금
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='토'>토
+					<input type='checkbox' name='personal_day' value='토'>토
 				</label>
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='일'>일
+					<input type='checkbox' name='personal_day' value='일'>일
 				</label>
 			</div>
 		</div>
+		
 		<div class="form-group under_border">
 			<label>운영시간</label>
 			<div>
@@ -431,7 +473,6 @@
 				</div>
 			</div>
 		</div>
-		
 		
 		<div class="form-group under_border" id="deliveryArea">
 			<label for="sel1">배달지역</label> 
@@ -459,6 +500,7 @@
 			<!-- 읍면동 -->
 			<div class="btn-group-toggle" data-toggle="buttons" id="chk1"></div>
 		</div>
+		
 		<div class="form-group under_border">
 			<label for="mutual_name">상호명</label> <input type="text"
 				class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요."
@@ -468,14 +510,14 @@
 			<h2>사업자정보</h2>
 		</div>
 		<div class="form-group under_border">
-			<label for="">사업자주소</label> <input type="text" class="form-control"
-				id="" placeholder="사업자주소" name="" required>
+			<label for="addr">사업자주소</label> <input type="text" class="form-control"
+				id="" placeholder="사업자주소" id="addr" name="addr" required>
 		</div>
+		
 		<div class="form-group has-feedback under_border">
-			<label for="reg_num">사업자등록번호</label> <input type="text"
-				class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요."
-				name="reg_num" required> <span id="reg_num_err"
-				class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
+			<label for="reg_num">사업자등록번호</label> 
+			<input type="text" class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요." name="reg_num" required> 
+			<span id="reg_num_err" class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
 	<!-- 
 	가게명, 최소주문금액, 운영시간, 전화번호, 배달지역, 상호명, 사업자주소, 사업자 등록번호
