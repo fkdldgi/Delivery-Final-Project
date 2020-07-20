@@ -72,7 +72,7 @@
 	margin: 0px 15px 5px 0px;
 }
 
-#chk2 label{
+#personal_days label{
 	margin: 0px 15px 5px 0px;
 }
 
@@ -89,6 +89,11 @@
 .form-control[readonly] {
     background-color: white;
     opacity: 1;
+}
+
+/* 휴무일,가게카테고리 margin */
+#personal_days label,#shop_categories label{
+	margin: 0px 15px 5px 0px;
 }
 
 </style>
@@ -123,22 +128,22 @@
 	결제방법, 가게소개, 안내, 휴무일, 리뷰안내, 가게상태, 울트라콜, 광고클릭수
  -->
 <div id="div_wrap">
-	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data">
+	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data" onsubmit="return myform();">
 		<div class="form-group under_border">
 			<h2>가게정보</h2>
 		</div>
 		<div class="form-group under_border">
 			<label for="">가게 프로필사진</label><br>
 			<img src="/delivery/resources/images/default.png" class="rounded-circle" id="preview" width="70" height="70">
-			<input type="file" name="file1" accept="image/*" id="file">
+			<input type="file" name="file1" accept="image/*" id="file" required>
 		</div>
 		<div class="form-group under_border">
 			<label for="shop_name">가게명</label> 
-			<input type="text" class="form-control" placeholder="가게명을 입력해주세요." name="name" required>
+			<input type="text" class="form-control" placeholder="가게명을 입력해주세요." id="shop_name" name="name" required>
 		</div>
 		<div class="form-group under_border">
 			<label for="">가게소개</label> 
-			<input type="text" class="form-control" placeholder="가게소개" name="introduce" required>
+			<input type="text" class="form-control" placeholder="가게소개" id="introduce" name="introduce" required>
 		</div>
 		<div class="form-group has-feedback under_border">
 			<label for="shop_phone">전화번호</label> 
@@ -146,26 +151,57 @@
 			<span id="shop_phone_err" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
 		<div class="form-group under_border">
-			<label for="">가게주소</label><br>
-			<input type="text" id="sample5_address" class="form-control" placeholder="주소" onclick="sample5_execDaumPostcode()" readonly="readonly" style="margin-bottom:5px;">
+			<label for="sample5_address">가게주소</label><br>
+			<input type="text" id="sample5_address" class="form-control" placeholder="주소를 검색하세요." onclick="sample5_execDaumPostcode()" style="margin-bottom:5px;" required>
 			<input type="text" class="form-control" id="address_detail" placeholder="상세주소를 입력해 주세요." name="address_detail" required>
 			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이	아닙니다. 다시 입력해 주세요.</span>
 			<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 		</div>
 
 		<div class="form-group under_border">
-			<label for="">가게카테고리</label> <input type="text" class="form-control"
-				id="" placeholder="가게카테고리" name="" required>
+			<label>가게카테고리</label> 
+			<div class="btn-group-toggle" data-toggle="buttons" id="shop_categories">
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='프랜차이즈' required>프랜차이즈
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='치킨'>치킨
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='중국집'>중국집
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='양식'>양식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='한식'>한식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='카페'>카페
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='일식'>일식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='족발/보쌈'>족발/보쌈
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='야식'>야식
+				</label>
+				<label class='btn btn-light border border-dark'>
+					<input type='checkbox' name='shop_category' value='분식'>분식
+				</label>
+			</div>
 		</div>
 		<div class="form-group under_border">
 			<label for="min_price">최소주문금액</label><br> 
-			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)">원
+			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" required>원
 		</div>
 		<div class="form-group under_border">
 			<label>결제방법</label>
 			<div class="form-check">
 				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option">만나서결제
+				<input type="radio"	class="form-check-input" name="payment_option" required>만나서결제
 				</label>
 			</div>
 			<div class="form-check">
@@ -181,16 +217,15 @@
 		</div>
 		<div class="form-group under_border">
 			<label for="info">안내</label> 
-			<textarea class="form-control" cols="30" rows="5" placeholder="가게안내에 대한 내용을 입력하세요" id="info" name="info" required></textarea>
+			<textarea class="form-control" cols="30" rows="5" placeholder="가게안내에 대한 내용을 입력하세요(선택)" id="info" name="info"></textarea>
 		</div>
 		<div class="form-group under_border">
-			<textarea class="form-control" cols="30" rows="5" placeholder="리뷰이벤트 또는 리뷰안내에 대한 내용을 입력하세요" id="review_info" name="review_info" required></textarea>
-			<label for="">리뷰안내</label> <input type="text" class="form-control"
-				id="" placeholder="리뷰안내" name="" required>
+			<label for="review_info">리뷰안내</label>
+			<textarea class="form-control" cols="30" rows="5" placeholder="리뷰이벤트 또는 리뷰안내에 대한 내용을 입력하세요(선택)" id="review_info" name="review_info"></textarea>
 		</div>
 		<div class="form-group under_border">
 			<label for="">휴무일</label><br>
-			<div class="btn-group-toggle" data-toggle="buttons" id="chk2">
+			<div class="btn-group-toggle" data-toggle="buttons" id="personal_days" required>
 				<label class='btn btn-light border border-dark'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴'>연중무휴
 				</label>
@@ -222,10 +257,10 @@
 			<div>
 				<div class="row">
 					<a id="open_time" class="col-md-2">오픈시간: </a> 
-					<input type="text" class="form-control col-md-3" id="shop_open_time" name="open_time">
+					<input type="text" class="form-control col-md-3" id="shop_open_time" name="open_time" required>
 					<a id="open_close" class="col-md-1">~</a> 
 					<a id="close_time" class="col-md-2">마감시간: </a> 
-					<input type="text" class="form-control col-md-3" id="shop_close_time" name="close_time">
+					<input type="text" class="form-control col-md-3" id="shop_close_time" name="close_time" required>
 				</div>
 			</div>
 		</div>
@@ -270,10 +305,9 @@
 				id="" placeholder="사업자주소" name="" required>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label for="reg_num">사업자등록번호</label> <input type="text"
-				class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요."
-				name="reg_num" required> <span id="reg_num_err"
-				class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
+			<label for="reg_num">사업자등록번호</label> 
+			<input type="text" class="form-control" id="reg_num" placeholder="사업자등록번호를 입력해 주세요." name="reg_num" required>
+			<span id="reg_num_err" class="help-block">올바른 사업자등록번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
 	<!-- 
 	가게명, 최소주문금액, 운영시간, 전화번호, 배달지역, 상호명, 사업자주소, 사업자 등록번호
@@ -289,8 +323,8 @@
 	가게소개, 안내(정보탭에 안내 및 혜택), 휴무일, 리뷰안내 -- 입력할 수도 있고 아닐 수도 있고
  -->
 		<div class="form-group form-check">
-			<label class="form-check-label"></label> <input type="submit"
-				id="btn1" class="btn btn-primary btn-lg float-right" value="가게등록">
+			<label class="form-check-label"></label>
+			<input type="submit" id="btn1" class="btn btn-primary btn-lg float-right" value="가게등록">
 		</div>
 	</form>
 </div>
@@ -327,7 +361,6 @@
                     if (status === daum.maps.services.Status.OK) {
                     	
                         var result = results[0]; //첫번째 결과의 값을 활용
-						alert(result.x+","+result.y);
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
                         // 지도를 보여준다.
@@ -336,7 +369,9 @@
                         // 지도 중심을 변경한다.
                         map.setCenter(coords);
                         // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
+                        marker.setPosition(coords);
+                        //검색 완료 시 수정 불가하도록 readonly 부여
+                        $("#sample5_address").attr('readonly',true);
                     }
                 });
             }
@@ -497,7 +532,7 @@
 	$("label.btn").on('click',function(){ //라벨을 클릭했을 때
 		if($(this).hasClass('active')===true){ //체크를 해제했을 경우 (active클래스가 존재한다는 것) 
 			if($(this).children().val()=='연중무휴'){
-				$("#chk2").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
+				$("#personal_days").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
 					if(index>0){
 						$(this).removeAttr('disabled'); //라벨 비활성화
 						$(this).children().removeAttr('disabled');
@@ -508,7 +543,7 @@
 			}
 		}else if($(this).hasClass('active')===false){ //체크를 했을경우
 			if($(this).children().val()=='연중무휴'){
-				$("#chk2").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
+				$("#personal_days").children('label.btn').each(function(index,item){ //연중무휴,월,...,일
 					if(index>0){
 						$(this).attr('disabled','disabled'); //라벨 비활성화
 						$(this).removeClass('active'); //active클래스 삭제
@@ -542,5 +577,9 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+	
+	function myform(){
+		
+	}
 	
 </script>

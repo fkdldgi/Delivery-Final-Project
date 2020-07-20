@@ -5,30 +5,48 @@ public class ShopVo {
 
 	// 가게번호
 	private int num;
+	
+	// 가게프로필사진
+	private String profile_img;
 
 	// 가게명
 	private String name;
 
-	// 최소주문금액
-	private int min_price;
-
-	// 결제방법
-	private String payment_option;
-
 	// 가게소개
 	private String introduce;
+	
+	// 전화번호
+	private String tel;
+	
+	// 건물관리번호
+	private String building_management_number;
+	
+	// 상세주소
+	private String address_detail;
+	
+	// 가게카테고리
+	private int shop_category_num;
+	
+	// 최소주문금액
+	private int min_price;
+	
+	// 결제방법
+	private String payment_option;	
 
 	// 안내
 	private String info;
-
-	// 운영시간
-	private String operating_time;
+	
+	// 리뷰안내
+	private String review_info;
 
 	// 휴무일
 	private String personal_day;
-
-	// 전화번호
-	private String tel;
+	
+	// 오픈시간
+	private String open_time;
+	
+	// 마감시간
+	private String close_time;
 
 	// 배달지역
 	private String delivery_area;
@@ -42,23 +60,14 @@ public class ShopVo {
 	// 사업자 등록번호
 	private String reg_num;
 
-	// 리뷰안내
-	private String review_info;
 
-	// 가게프로필사진
-	private String profile_img;
 
 	// 가게상태 0(close),1(open)
 	private String status;
 
-	// 건물관리번호
-	private String building_management_number;
 
-	// 상세주소
-	private String address_detail;
 
-	// 가게카테고리
-	private int shop_category_num;
+
 
 	// 울트라콜 OFF(0),ON(1)
 	private String ultracall;
@@ -83,7 +92,7 @@ public class ShopVo {
 		this.payment_option = payment_option;
 		this.introduce = introduce;
 		this.info = info;
-		this.operating_time = operating_time;
+		//this.operating_time = operating_time;
 		this.personal_day = personal_day;
 		this.tel = tel;
 		this.delivery_area = delivery_area;
@@ -149,13 +158,13 @@ public class ShopVo {
 		this.info = info;
 	}
 
-	public String getOperating_time() {
-		return operating_time;
-	}
-
-	public void setOperating_time(String operating_time) {
-		this.operating_time = operating_time;
-	}
+//	public String getOperating_time() {
+//		return operating_time;
+//	}
+//
+//	public void setOperating_time(String operating_time) {
+//		this.operating_time = operating_time;
+//	}
 
 	public String getPersonal_day() {
 		return personal_day;
