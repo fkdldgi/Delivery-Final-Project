@@ -37,4 +37,8 @@
 	<select id="storeInfo" parameterType="int" resultType="com.jhta.delivery.vo.ShopVo">
 		select * from shop where num=#{num}
 	</select>
+	
+	<delete id="deleteMenu" parameterType="int">
+		delete from menu where num=#{num}
+	</delete>
 </mapper>

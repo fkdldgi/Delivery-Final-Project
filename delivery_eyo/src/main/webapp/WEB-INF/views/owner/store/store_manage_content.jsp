@@ -53,16 +53,29 @@
 			
 			var a = $(this).parent();
 			a.prev().append(copy_menu);
-			
 		});
+			/*
+			주문안내 shop_info
+			메뉴이름 menu_name
+			메뉴설명 menu_info
+			메뉴가격 min_price
+			*/
 		
 		// 메뉴 삭제
-		$("input[name=remove_menu]").on("click",function(){
-			
-			console.log('remove_menu');
-			
+		$("input[name=remove_menu]").on("click",function(){			
 			var target = $(this).parent().prev().children("div[name=menu]:last");
-			target.remove();
+			var num = target.find("input[name=menu_num]").val();
+			$.ajax({
+				url: "/delivery/owner/store_manage/delete",
+				data:{delete_num : num, Shop_num: ${Shop_num}},
+				success: function(data){
+					if(data==1){
+						target.remove();
+					}else{
+						alert("메뉴삭제 실패");
+					}
+				}
+			});
 		});
 		
 		// 카테고리 추가
@@ -172,7 +185,7 @@
 	<div id="copy_category_menu" style="display: none; margin: auto; margin-top: 20px; width: 80%;height: 100%">
 		<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 			<div style="position: relative; text-align: center; height: 40px;">
-				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input style="text-align: center; width: 100%;" type="text" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
+				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;" type="text" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
 				<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
 			</div>
 		</div>			
@@ -180,8 +193,9 @@
 	
 		<!-- 복사할 메뉴 -->		
 	<div id="copy_menu"  style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+		<input type="text" name="menu_num" value="0" style="display: none;">
 		<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-			<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;"></h2>
+			<h2><input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;"></h2>
 			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;"></span>
 			<br>
 			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
@@ -257,6 +271,7 @@
 			<c:forEach var="list" items="${menuCategoryList }" >
 				<div name="category">
 					<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+						<input type="text" name="category_num" style="display:none;" value="${list.num }">
 						<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 						 	<div style="position: relative; text-align: center; height: 40px;">
 						 		<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;"type="text" placeholder="메뉴카테고리명을 입력해 주세요." 
@@ -270,6 +285,7 @@
 						<c:if test="${list.num == menu.menu_category_num }">
 							<!-- 메뉴 -->		
 							<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+								<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
 								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 									<h2><input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
 									<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>

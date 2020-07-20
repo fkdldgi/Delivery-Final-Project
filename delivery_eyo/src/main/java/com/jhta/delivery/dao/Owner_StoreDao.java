@@ -18,4 +18,9 @@ public class Owner_StoreDao {
 	public List<MenuVo> mainMenuList(int num){
 		return session.selectList(NAMESPACE+".mainMenuList", num);
 	}
+	
+	// 메뉴삭제하기
+	public int deleteMenu(int num) {
+		return session.delete(NAMESPACE+".deleteMenu", num);
+	}
 }

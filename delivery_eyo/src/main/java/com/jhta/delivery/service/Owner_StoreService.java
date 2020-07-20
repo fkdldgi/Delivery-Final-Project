@@ -17,4 +17,9 @@ public class Owner_StoreService {
 	public List<MenuVo> mainMenuList(int num){
 		return dao.mainMenuList(num);
 	}
+	
+	// 메뉴삭제하기
+	public int deleteMenu(int num) {
+		return dao.deleteMenu(num);
+	}
 }

@@ -1,7 +1,5 @@
 package com.jhta.delivery.vo;
 
-import java.util.List;
-
 public class MenuVo {
 
 	// 메뉴번호
