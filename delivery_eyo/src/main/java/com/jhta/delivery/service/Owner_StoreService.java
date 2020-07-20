@@ -18,8 +18,13 @@ public class Owner_StoreService {
 		return dao.mainMenuList(num);
 	}
 	
-	// 메뉴삭제하기
+	// 메뉴삭제
 	public int deleteMenu(int num) {
 		return dao.deleteMenu(num);
+	}
+	
+	// 메뉴카테고리삭제
+	public int deleteMenu_Category(int num) {
+		return dao.deleteMenu_Category(num);
 	}
 }

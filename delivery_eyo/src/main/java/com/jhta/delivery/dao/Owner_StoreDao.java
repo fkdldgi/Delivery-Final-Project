@@ -19,8 +19,13 @@ public class Owner_StoreDao {
 		return session.selectList(NAMESPACE+".mainMenuList", num);
 	}
 	
-	// 메뉴삭제하기
+	// 메뉴삭제
 	public int deleteMenu(int num) {
 		return session.delete(NAMESPACE+".deleteMenu", num);
+	}
+	
+	// 메뉴카테고리삭제
+	public int deleteMenu_Category(int num) {
+		return session.delete(NAMESPACE+".deleteMenu_Category", num);
 	}
 }

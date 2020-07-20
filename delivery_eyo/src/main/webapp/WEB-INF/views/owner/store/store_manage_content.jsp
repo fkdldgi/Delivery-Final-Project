@@ -53,6 +53,7 @@
 			
 			var a = $(this).parent();
 			a.prev().append(copy_menu);
+			
 		});
 			/*
 			주문안내 shop_info
@@ -65,17 +66,15 @@
 		$("input[name=remove_menu]").on("click",function(){			
 			var target = $(this).parent().prev().children("div[name=menu]:last");
 			var num = target.find("input[name=menu_num]").val();
-			$.ajax({
-				url: "/delivery/owner/store_manage/delete",
-				data:{delete_num : num, Shop_num: ${Shop_num}},
-				success: function(data){
-					if(data==1){
-						target.remove();
-					}else{
-						alert("메뉴삭제 실패");
-					}
-				}
-			});
+			
+			var trash = $("#trash").clone();
+			trash.removeAttr('id');
+			trash.attr('name','trash');
+			trash.val(num);
+			var trash_can = $("#trash_can");
+			trash_can.append(trash);
+			
+			target.remove();			
 		});
 		
 		// 카테고리 추가
@@ -137,15 +136,24 @@
 			
 			// 전체 카테고리 중 마지막 div
 			var category1 = $("div[name=category]:last");
+			var num = category1.find("input[name=category_num]").val();
 			
-			// 전체 카테고리 크기가 2 이상일때만 삭제 가능
+			var trash_category = $("#trash").clone();
+			trash_category.removeAttr('id');
+			trash_category.attr('name','trash_category');
+			trash_category.val(num);
+			
+			var trash_can = $("#trash_can");
+			trash_can.append(trash_category);
+			
 			if(category.length > 2){
 				category1.remove();
 			}else{
 				alert("대표메뉴는 삭제가 불가능 합니다.");
 			}
-			
 		});
+		
+		/*메뉴랑 메뉴카테고리 추가할 때 ajax로 넘기기*/
 		
 		// 이미지 추가
 		$("img").on('click',function(e){
@@ -165,15 +173,17 @@
 	
 </script>
 <body>
+	<input id="trash" type="text" style="display:none;">
+	<!-- 삭제한 값 넣기 -->
 	<!-- 복사할 메인메뉴 -->
 	<div id="copy_main_menu" style="display: none;">
 		<div>
 			<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
-				<input name="menu_name" style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
+				<input name="menu_name" style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름" required="required">
 				<br>
-				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성">
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성" required="required">
 				<br>
-				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격">
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격" required="required">
 			</div>
 		</div>
 		<div style="margin-top: 20px; width: 50%; height: 200px; float:right; text-align: center; border-right: 3px solid #FC5230;">
@@ -185,20 +195,20 @@
 	<div id="copy_category_menu" style="display: none; margin: auto; margin-top: 20px; width: 80%;height: 100%">
 		<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 			<div style="position: relative; text-align: center; height: 40px;">
-				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;" type="text" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
+				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;" type="text" required="required" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
 				<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
 			</div>
 		</div>			
 	</div>
 	
-		<!-- 복사할 메뉴 -->		
+	<!-- 복사할 메뉴 -->		
 	<div id="copy_menu"  style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
-		<input type="text" name="menu_num" value="0" style="display: none;">
+		<input type="text" name="menu_num" value="-1" style="display: none;">
 		<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-			<h2><input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;"></h2>
-			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;"></span>
+			<h2><input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;" required="required"></h2>
+			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;" required="required"></span>
 			<br>
-			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
+			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" required="required" name="min_price"
 				oninput="maxLengthCheck(this)" placeholer="가격">원</span>
 		</div>
 	</div>
@@ -219,6 +229,8 @@
 	메뉴가격 min_price
  -->
 	<form action="/delivery/owner/store_manage" method="post">
+		<div id="trash_can" style="display:none;"></div>
+		
 		<div id="menu_wrap">
 		<div id="add_menu_wrap">
 			<br>
@@ -293,6 +305,7 @@
 									<br>
 									<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
 										oninput="maxLengthCheck(this)" placeholder="가격"></span>
+									<input type="text" name="category_list_num" style="display:none;" value="${list.num }">
 								</div>
 							</div>
 						</c:if>

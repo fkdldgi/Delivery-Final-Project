@@ -53,7 +53,11 @@ public class Store_ManageController {
 						@RequestParam(value="menu_name") List<String> menu_name,
 						@RequestParam(value="menu_info") List<String> menu_info,
 						@RequestParam(value="min_price") List<String> min_price,
-						@RequestParam(value="menu_num") List<String> menu_num) {
+						@RequestParam(value="menu_num") List<String> menu_num,
+						@RequestParam(value="menu_category_num") List<String> menu_category_num,
+						@RequestParam(value="category_list_num") List<String> category_list_num,
+						@RequestParam(value="trash_category", required=false) List<String> trash_category,
+						@RequestParam(value="trash", required=false) List<String> trash) {
 		
 		System.out.println(shop_info); // 주문안내 가져옴
 		System.out.println(menu_category_name); // 메뉴카테고리명
@@ -62,11 +66,31 @@ public class Store_ManageController {
 		System.out.println(min_price); // 메뉴가격	
 		System.out.println(menu_num); // 메뉴번호
 		System.out.println(category_num); // 메뉴카테고리 번호
+		System.out.println(trash_category); // 삭제한 메뉴카테고리 번호
+		System.out.println(trash); // 삭제한 메뉴
+		System.out.println();
+		System.out.println(category_list_num);
+		
+		// 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제
+		if(trash_category != null) {
+			for(String trash_category_string:trash_category) {
+				int trash_category_num = Integer.parseInt(trash_category_string);
+				store_service.deleteMenu_Category(trash_category_num);
+			}
+		}
+		
+		// 삭제한 메뉴번호로 메뉴 DB에서 삭제
+		if(trash != null) {
+			for(String trash_string:trash) {
+				int trash_num = Integer.parseInt(trash_string);
+				store_service.deleteMenu(trash_num);
+			}
+		}
 		
 		List<MenuVo> MenuVoList = new ArrayList<>();
 		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();
 		
-		for(int i = 0; i<menu_category_name.size(); i++) {
+		for(int i = 0; i<menu_category_name.size()-1; i++) {
 			MenuCategoryVo vo = new MenuCategoryVo();
 			
 			String menu_category_nameVo = menu_category_name.get(i);
@@ -103,19 +127,6 @@ public class Store_ManageController {
 		}
 		
 		return ".owner.store_manage";
-	}
-	
-	// 메뉴삭제할 경우
-	@RequestMapping("/owner/store_manage/delete")
-	@ResponseBody
-	public int manageDeletMenu(Model model, int delete_num) {
-		int n = store_service.deleteMenu(delete_num);
-		System.out.println(n);
-		if(n > 0) {
-			return 1;
-		}else {
-			return -1;
-		}
 	}
 	
 	@RequestMapping("/owner/store_manage/home")
