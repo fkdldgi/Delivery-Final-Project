@@ -42,9 +42,9 @@
 			}
 		});
 		
-		// 메뉴추가
+		// 메뉴추가()
 		
-		$("input[name=add_menu]").on('click',function(){
+		/* $("input[name=add_menu]").on('click',function(){
 			
 			var copy_menu = $("#copy_menu").clone();
 			copy_menu.css('display','block');
@@ -54,7 +54,9 @@
 			var a = $(this).parent();
 			a.prev().append(copy_menu);
 			
-		});
+		}); */
+		
+		
 			/*
 			주문안내 shop_info
 			메뉴이름 menu_name
@@ -171,6 +173,16 @@
 		
 	});
 	
+	//메뉴 추가 함수
+	function menu_add(menu_category_num){
+		var copy_menu = $("#copy_menu").clone();
+		copy_menu.css('display','block');
+		copy_menu.attr('name','menu');
+		copy_menu.removeAttr('id');
+		copy_menu = append("<input type='text' name="category_list_num" style="display:none;" value="${list.num }">")
+		var a = $(this).parent();
+		a.prev().append(copy_menu);
+	}
 </script>
 <body>
 	<input id="trash" type="text" style="display:none;">
@@ -298,7 +310,7 @@
 							<!-- 메뉴 -->		
 							<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 								<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
-								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;"><!-- 여기에 input append해주기 -->
 									<h2><input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
 									<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
 						
@@ -315,7 +327,7 @@
 					<!-- 메뉴추가, 삭제 버튼 -->
 					<div style="text-align: center;">
 						<input name="add_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-							value="메뉴 추가">
+							value="메뉴 추가" onclick="menu_add(${list.num});">
 						<input name="remove_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" 
 							value="메뉴 삭제">
 					</div>
