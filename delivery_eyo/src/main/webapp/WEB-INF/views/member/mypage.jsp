@@ -1,56 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>myPage</title>
-<style type="text/css">
-.container{
-	border: 2px solid orange;
-}
-</style>
 </head>
-<body>
-<div class="container text-center">
-	<h2>¸¶ÀÌÆäÀÌÁö</h2>
-	<hr style="border: solid 1px orange;">
-	¾ÆÀÌµğ :<input type="text" value="${vo.id}" readonly="readonly"><br> 
- 	<span>Á¤º¸¸¦ ¼öÁ¤ÇÏ½Ã·Á¸é ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä</span><br>
- 	ºñ¹Ğ¹øÈ£ :<input type="password" value="pwd"><br>
-	<input type="password" value="${vo.pwd}" id="pwdchk" hidden="hidden"> <!-- °ª ¾ò¾î¿À±â vo¿¡¼­ ¾ò¾î¿Â ¾ÆÀÌµğ·Î -->
-	<input type="button" value="pwdchkbtn" id="pwdchkbtn"> 
-	<!-- ¼öÁ¤°¡´ÉÇÑ °Íµé (ºñ¹Ğ¹øÈ£,ÀÌ¸ŞÀÏ,ÀüÈ­¹øÈ£,ÁÖ¼Ò´Â..?)-->
+<script>
+
+$(document).ready(function(){
 	
-	<form>
-	<h2>È¸¿øÁ¤º¸ ¼öÁ¤</h2>
-	  <div class="form-group">
-	    <label for="exampleInputEmail1">ÀÌ¸ŞÀÏ</label>
-	    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="margin-left: 100px">
-	  </div>
-	  <div class="form-group">
-	    <label for="exampleInputPassword1">ÀüÈ­¹øÈ£</label>
-	    <input type="password" class="form-control" id="exampleInputPassword1">
-	  </div>
-	  <div class="form-group form-check">
-	    <h2>ÁÖ¼Òº¯°æ</h2>
-	  <button class="btn btn-outline-success" onclick="sample5_execDaumPostcode()" type="button">ÁÖ¼Ò °Ë»ö</button>
-	  <input type="text" id="building_nanagement_number" value="${vo.building_nanagement_number}">
-	  <label for="exampleInputPassword1">»ó¼¼ÁÖ¼Ò</label>
-	  <input type="text" id="address_detail" value="${vo.address_detail}">
-	  </div>
-	<br>
-	  <button type="submit" class="btn btn-primary">Submit</button>
-	</form>
-</div>
-</body>
-<script type="text/javascript">
- 	// var pwd=°ª °¡ÁÒ¤Å¿Í
- 	function expose() {
-		if (pwd==pwdchk) {
+	$("#file").change(function() {
+		readURL(this);
+	});
+	
+	$("#preview").change(function() {
+		$("#file").click();
+	});
+});
+
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#preview').attr('src',e.target.result);
 			
 		}
+		reader.readAsDataURL(input.files[0]);
 	}
- 	
+}
+function pwdcheck() {
+	var pwd=document.getElementById("pwd");
+	var pwdchk=document.getElementById("pwdchk");
+	if (pwd=== pwdchk) {
+		alert("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤");
+		$("#email").removeAttr("readonly");
+		$("#tel").removeAttr("readonly");
+		
+	}else {
+		alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë¶ˆì¼ì¹˜í•©ë‹ˆë‹¤");
+		$("waring").removeAttr("hidden");
+	}
+}
 </script>
+<body>
+<br>
+<div class="container" style="border: 1.5px solid orange; margin-bottom: 50px">
+<br>
+ <img class="d-block mx-auto mb-4" src="/delivery/resources/images/mypage_logo1.png" width="700" height="150">
+	<div class="form-group under_border" style="text-align: center;" >
+		<br>
+		<img src="/delivery/resources/images/mypage_logo.png" class="rounded-circle" id="preview" width="100" height="100">
+		<br>
+		<label>í”„ë¡œí•„ì‚¬ì§„ ë³€ê²½í•˜ê¸°</label><br>
+		<input type="file" name="file1" accept="image/*" id="file">
+	</div>
+	<hr style="border: 1px solid orange;">
+	<table class="table table-bordered">
+    <tbody>
+        <form action="mypage.jsp" method="post">
+            <tr>
+            	<th>ì•„ì´ë””</th>
+				<td><input type="text" value="${vo.getId}" id="title" class="form-control" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <th>ë¹„ë°€ë²ˆí˜¸ í™•ì¸</th>
+                   <td>	                
+					<div class="input-group mb-3">
+					  <input type="password" class="form-control" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <div class="input-group-append">
+					    <button class="btn btn-outline-secondary" type="button" id="pwdcheck" onclick="pwdcheck()">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</button>
+					  </div>
+					</div>
+					    <span> *ê°œì¸ì •ë³´ ë³´í˜¸ë¥¼ ìœ„í•´ ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ íŒ”ìš”í•©ë‹ˆë‹¤</span>
+					</td>
+                <input type="hidden" value="${vo.getPwd}" id="pwd" >
+            </tr>
+            <tr>
+                <th>ì´ë©”ì¼: </th>
+                <td><input type="email" placeholder="${vo.getEmail}" class="form-control-file" id="email" readonly="readonly"></td>
+            </tr>
+            <tr>
+                <th>ì´ë¦„: </th>
+                <td><input type="text" placeholder="${vo.getName}" class="form-control-file" id="name" readonly="readonly"></td>
+            </tr>
+            <tr> 
+                <th>ì „í™”ë²ˆí˜¸: </th>
+                <td><input type="text" placeholder="${vo.getTel}" class="form-control-file" id="tel" readonly="readonly" ></td>
+            </tr>
+        </form>
+   	</tbody>
+    </table>   
+   	 <br> 
+        <button type="submit" class="btn btn-primary">ìˆ˜ì •ì™„ë£Œ</button>
+</div>
+</body>
 </html>
