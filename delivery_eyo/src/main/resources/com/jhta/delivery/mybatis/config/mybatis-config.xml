@@ -17,5 +17,6 @@
 		<mapper resource="com/jhta/delivery/mybatis/mapper/MenuMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/NoticeMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/QnaMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/OrderMapper.xml"/>
 	</mappers>
 </configuration>

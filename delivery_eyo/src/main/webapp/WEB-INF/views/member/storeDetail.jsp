@@ -76,7 +76,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		<div id="cart-footer" style="width: 100%; height: 30%; border: 0px solid black; margin-top: 10px;">
 			<div id="min-price" style="width: 100%; height: 30%; border: 1px solid black;">최소 결제금액<br>${info.min_price }원</div>
 			<div style="width: 100%; height: 30%; border: 1px solid black;">총 금액<div id="total-price">선택된 메뉴가 없습니다</div>원</div>
-			<button type="button" class="btn btn-primary btn-lg" style="width: 100%; height: 30%;" onclick="">주문하기</button>
+			<button type="button" id='orderBtn' class='btn btn-primary btn-lg' style="width: 100%; height: 30%;">주문하기</button>
 		</div>
 	</div>    
   </div> 
@@ -219,12 +219,15 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		}));
 		
 		$('#cart-body').append(
-				'<p>' + menuNmae + "</p>" + 
-				'<p>' + optionStr + "</p>" + 
-				"<div class='row row-cols-2 border-bottom' style='width:100%;'>" + 
-				"<div class='col'>" + menuPrice[0] + " 원</div>" + 
-				"<div class='col'>" +  volume + " 개</div>" +
-				"</div>");
+				"<div class='cart-menu'>"+
+					'<p>' + menuNmae + "</p>" + 
+					'<p>' + optionStr + "</p>" + 
+					"<div class='row row-cols-2 border-bottom' style='width:100%;'>" + 
+					"<div class='col'>" + menuPrice[0] + " 원</div>" + 
+					"<div class='col'>" +  volume + "개</div>" +
+					"</div>"+
+				"</div>"
+		);
 
 		$('#total-price').text(cart_totalPrice + '원');
 		$('#volumeText').val(1);
@@ -263,5 +266,29 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		//총 금액 초기화
 		$('#total-price').text('선택된 메뉴가 없습니다');
 	}
+	
+	//장바구니 요소 더블클릭시 삭제하는 함수
+	$('#cart').on('dblclick','.cart-menu',function(){
+		console.log($(this).children('div').text()); //클릭한 요소의 자식 요소 중 div의 텍스트값을 가져오라는 뜻
+		var price = parseInt($(this).children('div').text().split('원')[0]);
+		var volume = parseInt($(this).children('div').text().split('원')[1]);
+		var delPrice =parseInt(price);
+		var orgPrice = parseInt($('#total-price').text());
+		if((orgPrice-delPrice)===0){
+			cart_totalPrice = 0
+			$('#total-price').text('선택된 메뉴가 없습니다');
+		}else{
+			$('#total-price').text((orgPrice-delPrice));
+		}
+		console.log('총 금액  후: ' + $('#total-price').text());
+		$(this).remove();
+	});
+	
+	//주문하기 누르면 실행되는 함수
+	$('#orderBtn').click(function(){
+		console.log($('#cart-body').find('.col').text());
+		$('#cart-body').find('.col').text();
+		//location.href='#';
+	});
 	
 </script>
