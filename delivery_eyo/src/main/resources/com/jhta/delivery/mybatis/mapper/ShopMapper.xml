@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.ShopMapper">
+	<insert id="insert" parameterType="shop">
+		insert into shop values(SHOP_SEQ.NEXTVAL,#{profile_img},#{name},#{introduce},#{tel},#{buildingCode},
+		#{address_detail},#{shop_category},#{min_price},#{payment_option},#{info},#{review_info},#{personal_day},
+		#{open_time},#{close_time},#{delivery_area},#{mutual_name},#{addr},#{reg_num},'0',0,0,#{owner_num},sysdate)
+	</insert>
+</mapper>

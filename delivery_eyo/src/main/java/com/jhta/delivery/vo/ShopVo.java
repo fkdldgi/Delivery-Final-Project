@@ -60,17 +60,11 @@ public class ShopVo {
 	// 사업자 등록번호
 	private String reg_num;
 
-
-
 	// 가게상태 0(close),1(open)
 	private String status;
 
-
-
-
-
 	// 울트라콜 OFF(0),ON(1)
-	private String ultracall;
+	private int ultracall;
 
 	// 광고클릭수 울트라콜ON일 시 클릭수가 오름
 	private int addcount;
@@ -80,31 +74,32 @@ public class ShopVo {
 
 	public ShopVo() {}
 
-	public ShopVo(int num, String name, int min_price, String payment_option, String introduce, String info,
-			String operating_time, String personal_day, String tel, String delivery_area, String mutual_name,
-			String addr, String reg_num, String review_info, String profile_img, String status,
-			String building_management_number, String address_detail, int shop_category_num, String ultracall,
-			int addcount, int owner_num) {
+	public ShopVo(int num, String profile_img, String name, String introduce, String tel,
+			String building_management_number, String address_detail, int shop_category_num, int min_price,
+			String payment_option, String info, String review_info, String personal_day, String open_time,
+			String close_time, String delivery_area, String mutual_name, String addr, String reg_num, String status,
+			int ultracall, int addcount, int owner_num) {
 		super();
 		this.num = num;
+		this.profile_img = profile_img;
 		this.name = name;
+		this.introduce = introduce;
+		this.tel = tel;
+		this.building_management_number = building_management_number;
+		this.address_detail = address_detail;
+		this.shop_category_num = shop_category_num;
 		this.min_price = min_price;
 		this.payment_option = payment_option;
-		this.introduce = introduce;
 		this.info = info;
-		//this.operating_time = operating_time;
+		this.review_info = review_info;
 		this.personal_day = personal_day;
-		this.tel = tel;
+		this.open_time = open_time;
+		this.close_time = close_time;
 		this.delivery_area = delivery_area;
 		this.mutual_name = mutual_name;
 		this.addr = addr;
 		this.reg_num = reg_num;
-		this.review_info = review_info;
-		this.profile_img = profile_img;
 		this.status = status;
-		this.building_management_number = building_management_number;
-		this.address_detail = address_detail;
-		this.shop_category_num = shop_category_num;
 		this.ultracall = ultracall;
 		this.addcount = addcount;
 		this.owner_num = owner_num;
@@ -118,12 +113,60 @@ public class ShopVo {
 		this.num = num;
 	}
 
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getBuilding_management_number() {
+		return building_management_number;
+	}
+
+	public void setBuilding_management_number(String building_management_number) {
+		this.building_management_number = building_management_number;
+	}
+
+	public String getAddress_detail() {
+		return address_detail;
+	}
+
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+
+	public int getShop_category_num() {
+		return shop_category_num;
+	}
+
+	public void setShop_category_num(int shop_category_num) {
+		this.shop_category_num = shop_category_num;
 	}
 
 	public int getMin_price() {
@@ -142,14 +185,6 @@ public class ShopVo {
 		this.payment_option = payment_option;
 	}
 
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
 	public String getInfo() {
 		return info;
 	}
@@ -158,13 +193,13 @@ public class ShopVo {
 		this.info = info;
 	}
 
-//	public String getOperating_time() {
-//		return operating_time;
-//	}
-//
-//	public void setOperating_time(String operating_time) {
-//		this.operating_time = operating_time;
-//	}
+	public String getReview_info() {
+		return review_info;
+	}
+
+	public void setReview_info(String review_info) {
+		this.review_info = review_info;
+	}
 
 	public String getPersonal_day() {
 		return personal_day;
@@ -174,12 +209,20 @@ public class ShopVo {
 		this.personal_day = personal_day;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getOpen_time() {
+		return open_time;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setOpen_time(String open_time) {
+		this.open_time = open_time;
+	}
+
+	public String getClose_time() {
+		return close_time;
+	}
+
+	public void setClose_time(String close_time) {
+		this.close_time = close_time;
 	}
 
 	public String getDelivery_area() {
@@ -214,22 +257,6 @@ public class ShopVo {
 		this.reg_num = reg_num;
 	}
 
-	public String getReview_info() {
-		return review_info;
-	}
-
-	public void setReview_info(String review_info) {
-		this.review_info = review_info;
-	}
-
-	public String getProfile_img() {
-		return profile_img;
-	}
-
-	public void setProfile_img(String profile_img) {
-		this.profile_img = profile_img;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -238,35 +265,11 @@ public class ShopVo {
 		this.status = status;
 	}
 
-	public String getBuilding_management_number() {
-		return building_management_number;
-	}
-
-	public void setBuilding_management_number(String building_management_number) {
-		this.building_management_number = building_management_number;
-	}
-
-	public String getAddress_detail() {
-		return address_detail;
-	}
-
-	public void setAddress_detail(String address_detail) {
-		this.address_detail = address_detail;
-	}
-
-	public int getShop_category_num() {
-		return shop_category_num;
-	}
-
-	public void setShop_category_num(int shop_category_num) {
-		this.shop_category_num = shop_category_num;
-	}
-
-	public String getUltracall() {
+	public int getUltracall() {
 		return ultracall;
 	}
 
-	public void setUltracall(String ultracall) {
+	public void setUltracall(int ultracall) {
 		this.ultracall = ultracall;
 	}
 
@@ -285,6 +288,7 @@ public class ShopVo {
 	public void setOwner_num(int owner_num) {
 		this.owner_num = owner_num;
 	}
+
 	
 	
-}
+	}

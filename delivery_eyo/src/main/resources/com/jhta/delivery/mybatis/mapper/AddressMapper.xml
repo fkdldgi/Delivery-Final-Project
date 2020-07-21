@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.AddressMapper">
+	<insert id="insert" parameterType="address">
+		insert into shop values(#{buildingCode},#{zonecode},#{address},#{addressEnglish},#{addressType},
+		#{userSelectedType},#{userLanguageType},#{roadAddress},#{roadAddressEnglish},#{jibunAddress},#{jibunAddressEnglish},
+		#{buildingName},#{apartment},#{sido},#{sigungu},#{sigunguCode},#{roadnameCode},#{bcode},#{roadname},#{bname},
+		#{bname1},#{bname2},#{hname},#{query},#{addr_x},#{addr_y})
+	</insert>
+</mapper>

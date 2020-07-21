@@ -128,7 +128,7 @@
 	결제방법, 가게소개, 안내, 휴무일, 리뷰안내, 가게상태, 울트라콜, 광고클릭수
  -->
 <div id="div_wrap">
-	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data" onsubmit="return myform();">
+	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data">
 		<div class="form-group under_border">
 			<h2>가게정보</h2>
 		</div>
@@ -146,13 +146,13 @@
 			<input type="text" class="form-control" placeholder="가게소개" id="introduce" name="introduce" required>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label for="shop_phone">전화번호</label> 
-			<input type="text" class="form-control" id="shop_phone" placeholder="'-'를 빼고 입력해주세요." name="shop_phone" required> 
-			<span id="shop_phone_err" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
+			<label for="tel">전화번호</label> 
+			<input type="text" class="form-control" id="tel" placeholder="'-'를 빼고 입력해주세요." name="tel" required> 
+			<span id="tel_err" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
-		<div class="form-group under_border">
-			<label for="sample5_address">가게주소</label><br>
-			<input type="text" id="sample5_address" class="form-control" placeholder="주소를 검색하세요." onclick="sample5_execDaumPostcode()" style="margin-bottom:5px;" required>
+		<div class="form-group under_border" id="address_wrap">
+			<label for="address_detail">가게주소</label><br>
+			<input type="text" id="address_detail" class="form-control" placeholder="주소를 검색하세요." onclick="sample5_execDaumPostcode()" style="margin-bottom:5px;" required>
 			<input type="text" class="form-control" id="address_detail" placeholder="상세주소를 입력해 주세요." name="address_detail" required>
 			<span id="address_detail_err" class="help-block">올바른 상세주소 형식이	아닙니다. 다시 입력해 주세요.</span>
 			<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
@@ -162,7 +162,7 @@
 			<label>가게카테고리</label> 
 			<div class="btn-group-toggle" data-toggle="buttons" id="shop_categories">
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' name='shop_category' value='프랜차이즈' required>프랜차이즈
+					<input type='checkbox' name='shop_category' value='프랜차이즈'>프랜차이즈
 				</label>
 				<label class='btn btn-light border border-dark'>
 					<input type='checkbox' name='shop_category' value='치킨'>치킨
@@ -201,17 +201,17 @@
 			<label>결제방법</label>
 			<div class="form-check">
 				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option" required>만나서결제
+				<input type="radio"	class="form-check-input" name="payment_option" value="만나서결제" required>만나서결제
 				</label>
 			</div>
 			<div class="form-check">
 				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option">바로결제
+				<input type="radio"	class="form-check-input" name="payment_option" value="바로결제">바로결제
 				</label>
 			</div>
 			<div class="form-check">
 				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option" checked="checked">만나서결제,바로결제
+				<input type="radio"	class="form-check-input" name="payment_option" value="만나서결제,바로결제">만나서결제,바로결제
 				</label>
 			</div>
 		</div>
@@ -225,9 +225,9 @@
 		</div>
 		<div class="form-group under_border">
 			<label for="">휴무일</label><br>
-			<div class="btn-group-toggle" data-toggle="buttons" id="personal_days" required>
+			<div class="btn-group-toggle" data-toggle="buttons" id="personal_days">
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴'>연중무휴
+					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴' required>연중무휴
 				</label>
 				<label class='btn btn-light border border-dark'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='월'>월
@@ -291,11 +291,11 @@
 			<select class="form-control" id="sel2"></select>
 			<!-- 읍면동 -->
 			<div class="btn-group-toggle" data-toggle="buttons" id="chk1"></div>
+			<input type="hidden" name=""
 		</div>
 		<div class="form-group under_border">
-			<label for="mutual_name">상호명</label> <input type="text"
-				class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요."
-				name="mutual_name" required>
+			<label for="mutual_name">상호명</label> 
+			<input type="text" class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요." name="mutual_name" required>
 		</div>
 		<div class="form-group under_border">
 			<h2>사업자정보</h2>
@@ -352,14 +352,13 @@
         new daum.Postcode({
             oncomplete: function(data) {
                 var addr = data.address; // 최종 주소 변수
-
                 // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
+                document.getElementById("address_detail").value = addr;
                 // 주소로 상세 정보를 검색
                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면
                     if (status === daum.maps.services.Status.OK) {
-                    	
+                    	$("#address_wrap input[type='hidden']").remove();
                         var result = results[0]; //첫번째 결과의 값을 활용
                         // 해당 주소에 대한 좌표를 받아서
                         var coords = new daum.maps.LatLng(result.y, result.x);
@@ -371,7 +370,35 @@
                         // 마커를 결과값으로 받은 위치로 옮긴다.
                         marker.setPosition(coords);
                         //검색 완료 시 수정 불가하도록 readonly 부여
-                        $("#sample5_address").attr('readonly',true);
+                        $("#address_detail").attr('readonly',true);
+                        //건물정보를 address_wrap에 append
+                       	$("#address_wrap").append("<input type='hidden' name='buildingCode' value='"+data.buildingCode+"'>"+
+                       			"<input type='hidden' name='zonecode' value='"+data.zonecode+"'>"+
+                       			"<input type='hidden' name='address' value='"+data.address+"'>"+
+                       			"<input type='hidden' name='addressEnglish' value='"+data.addressEnglish+"'>"+
+                       			"<input type='hidden' name='addressType' value='"+data.addressType+"'>"+
+                       			"<input type='hidden' name='userSelectedType' value='"+data.userSelectedType+"'>"+
+                       			"<input type='hidden' name='userLanguageType' value='"+data.userLanguageType+"'>"+
+                       			"<input type='hidden' name='roadAddress' value='"+data.roadAddress+"'>"+
+                       			"<input type='hidden' name='roadAddressEnglish' value='"+data.roadAddressEnglish+"'>"+
+                       			"<input type='hidden' name='jibunAddress' value='"+data.jibunAddress+"'>"+
+                       			"<input type='hidden' name='jibunAddressEnglish' value='"+data.jibunAddressEnglish+"'>"+
+                       			"<input type='hidden' name='buildingName' value='"+data.buildingName+"'>"+
+                       			"<input type='hidden' name='apartment' value='"+data.apartment+"'>"+
+                       			"<input type='hidden' name='sido' value='"+data.sido+"'>"+
+                       			"<input type='hidden' name='sigungu' value='"+data.sigungu+"'>"+
+                       			"<input type='hidden' name='sigunguCode' value='"+data.sigunguCode+"'>"+
+                       			"<input type='hidden' name='roadnameCode' value='"+data.roadnameCode+"'>"+
+                       			"<input type='hidden' name='bcode' value='"+data.bcode+"'>"+
+                       			"<input type='hidden' name='roadname' value='"+data.roadname+"'>"+
+                       			"<input type='hidden' name='bname' value='"+data.bname+"'>"+
+                       			"<input type='hidden' name='bname1' value='"+data.bname1+"'>"+
+                       			"<input type='hidden' name='bname2' value='"+data.bname2+"'>"+
+                       			"<input type='hidden' name='hname' value='"+data.hname+"'>"+
+                       			"<input type='hidden' name='query' value='"+data.query+"'>"+
+                       			"<input type='hidden' name='addr_x' value='"+result.x+"'>"+
+                       			"<input type='hidden' name='addr_y' value='"+result.y+"'>"
+                       			);
                     }
                 });
             }
@@ -404,14 +431,14 @@
 
 	// 전화번호 확인
 	var phone_status = 1;
-	$("#shop_phone").keyup(function() {
+	$("#tel").keyup(function() {
 		var tel = $(this).val();
 		var reg = /^\d{3}\d{3,4}\d{4}$/;
 		if (reg.test(tel)) {
-			$("#shop_phone_err").hide();
+			$("#tel_err").hide();
 			phone_status = 0;
 		} else {
-			$("#shop_phone_err").show();
+			$("#tel_err").show();
 			phone_status = 1;
 		}
 	});
@@ -471,20 +498,20 @@
 			alert("상세주소를 제대로 입력해 주세요.");
 			e.preventDefault();
 		}
-		e.preventDefault();
 	});
 	
 	
 	var chk1=$("#chk1");
 	//배달지역 시군구 얻어오기(accessToken은 4시간동안 유효)
 	$("#sel1").change(function(){
+		alert($("#sel1 option:checked").text());
 		var cityNum=this.value;
 		var sel2=$("#sel2");
 		chk1.empty();
 		sel2.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'32d04543-aad4-471e-963c-b6c382ddf4cc',cd:cityNum},
+			data:{accessToken:'1dcf13ca-701f-4d14-9abc-cc061a50045e',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -501,7 +528,7 @@
 		chk1.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'32d04543-aad4-471e-963c-b6c382ddf4cc',cd:cityNum},
+			data:{accessToken:'1dcf13ca-701f-4d14-9abc-cc061a50045e',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				data.result.forEach(function(item,index,array){
@@ -578,8 +605,5 @@
         }
     }
 	
-	function myform(){
-		
-	}
 	
 </script>
