@@ -1,13 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!--  id 세션값 이용해서 가져온 회원정보 -->
+<c:out value="${param.member}" /> 
+<!--  모델객체 이용해서 가져온 가게 번호 -->
+<c:out value="${param.shopNum}" />
 <form action="${pageContext.request.contextPath }/member/order" method="post">
-	<c:out value="${param.member}" /> <!--  id 세션값 이용해서 가져온 회원정보 -->
-	<c:out value="${param.shopNum}" /> <!--  모델객체 이용해서 가져온 가게 번호 -->
 	<div class="container" style="width: 100%;">
 		<div class="row" style="width: 100%;">
 		<!-- 가게 번호 받아서 숨기기 -->
-		 <input type="text" name="shopNum" style="width: 60%;" value="${param.shopNum }" hidden>
+		<input type="text" name="shopNum" style="width: 60%;" value="${param.shopNum }" hidden>
+		<!-- 고객번호 받아서 숨기기 -->
+		<input type="text" name="memberNum" style="width: 60%;" value="${sessionScope.memberNum }" hidden>
+		<!-- 주소관련 데이터 받아서 넘기기 -->
+		<input type="text" name="buildingCode" style="width: 60%;" >
+		<input type="text" name="zonecode" style="width: 60%;"  >
+		<input type="text" name="address" style="width: 60%;" >
+		<input type="text" name="addressEnglish" style="width: 60%;"  >
+<%-- 		<input type="text" name="addressType" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="userSelectedType" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="userLanguageType" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="roadAddress" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="roadAddressEnglish" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="jibunAddress" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="jibunAddressEnglish" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="buildingName" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="apartment" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="sido" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="sigungu" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="sigunguCode" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="roadnameCode" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="bcode" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="roadname" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="bname" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="bname1" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="bname2" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="hname" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="query" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="addr_x" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+<%-- 		<input type="text" name="addr_y" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+		
 			<div class="col-8 card" style="width: 100%; margin: auto; margin-bottom: 10px;">
 				<div class="card bg-dark" style="width: 100%; height: 50px; color: white; text-align: left;">
 					<h4 style="margin-top: 8px;">결제하기</h4>
@@ -68,4 +101,43 @@
 <script>
 	//주소 세션값 받아서 넣어주기
 	document.getElementById("addr").value = sessionStorage.getItem('addr');
+	//주소 데이터 세션값 가져오기
+	var data = sessionStorage.getItem('addrData');
+	var addrData=JSON.parse(data)
+	
+	var dataXY = sessionStorage.getItem('dataXY');
+	var XYdata=JSON.parse(dataXY);
+	
+	$('input[name=buildingCode]').val(addrData.buildingCode);
+	$('input[name=zonecode]').val(addrData.zonecode);
+	$('input[name=address]').val(addrData.address);
+	$('input[name=addressEnglish]').val(addrData.addressEnglish);
+	
+	console.log("주소 데이터 객체 값:" + addrData.buildingCode);
+	console.log("주소 데이터 객체 값:" + addrData.zonecode);
+	console.log("주소 데이터 객체 값:" + addrData.address);
+	console.log("주소 데이터 객체 값:" + addrData.addressEnglish);
+	console.log("주소 데이터 객체 값:" + addrData.addressType);
+	console.log("주소 데이터 객체 값:" + addrData.userSelectedType);
+	console.log("주소 데이터 객체 값:" + addrData.userLanguageType);
+	console.log("주소 데이터 객체 값:" + addrData.roadAddress);
+	console.log("주소 데이터 객체 값:" + addrData.roadAddressEnglish);
+	console.log("주소 데이터 객체 값:" + addrData.jibunAddress);
+	console.log("주소 데이터 객체 값:" + addrData.jibunAddressEnglish);
+	console.log("주소 데이터 객체 값:" + addrData.buildingName);
+	console.log("주소 데이터 객체 값:" + addrData.apartment);
+	console.log("주소 데이터 객체 값:" + addrData.sido);
+	console.log("주소 데이터 객체 값:" + addrData.sigungu);
+	console.log("주소 데이터 객체 값:" + addrData.sigunguCode);
+	console.log("주소 데이터 객체 값:" + addrData.roadnameCode);
+	console.log("주소 데이터 객체 값:" + addrData.bcode);
+	console.log("주소 데이터 객체 값:" + addrData.roadname);
+	console.log("주소 데이터 객체 값:" + addrData.bname);
+	console.log("주소 데이터 객체 값:" + addrData.bname1);
+	console.log("주소 데이터 객체 값:" + addrData.bname2);
+	console.log("주소 데이터 객체 값:" + addrData.hname);
+	console.log("주소 데이터 객체 값:" + addrData.query);
+	console.log("주소 데이터 x좌표 값:" + XYdata.x);
+	console.log("주소 데이터 y좌표 값" + XYdata.y);
+	
 </script>  
