@@ -42,8 +42,9 @@
 			}
 		});
 		
-		// 메뉴추가
-		$("input[name=add_menu]").on('click',function(){
+		// 메뉴추가()
+		
+		/* $("input[name=add_menu]").on('click',function(){
 			
 			var copy_menu = $("#copy_menu").clone();
 			copy_menu.css('display','block');
@@ -53,24 +54,37 @@
 			var a = $(this).parent();
 			a.prev().append(copy_menu);
 			
-		});
+		}); */
+		
+		
+			/*
+			주문안내 shop_info
+			메뉴이름 menu_name
+			메뉴설명 menu_info
+			메뉴가격 min_price
+			*/
 		
 		// 메뉴 삭제
-		$("input[name=remove_menu]").on("click",function(){
+		$("input[name=remove_menu]").on("click",function(){			
 			var target = $(this).parent().prev().children("div[name=menu]:last");
-			console.log(target);
-			target.remove();
+			var num = target.find("input[name=menu_num]").val();
+			
+			var trash = $("#trash").clone();
+			trash.removeAttr('id');
+			trash.attr('name','trash');
+			trash.val(num);
+			var trash_can = $("#trash_can");
+			trash_can.append(trash);
+			
+			target.remove();			
 		});
 		
 		// 카테고리 추가
 		$("#add_category_menu").on('click',function(){
-			
-			console.log('1');
-			
 			// 카테고리 메뉴 복사
 			var copy_category_menu = $("#copy_category_menu").clone();
 			copy_category_menu.css('display','block');
-			copy_category_menu.attr('name','category_name')
+			copy_category_menu.attr('name','category_name');
 			// copy_category_menu.name='category_name';
 			copy_category_menu.removeAttr('id');
 			
@@ -94,11 +108,58 @@
 			div1.append(copy_menu);
 			div1.append(copy_button);
 			$("#add_menu_wrap").append(div1);
+			
+			$("input[name=add_menu]").on('click',function(){
+				var copy_menu = $("#copy_menu").clone();
+				copy_menu.css('display','block');
+				copy_menu.css('width','100%');
+				copy_menu.attr('name','menu');
+				copy_menu.removeAttr('id');
+				
+				var a = $(this).parent();
+				a.prev().append(copy_menu);
+			});
+			
+			// 카테고리 div 눌렀을 때 div숨기고, 나타내기
+			$("div[name=category_name]").on('click',function(){
+				var cate = $(this).nextAll();
+				// 위 아래로 나타태는 효과
+				cate.animate({
+					height: 'toggle'
+				});
+			});
+			
 		});
+		
+		// 카테고리 삭제
+		$("#remove_category_menu").on('click',function(){
+			// 전체 카테고리
+			var category = $("div[name=category]");
+			
+			// 전체 카테고리 중 마지막 div
+			var category1 = $("div[name=category]:last");
+			var num = category1.find("input[name=category_num]").val();
+			
+			var trash_category = $("#trash").clone();
+			trash_category.removeAttr('id');
+			trash_category.attr('name','trash_category');
+			trash_category.val(num);
+			
+			var trash_can = $("#trash_can");
+			trash_can.append(trash_category);
+			
+			if(category.length > 2){
+				category1.remove();
+			}else{
+				alert("대표메뉴는 삭제가 불가능 합니다.");
+			}
+		});
+		
+		/*메뉴랑 메뉴카테고리 추가할 때 ajax로 넘기기*/
 		
 		// 이미지 추가
 		$("img").on('click',function(e){
-			console.log('1');
+			console.log('이미지 추가 버튼');
 		});
 		
 		// 카테고리 div 눌렀을 때 div숨기고, 나타내기
@@ -112,17 +173,29 @@
 		
 	});
 	
+	//메뉴 추가 함수
+	function menu_add(menu_category_num){
+		var copy_menu = $("#copy_menu").clone();
+		copy_menu.css('display','block');
+		copy_menu.attr('name','menu');
+		copy_menu.removeAttr('id');
+		copy_menu = append("<input type='text' name="category_list_num" style="display:none;" value="${list.num }">")
+		var a = $(this).parent();
+		a.prev().append(copy_menu);
+	}
 </script>
 <body>
+	<input id="trash" type="text" style="display:none;">
+	<!-- 삭제한 값 넣기 -->
 	<!-- 복사할 메인메뉴 -->
 	<div id="copy_main_menu" style="display: none;">
 		<div>
 			<div style="width: 50%; height: 200px; float:left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
-				<input style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름">
+				<input name="menu_name" style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름" required="required">
 				<br>
-				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성">
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성" required="required">
 				<br>
-				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격">
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격" required="required">
 			</div>
 		</div>
 		<div style="margin-top: 20px; width: 50%; height: 200px; float:right; text-align: center; border-right: 3px solid #FC5230;">
@@ -134,19 +207,20 @@
 	<div id="copy_category_menu" style="display: none; margin: auto; margin-top: 20px; width: 80%;height: 100%">
 		<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 			<div style="position: relative; text-align: center; height: 40px;">
-				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input style="text-align: center; width: 100%;" type="text" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
+				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;" type="text" required="required" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
 				<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
 			</div>
 		</div>			
 	</div>
 	
-		<!-- 복사할 메뉴 -->		
+	<!-- 복사할 메뉴 -->		
 	<div id="copy_menu"  style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+		<input type="text" name="menu_num" value="-1" style="display: none;">
 		<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-			<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;"></h2>
-			<span>메뉴설명:&nbsp;<input type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;"></span>
+			<h2><input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;" required="required"></h2>
+			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;" required="required"></span>
 			<br>
-			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
+			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" required="required" name="min_price"
 				oninput="maxLengthCheck(this)" placeholer="가격">원</span>
 		</div>
 	</div>
@@ -160,8 +234,15 @@
 	</div>
 	
 	<div id="div1" name="category" style="display: none;"></div>
-	
-	<form action="/delivery/owner/store_manage?id=${sessionScope.ownerId }" method="post">
+<!-- 
+	주문안내 shop_info
+	메뉴이름 menu_name
+	메뉴설명 menu_info
+	메뉴가격 min_price
+ -->
+	<form action="/delivery/owner/store_manage" method="post">
+		<div id="trash_can" style="display:none;"></div>
+		
 		<div id="menu_wrap">
 		<div id="add_menu_wrap">
 			<br>
@@ -172,7 +253,7 @@
 			<div id="menu_bar">
 				<h3 style="text-align: center;">메뉴관리</h3>
 			</div>
-			<h4 style="margin-left: 15px; ">주문안내: &nbsp;&nbsp;<input style="width: 30%; " type="text" placeholder="주문안내" value="${requestScope.vo.info }"></h4>
+			<h4 style="margin-left: 15px; ">주문안내: &nbsp;&nbsp;<input name="shop_info" style="width: 30%; " type="text" placeholder="주문안내" value="${requestScope.vo.info }"></h4>
 			
 			<div name="append_main_menu" style="margin: auto; margin-top: 20px; border: 3px solid #FC5230;width: 80%;height: 100%">
 				<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900;">대표 메뉴</h2>
@@ -214,9 +295,10 @@
 			<c:forEach var="list" items="${menuCategoryList }" >
 				<div name="category">
 					<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%;height: 100%">
+						<input type="text" name="category_num" style="display:none;" value="${list.num }">
 						<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 						 	<div style="position: relative; text-align: center; height: 40px;">
-						 		<div style="display: inline-block; text-align: center; width: 40%;"><h2><input style="text-align: center; width: 100%;"type="text" placeholder="메뉴카테고리명을 입력해 주세요." 
+						 		<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;"type="text" placeholder="메뉴카테고리명을 입력해 주세요." 
 						 						value="${list.name }"></h2></div>
 						 		<div style="position: absolute; display: inline-block; text-align: right; right: 1px;"><h2>∧∨</h2></div>
 						 	</div>
@@ -227,12 +309,15 @@
 						<c:if test="${list.num == menu.menu_category_num }">
 							<!-- 메뉴 -->		
 							<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
-								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
-									<h2><input type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
-									<span>메뉴설명:&nbsp;<input placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
+								<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
+								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;"><!-- 여기에 input append해주기 -->
+									<h2><input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
+									<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
+						
 									<br>
 									<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
 										oninput="maxLengthCheck(this)" placeholder="가격"></span>
+									<input type="text" name="category_list_num" style="display:none;" value="${list.num }">
 								</div>
 							</div>
 						</c:if>
@@ -242,7 +327,7 @@
 					<!-- 메뉴추가, 삭제 버튼 -->
 					<div style="text-align: center;">
 						<input name="add_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-							value="메뉴 추가">
+							value="메뉴 추가" onclick="menu_add(${list.num});">
 						<input name="remove_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" 
 							value="메뉴 삭제">
 					</div>
