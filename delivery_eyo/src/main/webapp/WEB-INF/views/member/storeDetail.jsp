@@ -236,10 +236,6 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		
 		$('#cart-body').append(
 				"<div class='list' hidden >"+ menuNum + ',' + volume + ',' + optionNum + ';' +"</div>"+
-// 				"<div class='menuNum' hidden >"+ menuNum +",</div>"+
-// 				"<div class='optionNum' hidden >"+ optionNum +"</div>"+
-// 				"<div class='menuVol' hidden >"+ volume +",</div>"+
-				
 				"<div class='cart-menu'>"+
 					'<p>' + menuNmae + "</p>" + 
 					'<p>' + optionStr + "</p>" + 
@@ -328,7 +324,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		var minPrice = parseInt(${info.min_price }); //최소 주문금액
 		
 		if(lastPrice>=minPrice){
-			location.href="${pageContext.request.contextPath}/member/orderPage?orderList=" + orderList;
+			location.href="${pageContext.request.contextPath}/member/orderPage?orderList=" + orderList + "&memberId='${sessionScope.memberId}'&shopNum=" + ${info.num};
 			//${pageContext.request.contextPath }
 		}else{
 			alert('최소 주문금액보다 적습니다');

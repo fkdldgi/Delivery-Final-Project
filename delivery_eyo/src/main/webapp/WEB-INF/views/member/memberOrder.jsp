@@ -1,81 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<div class="container" style="width: 100%;">
-  <div class="row" style="width: 100%;">
-    <div class="col-8" id="storeWrap"
-style="width: 90%; margin: auto; margin-bottom: 10px;">
-	<c:out value="${param.info}" />
-	<div class="media position-relative"
-		style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;">
-		<img
-			src="http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif"
-			style="width: 20%; height: 100px;" class="mr-3">
-		<div class="media-body">
-			<p><h5 class="mt-0">${info.name}</h5></p>
-			<p>최소 결제금액 : ${info.min_price }원</p>
-			<p>전화번호 : ${info.reg_num }</p>
-			<p>결재 수단 : ${info.payment_option}</p>
-			<p>가게번호 : ${info.num}</p>
-		</div>
-	</div>
-	
-	<nav>
-		<div class="nav nav-tabs" id="nav-tab" role="tablist"
-			style="width: 100%;">
-			<a class="nav-item nav-link active" id="nav-home-tab"
-				data-toggle="tab" href="#nav-home" role="tab"
-				aria-controls="nav-home" aria-selected="true"
-				style="width: 33%; border: 1px solid blue;">메뉴</a> <a
-				class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-				href="#nav-profile" role="tab" aria-controls="nav-profile"
-				aria-selected="false" style="width: 33%; border: 1px solid green;">리뷰</a>
-			<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
-				href="#nav-contact" role="tab" aria-controls="nav-contact"
-				aria-selected="false" style="width: 34%; border: 1px solid gray;">가게정보</a>
-		</div>
-	</nav>
-	<div class="tab-content" id="nav-tabContent" style="border: 1px solid black;">
-		<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-			aria-labelledby="nav-home-tab">
-			<div class="card-body">
-					<div style="border: 1px solid gray;" data-toggle="modal"
-						data-target="#menuModal"
-						onclick="javascript:menu_detail(${main.num})">
-						<p>${main.num }</p>
-						<p>${main.name}</p>
-						<p>${main.menu_info}</p>
-						<p>${main.price}</p>
-						<p>${main.img}</p>
+<form action="${pageContext.request.contextPath }/member/order" method="post">
+	<c:out value="${param.member}" /> <!--  id 세션값 이용해서 가져온 회원정보 -->
+	<c:out value="${param.shopNum}" /> <!--  모델객체 이용해서 가져온 가게 번호 -->
+	<div class="container" style="width: 100%;">
+		<div class="row" style="width: 100%;">
+		<!-- 가게 번호 받아서 숨기기 -->
+		 <input type="text" name="shopNum" style="width: 60%;" value="${param.shopNum }" hidden>
+			<div class="col-8 card" style="width: 100%; margin: auto; margin-bottom: 10px;">
+				<div class="card bg-dark" style="width: 100%; height: 50px; color: white; text-align: left;">
+					<h4 style="margin-top: 8px;">결제하기</h4>
+				</div>
+				<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
+					<h4 style="margin-top: 8px;">배달정보</h4>
+				</div>
+				<div class="card" style="width: 100%;">
+					<!-- 주소  -->
+					주소 <input type="text" id="addr" name="addr" style="width: 60%;" readonly="readonly"><br>
+					<input type="text" name="addr_detail" style="width: 60%;" placeholder="(필수)상세주소 입력"><br>
+					<!-- 전화번호 -->
+					휴대전화번호 <input type="text" name='tel' value='${member.tel }' style="width: 60%;" placeholder="(필수)전화번호 입력">
+				</div>
+					<!-- 사장님 요청 -->
+				<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
+					<h4 style="margin-top: 8px;">주문 요청사항</h4>
+				</div>
+				<div class="card" style="width: 100%;">
+					<textarea name="owner_request" rows="2" cols="20" style="width: 80%;" placeholder="사장님에게 요청하는 사항입니다"></textarea>
+				</div>
+					<!-- 라이더 요청 -->
+				<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
+					<h4 style="margin-top: 8px;">배달 요청사항</h4>
+				</div>
+				<div class="card" style="width: 100%;">
+					<textarea name="rider_request" rows="2" cols="20" style="width: 80%;" placeholder="라이더님께 요청하는 사항입니다"></textarea>
+				</div>
+					<!-- 결제수단 -->                          
+				<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
+					<h4 style="margin-top: 8px;">결제수단 선택</h4>
+				</div>
+				<div class="card" style="width: 100%;">
+					<div class="row">
+						<div class="col" style="border: 1px solid lightgray; height: 60px; width: 50%;">결재방법1</div>
+						<div class="col" style="border: 1px solid lightgray; height: 60px; width: 50%;">결재방법2</div>
 					</div>
+					<div class="row">
+						<div class="col" style="border: 1px solid lightgray; height: 60px;">결재방법3</div>
+						<div class="col" style="border: 1px solid lightgray;">결재방법4</div>
+					</div>
+				</div>
+					<!-- 쿠폰 -->
+					<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
+					<h4 style="margin-top: 8px;">할인방법 선택</h4>
+				</div>
 			</div>
-		</div>
-		<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-			aria-labelledby="nav-profile-tab">리뷰 숨기기2</div>
-		<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-			aria-labelledby="nav-contact-tab">가게정보 숨기기3</div>
-	</div>
-</div>
-    <!-- 주문표 부분 -->
-	<div class="card sticky-top" id="cart" style="width:25%; height: 600px; border: 0px solid black; margin-top: 10px; margin-left: -90px;" >
-		<div class="bg-dark" style="width: 100%; height: 10%; border: 0px solid black; color: white;">
-			<div class='row'>
-				<div class='col'>
-					<h4 style="margin-top: 15px; margin-left: 20px;">장바구니</h4>
-				</div>	
-				<div class='col'>
-					<button type="button" class="btn btn-sm btn-info" style=" margin-left:20px; margin-top: 15px;" onclick="delChild()">전체 삭제</button>
+			
+			<div class="card sticky-top" style="width: 25%; height: 4	00px;0px solid black; margin-top: 10px; margin-left: -90px; text-align: left;" >
+				<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
+					<h5 style="margin-top: 10px; margin-left: 10px;">주문내역</h5>
 				</div>
 			</div>
 		</div>
-		<div id="cart-body" style="width: 100%; height: 60%; border: 1px solid black; overflow: auto;"></div>
-		<div id="cart-num"></div>
-		<div id="cart-footer" style="width: 100%; height: 30%; border: 0px solid black; margin-top: 10px;">
-			<div id="min-price" style="width: 100%; height: 30%; border: 1px solid black;">최소 결제금액<br>${info.min_price }원</div>
-			<div style="width: 100%; height: 30%; border: 1px solid black;">총 금액<div id="total-price">선택된 메뉴가 없습니다</div>원</div>
-			<button type="button" id='orderBtn' class='btn btn-primary btn-lg' style="width: 100%; height: 30%;">주문하기</button>
-		</div>
-	</div>    
-  </div> 
-  </div>
+	</div>
+</form>
+
+<script>
+	//주소 세션값 받아서 넣어주기
+	document.getElementById("addr").value = sessionStorage.getItem('addr');
+</script>  
