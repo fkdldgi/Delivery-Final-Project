@@ -29,6 +29,7 @@ public class LoginController {
 		if (vo!=null) {
 			session.setAttribute("memberId",id);
 			session.setAttribute("memberName",vo.getName());
+			session.setAttribute("memberNum",vo.getNum());
 			return 1;
 		}else {
 			return 0;
