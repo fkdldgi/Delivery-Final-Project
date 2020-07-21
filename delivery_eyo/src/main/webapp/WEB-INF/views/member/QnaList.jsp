@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,12 +13,12 @@
 	  <thead>
 	    <tr>
 	      <th scope="col">No.</th>
-	      <th scope="col">¡¶∏Ò</th>
-	      <th scope="col">¿€º∫¿œ</th>
+	      <th scope="col">Ï†úÎ™©</th>
+	      <th scope="col">ÏûëÏÑ±Ïùº</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <c:forEach var="vo" items="${list}"> <!-- list¿÷¥¬ ∞™µÈ -->
+	    <c:forEach var="vo" items="${list}"> <!-- listÏûàÎäî Í∞íÎì§ -->
 		<tr>
 			<td>${vo.num}</td>
 			<td><a href="/delivery/member/detail?num=${vo.num }">${vo.title}</a></td>
@@ -30,22 +28,22 @@
 	</c:forEach>
 	  </tbody>
 </table>
-<!-- ¿Ã¿¸,¥Ÿ¿Ω -->
+<!-- Ïù¥Ï†Ñ,Îã§Ïùå -->
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">
     <c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
 		<c:when test="${i==pu.pageNum}">
-      <a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Previous">
+      <a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Previous">
         <span style="color:aqua"><<</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}">1</a></li>
-    <li class="page-item"><a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}">2</a></li>
+    <li class="page-item"><a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}">1</a></li>
+    <li class="page-item"><a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}">2</a></li>
     </c:when>
    	 <c:otherwise>
-      <a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Next">
+      <a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Next">
        <span style="color:gray">>></span>
        		</c:otherwise>
 		</c:choose>
@@ -57,15 +55,15 @@
 <div>		
 </div>
 <div>
-	<form method="post" action="/delivery/member/notice">
+	<form method="post" action="/delivery/member/QnaList">
 		<select name="field">
 			<option value="title"
-			<c:if test="${field=='title' }">seleted</c:if>>¡¶∏Ò</option>
+			<c:if test="${field=='title' }">seleted</c:if>>Ï†úÎ™©</option>
 			<option value="content"
-			<c:if test="${field=='content' }">seleted</c:if>>≥ªøÎ</option>
+			<c:if test="${field=='content' }">seleted</c:if>>ÎÇ¥Ïö©</option>
 		</select>
 		<input type="text" name="keyword">
-		<input type="submit" name="∞Àªˆ">		
+		<input type="submit" name="Í≤ÄÏÉâ">		
 	</form>
 </div>
 </div>
