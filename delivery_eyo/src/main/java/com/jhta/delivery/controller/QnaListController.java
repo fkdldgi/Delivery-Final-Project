@@ -18,7 +18,7 @@ public class QnaListController {
 	private QnaService service;
 	@GetMapping("/member/QnaList")
 	public String qnaList(Model model,@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-		String field,String keyword) {
+		String field,String keyword,int memberNum) {
 		HashMap<String , Object> map = new HashMap<String, Object>();
 		//검색조건 map에 담기
 		map.put("field", field);
@@ -29,7 +29,9 @@ public class QnaListController {
 		PageUtill pu= new PageUtill(pageNum, totalRowCount, 10, 10);
 		map.put("startRow", pu.getStartRow());
 		map.put("endRow", pu.getEndRow());
+		map.put("memberNum", memberNum);
 		
+		System.out.println(memberNum);
 		List<QnaVo> list= service.qnaList(map);
 		model.addAttribute("startRow",pu.getStartRow());
 		model.addAttribute("endRow",pu.getEndRow());
@@ -37,6 +39,7 @@ public class QnaListController {
 		model.addAttribute("pu",pu);
 		model.addAttribute("field",field);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("memberNum",memberNum);
 		
 		return ".member.QnaList";
 	}

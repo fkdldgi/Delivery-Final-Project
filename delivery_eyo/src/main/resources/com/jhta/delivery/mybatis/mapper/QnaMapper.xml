@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from inquiry_board order by rownum desc
 			)aa
 		)
-		where <![CDATA[ rnum>=#{startRow} and rnum<=#{endRow}]]> and name=#{name}
+		where <![CDATA[ rnum>=#{startRow} and rnum<=#{endRow}]]> and member_num=#{memberNum}
 	</select>
 	
 	<!-- 전체 페이지수 -->

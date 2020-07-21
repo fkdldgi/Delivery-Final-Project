@@ -103,8 +103,12 @@ function pwdcheck() {
    	 <br> 
         <div style="margin-bottom: 50px; text-align:center; ">        
         <button type="submit" class="btn btn-primary">수정완료</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/delivery/member/QnaList'">문의목록</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/delivery/member/QnaList?memberNum=${sessionScope.memberNum}'">문의목록</button>
+        <script type="text/javascript">
+        console.log('${sessionScope.memberNum}');
+        </script>
         </div>
+        
 </div>
 </body>
 </html>

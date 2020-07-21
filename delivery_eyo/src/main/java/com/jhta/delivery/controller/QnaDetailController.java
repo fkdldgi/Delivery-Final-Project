@@ -11,7 +11,7 @@ public class QnaDetailController {
 	@Autowired
 	private QnaService service;
 	@GetMapping("/member/qnaDetail")
-	public String qna(int num,Model model) {
+	public String qnadetail(int num,Model model) {
 		QnaVo vo=service.detail(num);//상세글 정보
 		QnaVo next = service.next(num);//다음글
 		QnaVo pre = service.pre(num);//이전글
