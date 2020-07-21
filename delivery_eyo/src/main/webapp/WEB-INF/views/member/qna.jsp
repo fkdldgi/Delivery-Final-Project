@@ -49,7 +49,7 @@
 	</div>
 	<!-- 1대1 질문 블록 -->
 	<div class="col-xs-6 col-sm-4 col-md-3" style="margin-top: 20px" >
-			<a href="/delivery/member/qnaDetail" class="thumbnail"> <img
+			<a href="/delivery/member/personalQna" class="thumbnail"> <img
 			src="/delivery/resources/images/QNA_08.png"></a>
 	</div>
 </div>
