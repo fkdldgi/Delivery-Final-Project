@@ -14,32 +14,32 @@
 		<!-- 고객번호 받아서 숨기기 -->
 		<input type="text" name="memberNum" style="width: 60%;" value="${sessionScope.memberNum }" hidden>
 		<!-- 주소관련 데이터 받아서 넘기기 -->
-		<input type="text" name="buildingCode" style="width: 60%;" >
-		<input type="text" name="zonecode" style="width: 60%;"  >
-		<input type="text" name="address" style="width: 60%;" >
-		<input type="text" name="addressEnglish" style="width: 60%;"  >
-<%-- 		<input type="text" name="addressType" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="userSelectedType" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="userLanguageType" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="roadAddress" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="roadAddressEnglish" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="jibunAddress" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="jibunAddressEnglish" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="buildingName" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="apartment" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="sido" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="sigungu" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="sigunguCode" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="roadnameCode" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="bcode" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="roadname" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="bname" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="bname1" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="bname2" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="hname" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="query" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="addr_x" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
-<%-- 		<input type="text" name="addr_y" style="width: 60%;" value="${addrData.memberNum }" hidden> --%>
+		<input type="text" name="buildingCode" style="width: 60%;" hidden>
+		<input type="text" name="zonecode" style="width: 60%;" hidden>
+		<input type="text" name="address" style="width: 60%;" hidden>
+		<input type="text" name="addressEnglish" style="width: 60%;" hidden>
+		<input type="text" name="addressType" style="width: 60%;"  hidden>
+		<input type="text" name="userSelectedType" style="width: 60%;" hidden>
+		<input type="text" name="userLanguageType" style="width: 60%;"  hidden>
+		<input type="text" name="roadAddress" style="width: 60%;" hidden>
+		<input type="text" name="roadAddressEnglish" style="width: 60%;" hidden>
+		<input type="text" name="jibunAddress" style="width: 60%;"  hidden>
+		<input type="text" name="jibunAddressEnglish" style="width: 60%;"  hidden>
+		<input type="text" name="buildingName" style="width: 60%;" hidden>
+		<input type="text" name="apartment" style="width: 60%;" hidden>
+		<input type="text" name="sido" style="width: 60%;" hidden>
+		<input type="text" name="sigungu" style="width: 60%;" hidden>
+		<input type="text" name="sigunguCode" style="width: 60%;" hidden>
+		<input type="text" name="roadnameCode" style="width: 60%;" hidden>
+		<input type="text" name="bcode" style="width: 60%;" hidden>
+		<input type="text" name="roadname" style="width: 60%;" hidden>
+		<input type="text" name="bname" style="width: 60%;" hidden>
+		<input type="text" name="bname1" style="width: 60%;"hidden>
+		<input type="text" name="bname2" style="width: 60%;" hidden>
+		<input type="text" name="hname" style="width: 60%;" hidden>
+		<input type="text" name="query" style="width: 60%;" hidden>
+		<input type="text" name="addr_x" style="width: 60%;" hidden>
+		<input type="text" name="addr_y" style="width: 60%;" hidden>
 		
 			<div class="col-8 card" style="width: 100%; margin: auto; margin-bottom: 10px;">
 				<div class="card bg-dark" style="width: 100%; height: 50px; color: white; text-align: left;">
@@ -112,6 +112,28 @@
 	$('input[name=zonecode]').val(addrData.zonecode);
 	$('input[name=address]').val(addrData.address);
 	$('input[name=addressEnglish]').val(addrData.addressEnglish);
+	$('input[name=addressType]').val(addrData.addressType);
+	$('input[name=userSelectedType]').val(addrData.userSelectedType);
+	$('input[name=userLanguageType]').val(addrData.userLanguageType);
+	$('input[name=roadAddress]').val(addrData.roadAddress);
+	$('input[name=roadAddressEnglish]').val(addrData.roadAddressEnglish);
+	$('input[name=jibunAddress]').val(addrData.jibunAddress);
+	$('input[name=jibunAddressEnglish]').val(addrData.jibunAddressEnglish);
+	$('input[name=buildingName]').val(addrData.buildingName);
+	$('input[name=apartment]').val(addrData.apartment);
+	$('input[name=sido]').val(addrData.sido);
+	$('input[name=sigungu]').val(addrData.sigungu);
+	$('input[name=sigunguCode]').val(addrData.sigunguCode);
+	$('input[name=roadnameCode]').val(addrData.roadnameCode);
+	$('input[name=bcode]').val(addrData.bcode);
+	$('input[name=roadname]').val(addrData.roadname);
+	$('input[name=bname]').val(addrData.bname);
+	$('input[name=bname1]').val(addrData.bname1);
+	$('input[name=bname2]').val(addrData.bname2);
+	$('input[name=hname]').val(addrData.hname);
+	$('input[name=query]').val(addrData.query);
+	$('input[name=addr_x]').val(XYdata.x);
+	$('input[name=addr_y]').val(XYdata.y);
 	
 	console.log("주소 데이터 객체 값:" + addrData.buildingCode);
 	console.log("주소 데이터 객체 값:" + addrData.zonecode);
