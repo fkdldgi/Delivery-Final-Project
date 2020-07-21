@@ -20,6 +20,7 @@
 			  }
 </style>
 <script>
+	var category_menu_menu = 0;
 	$(document).ready(function(){
 		
 		// main_menu 밑에 있는 메뉴 추가를 눌렀을 때 div가 추가됨
@@ -63,22 +64,7 @@
 			메뉴설명 menu_info
 			메뉴가격 min_price
 			*/
-		
-		// 메뉴 삭제
-		$("input[name=remove_menu]").on("click",function(){			
-			var target = $(this).parent().prev().children("div[name=menu]:last");
-			var num = target.find("input[name=menu_num]").val();
-			
-			var trash = $("#trash").clone();
-			trash.removeAttr('id');
-			trash.attr('name','trash');
-			trash.val(num);
-			var trash_can = $("#trash_can");
-			trash_can.append(trash);
-			
-			target.remove();			
-		});
-		
+		var category_hit = 0;
 		// 카테고리 추가
 		$("#add_category_menu").on('click',function(){
 			// 카테고리 메뉴 복사
@@ -87,6 +73,27 @@
 			copy_category_menu.attr('name','category_name');
 			// copy_category_menu.name='category_name';
 			copy_category_menu.removeAttr('id');
+			
+			// 바꿀값 얻어와서 int로 바꿈
+			var a = parseInt(copy_category_menu.find("input[name=category_num]").val());
+			// hit랑 합침
+			var b = a+category_hit;
+			category_menu_menu = b;
+			// 넣을 input타입 얻어오기
+			var c = copy_category_menu.find("input[name=category_num]");
+			// input타입 val 설정
+			c.attr("value",b);
+			
+			// 여러번할때마다 -1더함
+			category_hit += -1;
+			
+			console.log("가져온 값"+a);
+			console.log("새로 넣어야 할 값: "+b);
+			console.log(c);
+			console.log("가져온 값2"+a);
+			console.log("c타입:"+c.val());
+			console.log('---');
+			console.log(category_menu_menu);
 			
 			// 메뉴 복사
 			var copy_menu = $("#copy_menu").clone();
@@ -107,20 +114,11 @@
 			div1.append(copy_category_menu);
 			div1.append(copy_menu);
 			div1.append(copy_button);
-			$("#add_menu_wrap").append(div1);
 			
-			$("input[name=add_menu]").on('click',function(){
-				var copy_menu = $("#copy_menu").clone();
-				copy_menu.css('display','block');
-				copy_menu.css('width','100%');
-				copy_menu.attr('name','menu');
-				copy_menu.removeAttr('id');
-				
-				var a = $(this).parent();
-				a.prev().append(copy_menu);
-			});
+			var zzz=$("#add_menu_wrap").append(div1); 
+			div1.append("<input type='text' hidden='hidden' name='category_list_num' value='"+category_menu_menu+"'>");
 			
-			// 카테고리 div 눌렀을 때 div숨기고, 나타내기
+			//"<input typ리 div 눌렀을 때 div숨기고, 나타내기
 			$("div[name=category_name]").on('click',function(){
 				var cate = $(this).nextAll();
 				// 위 아래로 나타태는 효과
@@ -171,17 +169,53 @@
 			});
 		});
 		
+		// 메뉴 삭제
+		$("input[name=remove_menu]").on("click",function(){			
+			var target = $(this).parent().prev().children("div[name=menu]:last");
+			var num = target.find("input[name=menu_num]").val();
+			var num1 = target.fin("input[name=category_list_num]").val();
+			console.log(num1);
+			
+			if(num1 == -1){
+				target.remove();
+			}else{
+				
+			var trash = $("#trash").clone();
+			trash.removeAttr('id');
+			trash.attr('name','trash');
+			trash.val(num);
+			var trash_can = $("#trash_can");
+			trash_can.append(trash);
+			
+			target.remove();			
+			}
+		});
 	});
 	
 	//메뉴 추가 함수
-	function menu_add(menu_category_num){
+	function menu_add(menu_category_num, aa){		
 		var copy_menu = $("#copy_menu").clone();
 		copy_menu.css('display','block');
 		copy_menu.attr('name','menu');
 		copy_menu.removeAttr('id');
-		copy_menu = append("<input type='text' name="category_list_num" style="display:none;" value="${list.num }">")
-		var a = $(this).parent();
-		a.prev().append(copy_menu);
+		
+		//var mcm = menu_category_num;
+		
+		if(menu_category_num >= 0){
+			// mcm=category_menu_menu;
+			copy_menu.append("<input type='text' hidden='hidden' name='category_list_num' value='"+menu_category_num+"'>");
+		}else{
+			
+			copy_menu.css('width','100%');
+			var a = $(aa).parent().parent().find("input[name=category_list_num]");
+			// var name_list_num = a.find("input[name=category_list_num]:last");
+			
+			//copy_menu.append("<input type='text' name='category_list_num' value='"+mcm+"'>");
+			copy_menu.append("<input type='text' hidden='hidden' name='category_list_num' value='"+a.val()+"'>");
+		}
+		
+		var b = $(aa).parent();
+		b.prev().append(copy_menu);
 	}
 </script>
 <body>
@@ -205,6 +239,7 @@
 	
 	<!-- 복사할 카테고리메뉴 -->
 	<div id="copy_category_menu" style="display: none; margin: auto; margin-top: 20px; width: 80%;height: 100%">
+		<input type="text" name="category_num" style="display:none;" value="-1">
 		<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 			<div style="position: relative; text-align: center; height: 40px;">
 				<div style="display: inline-block; text-align: center; width: 40%;"><h2><input name="menu_category_name" style="text-align: center; width: 100%;" type="text" required="required" placeholder="메뉴카테고리명을 입력해 주세요."></h2></div>
@@ -216,19 +251,20 @@
 	<!-- 복사할 메뉴 -->		
 	<div id="copy_menu"  style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 		<input type="text" name="menu_num" value="-1" style="display: none;">
-		<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+		<div class="menu_wrap" style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 			<h2><input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;" required="required"></h2>
 			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;" required="required"></span>
 			<br>
 			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" required="required" name="min_price"
 				oninput="maxLengthCheck(this)" placeholer="가격">원</span>
+				
 		</div>
 	</div>
 	
 	<!-- 복사할 버튼 -->
 	<div  id="copy_button" style="text-align: center; display: none;">
 		<input name="add_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-			value="메뉴 추가">
+			value="메뉴 추가" onclick='menu_add(-1,this)'>
 		<input name="remove_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" 
 			value="메뉴 삭제">
 	</div>
@@ -310,7 +346,9 @@
 							<!-- 메뉴 -->		
 							<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 								<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
+								
 								<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;"><!-- 여기에 input append해주기 -->
+								
 									<h2><input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;"></h2>
 									<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span>
 						
@@ -318,6 +356,7 @@
 									<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price"
 										oninput="maxLengthCheck(this)" placeholder="가격"></span>
 									<input type="text" name="category_list_num" style="display:none;" value="${list.num }">
+									
 								</div>
 							</div>
 						</c:if>
@@ -327,7 +366,7 @@
 					<!-- 메뉴추가, 삭제 버튼 -->
 					<div style="text-align: center;">
 						<input name="add_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-							value="메뉴 추가" onclick="menu_add(${list.num});">
+							value="메뉴 추가" onclick='menu_add(${list.num},this)'>
 						<input name="remove_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" 
 							value="메뉴 삭제">
 					</div>

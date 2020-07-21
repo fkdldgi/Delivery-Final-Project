@@ -54,7 +54,6 @@ public class Store_ManageController {
 						@RequestParam(value="menu_info") List<String> menu_info,
 						@RequestParam(value="min_price") List<String> min_price,
 						@RequestParam(value="menu_num") List<String> menu_num,
-						@RequestParam(value="menu_category_num") List<String> menu_category_num,
 						@RequestParam(value="category_list_num") List<String> category_list_num,
 						@RequestParam(value="trash_category", required=false) List<String> trash_category,
 						@RequestParam(value="trash", required=false) List<String> trash) {
@@ -71,58 +70,60 @@ public class Store_ManageController {
 		System.out.println();
 		System.out.println(category_list_num);
 		
-		// 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제
-		if(trash_category != null) {
-			for(String trash_category_string:trash_category) {
-				int trash_category_num = Integer.parseInt(trash_category_string);
-				store_service.deleteMenu_Category(trash_category_num);
-			}
-		}
-		
-		// 삭제한 메뉴번호로 메뉴 DB에서 삭제
-		if(trash != null) {
-			for(String trash_string:trash) {
-				int trash_num = Integer.parseInt(trash_string);
-				store_service.deleteMenu(trash_num);
-			}
-		}
+		/*
+		 * // 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제 if(trash_category != null) { for(String
+		 * trash_category_string:trash_category) { int trash_category_num =
+		 * Integer.parseInt(trash_category_string);
+		 * store_service.deleteMenu_Category(trash_category_num); } }
+		 * 
+		 * // 삭제한 메뉴번호로 메뉴 DB에서 삭제 if(trash != null) { for(String trash_string:trash) {
+		 * int trash_num = Integer.parseInt(trash_string);
+		 * store_service.deleteMenu(trash_num); } }
+		 */
 		
 		List<MenuVo> MenuVoList = new ArrayList<>();
 		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();
 		
-		for(int i = 0; i<menu_category_name.size()-1; i++) {
+		int tmp=0;
+		int j=0;
+		for(int i = 0; i<min_price.size(); i++) {
 			MenuCategoryVo vo = new MenuCategoryVo();
-			
-			String menu_category_nameVo = menu_category_name.get(i);
-			int category_numVo = Integer.parseInt(category_num.get(i));
-			
+			int category_numVo = Integer.parseInt(category_list_num.get(i));
+			String menu_category_nameVo = menu_category_name.get(j);
+			if(tmp!=category_numVo) {
+				tmp = category_numVo;
+			}else {
+				j++;
+			}
 			vo.setNum(category_numVo);
 			vo.setName(menu_category_nameVo);
 			menuCateogryList.add(vo);
 			
 		}
 		
-		for(int i = 0; i<menu_name.size(); i++) {
+		for(int i = 0; i<min_price.size(); i++) {
 			MenuVo vo = new MenuVo();
 			
-			String menu_nameVo = menu_name.get(i);
-			String menu_infoVo = menu_info.get(i);
-			int min_priceVo = Integer.parseInt(min_price.get(i));
-			int menu_numVo = Integer.parseInt(menu_num.get(i));
-			int category_numVo = Integer.parseInt(category_num.get(i));
+			int category_numVo = Integer.parseInt(category_list_num.get(i));	// 카테고리 번호
+			String menu_nameVo = menu_name.get(i);								// 카테고리 명
+			String menu_infoVo = menu_info.get(i);								// 메뉴 설명
+			int min_priceVo = Integer.parseInt(min_price.get(i));				// 메뉴 가격
+			int menu_numVo = Integer.parseInt(menu_num.get(i));					// 메뉴 번호
 			
 			vo.setNum(menu_numVo);
 			vo.setName(menu_nameVo);
 			vo.setMenu_info(menu_infoVo);
 			vo.setPrice(min_priceVo);
 			vo.setMenu_category_num(category_numVo);
+			
 			MenuVoList.add(vo);
 		}
 		for(MenuVo vo1: MenuVoList) {
-			System.out.println(vo1.getNum());
+			System.out.println(vo1.getNum());	
 			System.out.println(vo1.getName());
 			System.out.println(vo1.getMenu_info());
 			System.out.println(vo1.getPrice());
+			System.out.println(vo1.getMenu_category_num());
 			System.out.println();
 		}
 		
