@@ -69,6 +69,5 @@
 	</form>
 </div>
 </div>
-</ul>
 </body>
 </html>

@@ -11,4 +11,5 @@
 	<select id="detail" parameterType="int" resultType="Qna">
 		select * from inquiry_board where num=#{num}
 	</select>
+	
 </mapper>

@@ -51,9 +51,10 @@ function pwdcheck() {
  <img class="d-block mx-auto mb-4" src="/delivery/resources/images/mypage_logo1.png" width="700" height="150">
 	<div class="form-group under_border" style="text-align: center;" >
 		<br>
-		<img src="/delivery/resources/images/mypage_logo.png" class="rounded-circle" id="preview" width="100" height="100">
+		<img src="/delivery/resources/images/mypage_logo.png" class="rounded-circle" id="preview" width="200" height="200">
 		<br>
-		<label>프로필사진 변경하기</label><br>
+		<label>프로필사진 변경하기</label>
+		<br>
 		<input type="file" name="file1" accept="image/*" id="file">
 	</div>
 	<hr style="border: 1px solid orange;">
@@ -73,9 +74,12 @@ function pwdcheck() {
 					    <button class="btn btn-outline-secondary" type="button" id="pwdcheck" onclick="pwdcheck()">비밀번호 확인</button>
 					  </div>
 					</div>
-					    <span> *개인정보 보호를 위해 비밀번호 확인이 팔요합니다</span>
+					    <span> *개인정보 보호를 위해 비밀번호 확인이 필요합니다</span>
 					</td>
-                <input type="hidden" value="${vo.getPwd}" id="pwd" >
+            </tr>
+            <tr>
+                <th>비밀번호 변경: </th>
+                <td><input type="password" placeholder="${vo.getPwd}" class="form-control-file" id="changedpwd" readonly="readonly"></td>
             </tr>
             <tr>
                 <th>이메일: </th>
@@ -89,11 +93,18 @@ function pwdcheck() {
                 <th>전화번호: </th>
                 <td><input type="text" placeholder="${vo.getTel}" class="form-control-file" id="tel" readonly="readonly" ></td>
             </tr>
+            <tr> 
+                <th>가입일</th>
+                <td><input type="text" placeholder="${vo.getRegdate}" class="form-control-file" id="tel" readonly="readonly" ></td>
+            </tr>
         </form>
    	</tbody>
     </table>   
    	 <br> 
+        <div style="margin-bottom: 50px; text-align:center; ">        
         <button type="submit" class="btn btn-primary">수정완료</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/delivery/member/QnaList'">문의목록</button>
+        </div>
 </div>
 </body>
 </html>
