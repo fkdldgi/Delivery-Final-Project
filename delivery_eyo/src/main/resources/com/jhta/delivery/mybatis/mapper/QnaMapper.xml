@@ -1,15 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://www.ibatis.com/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.QnaMapper">
+
+	<!-- 추가 (comments는 null) -->
 	<insert id="insert" parameterType="Qna">
-	<!-- comments는 null -->
 		insert into inquiry_board values(inquiry_board_seq.nextval,#{name},#{email},#{category},#{title},#{content},sysdate,#{adminNum},#{memberNum},null)
 	</insert>
-	
+	<!-- 상세 -->
 	<select id="detail" parameterType="int" resultType="Qna">
 		select * from inquiry_board where num=#{num}
 	</select>
+	<!-- QnA리스트 -->
+	<select id="qnaList" parameterType="hashmap" resultType="Qna">
+		select * from 
+		(
+		select aa.*,rownum rnum from 
+			(
+			select * from inquiry_board order by rownum desc
+			)aa
+		)
+		where <![CDATA[ rnum>=#{startRow} and rnum<=#{endRow}]]> and name=#{name}
+	</select>
+	
+	<!-- 전체 페이지수 -->
+	<select id="count" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from inquiry_board
+		<include refid="search"/>
+	</select>
+	
+	<!-- 이전 -->
+	<select id="pre" parameterType="int" resultType="Qna">
+		select * from(
+		<![CDATA[
+		select * from inquiry_board where num < #{num} ]]>
+		order by num desc
+		) where rownum=1
+
+	</select>
+	
+	<!-- 다음 -->
+	<select id="next" parameterType="int" resultType="Qna">
+		
+		select * from
+		(
+		select * from inquiry_board where num > #{num}
+		order by num asc
+		)
+		where rownum=1
+
+	</select>
+	<!--  검색 -->
+	<sql id="search">
+		<if test="field!=null and field!=''">
+			where ${field} like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
 	
 </mapper>

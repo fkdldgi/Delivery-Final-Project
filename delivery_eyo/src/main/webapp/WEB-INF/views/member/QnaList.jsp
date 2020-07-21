@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
- <img class="d-block mx-auto mb-4" src="/delivery/resources/images/notice_logo.png" width="700" height="150">
+<div class="container" style="margin-top:50px ; margin-bottom: 50px;">
+ <img class="d-block mx-auto mb-4" src="/delivery/resources/images/personalQna_logo.png" width="900" height="150">
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -53,18 +53,6 @@
   </ul>
 </nav>
 <div>		
-</div>
-<div>
-	<form method="post" action="/delivery/member/QnaList">
-		<select name="field">
-			<option value="title"
-			<c:if test="${field=='title' }">seleted</c:if>>제목</option>
-			<option value="content"
-			<c:if test="${field=='content' }">seleted</c:if>>내용</option>
-		</select>
-		<input type="text" name="keyword">
-		<input type="submit" name="검색">		
-	</form>
 </div>
 </div>
 </body>

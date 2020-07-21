@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 <br>
-<img class="d-block mx-auto mb-4" src="/delivery/resources/images/qna_logo.png" width="700" height="150">
+<img class="d-block mx-auto mb-4" src="/delivery/resources/images/personalQna_logo.png" width="900" height="170">
 <table class="table table-bordered">
     <tbody>
         <form action="personalQna.jsp" method="post">
@@ -17,12 +17,12 @@
             	<th>문의분류 </th>
             	
 				 <td><select class="form-control">
-				<option>회원가입문의</option>
-				<option>결제관련문의</option>
-				<option>음식관련문의</option>
-				<option>서비스불만문의</option>
-				<option>회원가입문의</option>
-				<option>기타문의</option>
+					<option>회원가입문의</option>
+					<option>결제관련문의</option>
+					<option>음식관련문의</option>
+					<option>서비스불만문의</option>
+					<option>회원가입문의</option>
+					<option>기타문의</option>
 				</td>
 			</select>
             </tr>
