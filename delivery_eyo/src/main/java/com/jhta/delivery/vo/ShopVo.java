@@ -1,5 +1,7 @@
 package com.jhta.delivery.vo;
 
+import java.util.Date;
+
 // 가게 
 public class ShopVo {
 
@@ -19,13 +21,13 @@ public class ShopVo {
 	private String tel;
 	
 	// 건물관리번호
-	private String building_management_number;
+	private String buildingCode;
 	
 	// 상세주소
 	private String address_detail;
 	
 	// 가게카테고리
-	private int shop_category_num;
+	private String shop_category;
 	
 	// 최소주문금액
 	private int min_price;
@@ -72,22 +74,25 @@ public class ShopVo {
 	// 사장번호
 	private int owner_num;
 
+	//가게등록일
+	private Date regdate;
+	
 	public ShopVo() {}
 
-	public ShopVo(int num, String profile_img, String name, String introduce, String tel,
-			String building_management_number, String address_detail, int shop_category_num, int min_price,
-			String payment_option, String info, String review_info, String personal_day, String open_time,
-			String close_time, String delivery_area, String mutual_name, String addr, String reg_num, String status,
-			int ultracall, int addcount, int owner_num) {
+	public ShopVo(int num, String profile_img, String name, String introduce, String tel, String buildingCode,
+			String address_detail, String shop_category, int min_price, String payment_option, String info,
+			String review_info, String personal_day, String open_time, String close_time, String delivery_area,
+			String mutual_name, String addr, String reg_num, String status, int ultracall, int addcount, int owner_num,
+			Date regdate) {
 		super();
 		this.num = num;
 		this.profile_img = profile_img;
 		this.name = name;
 		this.introduce = introduce;
 		this.tel = tel;
-		this.building_management_number = building_management_number;
+		this.buildingCode = buildingCode;
 		this.address_detail = address_detail;
-		this.shop_category_num = shop_category_num;
+		this.shop_category = shop_category;
 		this.min_price = min_price;
 		this.payment_option = payment_option;
 		this.info = info;
@@ -103,6 +108,7 @@ public class ShopVo {
 		this.ultracall = ultracall;
 		this.addcount = addcount;
 		this.owner_num = owner_num;
+		this.regdate = regdate;
 	}
 
 	public int getNum() {
@@ -145,12 +151,12 @@ public class ShopVo {
 		this.tel = tel;
 	}
 
-	public String getBuilding_management_number() {
-		return building_management_number;
+	public String getBuildingCode() {
+		return buildingCode;
 	}
 
-	public void setBuilding_management_number(String building_management_number) {
-		this.building_management_number = building_management_number;
+	public void setBuildingCode(String buildingCode) {
+		this.buildingCode = buildingCode;
 	}
 
 	public String getAddress_detail() {
@@ -161,12 +167,12 @@ public class ShopVo {
 		this.address_detail = address_detail;
 	}
 
-	public int getShop_category_num() {
-		return shop_category_num;
+	public String getShop_category() {
+		return shop_category;
 	}
 
-	public void setShop_category_num(int shop_category_num) {
-		this.shop_category_num = shop_category_num;
+	public void setShop_category(String shop_category) {
+		this.shop_category = shop_category;
 	}
 
 	public int getMin_price() {
@@ -289,6 +295,13 @@ public class ShopVo {
 		this.owner_num = owner_num;
 	}
 
-	
-	
+	public Date getRegdate() {
+		return regdate;
 	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	
+	
+}

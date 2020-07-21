@@ -291,7 +291,6 @@
 			<select class="form-control" id="sel2"></select>
 			<!-- 읍면동 -->
 			<div class="btn-group-toggle" data-toggle="buttons" id="chk1"></div>
-			<input type="hidden" name=""
 		</div>
 		<div class="form-group under_border">
 			<label for="mutual_name">상호명</label> 
@@ -504,14 +503,17 @@
 	var chk1=$("#chk1");
 	//배달지역 시군구 얻어오기(accessToken은 4시간동안 유효)
 	$("#sel1").change(function(){
-		alert($("#sel1 option:checked").text());
 		var cityNum=this.value;
 		var sel2=$("#sel2");
+		if($("#deliveryArea input[name='delivery_sido']")!=null){
+			$("#deliveryArea input[name='delivery_sido']").remove();
+		}
+		$("#deliveryArea").append("<input type='hidden' name='delivery_sido' value='"+$("#sel1 option:checked").text()+"'>");
 		chk1.empty();
 		sel2.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'1dcf13ca-701f-4d14-9abc-cc061a50045e',cd:cityNum},
+			data:{accessToken:'fbec861b-4050-4b2c-9f7d-f6d408f90882',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -525,10 +527,15 @@
 	//배달지역  읍면동 얻어오기(accessToken은 4시간동안 유효)
 	$("#sel2").change(function(){
 		var cityNum=this.value;
+		if($("#deliveryArea input[name='delivery_sigungu']")!=null){
+			$("#deliveryArea input[name='delivery_sigungu']").remove();
+		}
+		$("#deliveryArea").append("<input type='hidden' name='delivery_sigungu' value='"+$("#sel2 option:checked").text()+"'>");
+		
 		chk1.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'1dcf13ca-701f-4d14-9abc-cc061a50045e',cd:cityNum},
+			data:{accessToken:'fbec861b-4050-4b2c-9f7d-f6d408f90882',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				data.result.forEach(function(item,index,array){
