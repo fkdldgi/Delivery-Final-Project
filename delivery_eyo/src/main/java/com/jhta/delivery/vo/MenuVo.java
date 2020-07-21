@@ -25,7 +25,7 @@ public class MenuVo {
 
 	// 우선순위
 	private int priority;
-
+	
 	public MenuVo() {}
 
 	public MenuVo(int num, String name, String menu_info, int price, Integer status, String img, int menu_category_num,
