@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jhta.delivery.vo.Owner_ReviewVo;
+import com.jhta.delivery.vo.Owner_ShopReviewVo;
 
 @Repository
 public class Owner_ReviewDao {
@@ -15,8 +15,8 @@ public class Owner_ReviewDao {
 	
 	private final String NAMESPACE="mybatis.Owner_ReviewMapper";
 	
-	// 리뷰리스트
-	public List<Owner_ReviewVo> ownerReviewList(int num){
-		return session.selectList(NAMESPACE+".ReviewList", num);
-	}	
+	// 가게리뷰 전체 & 리뷰단 일반회원
+	public List<Owner_ShopReviewVo> shopReview(int num){
+		return session.selectList(NAMESPACE+".ShopReview", num);
+	}
 }

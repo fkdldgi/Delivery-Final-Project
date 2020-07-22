@@ -1,5 +1,4 @@
 package com.jhta.delivery.controller;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.delivery.service.OwnerService;
 import com.jhta.delivery.service.Owner_ReviewService;
-import com.jhta.delivery.vo.Owner_ReviewVo;
+import com.jhta.delivery.vo.Owner_ShopReviewVo;
 import com.jhta.delivery.vo.ShopVo;
 
 @Controller
@@ -25,10 +24,11 @@ public class Store_Manage_ReviewController {
 	public String manage_Ad(Model model, int num) {
 		
 		ShopVo vo = owner_service.shop_select(num);
-		List<Owner_ReviewVo> reviewList = owner_review_service.ownerReviewList(num);
+		List<Owner_ShopReviewVo> shopReviewList = owner_review_service.shopReview(vo.getNum());
 		
-		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("shopReviewList", shopReviewList);
 		model.addAttribute("vo", vo);
+		
 		return ".owner.store.store_manage_review";
 	}
 }
