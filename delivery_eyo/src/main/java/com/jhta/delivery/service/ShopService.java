@@ -18,8 +18,8 @@ public class ShopService {
 	
 	@Transactional
 	public int insert(ShopVo shopVo,AddressVo addrVo) {
-		shopDao.insert(shopVo);
 		addrDao.insert(addrVo);
+		shopDao.insert(shopVo);
 		return 1;
 	}
 }

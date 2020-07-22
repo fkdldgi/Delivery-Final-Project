@@ -62,8 +62,11 @@ public class ShopVo {
 	// 사업자 등록번호
 	private String reg_num;
 
+	//가게등록여부 0(등록대기),1(등록),2(폐점)
+	private int reg_status;
+	
 	// 가게상태 0(close),1(open)
-	private String status;
+	private int status;
 
 	// 울트라콜 OFF(0),ON(1)
 	private int ultracall;
@@ -82,8 +85,8 @@ public class ShopVo {
 	public ShopVo(int num, String profile_img, String name, String introduce, String tel, String buildingCode,
 			String address_detail, String shop_category, int min_price, String payment_option, String info,
 			String review_info, String personal_day, String open_time, String close_time, String delivery_area,
-			String mutual_name, String addr, String reg_num, String status, int ultracall, int addcount, int owner_num,
-			Date regdate) {
+			String mutual_name, String addr, String reg_num, int reg_status, int status, int ultracall, int addcount,
+			int owner_num, Date regdate) {
 		super();
 		this.num = num;
 		this.profile_img = profile_img;
@@ -104,6 +107,7 @@ public class ShopVo {
 		this.mutual_name = mutual_name;
 		this.addr = addr;
 		this.reg_num = reg_num;
+		this.reg_status = reg_status;
 		this.status = status;
 		this.ultracall = ultracall;
 		this.addcount = addcount;
@@ -263,11 +267,19 @@ public class ShopVo {
 		this.reg_num = reg_num;
 	}
 
-	public String getStatus() {
+	public int getReg_status() {
+		return reg_status;
+	}
+
+	public void setReg_status(int reg_status) {
+		this.reg_status = reg_status;
+	}
+
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -302,6 +314,6 @@ public class ShopVo {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	
+
 	
 }

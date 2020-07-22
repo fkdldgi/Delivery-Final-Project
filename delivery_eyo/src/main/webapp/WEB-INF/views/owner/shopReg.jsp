@@ -300,8 +300,8 @@
 			<h2>사업자정보</h2>
 		</div>
 		<div class="form-group under_border">
-			<label for="">사업자주소</label> <input type="text" class="form-control"
-				id="" placeholder="사업자주소" name="" required>
+			<label for="addr">사업자주소</label> 
+			<input type="text" class="form-control" id="" placeholder="사업자주소" name="addr" required>
 		</div>
 		<div class="form-group has-feedback under_border">
 			<label for="reg_num">사업자등록번호</label> 
@@ -513,7 +513,7 @@
 		sel2.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'fbec861b-4050-4b2c-9f7d-f6d408f90882',cd:cityNum},
+			data:{accessToken:'06b36897-8721-4265-91d3-daeda8e46c62',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -535,7 +535,7 @@
 		chk1.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'fbec861b-4050-4b2c-9f7d-f6d408f90882',cd:cityNum},
+			data:{accessToken:'06b36897-8721-4265-91d3-daeda8e46c62',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				data.result.forEach(function(item,index,array){

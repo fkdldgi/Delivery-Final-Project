@@ -117,10 +117,9 @@ public class ShopController {
 			
 			ShopVo shopVo=new ShopVo(0,profile_img,name,introduce,tel,buildingCode,
 					address_detail,shop_category,min_price,payment_option,info,review_info,
-					personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,0,0,0,ownerVo.getNum(),null);
+					personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
 			
-			//DB에 파일정보 저장하기....
-			ShopVo vo=new ShopVo();
+			//트랜잭션 저장
 			shopService.insert(shopVo, addrVo);
 			return "success";
 		}catch(IOException ie) {
