@@ -1,34 +1,54 @@
 package com.jhta.delivery.vo;
 
+import java.util.Date;
+
 // 가게 
 public class ShopVo {
 
 	// 가게번호
 	private int num;
+	
+	// 가게프로필사진
+	private String profile_img;
 
 	// 가게명
 	private String name;
 
-	// 최소주문금액
-	private int min_price;
-
-	// 결제방법
-	private String payment_option;
-
 	// 가게소개
 	private String introduce;
+	
+	// 전화번호
+	private String tel;
+	
+	// 건물관리번호
+	private String buildingCode;
+	
+	// 상세주소
+	private String address_detail;
+	
+	// 가게카테고리
+	private String shop_category;
+	
+	// 최소주문금액
+	private int min_price;
+	
+	// 결제방법
+	private String payment_option;	
 
 	// 안내
 	private String info;
-
-	// 운영시간
-	private String operating_time;
+	
+	// 리뷰안내
+	private String review_info;
 
 	// 휴무일
 	private String personal_day;
-
-	// 전화번호
-	private String tel;
+	
+	// 오픈시간
+	private String open_time;
+	
+	// 마감시간
+	private String close_time;
 
 	// 배달지역
 	private String delivery_area;
@@ -42,26 +62,14 @@ public class ShopVo {
 	// 사업자 등록번호
 	private String reg_num;
 
-	// 리뷰안내
-	private String review_info;
-
-	// 가게프로필사진
-	private String profile_img;
-
+	//가게등록여부 0(등록대기),1(등록),2(폐점)
+	private int reg_status;
+	
 	// 가게상태 0(close),1(open)
-	private String status;
-
-	// 건물관리번호
-	private String building_management_number;
-
-	// 상세주소
-	private String address_detail;
-
-	// 가게카테고리
-	private int shop_category_num;
+	private int status;
 
 	// 울트라콜 OFF(0),ON(1)
-	private String ultracall;
+	private int ultracall;
 
 	// 광고클릭수 울트라콜ON일 시 클릭수가 오름
 	private int addcount;
@@ -69,36 +77,42 @@ public class ShopVo {
 	// 사장번호
 	private int owner_num;
 
+	//가게등록일
+	private Date regdate;
+	
 	public ShopVo() {}
 
-	public ShopVo(int num, String name, int min_price, String payment_option, String introduce, String info,
-			String operating_time, String personal_day, String tel, String delivery_area, String mutual_name,
-			String addr, String reg_num, String review_info, String profile_img, String status,
-			String building_management_number, String address_detail, int shop_category_num, String ultracall,
-			int addcount, int owner_num) {
+	public ShopVo(int num, String profile_img, String name, String introduce, String tel, String buildingCode,
+			String address_detail, String shop_category, int min_price, String payment_option, String info,
+			String review_info, String personal_day, String open_time, String close_time, String delivery_area,
+			String mutual_name, String addr, String reg_num, int reg_status, int status, int ultracall, int addcount,
+			int owner_num, Date regdate) {
 		super();
 		this.num = num;
+		this.profile_img = profile_img;
 		this.name = name;
+		this.introduce = introduce;
+		this.tel = tel;
+		this.buildingCode = buildingCode;
+		this.address_detail = address_detail;
+		this.shop_category = shop_category;
 		this.min_price = min_price;
 		this.payment_option = payment_option;
-		this.introduce = introduce;
 		this.info = info;
-		this.operating_time = operating_time;
+		this.review_info = review_info;
 		this.personal_day = personal_day;
-		this.tel = tel;
+		this.open_time = open_time;
+		this.close_time = close_time;
 		this.delivery_area = delivery_area;
 		this.mutual_name = mutual_name;
 		this.addr = addr;
 		this.reg_num = reg_num;
-		this.review_info = review_info;
-		this.profile_img = profile_img;
+		this.reg_status = reg_status;
 		this.status = status;
-		this.building_management_number = building_management_number;
-		this.address_detail = address_detail;
-		this.shop_category_num = shop_category_num;
 		this.ultracall = ultracall;
 		this.addcount = addcount;
 		this.owner_num = owner_num;
+		this.regdate = regdate;
 	}
 
 	public int getNum() {
@@ -109,12 +123,60 @@ public class ShopVo {
 		this.num = num;
 	}
 
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getBuildingCode() {
+		return buildingCode;
+	}
+
+	public void setBuildingCode(String buildingCode) {
+		this.buildingCode = buildingCode;
+	}
+
+	public String getAddress_detail() {
+		return address_detail;
+	}
+
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+
+	public String getShop_category() {
+		return shop_category;
+	}
+
+	public void setShop_category(String shop_category) {
+		this.shop_category = shop_category;
 	}
 
 	public int getMin_price() {
@@ -133,14 +195,6 @@ public class ShopVo {
 		this.payment_option = payment_option;
 	}
 
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
 	public String getInfo() {
 		return info;
 	}
@@ -149,12 +203,12 @@ public class ShopVo {
 		this.info = info;
 	}
 
-	public String getOperating_time() {
-		return operating_time;
+	public String getReview_info() {
+		return review_info;
 	}
 
-	public void setOperating_time(String operating_time) {
-		this.operating_time = operating_time;
+	public void setReview_info(String review_info) {
+		this.review_info = review_info;
 	}
 
 	public String getPersonal_day() {
@@ -165,12 +219,20 @@ public class ShopVo {
 		this.personal_day = personal_day;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getOpen_time() {
+		return open_time;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setOpen_time(String open_time) {
+		this.open_time = open_time;
+	}
+
+	public String getClose_time() {
+		return close_time;
+	}
+
+	public void setClose_time(String close_time) {
+		this.close_time = close_time;
 	}
 
 	public String getDelivery_area() {
@@ -205,59 +267,27 @@ public class ShopVo {
 		this.reg_num = reg_num;
 	}
 
-	public String getReview_info() {
-		return review_info;
+	public int getReg_status() {
+		return reg_status;
 	}
 
-	public void setReview_info(String review_info) {
-		this.review_info = review_info;
+	public void setReg_status(int reg_status) {
+		this.reg_status = reg_status;
 	}
 
-	public String getProfile_img() {
-		return profile_img;
-	}
-
-	public void setProfile_img(String profile_img) {
-		this.profile_img = profile_img;
-	}
-
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
-	public String getBuilding_management_number() {
-		return building_management_number;
-	}
-
-	public void setBuilding_management_number(String building_management_number) {
-		this.building_management_number = building_management_number;
-	}
-
-	public String getAddress_detail() {
-		return address_detail;
-	}
-
-	public void setAddress_detail(String address_detail) {
-		this.address_detail = address_detail;
-	}
-
-	public int getShop_category_num() {
-		return shop_category_num;
-	}
-
-	public void setShop_category_num(int shop_category_num) {
-		this.shop_category_num = shop_category_num;
-	}
-
-	public String getUltracall() {
+	public int getUltracall() {
 		return ultracall;
 	}
 
-	public void setUltracall(String ultracall) {
+	public void setUltracall(int ultracall) {
 		this.ultracall = ultracall;
 	}
 
@@ -276,6 +306,14 @@ public class ShopVo {
 	public void setOwner_num(int owner_num) {
 		this.owner_num = owner_num;
 	}
-	
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+
 	
 }
