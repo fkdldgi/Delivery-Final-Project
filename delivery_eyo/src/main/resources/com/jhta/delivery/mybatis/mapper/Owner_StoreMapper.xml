@@ -24,11 +24,26 @@
 		delete from menu_category where num=#{num}
 	</delete>
 	
+	<!-- 메뉴 추가 -->
+	<insert id="insertMenu" parameterType="com.jhta.delivery.vo.MenuVo">
+		insert into menu
+		values(MENU_SEQ.nextval,#{name},#{menu_info},#{price},
+									1,'img',#{menu_category_num},4)
+	</insert>
+	
 	<!-- 메뉴카테고리 추가 -->
 	<insert id="insertMenu_Category" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
 		insert into menu_category
 		values(MENU_CATEGORY_SEQ.nextval,#{name},4,#{shop_num},0)
 	</insert>
+	
+	<!-- 메뉴 수정 -->
+	<update id="updateMenu" parameterType="com.jhta.delivery.vo.MenuVo">
+		update menu
+		set name=#{name}, menu_info=#{menu_info}, price=#{price},
+				menu_category_num=#{menu_category_num}
+		where num=#{num}
+	</update>
 	
 	<!-- 메뉴카테고리 이름 수정 -->
 	<update id="updateMenu_Category" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
@@ -36,4 +51,10 @@
 		set name=#{name}
 		where num=#{num} and shop_num=#{shop_num}
 	</update>
+	
+	<!-- 메뉴카테고리 번호 찾기 -->
+	<select id="selectMenu_CategoryNum" parameterType="com.jhta.delivery.vo.MenuCategoryVo" resultType="int">
+		select num from menu_category
+		where name=#{name} and shop_num=#{shop_num}
+	</select>
 </mapper>

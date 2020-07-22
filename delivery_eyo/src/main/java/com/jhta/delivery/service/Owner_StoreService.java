@@ -29,13 +29,28 @@ public class Owner_StoreService {
 		return dao.deleteMenu_Category(num);
 	}
 	
+	// 메뉴추가
+	public int insertMenu(MenuVo vo){
+		return dao.insertMenu(vo);
+	}
+	
+	// 메뉴카테고리 추가
+	public int insertMenu_Category(MenuCategoryVo vo) {
+		return dao.insertMenu_Category(vo);
+	}
+
+	// 메뉴 수정
+	public int updateMenu(MenuVo vo) {
+		return dao.updateMenu(vo);
+	}
+	
 	// 메뉴카테고리수정
 	public int updateMenu_Category(MenuCategoryVo vo) {
 		return dao.updateMenu_Category(vo);
 	}
 	
-	// 메뉴카테고리 넣기
-	public int insertMenu_Category(MenuCategoryVo vo) {
-		return dao.insertMenu_Category(vo);
+	// 메뉴카테고리번호 찾기
+	public int selectMenu_CategoryNum(MenuCategoryVo vo) {
+		return dao.selectMenu_CategoryNum(vo);
 	}
 }

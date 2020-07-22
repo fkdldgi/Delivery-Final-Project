@@ -120,34 +120,7 @@ public class Store_ManageController {
 			MenuVoList.add(vo);
 		}
 		
-		for(MenuVo vo1: MenuVoList) {
-			
-			// 카테고리 새로 만들었을 때
-			if(vo1.getMenu_category_num() <= 0) {
-				// 메뉴 새로 만들었을 때
-				if(vo1.getNum() <= 0) {				
-					
-				}
-			// 카테고리 기존에 있는 거
-			}else if(vo1.getMenu_category_num() >= 0) {
-				// 기존카테고리에서 새로운 메뉴 만들었을 때
-				if(vo1.getNum() <= 0) {
-					
-				// 기존카테고리에서 기존메뉴 수정
-				}else if(vo1.getNum() >= 0) {
-					
-				}				
-			}
-			//<input type="text" name="category_priority" style="display:none" value="${list.priority }">
-			System.out.println(vo1.getNum());	
-			System.out.println(vo1.getName());
-			System.out.println(vo1.getMenu_info());
-			System.out.println(vo1.getPrice());
-			System.out.println(vo1.getMenu_category_num());		// 카테고리번호
-			System.out.println();
-		}
-		
-		// 메뉴카테고리 수정(이름)
+		// 메뉴카테고리 수정, 추가(이름)
 		for(int i = 0; i < category_num.size(); i++) {
 			int menu_categoryNum = Integer.parseInt(category_num.get(i));
 			String categoryName = menu_category_name.get(i);
@@ -161,8 +134,52 @@ public class Store_ManageController {
 			}else {
 				MenuCategoryVo vo = new MenuCategoryVo(menu_categoryNum, categoryName, 0, shop_num, 0);
 				store_service.insertMenu_Category(vo);
+				
+				// 새로운 카테고리에 메뉴 추가 할 경우
+				for(MenuVo vo1: MenuVoList) {
+					if(vo1.getMenu_category_num() <= 0) {
+						if(vo1.getNum() <= 0) {
+							// 메뉴카테고리번호 가져오기
+							int selectMenu_CategoryNum = store_service.selectMenu_CategoryNum(vo);
+							
+						}
+					}
+				}
 			}
 		}
+		
+		for(MenuVo vo1: MenuVoList) {
+			
+			// 카테고리 새로 만들었을 때
+			if(vo1.getMenu_category_num() <= 0) {
+				// 메뉴 새로 만들었을 때
+				if(vo1.getNum() <= 0) {				
+					
+				}
+			// 카테고리 기존에 있는 거
+			}else if(vo1.getMenu_category_num() >= 0) {
+				// 기존카테고리에서 새로운 메뉴 만들었을 때
+				if(vo1.getNum() <= 0) {
+					MenuVo vo2 = new MenuVo(0,vo1.getName(),vo1.getMenu_info(),
+											vo1.getPrice(),1,"img1",vo1.getMenu_category_num(),0);
+					store_service.insertMenu(vo2);
+					
+				// 기존카테고리에서 기존메뉴 수정
+				}else if(vo1.getNum() >= 0) {
+					MenuVo vo2 = new MenuVo(vo1.getNum(),vo1.getName(),vo1.getMenu_info(),
+							vo1.getPrice(),1,"img1",vo1.getMenu_category_num(),0);
+					store_service.updateMenu(vo2);
+				}				
+			}
+			//<input type="text" name="category_priority" style="display:none" value="${list.priority }">
+			System.out.println(vo1.getNum());	
+			System.out.println(vo1.getName());
+			System.out.println(vo1.getMenu_info());
+			System.out.println(vo1.getPrice());
+			System.out.println(vo1.getMenu_category_num());		// 카테고리번호
+			System.out.println();
+		}
+		
 	
 		return ".owner.store_manage";
 	}
