@@ -1,5 +1,7 @@
 package com.jhta.delivery.vo;
 
+import java.util.List;
+
 public class MenuCategoryVo {
 	// 메뉴카테고리(대표메뉴,세트메뉴,치킨메뉴 등)
 
@@ -18,15 +20,15 @@ public class MenuCategoryVo {
 	// 대표메뉴
 	private int main_menu;
 
-	public MenuCategoryVo() {}
-
 	public MenuCategoryVo(int num, String name, int priority, int shop_num, int main_menu) {
-		super();
 		this.num = num;
 		this.name = name;
 		this.priority = priority;
 		this.shop_num = shop_num;
 		this.main_menu = main_menu;
+	}
+
+	public MenuCategoryVo() {
 	}
 
 	public int getNum() {

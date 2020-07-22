@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <div class="container" style="width: 100%;">
   <div class="row" style="width: 100%;">
     <div class="col-8" id="storeWrap"
@@ -73,6 +74,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			</div>
 		</div>
 		<div id="cart-body" style="width: 100%; height: 60%; border: 1px solid black; overflow: auto;"></div>
+		<div id="cart-num"></div>
 		<div id="cart-footer" style="width: 100%; height: 30%; border: 0px solid black; margin-top: 10px;">
 			<div id="min-price" style="width: 100%; height: 30%; border: 1px solid black;">최소 결제금액<br>${info.min_price }원</div>
 			<div style="width: 100%; height: 30%; border: 1px solid black;">총 금액<div id="total-price">선택된 메뉴가 없습니다</div>원</div>
@@ -116,7 +118,8 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 	</div>
 </div>
 <script>
-
+	//console.log('${sessionScope.memberId}') //아이디 세션 확인하기
+	
 	//메뉴 모달 띄우면서 출력값(메뉴,옵션메뉴) 뿌려주는 함수
 	function menu_detail(num){
 		$.ajax({
@@ -130,6 +133,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		        	$("#modal-body").empty();
 		        	$("#total").empty();
 					$("#modal-title").append("<h5 style='text-align: center;'>메뉴 상세</h5>");
+					$("#modal-title").append("<input type='text' id='menuNum' value='"+ data.menuInfo.num +"' hidden >");
 					$("#modal-body").append("<img src='http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif' style='width:100%;'>");
 					$("#modal-body").append("<p><h1 style='text-align: center;' id='menuName'>"+ data.menuInfo.name +"</h1></p>");
 					$("#modal-body").append("<p><h5 style='text-align: center;'> 설명 : "+ data.menuInfo.menu_info +"</h5></p>");
@@ -138,7 +142,13 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 					if(data.optionList[0] != null){
 						$("#modal-body").append("<p><h5>"+ data.optionList[0].category +"</h5></p>");
 						for(i in data.optionList){
-							$("#modal-body").append("<p><input type='checkbox' onclick='clickOption()' class='check' value="+ data.optionList[i].price +','+data.optionList[i].name + ">&nbsp;&nbsp;<label>"+ data.optionList[i].name +"</label><label style='float:right'>+"+ data.optionList[i].price +"원</label></p>");
+							$("#modal-body").append("<p><input type='checkbox' onclick='clickOption()' class='check' value="+ 
+									data.optionList[i].price +
+									',' + data.optionList[i].num + 
+									',' + data.optionList[i].name + ">&nbsp;&nbsp;" +
+									"<label>"+ data.optionList[i].name +"</label>" +
+									"<label style='float:right'>+"+ data.optionList[i].price +"원</label></p>"+
+									"<div id='optionNum' hidden >"+ data.optionList[i].num + "</div>");
 						}
 					}
 		        },error: function(errorThrown) {
@@ -163,7 +173,6 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		}
 		$('#volumeText').val((parseInt($("#volumeText").val()) + 1));
 		$("#total").text(totalPrice+'원');
-		console.log('${sessionScope.memberId}')
 	}
 	
 	//수량 감소 함수
@@ -196,6 +205,8 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		$('#volumeText').val(1); 
 	}
 	
+	//묶음으로 담을 List 만들기
+	
 	var cart_totalPrice = 0;
 	//담기 눌렀을 때 실행되는 함수
 	function addCart(){
@@ -203,32 +214,38 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		var menuPrice = $('#total').text().split('원'); //컨트롤러로 보낼 때 숫자만 보내야하므로 미리 자름
 		var menuNmae = $('#menuName').text();
 		var volume = $('#volumeText').val();
+		var menuNum = $('#menuNum').val();
 		var count = 0;
+		
 		cart_totalPrice = (parseInt(cart_totalPrice) + parseInt(menuPrice[0]));
 		
 		var optionStr = '옵션 : ';
+		var optionNum = '';
 		if($(".check").each(function(){
 			if($(this).is(":checked")){
 				++count;
 				if(count === 1){
-					optionStr = optionStr + $(this).val().split(',')[1];
+					optionStr = optionStr + $(this).val().split(',')[2];
+					optionNum = optionNum + $(this).val().split(',')[1];
 				}else{  
-					optionStr = optionStr + ', ' +$(this).val().split(',')[1];
+					optionStr = optionStr + ', ' +$(this).val().split(',')[2];
+					optionNum = optionNum + ', ' +$(this).val().split(',')[1];
 				}
 			}
 		}));
 		
 		$('#cart-body').append(
+				"<div class='list' hidden >"+ menuNum + ',' + volume + ',' + optionNum + ';' +"</div>"+
 				"<div class='cart-menu'>"+
 					'<p>' + menuNmae + "</p>" + 
 					'<p>' + optionStr + "</p>" + 
 					"<div class='row row-cols-2 border-bottom' style='width:100%;'>" + 
 					"<div class='col'>" + menuPrice[0] + " 원</div>" + 
-					"<div class='col'>" +  volume + "개</div>" +
+					"<div class='col' name='volume'>" +  volume + "개</div>" +
 					"</div>"+
 				"</div>"
 		);
-
+		
 		$('#total-price').text(cart_totalPrice + '원');
 		$('#volumeText').val(1);
 	}
@@ -262,6 +279,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 	//전체삭제 함수
 	function delChild(){
 		//장바구니의 자식객체 없애기
+		$('#cart-body').empty();
 		$('#cart-body').children().remove();
 		//총 금액 초기화
 		$('#total-price').text('선택된 메뉴가 없습니다');
@@ -281,14 +299,36 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			$('#total-price').text((orgPrice-delPrice));
 		}
 		console.log('총 금액  후: ' + $('#total-price').text());
+		$(this).prev().text('');
 		$(this).remove();
 	});
 	
 	//주문하기 누르면 실행되는 함수
 	$('#orderBtn').click(function(){
-		console.log($('#cart-body').find('.col').text());
-		$('#cart-body').find('.col').text();
-		//location.href='#';
+		console.log('주문 리스트 : '+$('#cart-body').find('.list').text()); //주문 리스트(메뉴 번호, 수량, 옵션번호) 가져오기
+		var orderList = $('#cart-body').find('.list').text();
+		var split1 = $('#cart-body').find('.list').text().split(';');
+		console.log(split1);
+		var split2 = '';
+			
+		for(var i=0; i<split1.length-1; i++){ //담은 메뉴의 수만큼 행이 나오도록 length의 길이를 조절했음
+			console.log('split1 값 : ' + split1[i]);
+			split2 = split1[i].split(',');
+			console.log('split2 크기 : ' + split2.length);
+			for(var j=0; j<split2.length; j++){
+				console.log('순서' + split2[j]);
+			}
+		}
+		
+		var lastPrice = parseInt($('#total-price').text()); //주문하기 직전 장바구니 총 금액
+		var minPrice = parseInt(${info.min_price }); //최소 주문금액
+		
+		if(lastPrice>=minPrice){
+			location.href="${pageContext.request.contextPath}/member/orderPage?orderList=" + orderList + "&memberId='${sessionScope.memberId}'&shopNum=" + ${info.num};
+			//${pageContext.request.contextPath }
+		}else{
+			alert('최소 주문금액보다 적습니다');
+		}
 	});
 	
 </script>

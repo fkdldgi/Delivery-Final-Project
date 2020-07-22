@@ -31,7 +31,6 @@ public class StoreMenuController {
 		map.put("optionList", optionList);
 		Gson gson=new Gson();
 		String jsonString=gson.toJson(map);
-		System.out.println("jsonString : " + jsonString);
 		return jsonString;
 	}
 }

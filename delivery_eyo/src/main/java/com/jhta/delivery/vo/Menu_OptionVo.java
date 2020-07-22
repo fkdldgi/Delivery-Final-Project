@@ -1,19 +1,19 @@
 package com.jhta.delivery.vo;
 public class Menu_OptionVo {
 
-	// ¸Ş´º¿É¼Ç ¹øÈ£
+	// ë©”ë‰´ì˜µì…˜ ë²ˆí˜¸
 	private int Menu_Option_num;
 	
-	// ¸Ş´º¿É¼Ç ÀÌ¸§
+	// ë©”ë‰´ì˜µì…˜ ì´ë¦„
 	private String Menu_Option_name;
 	
-	// ¸Ş´º¿É¼Ç °¡°İ
+	// ë©”ë‰´ì˜µì…˜ ê°€ê²©
 	private int Menu_Option_price;
 	
-	// ¸Ş´º¿É¼Ç Ä«Å×°í¸®
+	// ë©”ë‰´ì˜µì…˜ ì¹´í…Œê³ ë¦¬ëª…
 	private String Menu_Option_category;
 	
-	// ¸Ş´º¿É¼Ç ¸Ş´º¹øÈ£
+	// ë©”ë‰´ì˜µì…˜ ë©”ë‰´ë²ˆí˜¸
 	private int Menu_Option_menu_num;
 	
 	public Menu_OptionVo() {}
