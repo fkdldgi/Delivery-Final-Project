@@ -2,11 +2,12 @@ package com.jhta.delivery.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.jhta.delivery.dao.Order_Menu_OptionDao;
 import com.jhta.delivery.vo.Order_Menu_OptionVo;
 
-@Repository
+@Service
 // 주문메뉴옵션 
 public class Order_Menu_OptionService {
 	@Autowired

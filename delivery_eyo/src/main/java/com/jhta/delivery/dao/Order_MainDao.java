@@ -15,7 +15,7 @@ public class Order_MainDao {
 	
 	//주문 입력 부분
 	public int insert(Order_MainVo vo) {
-		return session.insert(NAMESPACE+"Order_Main_insert", vo);
+		return session.insert(NAMESPACE+".Order_Main_insert", vo);
 	}
 	
 }
