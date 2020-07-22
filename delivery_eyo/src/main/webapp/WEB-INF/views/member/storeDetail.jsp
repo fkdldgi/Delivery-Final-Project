@@ -61,7 +61,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			aria-labelledby="nav-contact-tab">가게정보 숨기기3</div>
 	</div>
 </div>
-    <!-- 주문표 부분 -->
+    <!-- 주문표(장바구니) 부분 -->
 	<div class="card sticky-top" id="cart" style="width:25%; height: 600px; border: 0px solid black; margin-top: 10px; margin-left: -90px;" >
 		<div class="bg-dark" style="width: 100%; height: 10%; border: 0px solid black; color: white;">
 			<div class='row'>
@@ -106,7 +106,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 				    <button type="button" class="btn btn-info" onclick="volumeUp()">+</button>
 				</div> 
 			</div>
-			<div style="background-color: gray;height: 50px;" class="d-flex bd-highlight">
+			<div style="background-color: gray; height: 50px;" class="d-flex bd-highlight">
 			  <div class="p-2 flex-grow-1 bd-highlight" style="color: white; margin-top: 5px; margin-left: 10px;"><h5>총 주문금액</h5></div>
 			  <div class="p-2 bd-highlight" style="color: blue;"><h3 id="total"></h3></div>
 			</div>
@@ -228,14 +228,14 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 					optionStr = optionStr + $(this).val().split(',')[2];
 					optionNum = optionNum + $(this).val().split(',')[1];
 				}else{  
-					optionStr = optionStr + ', ' +$(this).val().split(',')[2];
-					optionNum = optionNum + ', ' +$(this).val().split(',')[1];
+					optionStr = optionStr + ',' +$(this).val().split(',')[2];
+					optionNum = optionNum + ',' +$(this).val().split(',')[1];
 				}
 			}
 		}));
 		
 		$('#cart-body').append(
-				"<div class='list' hidden >"+ menuNum + ',' + volume + ',' + optionNum + ';' +"</div>"+
+				"<div class='list' hidden >"+menuNum+','+volume+','+optionNum+';'+"</div>"+
 				"<div class='cart-menu'>"+
 					'<p>' + menuNmae + "</p>" + 
 					'<p>' + optionStr + "</p>" + 
@@ -324,7 +324,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		var minPrice = parseInt(${info.min_price }); //최소 주문금액
 		
 		if(lastPrice>=minPrice){
-			location.href="${pageContext.request.contextPath}/member/orderPage?orderList=" + orderList + "&memberId='${sessionScope.memberId}'&shopNum=" + ${info.num};
+			location.href="${pageContext.request.contextPath}/member/orderPage?orderList=" + orderList + "&memberId='${sessionScope.memberId}'&shopNum=" + ${info.num} + "&lastPrice="+lastPrice;
 			//${pageContext.request.contextPath }
 		}else{
 			alert('최소 주문금액보다 적습니다');

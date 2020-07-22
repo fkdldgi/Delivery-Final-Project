@@ -11,11 +11,11 @@ import com.jhta.delivery.vo.Order_MainVo;
 public class Order_MainDao {
 	@Autowired
 	private SqlSession session;
-	String NAMESPACE = "mybatis.OrderMapper";
+	private final String NAMESPACE = "mybatis.OrderMapper";
 	
 	//주문 입력 부분
 	public int insert(Order_MainVo vo) {
-		return session.insert(NAMESPACE+"Order_MainVo_insert", vo);
+		return session.insert(NAMESPACE+"Order_Main_insert", vo);
 	}
 	
 }
