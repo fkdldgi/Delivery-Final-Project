@@ -69,7 +69,7 @@ public class Store_ManageController {
 		System.out.println(trash_category); // 삭제한 메뉴카테고리 번호
 		System.out.println(trash); // 삭제한 메뉴
 		System.out.println();
-		System.out.println(category_list_num);
+		System.out.println(category_list_num);	// 메뉴가 속한 메뉴카테고리 번호
 		
 		/*
 		 * // 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제 if(trash_category != null) { for(String
@@ -83,10 +83,9 @@ public class Store_ManageController {
 		 */
 		
 		List<MenuVo> MenuVoList = new ArrayList<>();
-		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();
+		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();	
 		
-		
-		int tmp=0;
+		int tmp=0;// 
 		int j=0;
 		for(int i = 0; i<min_price.size(); i++) {
 			MenuCategoryVo vo = new MenuCategoryVo();
@@ -99,10 +98,10 @@ public class Store_ManageController {
 			}
 			vo.setNum(category_numVo);
 			vo.setName(menu_category_nameVo);
-			menuCateogryList.add(vo);
-			
+			menuCateogryList.add(vo);			
 		}
 		
+		// vo에 값넣기
 		for(int i = 0; i<min_price.size(); i++) {
 			MenuVo vo = new MenuVo();
 			
@@ -149,32 +148,22 @@ public class Store_ManageController {
 		}
 		
 		// 메뉴카테고리 수정(이름)
-		for(int i = 0; i < menu_category_name.size(); i++) {
+		for(int i = 0; i < category_num.size(); i++) {
 			int menu_categoryNum = Integer.parseInt(category_num.get(i));
+			String categoryName = menu_category_name.get(i);
 			
-			// 기존에 있는 카테고리를 수정할 경우
-			if(menu_categoryNum >= 0) {
-				String menu_categoryName = menu_category_name.get(i);
+			// 기존에 있는 카테고리 수정
+			if(menu_categoryNum > 0) {				
+				MenuCategoryVo vo11 = new MenuCategoryVo(menu_categoryNum, categoryName, 0, shop_num, 0);
+				store_service.updateMenu_Category(vo11);
 				
-				// 카테고리번호, 카테고리명, 가게번호
-				MenuCategoryVo vo = null; 
-				vo.setNum(menu_categoryNum);
-				vo.setName(menu_categoryName);
-				vo.setShop_num(shop_num);			
-				
-				store_service.updateMenu_Category(vo);
-			// 카테고리 새로 넣을 경우(num) sequence로 바꿔야 함
+			// 카테고리 새로 넣을 경우
 			}else {
-				String menu_categoryName = menu_category_name.get(i);
-				
-				MenuCategoryVo vo = null;
-				vo.setName(menu_categoryName);
-				vo.setShop_num(shop_num);
-				
+				MenuCategoryVo vo = new MenuCategoryVo(menu_categoryNum, categoryName, 0, shop_num, 0);
 				store_service.insertMenu_Category(vo);
 			}
 		}
-		
+	
 		return ".owner.store_manage";
 	}
 	

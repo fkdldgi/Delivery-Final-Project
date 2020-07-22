@@ -26,16 +26,14 @@
 	
 	<!-- 메뉴카테고리 추가 -->
 	<insert id="insertMenu_Category" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
-		insert from menu_category
-		values(num=#{num},name=#{name},
-				priority=#{priority},shop_num=#{shop_num},
-				main_menu=#{main_menu})
+		insert into menu_category
+		values(MENU_CATEGORY_SEQ.nextval,#{name},4,#{shop_num},0)
 	</insert>
 	
-	<!-- 메뉴카테고리 수정 -->
+	<!-- 메뉴카테고리 이름 수정 -->
 	<update id="updateMenu_Category" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
 		update menu_category
-		set(name=#{name})
+		set name=#{name}
 		where num=#{num} and shop_num=#{shop_num}
 	</update>
 </mapper>

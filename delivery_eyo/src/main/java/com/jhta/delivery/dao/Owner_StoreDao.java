@@ -14,8 +14,9 @@ public class Owner_StoreDao {
 	@Autowired
 	private SqlSession session;
 	
-	private final String NAMESPACE="mybatis.StoreMapper";
+	private final String NAMESPACE="mybatis.Owner_StoreMapper";
 	
+	// 메뉴리스트
 	public List<MenuVo> mainMenuList(int num){
 		return session.selectList(NAMESPACE+".mainMenuList", num);
 	}
