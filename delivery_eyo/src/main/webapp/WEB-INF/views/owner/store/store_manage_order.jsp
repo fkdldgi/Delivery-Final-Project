@@ -298,6 +298,7 @@
 			
 			<div name="append_main_menu" style="margin: auto; margin-top: 20px; border: 3px solid #FC5230;width: 80%;height: 100%">
 				<h2 style="text-align: center; margin-top: 10px; width: 100%; color: brown; font-weight: 900;">대표 메뉴</h2>
+				
 				<c:forEach var="list" items="${requestScope.mainMenuList }">
 					<div name="main_menu">
 						<div>
@@ -315,7 +316,7 @@
 									<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;" src="/delivery/resources/images/plus2.png">										
 								</c:when>
 								<c:otherwise>	
-								
+								<!-- DB에 들어있는 이미지 경로 src에 넣기 -->
 									<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;" src="${list.img } ">										
 								</c:otherwise>
 							</c:choose>
