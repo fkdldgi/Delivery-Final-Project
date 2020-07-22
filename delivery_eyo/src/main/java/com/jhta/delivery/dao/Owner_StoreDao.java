@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.delivery.vo.MenuCategoryVo;
 import com.jhta.delivery.vo.MenuVo;
 
 @Repository
@@ -13,8 +14,9 @@ public class Owner_StoreDao {
 	@Autowired
 	private SqlSession session;
 	
-	private final String NAMESPACE="mybatis.StoreMapper";
+	private final String NAMESPACE="mybatis.Owner_StoreMapper";
 	
+	// 메뉴리스트
 	public List<MenuVo> mainMenuList(int num){
 		return session.selectList(NAMESPACE+".mainMenuList", num);
 	}
@@ -27,5 +29,15 @@ public class Owner_StoreDao {
 	// 메뉴카테고리삭제
 	public int deleteMenu_Category(int num) {
 		return session.delete(NAMESPACE+".deleteMenu_Category", num);
+	}
+	
+	// 메뉴카테고리수정
+	public int updateMenu_Category(MenuCategoryVo vo) {
+		return session.update(NAMESPACE+".updateMenu_Category", vo);
+	}
+	
+	// 메뉴카테고리넣기
+	public int insertMenu_Category(MenuCategoryVo vo) {
+		return session.insert(NAMESPACE+".insertMenu_Category", vo);
 	}
 }

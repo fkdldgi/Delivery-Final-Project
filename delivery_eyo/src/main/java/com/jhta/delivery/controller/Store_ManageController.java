@@ -47,6 +47,7 @@ public class Store_ManageController {
 	
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
 	public String manage_update(Model model,
+						@RequestParam(value="Shop_num") int shop_num,
 						@RequestParam(value="shop_info") String shop_info,
 						@RequestParam(value="category_num") List<String> category_num,
 						@RequestParam(value="menu_category_name") List<String> menu_category_name,
@@ -68,7 +69,7 @@ public class Store_ManageController {
 		System.out.println(trash_category); // 삭제한 메뉴카테고리 번호
 		System.out.println(trash); // 삭제한 메뉴
 		System.out.println();
-		System.out.println(category_list_num);
+		System.out.println(category_list_num);	// 메뉴가 속한 메뉴카테고리 번호
 		
 		/*
 		 * // 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제 if(trash_category != null) { for(String
@@ -82,9 +83,9 @@ public class Store_ManageController {
 		 */
 		
 		List<MenuVo> MenuVoList = new ArrayList<>();
-		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();
+		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();	
 		
-		int tmp=0;
+		int tmp=0;// 
 		int j=0;
 		for(int i = 0; i<min_price.size(); i++) {
 			MenuCategoryVo vo = new MenuCategoryVo();
@@ -97,18 +98,18 @@ public class Store_ManageController {
 			}
 			vo.setNum(category_numVo);
 			vo.setName(menu_category_nameVo);
-			menuCateogryList.add(vo);
-			
+			menuCateogryList.add(vo);			
 		}
 		
+		// vo에 값넣기
 		for(int i = 0; i<min_price.size(); i++) {
 			MenuVo vo = new MenuVo();
 			
-			int category_numVo = Integer.parseInt(category_list_num.get(i));	// 카테고리 번호
-			String menu_nameVo = menu_name.get(i);								// 카테고리 명
+			int menu_numVo = Integer.parseInt(menu_num.get(i));					// 메뉴 번호
+			String menu_nameVo = menu_name.get(i);								// 메뉴 명
 			String menu_infoVo = menu_info.get(i);								// 메뉴 설명
 			int min_priceVo = Integer.parseInt(min_price.get(i));				// 메뉴 가격
-			int menu_numVo = Integer.parseInt(menu_num.get(i));					// 메뉴 번호
+			int category_numVo = Integer.parseInt(category_list_num.get(i));	// 카테고리 번호
 			
 			vo.setNum(menu_numVo);
 			vo.setName(menu_nameVo);
@@ -118,15 +119,51 @@ public class Store_ManageController {
 			
 			MenuVoList.add(vo);
 		}
+		
 		for(MenuVo vo1: MenuVoList) {
+			
+			// 카테고리 새로 만들었을 때
+			if(vo1.getMenu_category_num() <= 0) {
+				// 메뉴 새로 만들었을 때
+				if(vo1.getNum() <= 0) {				
+					
+				}
+			// 카테고리 기존에 있는 거
+			}else if(vo1.getMenu_category_num() >= 0) {
+				// 기존카테고리에서 새로운 메뉴 만들었을 때
+				if(vo1.getNum() <= 0) {
+					
+				// 기존카테고리에서 기존메뉴 수정
+				}else if(vo1.getNum() >= 0) {
+					
+				}				
+			}
+			//<input type="text" name="category_priority" style="display:none" value="${list.priority }">
 			System.out.println(vo1.getNum());	
 			System.out.println(vo1.getName());
 			System.out.println(vo1.getMenu_info());
 			System.out.println(vo1.getPrice());
-			System.out.println(vo1.getMenu_category_num());
+			System.out.println(vo1.getMenu_category_num());		// 카테고리번호
 			System.out.println();
 		}
 		
+		// 메뉴카테고리 수정(이름)
+		for(int i = 0; i < category_num.size(); i++) {
+			int menu_categoryNum = Integer.parseInt(category_num.get(i));
+			String categoryName = menu_category_name.get(i);
+			
+			// 기존에 있는 카테고리 수정
+			if(menu_categoryNum > 0) {				
+				MenuCategoryVo vo11 = new MenuCategoryVo(menu_categoryNum, categoryName, 0, shop_num, 0);
+				store_service.updateMenu_Category(vo11);
+				
+			// 카테고리 새로 넣을 경우
+			}else {
+				MenuCategoryVo vo = new MenuCategoryVo(menu_categoryNum, categoryName, 0, shop_num, 0);
+				store_service.insertMenu_Category(vo);
+			}
+		}
+	
 		return ".owner.store_manage";
 	}
 	

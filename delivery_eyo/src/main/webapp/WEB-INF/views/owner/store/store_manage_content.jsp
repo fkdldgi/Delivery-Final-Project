@@ -277,6 +277,8 @@
 	메뉴가격 min_price
  -->
 	<form action="/delivery/owner/store_manage" method="post">
+		<!-- 가게번호 얻어오기 -->
+		<input type="text" name="Shop_num" value="${Shop_num }" hidden="hidden">
 		<div id="trash_can" style="display:none;"></div>
 		
 		<div id="menu_wrap">
