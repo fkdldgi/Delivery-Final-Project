@@ -20,6 +20,7 @@
 			  }
 </style>
 <script>
+	// 메뉴 추가했다가 다시 삭제하는 거 안됨
 	var category_menu_menu = 0;
 	$(document).ready(function(){
 		
@@ -277,6 +278,8 @@
 	메뉴가격 min_price
  -->
 	<form action="/delivery/owner/store_manage" method="post">
+		<!-- 아이디 -->
+		<input type="text" name="owner_id" hidden="hidden" value="${sessionScope.ownerId }">
 		<!-- 가게번호 얻어오기 -->
 		<input type="text" name="Shop_num" value="${Shop_num }" hidden="hidden">
 		<div id="trash_can" style="display:none;"></div>
