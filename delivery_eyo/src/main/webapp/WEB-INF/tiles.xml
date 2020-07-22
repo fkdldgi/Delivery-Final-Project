@@ -27,6 +27,13 @@
 		<put-attribute name="footer" value="/WEB-INF/views/owner/footer.jsp"/>
 	</definition>
 	
+	<definition name=".owner.mypage" template="/WEB-INF/views/owner/store/mypage_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/owner/header.jsp"/>
+		<put-attribute name="mypage_header" value="/WEB-INF/views/owner/mypage/mypage_header.jsp"/>
+		<put-attribute name="mypage_content" value="/WEB-INF/views/owner/mypage/mypage_content.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/owner/footer.jsp"/>
+	</definition>
+	
 	<definition name=".owner.*" extends=".owner.main">
 		<put-attribute name="content" value="/WEB-INF/views/owner/{1}.jsp"/>
 	</definition>
