@@ -21,6 +21,9 @@ display:flex
 }
 </style>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d85ff3401d499d8c4830a9da98833bd&libraries=services"></script>
+<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d85ff3401d499d8c4830a9da98833bd&libraries=services"></script>		
 <script>
 		
@@ -29,12 +32,28 @@ display:flex
     function sample5_execDaumPostcode() {
         new daum.Postcode({ 
             oncomplete: function(data) {
+            	sessionStorage.setItem("addrData", JSON.stringify(data)); //주소 api 데이터 세션에 넣기 -> 주문페이지에서 주소 데이터 편하게 가져오기 위해
                 var addr = data.address; // 최종 주소 변수
                 sessionStorage.setItem('addr', addr); //세션에 선택한 주소값 넣기 -> 페이지가 바뀌어도 값이 유지되도록 하기 위해
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("sample5_address").value = sessionStorage.getItem('addr');
                 console.log('session : ' + sessionStorage.getItem('addr'));
                 console.log('roadAddress : ' + data.roadAddress + ", jibunAddress : " + data.jibunAddress);
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+                        sessionStorage.setItem('dataXY', JSON.stringify(result));
+                        sessionStorage.setItem('dataX', result.x);
+                        sessionStorage.setItem('dataY', result.y);
+                        console.log('dataX : ' + result.x);
+                        console.log('dataY : ' + result.y);
+                    }
+                });
+                console.log('세션값 가져오기 : dataX : ' +  sessionStorage.getItem('dataX'));
+                console.log('세션값 가져오기 : dataY : ' +  sessionStorage.getItem('dataY'));
             }
         }).open();
     }
