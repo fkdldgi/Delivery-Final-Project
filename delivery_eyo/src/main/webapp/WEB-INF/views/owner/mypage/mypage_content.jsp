@@ -67,6 +67,8 @@ a {
 	    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요.">
 	    <span id="pwdErr" class="help-block">8글자 이상 입력하세요.</span>
 	    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+	    <span id="pwdErr2" class="help-block">비밀번호를 다시 확인해주세요.</span>
+	    <span class="glyphicon2 glyphicon-ok form-control-feedback"></span>
 	    <a href="" class="pwfind">비밀번호 찾기</a>
 	  </div>
 	  <button class="col-md-1 btn btn-outline-primary" type="submit">확인</button>
@@ -77,8 +79,11 @@ a {
 function pwdChk(){
 	var pwd="<%=session.getAttribute("ownerPwd") %>";
 	if(pwd==$("#pwd").val()){
+		$("#pwdErr2").hide();
 		return true;
 	}else{
+		$("#pwdErr").hide();
+		$("#pwdErr2").show();
 		return false;
 	}
 }
@@ -88,9 +93,11 @@ $("#pwd").keyup(function() {
 	// 비밀번호 검증할 정규 표현식
 	var reg = /^.{8,}$/;
 	if (reg.test(pwd)) {//정규표현식을 통과 한다면
+		$("#pwdErr2").hide();
 		$("#pwdErr").hide();
 		successState("#pwd");
-	} else {//정규표현식을 통과하지 못하면
+	}else {//정규표현식을 통과하지 못하면
+		$("#pwdErr2").hide();
 		$("#pwdErr").show();
 		errorState("#pwd");
 	}
