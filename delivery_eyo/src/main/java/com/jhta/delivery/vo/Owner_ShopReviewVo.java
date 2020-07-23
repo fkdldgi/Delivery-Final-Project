@@ -3,7 +3,7 @@ public class Owner_ShopReviewVo {
 	// 가게에 리뷰를 단 회원아이디
 	private String id;
 	
-	// 가게 리뷰 img
+	// 회원 이미지 img
 	private String img;
 	
 	// 가게 리뷰 평점
