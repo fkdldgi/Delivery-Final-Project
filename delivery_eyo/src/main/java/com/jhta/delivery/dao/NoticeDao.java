@@ -13,13 +13,20 @@ public class NoticeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NAMESPACE="mybatis.NoticeMapper";
-
+	
 	public int count(HashMap<String, Object>map) {
 		return sqlSession.selectOne(NAMESPACE+".count",map);
 	}
+	// 일반회원 공지리스트
 	public List<NoticeVo> noticeList(HashMap<String, Object> map) {
 		return sqlSession.selectList(NAMESPACE+".noticeList",map);
 	}
+	
+	// 기업회원 공지리스트
+	public List<NoticeVo> Owner_noticeList(HashMap<String, Object> map){
+		return sqlSession.selectList(NAMESPACE+".Owner_noticeList", map);
+	}
+	
 	public NoticeVo detail(int num) {
 		return sqlSession.selectOne(NAMESPACE+".detail",num);
 		

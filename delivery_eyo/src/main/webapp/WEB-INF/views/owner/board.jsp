@@ -6,6 +6,7 @@
 <script>
 
 </script>
+<!-- 맨위에 띄워지는 공지사항 nav -->
 <div>
     <div>
      	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">

@@ -31,6 +31,7 @@ public class NoticeController {
 			map.put("startRow", pu.getStartRow());
 			map.put("endRow", pu.getEndRow());
 			
+			// 일반회원 공지리스트
 			List<NoticeVo> list= service.noticeList(map);
 			model.addAttribute("startRow",pu.getStartRow());
 			model.addAttribute("endRow",pu.getEndRow());
