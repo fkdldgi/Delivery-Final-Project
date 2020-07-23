@@ -16,6 +16,6 @@ public class Order_MenuDao {
 	
 	//주문메뉴 입력 부분
 	public int insert(Order_MenuVo vo) {
-			return session.insert(NAMESPACE+"Order_Menu_insert", vo);
+			return session.insert(NAMESPACE+".Order_Menu_insert", vo);
 	}
 }

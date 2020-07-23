@@ -9,25 +9,46 @@
 		insert into ORDER_MAIN values(ORDER_MAIN_SEQ.nextval,sysdate,null,null,#{member_num},#{addr_num},#{addr_detail},1,'주문요청',1,#{owner_requests},#{rider_requests},#{total_price},0)
 	</insert>
 	
-	<!-- 주문메뉴 옵션   -->
-	<insert id="Order_Menu_Option_insert" parameterType="com.jhta.delivery.vo.Order_Menu_OptionVo">
-		insert into ORDER_MENU values(ORDER_MENU_SEQ.nextval,ORDER_MAIN_SEQ.CURRVAL,#{menu_num},#{count})
-	</insert>
-	
 	<!-- 주문메뉴  -->
 	<insert id="Order_Menu_insert" parameterType="com.jhta.delivery.vo.Order_MenuVo">
-		insert into ORDER_MENU_OPTION values(ORDER_MENU_OPTION.nextval,#{munu_option_num},ORDER_MENU_SEQ.CURRVAL)
+		insert into ORDER_MENU values(ORDER_MENU_SEQ.nextval,ORDER_MAIN_SEQ.CURRVAL,#{menu_num},#{order_price},#{count})
 	</insert>
-<!--/////////////////////////// //////////////////////-->	
 	
+	<!-- 주문메뉴 옵션   -->
+	<insert id="Order_Menu_Option_insert" parameterType="com.jhta.delivery.vo.Order_Menu_OptionVo">
+		insert into ORDER_MENU_OPTION values(ORDER_MENU_OPTION_SEQ.nextval,#{munu_option_num},ORDER_MENU_SEQ.CURRVAL)
+	</insert>
+	
+<!--/////////////////////////// //////////////////////-->	
+
 <!--/////////////// selectList 부분 //////////////////////-->	
 	<!-- 주문  -->
 	
-	
-	<!-- 주문메뉴 옵션   -->
-	
-	
 	<!-- 주문메뉴  -->
+		<!-- 메뉴 번호로 메뉴 가격 얻어오기 -->
+	<select id="getMenuPrice" parameterType="int" resultType="int">	
+		select price from MENU where num=#{num}
+	</select>
+	<!-- 주문메뉴 옵션   -->
+		<!-- 옵션 메뉴 번호로 옵션 가격 얻어오기 -->
+	<select id="getOptionPrice" parameterType="int" resultType="int">
+		select price from MENU_OPTION where num=#{num}
+	</select>
 	
+	<!-- 주문옵션 테이블의 주문 메뉴 번호 얻어오기-->
+	<select id="getOrderMenuNum" parameterType="int" resultType="int">
+		select order_menu_num from order_menu_option where num= #{num}
+	</select>
+	
+	<!-- 주문옵션 테이블의 주문 메뉴 메뉴번호 얻어오기(주문 트랜잭션 로직 처리에 사용) -->
+	<select id="getOrderMenuNumBy" parameterType="int" resultType="int">
+		select menu_num from MENU_OPTION where num=#{num}
+	</select>
+		
 <!--/////////////////////////// //////////////////////-->	
+
+
+<!-- ///////////////update 부분 ////////////////////// -->
+
+<!-- /////////////////////////////////////////////// -->
 </mapper>

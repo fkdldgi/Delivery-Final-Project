@@ -83,17 +83,17 @@
 					<h5 style="margin-top: 10px; margin-left: 10px;">주문내역</h5>
 				</div>
 				<div id="body" style="overflow: auto; width: 100%; height: 100%;">
-					<c:forEach var='orderList' items='${orderList }'>
+					<c:forEach var='orderList' items='${orderList }' varStatus="j">
 						<div class="card" style="width: 100%; border: 0px solid black;">
 							${orderList.menuVo.name }
 							<!-- 메뉴번호 보내기 -->
 							<input type="text" name="menuNum" value="${orderList.menuVo.num }" hidden class="data">
-							<p>옵션 : 
+							<p>옵션 :  
 							<c:forEach var="i" begin="1" end="${fn:length(orderList)-2 }" varStatus="status">
 								<c:set var="optionVo">optionVo${i}</c:set>
 								${orderList[optionVo].name}
 								<!-- 옵션번호 보내기(동적인 부분) -->
-								<input type="text" name="optionNum" value="${orderList[optionVo].num}" hidden class="data">
+								<input type="text" name="optionNum${j.index }" value="${orderList[optionVo].num}" hidden class="data">
 							</c:forEach>
 							<br>수량 : ${orderList.volume } 개
 							<!-- 수량 보내기 -->
@@ -187,9 +187,9 @@
 	                msg += '상점 거래ID : ' + rsp.merchant_uid;
 	                msg += '결제 금액 : ' + rsp.paid_amount;
 	                msg += '카드 승인번호 : ' + rsp.apply_num;
-	               	var form=$("<form></form>")
+	               	var form=$("<form></form>");
 	               	form.attr('method','post');
-	               	form.attr('action','${pageContext.request.contextPath }/member/order')
+	               	form.attr('action','${pageContext.request.contextPath }/member/order');
 	               	form.appendTo("body")
 	               	$('.data').each(function(){
 	               		$(this).appendTo(form);
