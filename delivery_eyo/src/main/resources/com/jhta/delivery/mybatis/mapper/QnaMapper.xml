@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 추가 (comments는 null) -->
 	<insert id="insert" parameterType="Qna">
-		insert into inquiry_board values(inquiry_board_seq.nextval,#{name},#{email},#{category},#{title},#{content},sysdate,#{adminNum},#{memberNum},null)
+		insert into inquiry_board values(inquiry_board_seq.nextval,#{name},#{email},#{category},#{title},#{content},sysdate,1,#{memberNum},null)
 	</insert>
 	<!-- 상세 -->
 	<select id="detail" parameterType="int" resultType="Qna">
@@ -27,7 +27,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 전체 페이지수 -->
 	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) cnt from inquiry_board
-		<include refid="search"/>
 	</select>
 	
 	<!-- 이전 -->
@@ -51,12 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rownum=1
 
 	</select>
-	<!--  검색 -->
-	<sql id="search">
-		<if test="field!=null and field!=''">
-			where ${field} like '%'||#{keyword}||'%'
-		</if>
-	</sql>
 	
 	
 </mapper>

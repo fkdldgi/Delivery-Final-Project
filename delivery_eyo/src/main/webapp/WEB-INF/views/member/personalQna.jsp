@@ -12,7 +12,7 @@
 <img class="d-block mx-auto mb-4" src="/delivery/resources/images/personalQna_logo.png" width="900" height="170">
 <table class="table table-bordered">
     <tbody>
-        <form action="personalQna.jsp" method="post">
+        <form action="personalQna.do" method="post">
             <tr>
             	<th>문의분류 </th>
             	
@@ -48,8 +48,8 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="button" value="등록" onclick="sendData()" class="pull-right"/>
-                    <input type="button" value="문의목록" class="pull-right"/>
+                    <input type="submit" value="등록" class="pull-right"/>
+                    <input type="button" value="문의목록" onclick="location.href='/delivery/member/QnaList?memberNum=${sessionScope.memberNum}"  class="pull-right"/>
                 </td>
             </tr>
         </form>

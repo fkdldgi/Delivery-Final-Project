@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,30 +31,21 @@
 	  </tbody>
 </table>
 <!-- 이전,다음 -->
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-    <c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+<div>
+	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
 		<c:choose>
-		<c:when test="${i==pu.pageNum}">
-      <a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Previous">
-        <span style="color:aqua"><<</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}">1</a></li>
-    <li class="page-item"><a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}">2</a></li>
-    </c:when>
-   	 <c:otherwise>
-      <a class="page-link" href="/delivery/member/QnaList?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Next">
-       <span style="color:gray">>></span>
-       		</c:otherwise>
+			<c:when test="${i==pu.pageNum}">
+				<a href="/delivery/member/QnaList?pageNum=${i}&memberNum=${sessionScope.memberNum}">
+				<span style="color:blue">${i }</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="/delivery/member/QnaList?pageNum=${i}&memberNum=${sessionScope.memberNum}">
+				<span style="color:gray">${i }</span>
+				</a>
+			</c:otherwise>
 		</c:choose>
 	</c:forEach>
-      </a>
-    </li>
-  </ul>
-</nav>
-<div>		
 </div>
 </div>
 </body>
