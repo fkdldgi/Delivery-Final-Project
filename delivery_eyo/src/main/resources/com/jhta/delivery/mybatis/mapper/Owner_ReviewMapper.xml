@@ -6,11 +6,24 @@
 
 	<!-- 가게리뷰 전체 & 리뷰단 일반회원 -->
 	<select id="ShopReview" parameterType="int" resultType="com.jhta.delivery.vo.Owner_ShopReviewVo">
-		select m.id,m.img,r.grade,r.content,r.regdate,
+		select m.id,m.img,r.grade,r.content,r.regdate,r.num,
 		nvl((select rm.save_filename from review_img rm where rm.num = r.review_img_num),0) save_filename,
 		nvl((select rm.img_path from review_img rm where rm.num = r.review_img_num),0) img_path
 		from review r, member m
 		where r.member_num = m.num and r.shop_num = #{shop_num}
 		order by r.regdate desc
 	</select>
+	
+	<!-- 기업회원 댓글 가져오기 -->
+	<select id="Owner_Review" parameterType="int" resultType="com.jhta.delivery.vo.Owner_ShopRereviewVo">
+		select r2.content ,r2.ref, r2.regdate
+		from review r1, review r2
+		where r1.num = r2.ref and r1.shop_num = #{num}
+	</select>
+	
+	<!-- 기업회원 댓글 넣기 -->
+	<insert id="insert_OwnerReview" parameterType="com.jhta.delivery.vo.Owner_ShopRereviewVo">
+		insert into review
+		values(REVIEW_SEQ.nextval,#{content},#{ref},1,0,0,sysdate,null,#{shop_num},null,#{owner_num})
+	</insert>
 </mapper>

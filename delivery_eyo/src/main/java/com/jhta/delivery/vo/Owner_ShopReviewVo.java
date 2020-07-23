@@ -1,5 +1,8 @@
 package com.jhta.delivery.vo;
 public class Owner_ShopReviewVo {
+	// 리뷰번호
+	private int num;
+	
 	// 가게에 리뷰를 단 회원아이디
 	private String id;
 	
@@ -23,8 +26,9 @@ public class Owner_ShopReviewVo {
 
 	public Owner_ShopReviewVo() {}
 
-	public Owner_ShopReviewVo(String id, String img, String grade, String content, String regdate,
+	public Owner_ShopReviewVo(int num, String id, String img, String grade, String content, String regdate,
 			String save_filename, String img_path) {
+		this.num = num;
 		this.id = id;
 		this.img = img;
 		this.grade = grade;
@@ -32,6 +36,14 @@ public class Owner_ShopReviewVo {
 		this.regdate = regdate;
 		this.save_filename = save_filename;
 		this.img_path = img_path;
+	}
+	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public String getId() {
