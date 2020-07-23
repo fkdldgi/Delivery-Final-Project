@@ -27,6 +27,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views/owner/footer.jsp"/>
 	</definition>
 	
+	<definition name=".owner.store.*" extends=".owner.store_manage_home">
+		<put-attribute name="store_content" value="/WEB-INF/views/owner/store/{1}.jsp"/>
+	</definition>
+	
 	<definition name=".owner.*" extends=".owner.main">
 		<put-attribute name="content" value="/WEB-INF/views/owner/{1}.jsp"/>
 	</definition>
@@ -35,8 +39,5 @@
 		<put-attribute name="content" value="/WEB-INF/views/member/{1}.jsp"/>
 	</definition>
 	
-	<definition name=".owner.store.*" extends=".owner.store_manage_home">
-		<put-attribute name="store_content" value="/WEB-INF/views/owner/store/{1}.jsp"/>
-	</definition>
 	
 </tiles-definitions>

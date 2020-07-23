@@ -21,16 +21,16 @@
 				<a class="nav-link" href="/delivery/owner/store_manage/advertisement?num=${vo.num }">광고관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">리뷰관리</a>
+				<a class="nav-link" href="/delivery/owner/store_manage/review?num=${vo.num }">리뷰관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">주문관리</a>
+				<a class="nav-link" href="/delivery/owner/store_manage/order?num=${vo.num }">주문관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">정산관리</a>
+				<a class="nav-link" href="/delivery/owner/store_manage/calculate?num=${vo.num }">정산관리</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">가게정보</a>
+				<a class="nav-link" href="/delivery/owner/store_manage/shop_info?num=${vo.num }">가게정보</a>
 			</li>
 	    </ul>
 	</div>
