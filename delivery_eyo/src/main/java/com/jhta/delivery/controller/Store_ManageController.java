@@ -61,6 +61,9 @@ public class Store_ManageController {
 			@RequestParam(value = "trash", required = false) List<String> trash) {
 		
 			System.out.println(id);
+			System.out.println("번호"+category_list_num);
+			System.out.println("이름"+menu_category_name);
+			System.out.println("category_num"+category_num);
 		// 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제 
 		if(trash_category != null) { 
 			for(String trash_category_string:trash_category) { 
@@ -80,17 +83,10 @@ public class Store_ManageController {
 		List<MenuVo> MenuVoList = new ArrayList<>();
 		List<MenuCategoryVo> menuCateogryList = new ArrayList<>();
 
-		int tmp = 0;//
-		int j = 0;
 		for (int i = 0; i < min_price.size(); i++) {
 			MenuCategoryVo vo = new MenuCategoryVo();
 			int category_numVo = Integer.parseInt(category_list_num.get(i));
-			String menu_category_nameVo = menu_category_name.get(j);
-			if (tmp != category_numVo) {
-				tmp = category_numVo;
-			} else {
-				j++;
-			}
+			String menu_category_nameVo = menu_category_name.get(category_num.indexOf(category_list_num.get(i)));
 			vo.setNum(category_numVo);
 			vo.setName(menu_category_nameVo);
 			menuCateogryList.add(vo);
