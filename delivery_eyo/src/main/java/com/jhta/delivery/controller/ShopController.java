@@ -119,12 +119,12 @@ public class ShopController {
 					address_detail,shop_category,min_price,payment_option,info,review_info,
 					personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
 			
-			//트랜잭션 저장
+			//DB저장 트랜잭션처리(가게,주소)
 			shopService.insert(shopVo, addrVo);
-			return "success";
+			return ".owner.success";
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());
-			return "error";
+			return ".owner.error";
 		}
 	}
 }
