@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.Owner_ReviewMapper">
+
+	<!-- 가게리뷰 전체 & 리뷰단 일반회원 -->
+	<select id="ShopReview" parameterType="int" resultType="com.jhta.delivery.vo.Owner_ShopReviewVo">
+		select m.id,m.img,r.grade,r.content,r.regdate,
+		nvl((select rm.save_filename from review_img rm where rm.num = r.review_img_num),0) save_filename,
+		nvl((select rm.img_path from review_img rm where rm.num = r.review_img_num),0) img_path
+		from review r, member m
+		where r.member_num = m.num and r.shop_num = #{shop_num}
+		order by r.regdate desc
+	</select>
+</mapper>
