@@ -1,7 +1,5 @@
 package com.jhta.delivery.vo;
 
-import java.util.List;
-
 public class MenuCategoryVo {
 	// 메뉴카테고리(대표메뉴,세트메뉴,치킨메뉴 등)
 

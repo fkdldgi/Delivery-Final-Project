@@ -8,6 +8,23 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<annotation-driven />
+	
+	<!-- 파일업로드 -->
+	<!-- spring이  multipartResolver라는 이름을 자동으로 찾음 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대업로드 사이즈 설정(바이트단위 - 5MB) -->
+		<beans:property name="maxUploadSize" value="5242880"/>
+	</beans:bean>
+
+	<!-- 파일다운로드 
+		DownloadController의 return과 id가 같음
+	-->
+	<beans:bean id="filedownloadView" class="com.jhta.delivery.view.DownloadView"/>
+	
+	<!-- 뷰이름과 동일한 뷰로 응답하는 뷰리절버 등록 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
 
 	<resources mapping="/resources/**" location="/resources/" />
 	
