@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name=".owner.main" template="/WEB-INF/views/owner/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/owner/header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/owner/home.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/owner/footer.jsp"/>	
+	</definition>
+	
+	<definition name=".member.main" template="/WEB-INF/views/member/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/member/header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/member/home.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/member/footer.jsp"/>	
+	</definition>
+	
+	<definition name=".join" template="/WEB-INF/views/owner/layout_join.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/owner/header.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/owner/join.jsp"/>
+	</definition>
+	
+	<definition name=".owner.store_manage_home" template="/WEB-INF/views/owner/store/store_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/owner/header.jsp"/>
+		<put-attribute name="store_header" value="/WEB-INF/views/owner/store/store_header.jsp"/>
+		<put-attribute name="store_content" value="/WEB-INF/views/owner/store/store_manage_content.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/owner/footer.jsp"/>
+	</definition>
+	
+	<definition name=".owner.store.*" extends=".owner.store_manage_home">
+		<put-attribute name="store_content" value="/WEB-INF/views/owner/store/{1}.jsp"/>
+	</definition>
+	
+	<definition name=".owner.*" extends=".owner.main">
+		<put-attribute name="content" value="/WEB-INF/views/owner/{1}.jsp"/>
+	</definition>
+	
+	<definition name=".member.*" extends=".member.main">
+		<put-attribute name="content" value="/WEB-INF/views/member/{1}.jsp"/>
+	</definition>
+	
+	
+</tiles-definitions>
