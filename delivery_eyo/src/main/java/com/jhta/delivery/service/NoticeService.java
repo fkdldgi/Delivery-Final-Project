@@ -17,21 +17,44 @@ public class NoticeService {
 		return dao.count(map);
 		
 	}
+	// 일반회원 전체공지
 	public List<NoticeVo> noticeList(HashMap<String, Object> map) {
 		return dao.noticeList(map);
 		
 	}
+	
+	// 기업회원 전체공지
+	public List<NoticeVo> Owner_noticeList(HashMap<String, Object> map){
+		return dao.Owner_noticeList(map);
+	}
+	
+	// 일반회원 상세공지
 	public NoticeVo detail(int num) {
-		return dao.detail(num);
-		
+		return dao.detail(num);		
 	}
+	
+	// 기업회원 상세공지
+	public NoticeVo Owner_noticeDetail(int num) {
+		return dao.Owner_noticeDetail(num);
+	}
+	
+	// 일반회원 다음공지
 	public NoticeVo next(int num) {
-		return dao.next(num);
-		
+		return dao.next(num);		
 	}
+	
+	// 기업회원 다음공지
+	public NoticeVo Owner_next(int num) {
+		return dao.Owner_next(num);
+	}
+	
+	// 일반회원 이전공지
 	public NoticeVo pre(int num) {
-		return dao.pre(num);
-		
+		return dao.pre(num);		
 	}
 
+	// 기업회원 이전공지
+	public NoticeVo Owner_prev(int num) {
+		return dao.Owner_prev(num);
+	}
 }
