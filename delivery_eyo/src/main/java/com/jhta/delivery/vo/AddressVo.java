@@ -1,32 +1,33 @@
 package com.jhta.delivery.vo;
 
+//null값이 들어오면 자바에서 오류를 잡아 진행이 되지 않아 null값이 들어가지 않게 수정
 public class AddressVo {
-	private String buildingCode;
-	private String zonecode;
-	private String address;
-	private String addressEnglish;
-	private String addressType;
-	private String userSelectedType;
-	private String userLanguageType;
-	private String roadAddress;
-	private String roadAddressEnglish;
-	private String jibunAddress;
-	private String jibunAddressEnglish;
-	private String buildingName;
-	private String apartment;
-	private String sido;
-	private String sigungu;
-	private String sigunguCode;
-	private String roadnameCode;
-	private String bcode;
-	private String roadname;
-	private String bname;
-	private String bname1;
-	private String bname2;
-	private String hname;
-	private String query;
-	private double addr_x;
-	private double addr_y;
+	private String buildingCode="";
+	private String zonecode="";
+	private String address="";
+	private String addressEnglish="";
+	private String addressType="";
+	private String userSelectedType="";
+	private String userLanguageType="";
+	private String roadAddress="";
+	private String roadAddressEnglish="";
+	private String jibunAddress="";
+	private String jibunAddressEnglish="";
+	private String buildingName="";
+	private String apartment="";
+	private String sido="";
+	private String sigungu="";
+	private String sigunguCode="";
+	private String roadnameCode="";
+	private String bcode="";
+	private String roadname="";
+	private String bname="";
+	private String bname1="";
+	private String bname2="";
+	private String hname="";
+	private String query="";
+	private double addr_x=0;
+	private double addr_y=0;
 	
 	public AddressVo() {}
 
@@ -36,32 +37,32 @@ public class AddressVo {
 			String sigungu, String sigunguCode, String roadnameCode, String bcode, String roadname, String bname,
 			String bname1, String bname2, String hname, String query, double addr_x, double addr_y) {
 		super();
-		this.buildingCode = buildingCode;
-		this.zonecode = zonecode;
-		this.address = address;
-		this.addressEnglish = addressEnglish;
-		this.addressType = addressType;
-		this.userSelectedType = userSelectedType;
-		this.userLanguageType = userLanguageType;
-		this.roadAddress = roadAddress;
-		this.roadAddressEnglish = roadAddressEnglish;
-		this.jibunAddress = jibunAddress;
-		this.jibunAddressEnglish = jibunAddressEnglish;
-		this.buildingName = buildingName;
-		this.apartment = apartment;
-		this.sido = sido;
-		this.sigungu = sigungu;
-		this.sigunguCode = sigunguCode;
-		this.roadnameCode = roadnameCode;
-		this.bcode = bcode;
-		this.roadname = roadname;
-		this.bname = bname;
-		this.bname1 = bname1;
-		this.bname2 = bname2;
-		this.hname = hname;
-		this.query = query;
-		this.addr_x = addr_x;
-		this.addr_y = addr_y;
+		if(buildingCode!=null)	this.buildingCode = buildingCode;
+		if(zonecode!=null) this.zonecode = zonecode;
+		if(address!=null) this.address = address;
+		if(addressEnglish!=null) this.addressEnglish = addressEnglish;
+		if(addressType!=null) this.addressType = addressType;
+		if(userSelectedType!=null) this.userSelectedType = userSelectedType;
+		if(userLanguageType!=null) this.userLanguageType = userLanguageType;
+		if(roadAddress!=null) this.roadAddress = roadAddress;
+		if(roadAddressEnglish!=null) this.roadAddressEnglish = roadAddressEnglish;
+		if(jibunAddress!=null) this.jibunAddress = jibunAddress;
+		if(jibunAddressEnglish!=null) this.jibunAddressEnglish = jibunAddressEnglish;
+		if(buildingName!=null) this.buildingName = buildingName;
+		if(apartment!=null) this.apartment = apartment;
+		if(sido!=null) this.sido = sido;
+		if(sigungu!=null) this.sigungu = sigungu;
+		if(sigunguCode!=null) this.sigunguCode = sigunguCode;
+		if(roadnameCode!=null) this.roadnameCode = roadnameCode;
+		if(bcode!=null) this.bcode = bcode;
+		if(roadname!=null) this.roadname = roadname;
+		if(bname!=null) this.bname = bname;
+		if(bname1!=null) this.bname1 = bname1;
+		if(bname2!=null) this.bname2 = bname2;
+		if(hname!=null) this.hname = hname;
+		if(query!=null) this.query = query;
+		if(addr_x!=0) this.addr_x = addr_x;
+		if(addr_y!=0) this.addr_y = addr_y;
 	}
 
 	public String getBuildingCode() {

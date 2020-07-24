@@ -17,6 +17,7 @@ import com.jhta.delivery.service.Order_MainService;
 import com.jhta.delivery.service.Order_MenuService;
 import com.jhta.delivery.service.Order_Menu_OptionService;
 import com.jhta.delivery.service.StoreService;
+import com.jhta.delivery.vo.AddressVo;
 import com.jhta.delivery.vo.MemberVo;
 import com.jhta.delivery.vo.Order_MainVo;
 import com.jhta.delivery.vo.Order_MenuVo;
@@ -94,6 +95,8 @@ public class MemberOrderController {
 //		System.out.println(req.getParameter("query"));
 //		System.out.println(req.getParameter("addr_x"));
 //		System.out.println(req.getParameter("addr_y"));
+		
+		
 //		
 //		System.out.println(req.getParameter("shopNum"));
 //		System.out.println(req.getParameter("memberNum"));
@@ -107,35 +110,6 @@ public class MemberOrderController {
 //		System.out.println(req.getParameter("volume").trim());
 //		System.out.println(req.getParameter("lastPrice"));
 		
-		
-
-// 
-//		Order_MenuVo orderMenuvo = new Order_MenuVo(0, 0, Integer.parseInt(req.getParameter("menuNum")), Integer.parseInt(req.getParameter("lastPrice")), Integer.parseInt(req.getParameter("volume").trim()));
-//		orderMenuService.insert(orderMenuvo);
-//
-//		Order_Menu_OptionVo orderOptionvo = new Order_Menu_OptionVo(0,Integer.parseInt(req.getParameter("optionNum")) , 0);
-//		orderOptionService.insert(orderOptionvo);
-		
-//		Order_MainVo orderMainvo = new Order_MainVo(0, null, null, null, Integer.parseInt(req.getParameter("memberNum")),"1234", req.getParameter("addr_detail"), 0, null, 0, req.getParameter("owner_request"), req.getParameter("rider_request"), Integer.parseInt(req.getParameter("lastPrice")), 0);
-//		orderMainService.insert(orderMainvo);
-//		
-
-		
-		
-//		for(int i=0; i<req.getParameterValues("menuNum").length; i++) {
-//			menuNum = Integer.parseInt(req.getParameterValues("menuNum")[i]);
-//			Order_MenuVo orderMenuvo = new Order_MenuVo(0, 0, Integer.parseInt(req.getParameter("menuNum")), 
-//					Integer.parseInt(req.getParameter("lastPrice")), 
-//					Integer.parseInt(req.getParameter("volume").trim()));
-//			orderMenuService.insert(orderMenuvo);
-//			if(req.getParameter("optionNum0") != null) {
-//				for(int j=0; j<req.getParameterValues("optionNum"+j).length; j++) {
-//					optionNum = Integer.parseInt(req.getParameterValues("optionNum"+j)[j]);
-//				}
-//			}
-//			
-//		}
-		
 		System.out.println("메뉴 번호 크기 : " + req.getParameterValues("menuNum").length);
 //		System.out.println("옵션 번호 크기 : " + req.getParameterValues("optionNum").length);
 		System.out.println("메뉴 번호 : " + req.getParameterValues("menuNum")[0]);
@@ -146,44 +120,79 @@ public class MemberOrderController {
 		int vol;
 		int lastPrice;
 		int price = 0;
+		
+		System.out.println("지번 어드레스 : " + req.getParameter("jibunAddress"));
+		
+		AddressVo addVo = new AddressVo(
+				req.getParameter("buildingCode"),
+				req.getParameter("zonecode"),
+				req.getParameter("address"), 
+				req.getParameter("addressEnglish"),
+				req.getParameter("addressType"),
+				req.getParameter("userSelectedType"),
+				req.getParameter("userLanguageType"),
+				req.getParameter("roadAddress"),
+				req.getParameter("roadAddressEnglish"),
+				req.getParameter("jibunAddress"),
+				req.getParameter("jibunAddressEnglish"),
+				req.getParameter("buildingName"),
+				req.getParameter("apartment"),
+				req.getParameter("sido"),
+				req.getParameter("sigungu"),
+				req.getParameter("sigunguCode"),
+				req.getParameter("roadnameCode"),
+				req.getParameter("bcode"),
+				req.getParameter("roadname"),
+				req.getParameter("bname"),
+				req.getParameter("bname1"),
+				req.getParameter("bname2"),
+				req.getParameter("hname"),
+				req.getParameter("query"),
+				Double.parseDouble(req.getParameter("addr_x")),
+				Double.parseDouble(req.getParameter("addr_y"))
+				);
+		
 		ArrayList<Order_MenuVo> menuList = new ArrayList<Order_MenuVo>();
 		ArrayList<Order_Menu_OptionVo> optionList = new ArrayList<Order_Menu_OptionVo>();
-		Order_MainVo orderMainvo = new Order_MainVo(0, null, null, null, Integer.parseInt(req.getParameter("memberNum")),
-													"1234", 
-													req.getParameter("addr_detail"),
-													0,
-													null, 
-													0, 
-													req.getParameter("owner_request"),
-													req.getParameter("rider_request"),
-													Integer.parseInt(req.getParameter("lastPrice")),
-													0);
+		Order_MainVo orderMainvo = new Order_MainVo(0, //pk값
+													null, null, null, //주문시간, 도착예정시간, 도착시간
+													Integer.parseInt(req.getParameter("memberNum")), //주문하는 고객의 pk값
+													"1234", //참조하는 고객의 주소pk값
+													req.getParameter("addr_detail"), //고객이 입력하는 상세주소
+													0, //배달팁번호 (일단 고정값으로 넣음)
+													null, //주문상태
+													0, //라이더 번호(일단 고정값으로 넣음)
+													req.getParameter("owner_request"), //사장님 요청사항
+													req.getParameter("rider_request"), //라이더 요청사항
+													Integer.parseInt(req.getParameter("lastPrice")), //총 주문금액
+													0 //분할결제인원 (미구현)
+													);
 		
 		for(int i=0; i<req.getParameterValues("menuNum").length; i++) {
 			vol = Integer.parseInt(req.getParameterValues("volume")[i].trim());
 			lastPrice = Integer.parseInt(req.getParameter("lastPrice"));
 			price = (lastPrice/vol);
-			Order_MenuVo orderMenuvo = new Order_MenuVo(0,
-														0,
-														Integer.parseInt(req.getParameterValues("menuNum")[i]), 
-														price, 
-														vol
+			Order_MenuVo orderMenuvo = new Order_MenuVo(0, //pk값
+														0, //주문번호 참조(시퀀스로 참조)
+														Integer.parseInt(req.getParameterValues("menuNum")[i]), //메뉴번호 참조 
+														price, //주문금액
+														vol //수량
 														);
 			menuList.add(orderMenuvo);
 			//해당 주문에 대한 옵션 메뉴가 존재할 때
 			if(req.getParameterValues("optionNum"+i) != null) {
 				for(int j=0; j<req.getParameterValues("optionNum"+i).length; j++) {
 					Order_Menu_OptionVo orderOptionvo = new Order_Menu_OptionVo(
-																				0,
-																				Integer.parseInt(req.getParameterValues("optionNum"+i)[j]),
-																				Integer.parseInt(req.getParameterValues("menuNum")[i])
+																				0,//pk값
+																				Integer.parseInt(req.getParameterValues("optionNum"+i)[j]), //옵션번호 참조
+																				Integer.parseInt(req.getParameterValues("menuNum")[i]) //메뉴번호 참조
 																				);
 					optionList.add(orderOptionvo);
 				}
 			}
 		}
 		try {
-			orderMainService.orderInsert(orderMainvo, menuList, optionList);
+			orderMainService.orderInsert(orderMainvo, menuList, optionList, addVo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -6,4 +6,8 @@
 	<insert id="insert" parameterType="address">
 		insert into address values(#{buildingCode},#{zonecode},#{address},#{addressEnglish},#{addressType},#{userSelectedType},#{userLanguageType},#{roadAddress},#{roadAddressEnglish},#{jibunAddress},#{jibunAddressEnglish},#{buildingName},#{apartment},#{sido},#{sigungu},#{sigunguCode},#{roadnameCode},#{bcode},#{roadname},#{bname},#{bname1},#{bname2},#{hname},#{query},#{addr_x},#{addr_y})
 	</insert>
+	
+	<select id="selectByBuildingcode" parameterType="String" resultType="com.jhta.delivery.vo.AddressVo">
+		select * from address where buildingcode = #{buildingCode}
+	</select>
 </mapper>
