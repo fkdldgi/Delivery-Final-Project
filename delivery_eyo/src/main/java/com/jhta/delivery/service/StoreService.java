@@ -28,4 +28,9 @@ public class StoreService {
 	public List<MenuOptionVo> optionInfo(int num){
 		return dao.optionInfo(num);
 	}
+	
+	//옵션메뉴번호로 옵션메뉴 정보 가져오기
+	public MenuOptionVo optionInfoByOption(int num) {
+		return dao.optionInfoByOption(num);
+	}
 }
