@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.Owner_OrderMapper">
+	
+	<!-- 가게에서 주문받은 목록 주문요청인경우만 -->
+	<select id="Owner_OrderList" parameterType="int" resultType="com.jhta.delivery.vo.Owner_OrderVo">
+		select distinct om.num main_num,om.start_time start_time, om.end_ex_time end_ex_time, om.status status, om.owner_requests owner_requests,om.total_price total_price,orm.order_price order_price, orm.count count,
+        	mu.name menu_name, mu.price price, mop.name menu_option_name, om.addr_num addr_num,
+        	om.addr_detail addr_detail
+		from order_menu orm, order_main om,order_menu_option mo, menu mu,menu_option mop
+				where om.num=orm.order_num and mo.order_menu_num = orm.num and
+        				orm.menu_num in 
+        					(select num from menu 
+            					where menu_category_num in
+                					(select num from menu_category 
+                    					where shop_num=(select num from shop where num=#{num}))) 
+        		and mu.num= orm.menu_num and mop.menu_num=mu.num and om.status='주문요청'
+        		order by om.start_time
+	</select>
+	
+	<!-- 가게에서 주문 승인한 경우 -->
+	<select id="Owner_SuccessList" parameterType="int" resultType="com.jhta.delivery.vo.Owner_OrderVo">
+		select distinct om.num main_num,om.start_time start_time, om.end_ex_time end_ex_time, om.status status, om.owner_requests owner_requests,om.total_price total_price,orm.order_price order_price, orm.count count,
+        	mu.name menu_name, mu.price price, mop.name menu_option_name
+		from order_menu orm, order_main om,order_menu_option mo, menu mu,menu_option mop
+				where om.num=orm.order_num and mo.order_menu_num = orm.num and
+        				orm.menu_num in 
+        					(select num from menu 
+            					where menu_category_num in
+                					(select num from menu_category 
+                    					where shop_num=(select num from shop where num=#{num}))) 
+        		and mu.num= orm.menu_num and mop.menu_num=mu.num and om.status='승인'
+        		order by om.start_time
+	</select>
+</mapper>
