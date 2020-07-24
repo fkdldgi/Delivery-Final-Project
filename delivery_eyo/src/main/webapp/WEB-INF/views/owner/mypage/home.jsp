@@ -39,32 +39,25 @@
 <div class="container mt-4">
 	<h1>내 정보 관리</h1>
 	<div class="row">
-		<div class="card col-3 shadow my-4 mr-4" style="width: 18rem;">
+		<div class="card col-xs-4 shadow my-4 mr-4 p-3" style="width: 18rem;">
 		  <div class="card-body">
-		    <h4 class="card-title">가게운영</h4>
-		    <h6 class="card-subtitle mb-2 text-muted">사장님의 가게를 확인할 수 있습니다.<br>마지막 비밀번호 변경일:?일전</h6>
-		    <a href="#" class="btn btn-outline-secondary stretched-link">변경하기</a>
+		    <h4 class="card-title">가게운영</h4><br>
+		    <small class="card-subtitle mb-2 text-muted">사장님의 가게를 확인할 수 있습니다.</small><br><br>
+		    <a href="${pageContext.request.contextPath }/owner/store_manage?id=${sessionScope.ownerId }" class="btn btn-outline-secondary stretched-link">관리하기</a>
 		  </div>
 		</div>
-		<div class="card col-3 shadow my-4 mr-4" style="width: 18rem;">
+		<div class="card col-xs-4 shadow my-4 mr-4 p-3" style="width: 18rem;">
 		  <div class="card-body">
-		    <h4 class="card-title">계정정보</h4>
-		    <h6 class="card-subtitle mb-2 text-muted">비밀번호를 변경하실 수 있습니다.<br>마지막 비밀번호 변경일:?일전</h6>
-		    <a href="#" class="btn btn-outline-secondary stretched-link">변경하기</a>
+		    <h4 class="card-title">계정정보</h4><br>
+		    <small class="card-subtitle mb-2 text-muted">비밀번호를 변경하실 수 있습니다.</small><br><br>
+		    <a href="${pageContext.request.contextPath }/owner/pwdChange" class="btn btn-outline-secondary stretched-link">변경하기</a>
 		  </div>
 		</div>
-		<div class="card col-3 shadow my-4 mr-4" style="width: 18rem;">
+		<div class="card col-xs-4 shadow my-4 mr-4 p-3" style="width: 18rem;">
 		  <div class="card-body">
-		    <h4 class="card-title">회원정보</h4>
-		    <p class="card-subtitle mb-2 text-muted">주소,이메일 등을 변경하실 수 있습니다.<br>마지막 비밀번호 변경일:?일전</p>
-		    <a href="#" class="btn btn-outline-secondary stretched-link">변경하기</a>
-		  </div>
-		</div>
-		<div class="card col-3 shadow my-4 mr-4" style="width: 18rem;">
-		  <div class="card-body">
-		    <h4 class="card-title">Card title</h4>
-		    <h6 class="card-subtitle mb-2 text-muted">비밀번호를 변경하실 수 있습니다.<br>마지막 비밀번호 변경일:?일전</h6>
-		    <a href="#" class="btn btn-outline-secondary stretched-link">변경하기</a>
+		    <h4 class="card-title">회원정보</h4><br>
+		    <small class="card-subtitle mb-2 text-muted">주소,이메일 등을 변경하실 수 있습니다.</small><br><br>
+		    <a href="${pageContext.request.contextPath }/owner/owner_update?id=${ownerId}" class="btn btn-outline-secondary stretched-link">변경하기</a>
 		  </div>
 		</div>
 	</div>
