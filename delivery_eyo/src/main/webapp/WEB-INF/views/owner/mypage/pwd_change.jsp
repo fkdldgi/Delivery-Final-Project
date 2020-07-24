@@ -23,10 +23,7 @@ input {
 #joinForm .help-block {
 	display: none;
 }
-/* glyphicon 을 일단 보이지 않게 설정 */
-#joinForm .glyphicon {
-	display: none;
-}
+
 </style>
 </head>
 <body>
@@ -36,7 +33,9 @@ input {
 				<img id="store_img" class="nav-link" src="/delivery/resources/images/logo.PNG">
 			</div>
 		</div>
+		<h2>계정정보</h2><br>
 		<form action="${pageContext.request.contextPath }/owner/pwdChange" method="post" id="joinForm" onsubmit="return submitAction();">
+			<input type="hidden" name="id" value="${ownerId }">
 			<div class="form-group has-feedback">
 				<label class="control-label" for="pwd">현재 비밀번호</label> 
 				<input class="form-control" type="password" id="pwd" /> 
@@ -55,7 +54,7 @@ input {
 				<span id="rePwdErr" class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해주세요.</span> 
 			</div>
 			<div class="row justify-content-end">
-				<button class="col-md-1 btn btn-outline-secondary" type="reset">취소</button>
+				<button class="col-md-1 btn btn-outline-secondary" type="reset" onclick="history.go(-1)">취소</button>
 				<button class="col-md-1 btn btn-outline-primary" type="submit">가입</button>
 			</div>
 		</form>

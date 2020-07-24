@@ -21,4 +21,7 @@
 		select *
 		from shop where num=#{num}
 	</select>
+	<update id="pwd_update" parameterType="hashmap">
+		update owner set pwd=#{pwd} where id=#{id}
+	</update>
 </mapper>

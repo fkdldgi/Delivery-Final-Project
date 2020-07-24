@@ -57,7 +57,7 @@
 		  <div class="card-body">
 		    <h4 class="card-title">회원정보</h4><br>
 		    <small class="card-subtitle mb-2 text-muted">주소,이메일 등을 변경하실 수 있습니다.</small><br><br>
-		    <a href="#" class="btn btn-outline-secondary stretched-link">변경하기</a>
+		    <a href="${pageContext.request.contextPath }/owner/owner_update?id=${ownerId}" class="btn btn-outline-secondary stretched-link">변경하기</a>
 		  </div>
 		</div>
 	</div>
