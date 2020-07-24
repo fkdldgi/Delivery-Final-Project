@@ -18,7 +18,7 @@
 				<p> 전화번호 : ${list.reg_num }</p>
 				<p>리뷰 수 : 120 | 별점  : 4.2</p>
 				<p>가게번호 :  ${list.num}</p>
-				<a href="/delivery/member/storeDetail?num=${list.num }" class="stretched-link"></a>
+				<a href="/delivery/member/storeDetail?num=${list.num }&owner_num=${list.owner_num }&memberNum=${sessionScope.memberNum }" class="stretched-link"></a>
 			</div>
 		</div>
 	</c:forEach>
@@ -51,7 +51,7 @@
 								"<p>전화번호 : " + list.reg_num + "</p>" +
 								"<p>리뷰 수 : 120 | 별점  : 4.2</p> " +	
 								"<p>가게번호 : " + list.num + "</p> " +
-								"<a href='/delivery/member/storeDetail?num=" + list.num +"' class='stretched-link'></a>" +
+								"<a href='/delivery/member/storeDetail?num=" + list.num +"&owner_num=" + list.owner_num +"&memberNum=${sessionScope.memberNum}' class='stretched-link'></a>" +
 							"</div>" +
 						"</div>";
 							$("#storeWrap").append(str);
