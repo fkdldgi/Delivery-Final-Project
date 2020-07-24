@@ -15,4 +15,8 @@ public class AddressDao {
 	public int insert(AddressVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
+	
+	public AddressVo selectByBuildingcode(String buildingCode) {
+		return session.selectOne(NAMESPACE+".selectByBuildingcode", buildingCode);
+	}
 }

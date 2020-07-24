@@ -24,7 +24,6 @@ public class MemberVo {
 	public MemberVo(int num, String id, String pwd, String name, String email, String tel, int status, String img,
 			String building_nanagement_number, String address_detail, Date regdate, int grade, String gender,
 			String birth) {
-		super();
 		this.num = num;
 		this.id = id;
 		this.pwd = pwd;
@@ -40,8 +39,8 @@ public class MemberVo {
 		this.gender = gender;
 		this.birth = birth;
 	}
+
 	public MemberVo() {
-		super();
 	}
 	public int getNum() {
 		return num;

@@ -55,8 +55,40 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 				</c:forEach>
 			</div>
 		</div>
-		<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-			aria-labelledby="nav-profile-tab">리뷰 숨기기2</div>
+		<!-- 리뷰 넣는 부분 -->
+		<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+			<c:forEach items="${shopReviewList }" var="reviewList">
+				<p>---------------------------</p>
+				<p>리뷰 번호 : ${reviewList.num }</p>
+				<p>리뷰 내용 : ${reviewList.content }</p>
+				<p>그룹 번호 : ${reviewList.ref }</p>
+				<p>레벨 번호 : ${reviewList.lev }</p>
+				<p>리뷰 점수 :${reviewList.grade }</p>
+				<p>리뷰 작성일 : ${reviewList.regdate }</p>
+				<p>리뷰 이미지 : ${reviewList.review_img_num }</p>
+				<p>가게 번호 : ${reviewList.shop_num }</p>
+				<p>회원 번호 : ${reviewList.member_num }</p>
+				<p>사장 번호 : ${reviewList.owner_num }</p>
+				<c:forEach items="${reviewImg }" var="img">
+					<c:if test="${reviewList.review_img_num } == ${img.num }">
+						<p>이미지 번호 : ${img.num }</p>
+						<p>이미지 경로 : ${img.img_path }</p>
+						<p>이미지 원본파일 이름 : ${img.original_filename }</p>
+						<p>이미지 저장파일 이름 : ${img.save_filename }</p>
+					</c:if>
+				</c:forEach>
+				<p>---------------------------</p>
+			</c:forEach>
+<%-- 			<c:forEach items="${reviewImg }" var="img"> --%>
+<!-- 				<p>--------------------</p> -->
+<%-- 				<p>이미지 번호 : ${img.num }</p> --%>
+<%-- 				<p>이미지 경로 : ${img.img_path }</p> --%>
+<%-- 				<p>이미지 원본파일 이름 : ${img.original_filename }</p> --%>
+<%-- 				<p>이미지 저장파일 이름 : ${img.save_filename }</p> --%>
+<!-- 				<p>--------------------</p> -->
+<%-- 			</c:forEach> --%>
+		</div>
+		<!-- 가게정보 넣는 부분 -->
 		<div class="tab-pane fade" id="nav-contact" role="tabpanel"
 			aria-labelledby="nav-contact-tab">가게정보 숨기기3</div>
 	</div>

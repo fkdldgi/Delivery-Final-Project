@@ -17,19 +17,24 @@ public class NoticeVo {
 
     // 관리자번호 
     private int adminNum;
+   //구분 일반0, 사장1
+    private int division;
     
     public NoticeVo() {
     	
     }
     
-	public NoticeVo(int num, String title, String content, Date regdate, int adminNum) {
+
+	public NoticeVo(int num, String title, String content, Date regdate, int adminNum, int division) {
 		super();
 		this.num = num;
 		this.title = title;
 		this.content = content;
 		this.regdate = regdate;
 		this.adminNum = adminNum;
+		this.division = division;
 	}
+
 
 	public int getNum() {
 		return num;
@@ -70,5 +75,14 @@ public class NoticeVo {
 	public void setAdminNum(int adminNum) {
 		this.adminNum = adminNum;
 	}
+
+	public int getDivision() {
+		return division;
+	}
+
+	public void setDivision(int division) {
+		this.division = division;
+	}
     
+	
 }

@@ -29,7 +29,6 @@ public class MemberService {
 		return dao.idChk(id);
 	}
 	
-	
 	//가게목록 리스트 받아오기
 	public List<ShopVo> shopList(HashMap<String, Object> map){
 		return dao.shopList(map);
@@ -39,4 +38,13 @@ public class MemberService {
 	public ShopVo storeInfo(int num) {
 		return dao.storeInfo(num);
 	}
+	//로그인된 회원 정보 받아오기
+	public MemberVo memberInfo(int num) {
+		return dao.memberInfo(num);
+	}
+	public int update(HashMap<String, Object> map) {
+		return dao.update(map);
+	}
+
+	
 }
