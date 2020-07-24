@@ -34,11 +34,11 @@ public class Order_MainService {
 	//주문 - 주문 메뉴 - 주문 메뉴 옵션 트랜잭션 처리(최초 실행)
 	@Transactional
 	public int orderInsert(Order_MainVo vo1, ArrayList<Order_MenuVo> menuList, ArrayList<Order_Menu_OptionVo> optionList, AddressVo addVo) {
-		orderMinDao.insert(vo1);
 		AddressVo avo=addDao.selectByBuildingcode(addVo.getBuildingCode());
 		if(avo == null) {
 			addDao.insert(addVo);
 		}
+		orderMinDao.insert(vo1);
 		for(int i=0; i<menuList.size(); i++) {
 			orderMenuDao.insert(menuList.get(i));
 			if(optionList != null) {
