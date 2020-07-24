@@ -59,25 +59,23 @@ a {
 	</nav>
 </div>
 <div class="container p-3 my-5 border">
-	<form action="${pageContext.request.contextPath}/owner/mypage" method="POST" onsubmit="return pwdChk()">
+	<form action="${pageContext.request.contextPath}/owner/mypage" method="POST" onsubmit="return submitAction()">
 	  <div class="form-group">
 	    <label class="font-weight-bold">비밀번호 재확인</label>
 	    <small id="emailHelp" class="form-text text-muted">회원님의 개인정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</small><br>
 	    <label for="exampleInputPassword1" class="font-weight-bold">Password</label>
 	    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요.">
 	    <span id="pwdErr" class="help-block">8글자 이상 입력하세요.</span>
-	    <span class="glyphicon glyphicon-ok form-control-feedback"></span>
 	    <span id="pwdErr2" class="help-block">비밀번호를 다시 확인해주세요.</span>
-	    <span class="glyphicon2 glyphicon-ok form-control-feedback"></span>
 	    <a href="" class="pwfind">비밀번호 찾기</a>
 	  </div>
 	  <button class="col-md-1 btn btn-outline-primary" type="submit">확인</button>
 	</form>
 </div>
 <script>
-//비밀번호 찾기
-function pwdChk(){
-	var pwd="<%=session.getAttribute("ownerPwd") %>";
+//비밀번호 재확인 후 form 전송
+function submitAction(){
+	var pwd="<%=request.getAttribute("ownerPwd") %>";
 	if(pwd==$("#pwd").val()){
 		$("#pwdErr2").hide();
 		return true;
@@ -95,23 +93,10 @@ $("#pwd").keyup(function() {
 	if (reg.test(pwd)) {//정규표현식을 통과 한다면
 		$("#pwdErr2").hide();
 		$("#pwdErr").hide();
-		successState("#pwd");
 	}else {//정규표현식을 통과하지 못하면
 		$("#pwdErr2").hide();
 		$("#pwdErr").show();
-		errorState("#pwd");
 	}
 });
-//성공 상태로 바꾸는 함수
-function successState(sel) {
-	$(sel).parent().removeClass("has-error").addClass("has-success").find(
-			".glyphicon").removeClass("glyphicon-remove").addClass(
-			"glyphicon-ok").show();
-};
-// 에러 상태로 바꾸는 함수
-function errorState(sel) {
-	$(sel).parent().removeClass("has-success").addClass("has-error").find(
-			".glyphicon").removeClass("glyphicon-ok").addClass(
-			"glyphicon-remove").show();
-};
+
 </script>

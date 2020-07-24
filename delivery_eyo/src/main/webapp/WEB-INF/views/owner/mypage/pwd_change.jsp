@@ -33,28 +33,26 @@ input {
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-4">
-				<img id="store_img" class="nav-link"
-					src="/delivery/resources/images/logo.PNG">
+				<img id="store_img" class="nav-link" src="/delivery/resources/images/logo.PNG">
 			</div>
 		</div>
-		<form action="${pageContext.request.contextPath }/owner/join" method="post" id="joinForm" onsubmit="return submitAction();">
+		<form action="${pageContext.request.contextPath }/owner/pwdChange" method="post" id="joinForm" onsubmit="return submitAction();">
 			<div class="form-group has-feedback">
-				<label class="control-label" for="pwd">현재비밀번호</label> 
+				<label class="control-label" for="pwd">현재 비밀번호</label> 
 				<input class="form-control" type="password" id="pwd" /> 
-				<span id="pwdErr" class="help-block">8글자 이상 입력하세요.</span> 
-				<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span id="pwdErr" class="help-block">8글자 이상 입력하세요.</span>
+				<span id="originalPwdErr" class="help-block">현재 비밀번호와 일치하지 않습니다.</span>
 			</div>
 			<div class="form-group has-feedback">
-				<label class="control-label" for="pwd">새비밀번호</label> 
+				<label class="control-label" for="pwd">새 비밀번호</label> 
 				<input class="form-control" type="password" name="pwd" id="newPwd" /> 
 				<span id="newPwdErr" class="help-block">8글자 이상 입력하세요.</span> 
-				<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				<span id="sameNewPwdErr" class="help-block">현재 비밀번호와 다른 비밀번호를 입력하세요.</span> 
 			</div>
 			<div class="form-group has-feedback">
-				<label class="control-label" for="rePwd">새비밀번호 재확인</label> 
+				<label class="control-label" for="rePwd">새 비밀번호 재확인</label> 
 				<input class="form-control" type="password" id="rePwd" />
 				<span id="rePwdErr" class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해주세요.</span> 
-				<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 			</div>
 			<div class="row justify-content-end">
 				<button class="col-md-1 btn btn-outline-secondary" type="reset">취소</button>
@@ -70,11 +68,11 @@ $("#pwd").keyup(function() {
 	// 비밀번호 검증할 정규 표현식
 	var reg = /^.{8,}$/;
 	if (reg.test(pwd)) {//정규표현식을 통과 한다면
+		$("#originalPwdErr").hide();
 		$("#pwdErr").hide();
-		successState("#pwd");
 	} else {//정규표현식을 통과하지 못하면
+		$("#originalPwdErr").hide();
 		$("#pwdErr").show();
-		errorState("#pwd");
 	}
 });
 $("#newPwd").keyup(function() {
@@ -82,11 +80,11 @@ $("#newPwd").keyup(function() {
 	// 비밀번호 검증할 정규 표현식
 	var reg = /^.{8,}$/;
 	if (reg.test(pwd)) {//정규표현식을 통과 한다면
+		$("#sameNewPwdErr").hide();
 		$("#newPwdErr").hide();
-		successState("#newPwd");
 	} else {//정규표현식을 통과하지 못하면
+		$("#sameNewPwdErr").hide();
 		$("#newPwdErr").show();
-		errorState("#newPwd");
 	}
 });
 $("#rePwd").keyup(function() {
@@ -95,25 +93,12 @@ $("#rePwd").keyup(function() {
 	// 비밀번호 같은지 확인
 	if (rePwd == newPwd) {//비밀번호 같다면
 		$("#rePwdErr").hide();
-		successState("#rePwd");
 	} else {//비밀번호 다르다면
 		$("#rePwdErr").show();
-		errorState("#rePwd");
 	}
 });
 
-// 성공 상태로 바꾸는 함수
-function successState(sel) {
-	$(sel).parent().removeClass("has-error").addClass("has-success").find(
-			".glyphicon").removeClass("glyphicon-remove").addClass(
-			"glyphicon-ok").show();
-};
-// 에러 상태로 바꾸는 함수
-function errorState(sel) {
-	$(sel).parent().removeClass("has-success").addClass("has-error").find(
-			".glyphicon").removeClass("glyphicon-ok").addClass(
-			"glyphicon-remove").show();
-};
+
 
 function submitAction(){
 	let pwd = $("#pwd");
@@ -122,21 +107,44 @@ function submitAction(){
 	let pwdErr=$("#pwdErr").css('display');
 	let	newPwdErr=$("#newPwdErr").css('display');
 	let rePwdErr=$("#rePwdErr").css('display');
-
+	let sameNewPwdErr=$("#sameNewPwdErr").css('display');
+	
+	//required를 사용하지 않는 이유는 에러문구가 있는 상태에서 
 	if(pwd.val()=="" || pwd.val()==null || pwd.val()!="" && pwd.val()!=null && pwdErr=='inline'){
-		errorState("#pwd");
 		pwd.focus();
 		return false;
-	}else if(newPwd.val()=="" || newPwd.val()==null || newPwd.val()!="" && newPwd.val()!=null && newPwdwdErr=='inline'){
-		errorState("#newPwd");
+	}else if(newPwd.val()=="" || newPwd.val()==null || newPwd.val()!="" && newPwd.val()!=null && newPwdErr=='inline'){
 		newPwd.focus();
 		return false;
 	}else if(rePwd.val()=="" || rePwd.val()==null || rePwd.val()!="" && rePwd.val()!=null && rePwdErr=='inline'){
-		errorState("#rePwd");
 		rePwd.focus();
+		return false;
+	}else if(!(pwd.val()=="<%=session.getAttribute("ownerPwd")%>")){
+		$("#originalPwdErr").show();
+		return false;
+	}else if(rePwd.val()=="<%=session.getAttribute("ownerPwd")%>"){
+		$("#originalPwdErr").hide();
+		$("#sameNewPwdErr").show();
 		return false;
 	}else{
 		return true;
 	}
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
