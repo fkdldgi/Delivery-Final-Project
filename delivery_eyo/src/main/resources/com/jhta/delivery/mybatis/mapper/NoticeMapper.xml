@@ -10,7 +10,7 @@
 		(
 		select aa.*,rownum rnum from 
 			(
-			select * from notice order by rownum desc
+			select * from notice where division=0 order by rownum desc
 			)aa
 		)
 		where <![CDATA[ rnum>=#{startRow} and rnum<=#{endRow}]]>
@@ -30,7 +30,7 @@
 	
 	<!-- 일반회원 공지사항 상세 -->
 	<select id="detail" parameterType="int" resultType="notice">
-		select * from notice where num=#{num}
+		select * from notice where num=#{num} and division=0
 	</select>
 	
 	<!-- 기업회원 상세 공지 -->
@@ -40,7 +40,7 @@
 	
 	<!-- 일반회원 전체 페이지수 -->
 	<select id="count" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) cnt from notice
+		select NVL(count(*),0) cnt from notice where division=0
 		<include refid="search"/>
 	</select>
 	
@@ -54,6 +54,7 @@
 		select * from(
 		<![CDATA[
 		select * from notice where num < #{num} ]]>
+		where division=0
 		order by num desc
 		) where rownum=1
 	</select>
@@ -76,7 +77,7 @@
 	<select id="next" parameterType="int" resultType="notice">
 		select * from
 		(
-		select * from notice where num > #{num}
+		select * from notice where num > #{num} and division=0
 		order by num asc
 		)
 		where rownum=1
@@ -99,7 +100,7 @@
 	<!--  일반회원 검색 -->
 	<sql id="search">
 		<if test="field!=null and field!=''">
-			where ${field} like '%'||#{keyword}||'%'
+			where ${field} like '%'||#{keyword}||'%' and division=0
 		</if>
 	</sql>
 	
