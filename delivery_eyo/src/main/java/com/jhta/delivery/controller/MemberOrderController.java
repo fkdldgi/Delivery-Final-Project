@@ -157,7 +157,7 @@ public class MemberOrderController {
 		Order_MainVo orderMainvo = new Order_MainVo(0, //pk값
 													null, null, null, //주문시간, 도착예정시간, 도착시간
 													Integer.parseInt(req.getParameter("memberNum")), //주문하는 고객의 pk값
-													"1234", //참조하는 고객의 주소pk값
+													req.getParameter("buildingCode"), //참조하는 고객의 주소pk값
 													req.getParameter("addr_detail"), //고객이 입력하는 상세주소
 													0, //배달팁번호 (일단 고정값으로 넣음)
 													null, //주문상태
