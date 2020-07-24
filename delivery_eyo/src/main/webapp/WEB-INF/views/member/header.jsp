@@ -117,7 +117,7 @@ display:flex
       <!-- 로그인이 되면 마이페이지 탭이 생김 -->
       <c:if test="${not empty sessionScope.memberId }">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
+	        <a class="nav-link" href="${pageContext.request.contextPath}/member/mypage?memberNum=${sessionScope.memberNum}">마이페이지</a>
 	      </li>
       </c:if>
       <li class="nav-item">
