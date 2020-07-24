@@ -33,32 +33,67 @@
 		select * from notice where num=#{num}
 	</select>
 	
+	<!-- 기업회원 상세 공지 -->
+	<select id="Owner_noticeDetail" parameterType="int" resultType="notice">
+		select * from notice where num=#{num} and division=1
+	</select>
+	
 	<!-- 일반회원 전체 페이지수 -->
 	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) cnt from notice
 		<include refid="search"/>
 	</select>
 	
-	<!-- 일반회원 이전 -->
+	<!-- 기업회원 전체 페이지수 -->
+	<select id="Owner_noticeCount" resultType="int" parameterType="hashmap">
+		select NVL(count(*),0) cnt from notice where division=1
+	</select>
+	
+	<!-- 일반회원 이전공지 -->
 	<select id="pre" parameterType="int" resultType="notice">
 		select * from(
 		<![CDATA[
 		select * from notice where num < #{num} ]]>
 		order by num desc
 		) where rownum=1
-
 	</select>
 	
-	<!-- 일반회원 다음 -->
+	<!-- 기업회원 이전공지 -->
+	<select id="Owner_prev" parameterType="int" resultType="notice">
+		<![CDATA[
+			select *
+			from(
+			select *
+			from notice
+			where division=1
+			order by num desc)
+			where num < #{num}
+			and rownum = 1
+		]]>
+	</select>
+	
+	<!-- 일반회원 다음공지 -->
 	<select id="next" parameterType="int" resultType="notice">
-		
 		select * from
 		(
 		select * from notice where num > #{num}
 		order by num asc
 		)
 		where rownum=1
-
+	</select>
+	
+	<!-- 기업회원 다음공지 -->
+	<select id="Owner_next" parameterType="int" resultType="notice">
+	<![CDATA[
+		select *
+		from(
+		select *
+		from board
+		where division = 1
+		order by num)
+		where num > #{num}
+		and rownum = 1
+		]]>
 	</select>
 	
 	<!--  일반회원 검색 -->
@@ -68,6 +103,10 @@
 		</if>
 	</sql>
 	
-
-	
+	<!-- 기업회원 검색 -->
+	<sql id="Owner_search">
+		<if test="field!=null and field=''">
+			where ${field} like '%'||#{keyword}||'%' and division=1
+		</if>
+	</sql>
 </mapper>

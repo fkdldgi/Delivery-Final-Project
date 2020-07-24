@@ -28,22 +28,33 @@ public class NoticeService {
 		return dao.Owner_noticeList(map);
 	}
 	
-	// 공지 세부사항 
+	// 일반회원 상세공지
 	public NoticeVo detail(int num) {
-		return dao.detail(num);
-		
+		return dao.detail(num);		
 	}
 	
-	// 공지 다음페이지
+	// 기업회원 상세공지
+	public NoticeVo Owner_noticeDetail(int num) {
+		return dao.Owner_noticeDetail(num);
+	}
+	
+	// 일반회원 다음공지
 	public NoticeVo next(int num) {
-		return dao.next(num);
-		
+		return dao.next(num);		
 	}
 	
-	// 공지 이전페이지
+	// 기업회원 다음공지
+	public NoticeVo Owner_next(int num) {
+		return dao.Owner_next(num);
+	}
+	
+	// 일반회원 이전공지
 	public NoticeVo pre(int num) {
-		return dao.pre(num);
-		
+		return dao.pre(num);		
 	}
 
+	// 기업회원 이전공지
+	public NoticeVo Owner_prev(int num) {
+		return dao.Owner_prev(num);
+	}
 }
