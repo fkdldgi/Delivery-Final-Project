@@ -31,4 +31,8 @@ public class StoreDao {
 		int menu_num = num;
 		return session.selectList(NAMESPACE+".optionInfo", menu_num);
 	}
+	//옵션메뉴 번호로 옵션메뉴 정보 가져오기
+	public MenuOptionVo optionInfoByOption(int num) {
+		return session.selectOne(NAMESPACE+".optionInfoByOption", num);
+	}
 }

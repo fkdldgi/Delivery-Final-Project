@@ -25,6 +25,12 @@
 		select * from menu_option where menu_num=#{num}
 	</select>
 	
+	<!-- 옵션메뉴번호(pk)로 옵션메뉴 정보 가져오기 -->
+	<select id="optionInfoByOption" parameterType="int" resultType="com.jhta.delivery.vo.MenuOptionVo">
+		select * from menu_option where num=#{num}
+	</select>
+	
+	
 	<!-- 가게 리스트 -->
 	<select id="shopList" parameterType="hashmap"
 		resultType="com.jhta.delivery.vo.ShopVo">
