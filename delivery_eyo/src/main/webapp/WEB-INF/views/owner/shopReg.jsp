@@ -227,7 +227,7 @@
 			<label for="">휴무일</label><br>
 			<div class="btn-group-toggle" data-toggle="buttons" id="personal_days">
 				<label class='btn btn-light border border-dark'>
-					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴' required>연중무휴
+					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴'>연중무휴
 				</label>
 				<label class='btn btn-light border border-dark'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='월'>월
@@ -349,7 +349,10 @@
   	//주소검색 결과를 지도로 보여주기
 	function sample5_execDaumPostcode() {
         new daum.Postcode({
-            oncomplete: function(data) {
+        	animation:true,
+        	shorthand:false, //시,도명 축약어로 하지 않기 ex)인천 x 인천광역시 o
+        	showMoreHName:true, //행정동명 가져오기 ex)부평동 검색 -> 부평3동
+        	oncomplete: function(data) {
                 var addr = data.address; // 최종 주소 변수
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("address_detail").value = addr;
@@ -513,7 +516,7 @@
 		sel2.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'06b36897-8721-4265-91d3-daeda8e46c62',cd:cityNum},
+			data:{accessToken:'c4bea074-c28c-4b08-ba93-f94cd318baed',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -535,7 +538,7 @@
 		chk1.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'06b36897-8721-4265-91d3-daeda8e46c62',cd:cityNum},
+			data:{accessToken:'c4bea074-c28c-4b08-ba93-f94cd318baed',cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				data.result.forEach(function(item,index,array){

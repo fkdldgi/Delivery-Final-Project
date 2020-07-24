@@ -12,10 +12,10 @@ import com.jhta.delivery.vo.Order_MenuVo;
 public class Order_MenuDao {
 	@Autowired
 	private SqlSession session;
-	String NAMESPACE = "mybatis.OrderMapper";
+	private final String NAMESPACE = "mybatis.OrderMapper";
 	
 	//주문메뉴 입력 부분
 	public int insert(Order_MenuVo vo) {
-			return session.insert(NAMESPACE+"Order_MenuVo_insert", vo);
+			return session.insert(NAMESPACE+".Order_Menu_insert", vo);
 	}
 }

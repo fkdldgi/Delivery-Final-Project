@@ -31,6 +31,10 @@
 		<put-attribute name="store_content" value="/WEB-INF/views/owner/store/{1}.jsp"/>
 	</definition>
 	
+	<definition name=".owner.*.*" extends=".owner.main">
+		<put-attribute name="content" value="/WEB-INF/views/owner/{1}/{2}.jsp"/>
+	</definition>
+	
 	<definition name=".owner.*" extends=".owner.main">
 		<put-attribute name="content" value="/WEB-INF/views/owner/{1}.jsp"/>
 	</definition>
