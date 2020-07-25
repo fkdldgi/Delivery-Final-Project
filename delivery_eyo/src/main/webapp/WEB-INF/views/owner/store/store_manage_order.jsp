@@ -9,8 +9,17 @@
 	$(document).ready(function(){
 		
 		// 상세보기 버튼
-		$("input[name=show_detail]").onclick(function(){
-			
+		/*
+		$('input[name=show_detail]').onclick(function(){
+			alert('1');
+		});
+		*/
+		
+		$("input[name='show_detail']").on('click',function(){
+			var aa = $(this).parent().parent().next();
+			aa.animate({				
+				height: 'toggle'
+			});
 		});
 	});
 
@@ -23,13 +32,16 @@
 	<!-- 가게에 들어온 주문 확인하기 -->
 	<div style="margin: auto; padding: auto; width: 80%;">
 		<c:forEach var="list" items="${orderList }">
-			<div style="border: 1px solid black; margin: 10px; margin-top: 30px; padding: 10px;">
+			<div style="border: 1px solid lightgray; margin: 10px; margin-top: 30px; margin-bottom: 0px; padding: 10px;">
 				<h2>주문 메뉴: &nbsp; &nbsp; &nbsp;${list.menu_name }</h2>
 				<h3>위치: &nbsp; &nbsp; &nbsp;${list.addr_num }(${list.addr_detail })</h3>
 				<span>주문시간: &nbsp; &nbsp; &nbsp;${list.start_time }</span>
 				<div style="width: 100%; text-align: right;">
 					<input type="button" name="show_detail" class="btn btn-primary" value="상세보기">
 				</div>
+			</div>
+			<div style="border: 1px solid lightgray; border-top: 0px; margin: 10px; margin-top: 0px; paddin: 10px; display: none;">
+				<span>주문시간: &nbsp; &nbsp; &nbsp;${list.start_time }</span>
 			</div>
 		</c:forEach>
 	</div>
