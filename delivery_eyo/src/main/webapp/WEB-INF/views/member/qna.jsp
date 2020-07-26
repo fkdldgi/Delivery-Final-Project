@@ -24,7 +24,7 @@
 	</div>
 	<!-- 결제 질문 블록 -->
 	<div class="col-xs-6 col-sm-4 col-md-3">
-		<a href="/delivery/member/event_main" class="thumbnail"> <img
+		<a href="#" onclick="alldivchange3()" class="thumbnail"> <img
 			src="/delivery/resources/images/QNA_03.png"></a>
 	</div>
 	<!-- 리뷰관리 질문 블록 -->
@@ -34,17 +34,17 @@
 	</div>
 	<!--이용문의 질문 -->
 	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3"  style="margin-top: 20px">
-		<a href="/delivery/member/event_main" class="thumbnail"> <img
+		<a href="#" onclick="alldivchange5()" class="thumbnail"> <img
 			src="/delivery/resources/images/QNA_05.png"></a>
 	</div>
 	<!-- 불편사항 질문 블록 -->
 	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3" style="margin-top: 20px">
-		<a href="/delivery/member/event_main" class="thumbnail"> <img
+		<a href="#"onclick="alldivchange6()" class="thumbnail"> <img
 			src="/delivery/resources/images/QNA_06.png"></a>
 	</div>
 	<!--기타 블록 -->
 	<div class="col-xs-6 col-sm-4 col-md-3" style="margin-top: 20px">
-			<a href="/delivery/member/event_main" class="thumbnail"> <img
+			<a href="#" onclick="alldivchange7()" class="thumbnail"> <img
 			src="/delivery/resources/images/QNA_07.png"></a>
 	</div>
 	<!-- 1대1 질문 블록 -->
@@ -104,7 +104,7 @@
 	    <div class="card-header" id="headingFour">
 	      <h2 class="mb-0">
 	        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo" id="btn4">
-	        - 444444444444444444444
+	       	-  사장님으로 회원가입을 하고싶어요
 	        </button>
 	      </h2>
 	    </div>
@@ -118,7 +118,7 @@
 	    <div class="card-header" id="headingFive">
 	      <h2 class="mb-0">
 	        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo" id="btn5">
-	        - v55555555555555555
+	        - 리뷰를 수정하고싶어요."
 	        </button>
 	      </h2>
 	    </div>
@@ -146,6 +146,20 @@ function alldivchange2() {
 		btn5.textContent="회원가입시 사용했던 개인정보를 변경하고 싶어요."
 		document.all('detail5').innerHTML="개인정보 변경은 마이페이지에서 비밀번호 확인후에 변경이 가능합니다.(변경 불가능한 사항 존재)"
 		
+}	//바로결제
+	function alldivchange3() {
+	 	document.getElementById("maintext").innerText = "바로결제"
+		btn1.textContent="회원가입이 불가능해요."
+		document.all('detail1').innerHTML="이전에 가입된 회원인 경우 가입이 불가능 하며 탈퇴후 30일 동안을 회원가입이 제한됩니다.위의 두 사항에 포합되지 않는 고객님의 경우 1대1 상담을 통해 상담사와 분제해결을 해주세요."
+		btn2.textContent="누군가 제 아이디를 쓰고 있어요."
+		document.all('detail2').innerHTML="배달이요!의 경우 원활한 서비스제공을 위해 아이디 중복이 불가능한 점을 양해 부탁드립니다."
+		btn3.textContent="탈퇴하고싶어요."
+		document.all('detail3').innerHTML="회원탈퇴 방법은 마이페이지 - 개인정보 수정 - 하단의 탈퇴하기 버튼을 클릭하시면 탈퇴절차가 진행됩니다"
+		btn4.textContent="사장님으로 회원가입을 하고싶어요."
+		document.all('detail4').innerHTML="사장님 회원가입의 경우 배달이요! 사장님 사이트를 사용하여 회원가입을 진행해주시면 됩니다."
+		btn5.textContent="회원가입시 사용했던 개인정보를 변경하고 싶어요."
+		document.all('detail5').innerHTML="개인정보 변경은 마이페이지에서 비밀번호 확인후에 변경이 가능합니다.(변경 불가능한 사항 존재)"
+	
 }	
 
 	function alldivchange4() {
@@ -162,6 +176,49 @@ function alldivchange2() {
 		document.all('detail5').innerHTML="개인정보 변경은 마이페이지에서 비밀번호 확인후에 변경이 가능합니다.(변경 불가능한 사항 존재)"
 		
 }	
+	//이용문의
+	function alldivchange5() {
+		document.getElementById("maintext").innerText = "이용문의"
+			btn1.textContent="리뷰를 작성하고 싶어요."
+			document.all('detail1').innerHTML="이전에 가입된 회원인 경우 가입이 불가능 하며 탈퇴후 30일 동안을 회원가입이 제한됩니다.위의 두 사항에 포합되지 않는 고객님의 경우 1대1 상담을 통해 상담사와 분제해결을 해주세요."
+			btn2.textContent="리뷰가 삭제되었어요."
+			document.all('detail2').innerHTML="배달이요!의 경우 원활한 서비스제공을 위해 아이디 중복이 불가능한 점을 양해 부탁드립니다."
+			btn3.textContent="리뷰를 수정하고싶어요."
+			document.all('detail3').innerHTML="회원탈퇴 방법은 마이페이지 - 개인정보 수정 - 하단의 탈퇴하기 버튼을 클릭하시면 탈퇴절차가 진행됩니다"
+			btn4.textContent="리뷰작성으로 얻는 혜택이 있나요?."
+			document.all('detail4').innerHTML="사장님 회원가입의 경우 배달이요! 사장님 사이트를 사용하여 회원가입을 진행해주시면 됩니다."
+			btn5.textContent="리뷰작성을 강요하는 매장이 있어요."
+			document.all('detail5').innerHTML="개인정보 변경은 마이페이지에서 비밀번호 확인후에 변경이 가능합니다.(변경 불가능한 사항 존재)"
+				
+	}
+	//불편문의
+	function alldivchange6() {
+		document.getElementById("maintext").innerText = "불편문의"
+			btn1.textContent="리뷰를 작성하고 싶어요."
+			document.all('detail1').innerHTML="이전에 가입된 회원인 경우 가입이 불가능 하며 탈퇴후 30일 동안을 회원가입이 제한됩니다.위의 두 사항에 포합되지 않는 고객님의 경우 1대1 상담을 통해 상담사와 분제해결을 해주세요."
+			btn2.textContent="리뷰가 삭제되었어요."
+			document.all('detail2').innerHTML="배달이요!의 경우 원활한 서비스제공을 위해 아이디 중복이 불가능한 점을 양해 부탁드립니다."
+			btn3.textContent="리뷰를 수정하고싶어요."
+			document.all('detail3').innerHTML="회원탈퇴 방법은 마이페이지 - 개인정보 수정 - 하단의 탈퇴하기 버튼을 클릭하시면 탈퇴절차가 진행됩니다"
+			btn4.textContent="리뷰작성으로 얻는 혜택이 있나요?."
+			document.all('detail4').innerHTML="사장님 회원가입의 경우 배달이요! 사장님 사이트를 사용하여 회원가입을 진행해주시면 됩니다."
+			btn5.textContent="리뷰작성을 강요하는 매장이 있어요."
+			document.all('detail5').innerHTML="개인정보 변경은 마이페이지에서 비밀번호 확인후에 변경이 가능합니다.(변경 불가능한 사항 존재)"
+	}
+	//기타문의
+	function alldivchange7() {
+		document.getElementById("maintext").innerText = "기타문의"
+			btn1.textContent="리뷰를 작성하고 싶어요."
+			document.all('detail1').innerHTML="이전에 가입된 회원인 경우 가입이 불가능 하며 탈퇴후 30일 동안을 회원가입이 제한됩니다.위의 두 사항에 포합되지 않는 고객님의 경우 1대1 상담을 통해 상담사와 분제해결을 해주세요."
+			btn2.textContent="리뷰가 삭제되었어요."
+			document.all('detail2').innerHTML="배달이요!의 경우 원활한 서비스제공을 위해 아이디 중복이 불가능한 점을 양해 부탁드립니다."
+			btn3.textContent="리뷰를 수정하고싶어요."
+			document.all('detail3').innerHTML="회원탈퇴 방법은 마이페이지 - 개인정보 수정 - 하단의 탈퇴하기 버튼을 클릭하시면 탈퇴절차가 진행됩니다"
+			btn4.textContent="리뷰작성으로 얻는 혜택이 있나요?."
+			document.all('detail4').innerHTML="사장님 회원가입의 경우 배달이요! 사장님 사이트를 사용하여 회원가입을 진행해주시면 됩니다."
+			btn5.textContent="리뷰작성을 강요하는 매장이 있어요."
+			document.all('detail5').innerHTML="개인정보 변경은 마이페이지에서 비밀번호 확인후에 변경이 가능합니다.(변경 불가능한 사항 존재)"
+	}
 	
 </script>
 </html>

@@ -45,7 +45,7 @@
      </div>
 </div>
 <div class="container">
-	<img class="d-block mx-auto mb-4" src="/delivery/resources/images/notice_logo.png" width="700" height="150">
+	<img class="d-block mx-auto mb-4" src="/delivery/resources/images/owner_notice_logo" width="700" height="150">
 	<table class="table">
 		<thead>
 			<tr>
@@ -58,7 +58,7 @@
 			<c:forEach var="vo" items="${list}"> <!-- list있는 값들 -->
 			<tr>
 				<td>${vo.num}</td>
-				<td><a href="/delivery/member/detail?num=${vo.num }">${vo.title}</a></td>
+				<td><a href="/delivery/owner/detail?num=${vo.num }">${vo.title}</a></td>
 				<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" var="regdate"/>
 				<td>${regdate}</td>
 			</tr>
@@ -66,33 +66,24 @@
 		</tbody>
 	</table>
 	<!-- 이전,다음 -->
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item">
-				<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-					<c:choose>
-						<c:when test="${i==pu.pageNum}">
-							<a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Previous">
-								<span style="color:aqua"><<</span>
-							</a>
-							
-							<li class="page-item"><a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}">1</a></li>
-							<li class="page-item"><a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}">2</a></li>
-						</c:when>
-						<c:otherwise>
-							<a class="page-link" href="/delivery/member/notice?pageNum=${i}&field=${field}&keyword=${keyword}" aria-label="Next">
-								<span style="color:gray">>></span>
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-			</li>
-		</ul>
-	</nav>
-	<div>		
-	</div>
+<div>
+	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
+		<c:choose>
+			<c:when test="${i==pu.pageNum}">
+				<a href="/delivery/owner/board?pageNum=${i}&field=${field}&keyword=${keyword}">
+				<span style="color:blue">${i }</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="/delivery/owner/board?pageNum=${i}&field=${field}&keyword=${keyword}">
+				<span style="color:gray">${i }</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
 	<div>
-		<form method="post" action="/delivery/member/notice">
+		<form method="post" action="/delivery/owner/board">
 			<select name="field">
 				<option value="title"
 					<c:if test="${field=='title' }">seleted</c:if>>제목</option>
