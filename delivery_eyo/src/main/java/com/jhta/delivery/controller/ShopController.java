@@ -55,7 +55,7 @@ public class ShopController {
 			FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
 			fis.close();
 			fos.close();
-			String profile_img=uploadPath+"\\"+savefileName; //가게프로필 사진 경로
+			String profile_img=savefileName; //가게프로필 사진 파일명
 			String name=req.getParameter("name"); //가게명
 			String introduce=req.getParameter("introduce"); //가게소개
 			String tel=req.getParameter("tel"); //전화번호

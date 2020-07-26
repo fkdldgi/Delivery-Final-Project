@@ -31,6 +31,11 @@
 		<put-attribute name="store_content" value="/WEB-INF/views/owner/store/{1}.jsp"/>
 	</definition>
 	
+	<!-- 0727추가 -->
+	<definition name=".owner.shop.*" extends=".owner.store_manage_home">
+		<put-attribute name="store_content" value="/WEB-INF/views/owner/shop/{1}.jsp"/>
+	</definition>
+	
 	<definition name=".owner.*.*" extends=".owner.main">
 		<put-attribute name="content" value="/WEB-INF/views/owner/{1}/{2}.jsp"/>
 	</definition>

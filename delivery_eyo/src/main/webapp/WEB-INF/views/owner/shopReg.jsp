@@ -143,7 +143,7 @@
 		</div>
 		<div class="form-group under_border">
 			<label for="">가게소개</label> 
-			<input type="text" class="form-control" placeholder="가게소개" id="introduce" name="introduce" required>
+			<textarea class="form-control" cols="30" rows="5" placeholder="가게소개에 대한 내용을 입력하세요" id="introduce" name="introduce" required></textarea>
 		</div>
 		<div class="form-group has-feedback under_border">
 			<label for="tel">전화번호</label> 
@@ -503,9 +503,22 @@
 	});
 	
 	
+	
+	var accessToken="";	
+	//동적으로 엑세스토큰 얻어오기
+	$.ajax({
+		url:"https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json",
+		data:{consumer_key:"22368008e43f41cbaa0b",consumer_secret:"497a4a53690046ff9233"},
+		dataType:'json',
+		success:function(data){
+			accessToken=data.result.accessToken;
+		}
+	});
 	var chk1=$("#chk1");
 	//배달지역 시군구 얻어오기(accessToken은 4시간동안 유효)
 	$("#sel1").change(function(){
+		
+		
 		var cityNum=this.value;
 		var sel2=$("#sel2");
 		if($("#deliveryArea input[name='delivery_sido']")!=null){
@@ -516,7 +529,7 @@
 		sel2.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'c4bea074-c28c-4b08-ba93-f94cd318baed',cd:cityNum},
+			data:{accessToken:accessToken,cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				sel2.append("<option value='null'>-- 시,군,구를 선택해주세요 --</option>");
@@ -538,7 +551,7 @@
 		chk1.empty();
 		$.ajax({
 			url:'https://sgisapi.kostat.go.kr/OpenAPI3/addr/stage.json',
-			data:{accessToken:'c4bea074-c28c-4b08-ba93-f94cd318baed',cd:cityNum},
+			data:{accessToken:accessToken,cd:cityNum},
 			dataType:'json',
 			success:function(data){
 				data.result.forEach(function(item,index,array){
