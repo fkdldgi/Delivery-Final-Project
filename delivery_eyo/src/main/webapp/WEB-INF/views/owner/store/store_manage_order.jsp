@@ -78,25 +78,6 @@
 			</form>
 		</c:forEach>
 	</div>
-	<!-- 
-				<input type="text" value="${list.main_num }">
-				<input type="text" value="${list.start_time }">
-				<input type="text" value="${list.end_ex_time }">
-				<input type="text" value="${list.status }">
-				<input type="text" value="${list.owner_requests }">
-				<input type="text" value="${list.total_price }">
-				<input type="text" value="${list.order_price }">
-				<input type="text" value="${list.count }">
-				<input type="text" value="${list.menu_name }">
-				<input type="text" value="${list.price }">
-				<input type="text" value="${list.menu_option_name }"><br>
-	 -->
-	
-	<!-- 가게주문 승인 리스트 -->
-	<c:forEach var="list" items="${successList }">
-		<input type="text" value="${list.start_time }">
-		<input type="text" value="${list.end_ex_time }">
-	</c:forEach>
 </body>
 
 
