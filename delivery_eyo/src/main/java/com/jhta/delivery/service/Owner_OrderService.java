@@ -23,4 +23,8 @@ public class Owner_OrderService {
 		return dao.owner_successList(num);
 	}
 	
+	// 가게에서 주문 승인
+	public int update_end_ex_time(Owner_OrderVo vo) {
+		return dao.update_end_ex_time(vo);
+	}
 }
