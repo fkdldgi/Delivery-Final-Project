@@ -42,4 +42,17 @@
         		and mu.num= orm.menu_num and mop.menu_num=mu.num and om.status='주문승인'
         		order by om.start_time
 	</select>
+	
+	<!-- 배달이 완료된 계산값 -->
+	<select id="Owner_Cal" parameterType="int" resultType="com.jhta.delivery.vo.Owner_CalVo">
+		select distinct om.num num, om.total_price total_price, om.end_ex_time ex_time, om.end_time end_time, om.status status
+		from order_menu orm, order_main om,order_menu_option mo, menu mu,menu_option mop
+				where om.num=orm.order_num and mo.order_menu_num = orm.num and
+        				orm.menu_num in 
+        					(select num from menu 
+            					where menu_category_num in
+                					(select num from menu_category 
+                    					where shop_num=(select num from shop where num=#{num}))) 
+        		and mu.num= orm.menu_num and mop.menu_num=mu.num and om.status='배달완료'
+	</select>
 </mapper>
