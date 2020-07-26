@@ -13,4 +13,15 @@
 		select * from review_img
 	</select>
 
+	<!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 -->
+	<select id="reviewAble" parameterType="hashmap" resultType="String">
+		select NVL(1,0) chk
+		from ORDER_MAIN,ORDER_TRANSACTION
+		where (select num from ORDER_MAIN where member_num=#{member_num}) = (select order_num from ORDER_TRANSACTION where shop_num=#{shop_num})
+	</select>
+	
+	<!-- 주문한 고객이 리뷰를 썼는지 -->
+	<select id="selectMemberReview" parameterType="hashmap" resultType="com.jhta.delivery.vo.ReviewVo">
+		select * from REVIEW where member_num=#{member_num} and shop_num=#{shop_num}
+	</select>
 </mapper>

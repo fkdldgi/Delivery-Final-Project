@@ -1,5 +1,6 @@
 package com.jhta.delivery.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,16 @@ public class MemberReviewService {
 	public List<Review_ImgVo> reviewImgList(){
 		return dao.reviewImgList();
 	}
+	
+	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
+	public String reviewAble(HashMap<String, Integer> map) {
+		return dao.reviewAble(map);
+	}
+	
+	//주문한 고객이 리뷰를 썼는지
+	public List<ReviewVo> selectMemberReview(HashMap<String, Integer> map){
+		System.out.println("서비스  map" + map);
+		return dao.selectMemberReview(map);
+	}
+	
 }
