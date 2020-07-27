@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,6 +60,15 @@ public class QnaListController {
 	@RequestMapping(value = "/member/personalQna",method=RequestMethod.GET)
 	public String qnainsert() {
 		return ".member.personalQna";
+	}
+	@PostMapping("/member/insertQnaOk")
+	public String insertQnaOk(QnaVo vo) {
+		int n=service.insert(vo);
+		if (n>0) {
+			return ".member.insertQnaOk";	
+		}else {
+			return ".member.error";
+		}
 	}
 	@RequestMapping(value = "/member/personalQna",method=RequestMethod.POST)
 	public String qnainsertOk(QnaVo vo) {

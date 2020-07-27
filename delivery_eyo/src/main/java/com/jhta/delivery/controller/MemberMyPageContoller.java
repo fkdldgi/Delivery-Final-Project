@@ -38,6 +38,7 @@ public class MemberMyPageContoller {
 		//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
 		String savefileName=UUID.randomUUID()+"_"+orgfileName;
 		HashMap<String , Object> map= new HashMap<String, Object>();
+		System.out.println(pwd);
 		map.put("num", num);
 		map.put("email",email);
 		map.put("tel",tel);
