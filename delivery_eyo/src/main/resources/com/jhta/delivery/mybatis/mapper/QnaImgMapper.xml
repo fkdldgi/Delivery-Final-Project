@@ -6,4 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="QnaImg">
 		insert into INQUIRY_IMG values(inquiry_img_seq.nextval,#{imgPath},#{originalFilename},#{inquiryNum})
 	</insert>
+	<select id="imgselect" resultType="QnaImg">
+		select * from INQUIRY_IMG where inquiryNum={num}
+	</select>
 </mapper>
