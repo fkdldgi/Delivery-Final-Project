@@ -39,4 +39,12 @@ public class MemberDao {
 	public ShopVo storeInfo(int num) {
 		return session.selectOne(NAMESPACE+".storeInfo", num);
 	}
+	//로그인된 회원 정보 받아오기
+	public MemberVo memberInfo(int memberNum) {
+		return session.selectOne(NAMESPACE+".memberInfo", memberNum);
+	}
+	public int update(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".update",map);
+		
+	}
 }
