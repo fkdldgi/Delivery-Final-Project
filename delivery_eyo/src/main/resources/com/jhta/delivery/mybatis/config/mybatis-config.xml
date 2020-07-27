@@ -25,6 +25,7 @@
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Owner_StoreMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Owner_ReviewMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Member_ReviewMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/Owner_OrderMapper.xml"/>
 		
 	</mappers>
 </configuration>
