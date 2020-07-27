@@ -45,7 +45,7 @@
 	
 	<!-- 배달이 완료된 계산값 -->
 	<select id="Owner_Cal" parameterType="int" resultType="com.jhta.delivery.vo.Owner_CalVo">
-		select distinct om.num num, om.total_price total_price, om.end_ex_time ex_time, om.end_time end_time, om.status status
+		select distinct om.num num, om.total_price total_price, om.end_time end_time
 		from order_menu orm, order_main om,order_menu_option mo, menu mu,menu_option mop
 				where om.num=orm.order_num and mo.order_menu_num = orm.num and
         				orm.menu_num in 

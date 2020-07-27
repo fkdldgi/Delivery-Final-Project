@@ -51,8 +51,6 @@ public class Store_Manage_OrderController {
 		
 		int n = owner_order_service.update_end_ex_time(vo);
 		
-		System.out.println(n);
-		
 		return manage_order(model,num);
 	}
 }
