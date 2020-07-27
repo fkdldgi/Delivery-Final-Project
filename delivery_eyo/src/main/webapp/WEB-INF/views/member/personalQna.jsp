@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 <br>
-<img class="d-block mx-auto mb-4" src="/delivery/resources/images/personalQna_logo.png" width="900" height="170">
+<img class="d-block mx-auto mb-4" src="/delivery/resources/images/qna_logo.png" width="900" height="170">
 <table class="table table-bordered">
     <tbody>
         <form action="personalQna.do" method="post">

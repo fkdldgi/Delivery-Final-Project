@@ -22,7 +22,7 @@
      				<li class="nav-item active">
      					<a class="nav-link" href="#">
      						<span class="sr-only">
-     							(current)
+     							(current).
      						</span>
      					</a>
      				</li>
