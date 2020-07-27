@@ -15,11 +15,9 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			src="http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif"
 			style="width: 20%; height: 100px;" class="mr-3">
 		<div class="media-body">
-			<p><h5 class="mt-0">${info.name}</h5></p>
-			<p>최소 결제금액 : ${info.min_price }원</p>
-			<p>전화번호 : ${info.reg_num }</p>
-			<p>결재 수단 : ${info.payment_option}</p>
-			<p>가게번호 : ${info.num}</p>
+			<p><h2 style="font-weight: bold;" class="mt-0">${info.name}</h2></p>
+			<p><h4>최소 결제금액 : <span style="color: red;">${info.min_price }</span>원</h4></p>
+			<p><h4>결재 수단 : <span style="color: green;">${info.payment_option}</span></h4></p>
 		</div>
 	</div>
 	
@@ -29,13 +27,13 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			<a class="nav-item nav-link active" id="nav-home-tab"
 				data-toggle="tab" href="#nav-home" role="tab"
 				aria-controls="nav-home" aria-selected="true"
-				style="width: 33%; border: 1px solid blue;">메뉴</a> <a
+				style="width: 33%; border: 1px solid blue;"><h4 style="font-weight: bold;">메뉴</h4></a> <a
 				class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
 				href="#nav-profile" role="tab" aria-controls="nav-profile"
-				aria-selected="false" style="width: 33%; border: 1px solid green;">리뷰</a>
+				aria-selected="false" style="width: 33%; border: 1px solid green;"><h4 style="font-weight: bold;">리뷰</h4></a>
 			<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
 				href="#nav-contact" role="tab" aria-controls="nav-contact"
-				aria-selected="false" style="width: 34%; border: 1px solid gray;">가게정보</a>
+				aria-selected="false" style="width: 34%; border: 1px solid gray;"><h4 style="font-weight: bold;">가게정보</h4></a>
 		</div>
 	</nav>
 	<div class="tab-content" id="nav-tabContent" style="border: 1px solid black;">
@@ -43,14 +41,16 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			aria-labelledby="nav-home-tab">
 			<div class="card-body">
 				<c:forEach items="${mainmenu }" var="main">
-					<div style="border: 1px solid gray;" data-toggle="modal"
-						data-target="#menuModal"
-						onclick="javascript:menu_detail(${main.num})">
-						<p>${main.num }</p>
-						<p>${main.name}</p>
-						<p>${main.menu_info}</p>
-						<p>${main.price}</p>
-						<p>${main.img}</p>
+					<div class="row border-bottom" data-toggle="modal" data-target="#menuModal" onclick="javascript:menu_detail(${main.num})">
+<%-- 					<p>${main.num }</p> --%>
+						<div class="col-5">
+							<img src="${pageContext.request.contextPath }/resources/images/${main.img}" style="width: 250px; height: 150px; margin-top: 10px; margin-bottom: 10px;">
+						</div>
+						<div class="col-7">
+							<p><h2 style="font-weight: bold;">${main.name}</h2></p>
+							<p><h5>${main.menu_info}</h5></p>
+							<p><h4 style="color: red;">${main.price}원</h4></p>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -125,21 +125,43 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
-							<p>사장 번호 : ${rmList.OWNER_NUM }</p>
-							<p>리뷰 번호 : ${rmList.NUM }</p>
-							<p>리뷰 등록일 : ${rmList.OWNER_NUM }</p>
-							<p>사장 번호 : ${rmList.OWNER_NUM }</p>
-							<p>리뷰 점수 : ${rmList.GRADE }</p>
-							<p>리뷰 내용 : ${rmList.CONTENT }</p>
-							<p>---------------------------</p>
+<%-- 							<p>사장 번호 : ${rmList.OWNER_NUM }</p> --%>
+<%-- 							<p>리뷰 번호 : ${rmList.NUM }</p> --%>
+<%-- 							<p>리뷰 등록일 : ${rmList.OWNER_NUM }</p> --%>
+<%-- 							<p>사장 번호 : ${rmList.OWNER_NUM }</p> --%>
+<%-- 							<p>리뷰 점수 : ${rmList.GRADE }</p> --%>
+							<h5 style="margin-left: 60px; margin-bottom: 30px;">${rmList.CONTENT }</h5>
+<!-- 							<p>---------------------------</p> -->
 						</div>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</div>
 		<!-- 가게정보 넣는 부분 -->
-		<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-			aria-labelledby="nav-contact-tab">가게정보 숨기기3</div>
+		<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+			<div class="card" style="width: 100%;">
+				<h3 style="font-weight: bold; margin-top: 20px;">가게 소개</h3>
+				<br>
+				<h4 style="margin-bottom: 20px;">${info.introduce }</h4>
+			</div>
+			<div class="card" style="width: 100%;">
+				<h3 style="font-weight: bold; margin-top: 20px;">안내 및 혜택</h3>
+				<br>
+				<h4 style="margin-bottom: 20px;">${info.review_info }</h4>
+			</div>
+			<div class="card" style="width: 100%;">
+				<h3 style="font-weight: bold; margin-top: 20px;">영업 정보</h3>
+				<br>
+				<div class="row row-cols-2" style="margin-bottom: 20px;">
+					<div class="col-2">운영시간</div>
+					<div class="col-10">매일- 오전 ${info.open_time } ~ 오후 ${info.close_time }</div>
+					<div class="col-2">휴무일</div>
+					<div class="col-10">${info.personal_day }</div>
+					<div class="col-2">전화번호</div>
+					<div class="col-10">${info.tel }</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
     <!-- 주문표(장바구니) 부분 -->
@@ -157,8 +179,8 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		<div id="cart-body" style="width: 100%; height: 60%; border: 1px solid black; overflow: auto;"></div>
 		<div id="cart-num"></div>
 		<div id="cart-footer" style="width: 100%; height: 30%; border: 0px solid black; margin-top: 10px;">
-			<div id="min-price" style="width: 100%; height: 30%; border: 1px solid black;">최소 결제금액<br>${info.min_price }원</div>
-			<div style="width: 100%; height: 30%; border: 1px solid black;">총 금액<div id="total-price">선택된 메뉴가 없습니다</div>원</div>
+			<div id="min-price" style="width: 100%; height:35%; border: 1px solid black;"><h4 style="font-weight: bold;">최소 결제금액<br><span style="color: red;">${info.min_price }</span>원</h4></div>
+			<div style="width: 100%; height: 50%; border: 1px solid black;"><h4 style="font-weight: bold;">총 금액</h4><div id="total-price" style="float: left; font-weight: bold; font-size: 1.5em; color: blue;">선택된 메뉴가 없습니다</div></div>
 			<button type="button" id='orderBtn' class='btn btn-primary btn-lg' style="width: 100%; height: 30%;">주문하기</button>
 		</div>
 	</div>    
@@ -182,9 +204,9 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			<div class="modal-body" id="modal-body"></div>
 			<div id="volume" style="margin: auto; margin-bottom: 10px;">
 				<div class="btn-group mr-2" role="group">
-				    <button type="button" class="btn btn-info" onclick="volumeDown()">-</button>
-				    <input type="text" id="volumeText" class="btn btn-white" value="1" style="width: 5%; border: 1px solid gray;" readonly="readonly">
-				    <button type="button" class="btn btn-info" onclick="volumeUp()">+</button>
+				    <button type="button" class="btn btn-info" onclick="volumeDown()"><h1 style="font-weight: bold;">-</h1></button>
+				    <input type="text" id="volumeText" class="btn btn-white" value="1" style="width: 5%; border: 1px solid gray; font-weight: bold; font-size: 1.2em;" readonly="readonly">
+				    <button type="button" class="btn btn-info" onclick="volumeUp()"><h1 style="font-weight: bold;">+</h1></button>
 				</div> 
 			</div>
 			<div style="background-color: gray; height: 50px;" class="d-flex bd-highlight">
@@ -215,13 +237,13 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		        	$("#total").empty();
 					$("#modal-title").append("<h5 style='text-align: center;'>메뉴 상세</h5>");
 					$("#modal-title").append("<input type='text' id='menuNum' value='"+ data.menuInfo.num +"' hidden >");
-					$("#modal-body").append("<img src='http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif' style='width:100%;'>");
-					$("#modal-body").append("<p><h1 style='text-align: center;' id='menuName'>"+ data.menuInfo.name +"</h1></p>");
+					$("#modal-body").append("<img src='${pageContext.request.contextPath}/resources/images/" + data.menuInfo.img +"' style='width:100%;'>");
+					$("#modal-body").append("<p><h1 style='text-align: center; font-weight:bold;' id='menuName'>"+ data.menuInfo.name +"</h1></p>");
 					$("#modal-body").append("<p><h5 style='text-align: center;'> 설명 : "+ data.menuInfo.menu_info +"</h5></p>");
-					$("#modal-body").append("<label style='text-align: left;'> 가격 :</label><label style='text-align: right;'id='menuprice'>"+ data.menuInfo.price +"</label><label style='text-align: left;'>원</label>");
+					$("#modal-body").append("<label style='text-align: left;'><h5 style='font-weight:bold;'> 가격 :</h5></label><label style='text-align: right;'id='menuprice'><h4 style='font-weight:bold; color:red;'>"+ data.menuInfo.price +"</h4></label><label style='text-align: left;'><h5 style='font-weight:bold;'>원</h5></label>");
 					$("#total").text(data.menuInfo.price +"원");
 					if(data.optionList[0] != null){
-						$("#modal-body").append("<p><h5>"+ data.optionList[0].category +"</h5></p>");
+						$("#modal-body").append("<p><h5 style='font-weight:bold;'>"+ data.optionList[0].category +"</h5></p>");
 						for(i in data.optionList){
 							$("#modal-body").append("<p><input type='checkbox' onclick='clickOption()' class='check' value="+ 
 									data.optionList[i].price +
@@ -363,6 +385,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		$('#cart-body').empty();
 		$('#cart-body').children().remove();
 		//총 금액 초기화
+		cart_totalPrice = 0;
 		$('#total-price').text('선택된 메뉴가 없습니다');
 	}
 	
@@ -377,7 +400,7 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			cart_totalPrice = 0
 			$('#total-price').text('선택된 메뉴가 없습니다');
 		}else{
-			$('#total-price').text((orgPrice-delPrice));
+			$('#total-price').text((orgPrice-delPrice)+'원');
 		}
 		console.log('총 금액  후: ' + $('#total-price').text());
 		$(this).prev().text('');
@@ -411,5 +434,4 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			alert('최소 주문금액보다 적습니다');
 		}
 	});
-	
 </script>

@@ -22,6 +22,15 @@
 		and r.member_num=m.num order by r.num desc
 	</select>
 	
+	<!-- 멤버번호로 주문한 가게번호 가져오기 -->
+	<select id="getShopByMember" parameterType="int" resultType="hashmap">
+		select shop_num from MENU_CATEGORY
+		where num in (select menu_category_num from MENU
+                        where num in (select menu_num from ORDER_MENU
+                                                where order_num in (select num from order_main 
+                                                                                where member_num=#{member_num})))
+	</select>
+	<!-- 멤버 번호와  -->
 <!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 --> 
 <!-- 	<select id="reviewAble" parameterType="hashmap" resultType="String"> -->
 <!-- 		select NVL(count(*),0) chk -->

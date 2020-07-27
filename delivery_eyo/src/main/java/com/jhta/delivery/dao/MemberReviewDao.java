@@ -40,7 +40,11 @@ public class MemberReviewDao {
 	
 	//주문한 고객이 리뷰를 썼는지
 	public List<ReviewVo> selectMemberReview(HashMap<String, Integer> map){
-		System.out.println("dao map" + map);
 		return sqlSession.selectList(NAMESPACE+".selectMemberReview", map);
+	}
+	
+	//멤버번호로 주문한 가게번호 가져오기
+	public List<HashMap<String, Object>> getShopByMember(int member_num){
+		return sqlSession.selectList(NAMESPACE+".getShopByMember", member_num);
 	}
 }

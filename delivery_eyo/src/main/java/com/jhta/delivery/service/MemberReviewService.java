@@ -37,8 +37,11 @@ public class MemberReviewService {
 	
 	//주문한 고객이 리뷰를 썼는지
 	public List<ReviewVo> selectMemberReview(HashMap<String, Integer> map){
-		System.out.println("서비스  map" + map);
 		return dao.selectMemberReview(map);
 	}
 	
+	//멤버번호로 주문한 가게번호 가져오기
+	public List<HashMap<String, Object>> getShopByMember(int member_num){
+		return dao.getShopByMember(member_num);
+	}
 }

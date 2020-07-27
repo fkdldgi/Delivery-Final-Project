@@ -29,7 +29,7 @@
 <script type="text/javascript">
 	var startrow = 1;
 	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 	    	console.log($(document).height());
 	    	console.log($(window).height());
 	    	startrow = startrow + 5;
