@@ -40,22 +40,28 @@ public class ShopController {
 		
 		//업로드할 폴더 경로 얻어오기
 		String uploadPath=session.getServletContext().getRealPath("/resources/profile");
-		//전송된 파일명
-		String orgfileName=file1.getOriginalFilename();
-		//실제 저장할 파일명(중복되지 않도록)
-		//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
-		String savefileName=UUID.randomUUID()+"_"+orgfileName;
-		long filesize=file1.getSize();
+		String orgfileName="";
+		String savefileName="";
+		System.out.println(file1.getSize());
 		try {
-			//전송된 파일을 읽어오는 스트림
-			InputStream fis=file1.getInputStream();
-			//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
-			FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
-			//파일 복사하기
-			FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
-			fis.close();
-			fos.close();
-			String profile_img=uploadPath+"\\"+savefileName; //가게프로필 사진 경로
+			if(file1.getSize()!=0) {
+				//전송된 파일명
+				orgfileName=file1.getOriginalFilename();
+				//실제 저장할 파일명(중복되지 않도록)
+				//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
+				savefileName=UUID.randomUUID()+"_"+orgfileName;
+				//전송된 파일을 읽어오는 스트림
+				InputStream fis=file1.getInputStream();
+				//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
+				FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
+				//파일 복사하기 
+				FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
+				fis.close();
+				fos.close();
+			}else {
+				savefileName="default.png";
+			}
+			String profile_img=savefileName; //가게프로필 사진 파일명
 			String name=req.getParameter("name"); //가게명
 			String introduce=req.getParameter("introduce"); //가게소개
 			String tel=req.getParameter("tel"); //전화번호

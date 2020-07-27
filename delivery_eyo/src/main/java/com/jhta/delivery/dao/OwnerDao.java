@@ -32,6 +32,10 @@ public class OwnerDao {
 	public int pwdUpdate(HashMap<String, Object> map) {
 		return session.update(NAMESPACE+".pwd_update",map);
 	}
+	//사장 이름,전화번호,이메일변경
+	public int ownerUpdate(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".owner_update",map);
+	}
 	public List<ShopVo> shop_list(String id){
 		return session.selectList(NAMESPACE+".shop_list", id);
 	}

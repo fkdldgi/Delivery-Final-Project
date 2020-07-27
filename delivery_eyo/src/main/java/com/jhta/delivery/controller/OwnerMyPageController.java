@@ -22,7 +22,7 @@ public class OwnerMyPageController {
 		OwnerVo vo=service.idChk(id);
 		//세션에 비밀번호 저장
 		model.addAttribute("ownerPwd", vo.getPwd());
-		return ".owner.mypage.mypage_content";
+		return ".owner.mypage.reconfirm";
 	}
 	@PostMapping("/owner/mypage")
 	public String mypageOk(String pwd,HttpSession session) {

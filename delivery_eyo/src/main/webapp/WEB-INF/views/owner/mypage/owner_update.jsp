@@ -20,7 +20,7 @@ input {
 	height: 500px;
 }
 /* .help-block 을 일단 보이지 않게 설정 */
-#joinForm .help-block {
+#updateForm .help-block {
 	display: none;
 }
 
@@ -34,26 +34,27 @@ input {
 			</div>
 		</div>
 		<h2>회원정보</h2><br>
-		<form action="${pageContext.request.contextPath }/owner/pwdChange" method="post" id="joinForm" onsubmit="return submitAction();">
+		<form action="${pageContext.request.contextPath }/owner/owner_update" method="post" id="updateForm" onsubmit="return submitAction();">
+			<input type="hidden" name="id" value="${ownerId }">
 			<div class="form-group has-feedback">
 				<label class="control-label" for="name">이름</label> 
-				<input class="form-control" type="text" id="name" name="name" value="${ownerVo.name }"/> 
+				<input class="form-control" type="text" id="name" name="name" value="${name }"/> 
 				<span id="nameErr" class="help-block">올바른 이름 형식이 아닙니다. 다시 입력해주세요.</span>
 			</div>
 			<div class="form-group has-feedback">
 				<label class="control-label" for="tel">전화번호</label> 
-				<input class="form-control" type="text" name="tel" id="tel" value="${ownerVo.tel }"/> 
+				<input class="form-control" type="text" name="tel" id="tel" value="${tel }"/> 
 				<span id="telErr" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해주세요.</span> 
 			</div>
 			<div class="form-group has-feedback">
 				<label class="control-label" for="email">이메일</label> 
-				<input class="form-control" type="text" name="email" id="email" value="${ownerVo.email }"/> 
+				<input class="form-control" type="text" name="email" id="email" value="${email }"/> 
 				<span id="emailErr" class="help-block">올바른 이메일 형식이 아닙니다. 다시 입력해주세요.</span> 
 				<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 			</div>
 			<div class="row justify-content-end">
 				<button class="col-md-1 btn btn-outline-secondary" type="reset" onclick="history.go(-1)">취소</button>
-				<button class="col-md-1 btn btn-outline-primary" type="submit">가입</button>
+				<button class="col-md-1 btn btn-outline-primary" type="submit">수정</button>
 			</div>
 		</form>
 	</div>
@@ -66,10 +67,8 @@ $("#name").keyup(function() {
 	let reg = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
 	if (reg.test(name)) {//정규표현식을 통과 한다면
 		$("#nameErr").hide();
-		successState("#name");
 	} else {//정규표현식을 통과하지 못하면
 		$("#nameErr").show();
-		errorState("#name");
 	}
 });
 $("#tel").keyup(function(){
@@ -79,10 +78,8 @@ $("#tel").keyup(function(){
 
 	if (reg.test(tel)) {//정규표현식을 통과 한다면
 		$("#telErr").hide();
-		successState("#tel");
 	} else {//정규표현식을 통과하지 못하면
 		$("#telErr").show();
-		errorState("#tel");
 	}
 });
 $("#email").keyup(function() {
@@ -91,10 +88,8 @@ $("#email").keyup(function() {
 	let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	if (reg.test(email)) {//정규표현식을 통과 한다면
 		$("#emailErr").hide();
-		successState("#email");
 	} else {//정규표현식을 통과하지 못하면
 		$("#emailErr").show();
-		errorState("#email");
 	}
 });
 
@@ -107,29 +102,20 @@ function submitAction(){
 	let nameErr=$("#nameErr").css('display');
 	let emailErr=$("#emailErr").css('display');
 	let telErr=$("#telErr").css('display');
-	if(id.val()=="" || id.val()==null || id.val()!="" && id.val()!=null && idErr=='inline'){
-		errorState("#id");
-		id.focus();
-		return false;
-	}else if(pwd.val()=="" || pwd.val()==null || pwd.val()!="" && pwd.val()!=null && pwdErr=='inline'){
-		errorState("#pwd");
-		pwd.focus();
-		return false;
-	}else if(rePwd.val()=="" || rePwd.val()==null || rePwd.val()!="" && rePwd.val()!=null && rePwdErr=='inline'){
-		errorState("#rePwd");
-		rePwd.focus();
-		return false;
-	}else if(name.val()=="" || name.val()==null || name.val()!="" && name.val()!=null && nameErr=='inline'){
-		errorState("#name");
+	let rname="<%=request.getAttribute("name")%>";
+	let remail="<%=request.getAttribute("email")%>";
+	let rtel="<%=request.getAttribute("tel")%>";
+	if(name.val()=="" || name.val()==null || name.val()!="" && name.val()!=null && nameErr=='inline'){
 		name.focus();
 		return false;
+	}else if(tel.val()=="" || tel.val()==null || tel.val()!="" && tel.val()!=null && telErr=='inline'){
+		tel.focus();
+		return false;
 	}else if(email.val()=="" || email.val()==null || email.val()!="" && email.val()!=null && emailErr=='inline'){
-		errorState("#email");
 		email.focus();
 		return false;
-	}else if(tel.val()=="" || tel.val()==null || tel.val()!="" && tel.val()!=null && telErr=='inline'){
-		errorState("#tel");
-		tel.focus();
+	}else if(name.val()==rname && tel.val()==rtel && email.val()==remail){
+		alert("수정사항이 없습니다.");
 		return false;
 	}else{
 		return true;

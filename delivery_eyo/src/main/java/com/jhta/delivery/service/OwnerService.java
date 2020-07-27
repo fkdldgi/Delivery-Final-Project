@@ -30,6 +30,10 @@ public class OwnerService {
 	public int pwdUpdate(HashMap<String, Object> map) {
 		return dao.pwdUpdate(map);
 	}
+	//사장 이름,전화번호,이메일변경
+	public int ownerUpdate(HashMap<String, Object> map) {
+		return dao.ownerUpdate(map);
+	}
 	public List<ShopVo> shop_list(String id){
 		return dao.shop_list(id);
 	}
