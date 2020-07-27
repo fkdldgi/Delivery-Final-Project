@@ -10,7 +10,11 @@
 	</insert>
 	<!-- 기본정보 업데이트 -->
 	<update id="basicinfo_update" parameterType="hashmap">
-		update shop set profile_img=#{profile_img},introduce=#{introduce},tel=#{tel},status=#{status} where num=#{num}
+		update shop set profile_img=#{profile_img},introduce=#{introduce},info=#{info},review_info=#{review_info},tel=#{tel},status=#{status} where num=#{num}
+	</update>
+	<!-- 운영정보 업데이트 -->
+	<update id="operationinfo_update" parameterType="hashmap">
+		update shop set shop_category=#{shop_category},payment_option=#{payment_option},open_time=#{open_time},close_time=#{close_time},personal_day=#{personal_day} where num=#{num}
 	</update>
 	<!-- 가게번호로 가게정보 얻어오기 -->
 	<select id="selectShop" parameterType="int" resultType="shop">

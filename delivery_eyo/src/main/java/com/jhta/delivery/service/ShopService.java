@@ -18,14 +18,20 @@ public class ShopService {
 	@Autowired
 	private AddressDao addrDao;
 	
+	//가게등록 및 주소등록 트랜잭션
 	@Transactional
 	public int insert(ShopVo shopVo,AddressVo addrVo) {
 		addrDao.insert(addrVo);
 		shopDao.insert(shopVo);
 		return 1;
 	}
+	//기본정보 업데이트
 	public int basic_info_update(HashMap<String, Object> map) {
 		return shopDao.basic_info_update(map);
+	}
+	//운영정보 업데이트
+	public int operation_info_update(HashMap<String, Object> map) {
+		return shopDao.operation_info_update(map);
 	}
 	public ShopVo selectShop(int num) {
 		return shopDao.selectShop(num);
