@@ -25,6 +25,11 @@ public class MemberReviewService {
 		return dao.reviewImgList();
 	}
 	
+	// 가게번호로 리뷰 리스트 + 회원 정보 가져오기
+	public List<HashMap<String, Object>> review_member_list(int shop_num){
+		return dao.review_member_list(shop_num);
+	}
+	
 	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
 	public String reviewAble(HashMap<String, Integer> map) {
 		return dao.reviewAble(map);

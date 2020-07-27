@@ -12,16 +12,25 @@
 	<select id="reviewImgList" resultType="com.jhta.delivery.vo.Review_ImgVo">
 		select * from review_img
 	</select>
-
-	<!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 -->
-	<select id="reviewAble" parameterType="hashmap" resultType="String">
-		select NVL(1,0) chk
-		from ORDER_MAIN,ORDER_TRANSACTION
-		where (select num from ORDER_MAIN where member_num=#{member_num}) = (select order_num from ORDER_TRANSACTION where shop_num=#{shop_num})
+	
+	<!-- 가게번호로 리뷰 리스트 + 회원 정보 가져오기 -->
+	<select id="review_member_list" parameterType="int" resultType="hashmap">
+		select r.num,r.content,r.ref,r.lev,r.step,r.grade,r.regdate,r.review_img_num,r.shop_num,r.member_num,r.owner_num,m.name,m.img,m.gender
+		from review r,member m 
+		where shop_num=#{shop_num} and r.ref=0 
+		and r.lev=0 
+		and r.member_num=m.num order by r.num desc
 	</select>
 	
-	<!-- 주문한 고객이 리뷰를 썼는지 -->
-	<select id="selectMemberReview" parameterType="hashmap" resultType="com.jhta.delivery.vo.ReviewVo">
-		select * from REVIEW where member_num=#{member_num} and shop_num=#{shop_num}
-	</select>
+<!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 --> 
+<!-- 	<select id="reviewAble" parameterType="hashmap" resultType="String"> -->
+<!-- 		select NVL(count(*),0) chk -->
+<!-- 		from ORDER_MAIN,ORDER_TRANSACTION -->
+<!-- 		where (select num from ORDER_MAIN where member_num=#{member_num}) in (select order_num from ORDER_TRANSACTION where shop_num=#{shop_num}) -->
+<!-- 	</select> -->
+	
+<!-- 주문한 고객이 리뷰를 썼는지 -->
+<!-- 	<select id="selectMemberReview" parameterType="hashmap" resultType="com.jhta.delivery.vo.ReviewVo"> -->
+<!-- 		select * from REVIEW where member_num=#{member_num} and shop_num=#{shop_num} -->
+<!-- 	</select> -->
 </mapper>

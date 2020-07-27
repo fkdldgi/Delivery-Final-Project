@@ -57,55 +57,85 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		</div>
 		<!-- 리뷰 넣는 부분 -->
 		<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-		<c:choose>
-			<c:when test="${shopReviewList eq '[]' }">
-				<div style="width: 100%; height: 500px;">
-					<h1>등록된 리뷰가 없습니다.</h1>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<c:when test="${memberReviewList  eq '[]'}">
-					<form action="" method="post">
-						<div>
-							<h1>리뷰 작성하기</h1>
-							<textarea rows="5" cols="50"></textarea>
-							<input type="file">
-						</div>
-						<input type="submit" value="등록">
-					</form>
+			<c:choose>
+				<c:when test="${review_member_list eq '[]' }">
+					<div style="width: 100%; height: 500px;">
+						<h1>등록된 리뷰가 없습니다.</h1>
+					</div>
 				</c:when>
-				<c:forEach items="${shopReviewList }" var="reviewList">
-					<p>---------------------------</p>
-					<p>리뷰 번호 : ${reviewList.num }</p>
-					<p>리뷰 내용 : ${reviewList.content }</p>
-					<p>그룹 번호 : ${reviewList.ref }</p>
-					<p>레벨 번호 : ${reviewList.lev }</p>
-					<p>리뷰 점수 :${reviewList.grade }</p>
-					<p>리뷰 작성일 : ${reviewList.regdate }</p>
-					<p>리뷰 이미지 : ${reviewList.review_img_num }</p>
-					<p>가게 번호 : ${reviewList.shop_num }</p>
-					<p>회원 번호 : ${reviewList.member_num }</p>
-					<p>사장 번호 : ${reviewList.owner_num }</p>
-					<c:forEach items="${reviewImg }" var="img">
-						<c:if test="${reviewList.review_img_num eq '${img.num }'}">
-							<p>이미지 번호 : ${img.num }</p>
-							<p>이미지 경로 : ${img.img_path }</p>
-							<p>이미지 원본파일 이름 : ${img.original_filename }</p>
-							<p>이미지 저장파일 이름 : ${img.save_filename }</p>
-						</c:if>
+				<c:otherwise>
+					<c:forEach items="${review_member_list }" var="rmList">
+						<div class="card">
+							<!-- 리뷰 회원 프로필 이미지 -->
+							<c:choose>
+								<c:when test="${rmList eq null}">
+									<div style="width: 10%; height: 100%; float:left; text-align: right;">
+										<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
+									</div>
+									<div style="width: 85%; height: 100%; float: left; margin-left: 5px;">
+										<span>${rmList.NAME }님</span>
+									</div>
+								</c:when> 
+								<c:otherwise>
+									<div style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+										<div style="width: 10%; height: 100%; float:left; text-align: right; margin-right: 10px;">
+											<img src="/delivery/resources/images/${rmList.IMG }" style="border-radius: 70%; width: 50px; height: 50px;">
+										</div>
+										<div style="width: 60%; height: 100%; margin-left: 15px; margin-top: 10px; float:left">
+											<h4 style="font-weight: bold;">${rmList.NAME }님</h4>
+										</div>
+										<div style="width: 30%;">
+											<c:choose>
+												<c:when test="${rmList.GRADE eq '5' }">
+													<img src="/delivery/resources/images/star_5.png" style="width: 100px; height: 25px;">
+												</c:when>
+												<c:when test="${rmList.GRADE eq '4' }">
+													<img src="/delivery/resources/images/star_4.png" style="width: 100px; height: 25px;">
+												</c:when>
+												<c:when test="${rmList.GRADE eq '3' }">
+													<img src="/delivery/resources/images/star_3.png" style="width: 100px; height: 25px;">
+												</c:when>
+												<c:when test="${rmList.GRADE eq '2' }">
+													<img src="/delivery/resources/images/star_2.png" style="width: 100px; height: 25px;">
+												</c:when>
+												<c:when test="${rmList.GRADE eq '1' }">
+													<img src="/delivery/resources/images/star_1.png" style="width: 100px; height: 25px;">
+												</c:when>
+											</c:choose>
+										</div>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${rmList.REVIEW_IMG_NUM eq null}">
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${reviewImg }" var="img">
+										<c:choose>
+											<c:when test="${rmList.REVIEW_IMG_NUM == img.num }">
+<!-- 												<p>=============이미지 부분===========</p> -->
+<%-- 												<p>이미지 번호 : ${img.num }</p> --%>
+<%-- 												<p>이미지 경로 : ${img.img_path }</p> --%>
+<%-- 												<p>이미지 원본파일 이름 : ${img.original_filename }</p> --%>
+<%-- 												<p>이미지 저장파일 이름 : ${img.save_filename }</p> --%>
+												<img src="/delivery/resources/images/${img.original_filename }" style=" width: 600px; height: 400px; margin: auto; margin-top: 20px; margin-bottom: 20px;"> 
+											</c:when>
+											<c:otherwise></c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<p>사장 번호 : ${rmList.OWNER_NUM }</p>
+							<p>리뷰 번호 : ${rmList.NUM }</p>
+							<p>리뷰 등록일 : ${rmList.OWNER_NUM }</p>
+							<p>사장 번호 : ${rmList.OWNER_NUM }</p>
+							<p>리뷰 점수 : ${rmList.GRADE }</p>
+							<p>리뷰 내용 : ${rmList.CONTENT }</p>
+							<p>---------------------------</p>
+						</div>
 					</c:forEach>
-					<p>---------------------------</p>
-				</c:forEach>
-<%-- 			<c:forEach items="${reviewImg }" var="img"> --%>
-<!-- 				<p>--------------------</p> -->
-<%-- 				<p>이미지 번호 : ${img.num }</p> --%>
-<%-- 				<p>이미지 경로 : ${img.img_path }</p> --%>
-<%-- 				<p>이미지 원본파일 이름 : ${img.original_filename }</p> --%>
-<%-- 				<p>이미지 저장파일 이름 : ${img.save_filename }</p> --%>
-<!-- 				<p>--------------------</p> -->
-<%-- 			</c:forEach> --%>
-			</c:otherwise>
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<!-- 가게정보 넣는 부분 -->
 		<div class="tab-pane fade" id="nav-contact" role="tabpanel"
