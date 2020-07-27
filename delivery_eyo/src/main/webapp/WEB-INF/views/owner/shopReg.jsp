@@ -135,7 +135,7 @@
 		<div class="form-group under_border">
 			<label for="">가게 프로필사진</label><br>
 			<img src="/delivery/resources/images/default.png" class="rounded-circle" id="preview" width="70" height="70">
-			<input type="file" name="file1" accept="image/*" id="file" required>
+			<input type="file" name="file1" accept="image/*" id="file">
 		</div>
 		<div class="form-group under_border">
 			<label for="shop_name">가게명</label> 
