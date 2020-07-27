@@ -53,8 +53,7 @@
 	<select id="pre" parameterType="int" resultType="notice">
 		select * from(
 		<![CDATA[
-		select * from notice where num < #{num} ]]>
-		where division=0
+		select * from notice where num < #{num} and division=0]]>
 		order by num desc
 		) where rownum=1
 	</select>

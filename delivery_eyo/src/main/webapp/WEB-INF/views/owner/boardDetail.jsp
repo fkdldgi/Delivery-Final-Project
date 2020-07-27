@@ -7,7 +7,7 @@
 
 </script>
 <!-- 맨위에 띄워지는 공지사항 nav -->
-<div><!-- 만져도 되는감? -->
+<div>
     <div>
      	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      		<a class="navbar-brand" href="#">공지사항</a>

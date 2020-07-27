@@ -2,12 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<style>
 
-</style>
-<script>
-
-</script>
 <!-- 맨위에 띄워지는 공지사항 nav -->
 <div>
     <div>
@@ -55,10 +50,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="vo" items="${list}"> <!-- list있는 값들 -->
+			<c:forEach var="vo" items="${list}"  varStatus="i"> <!-- list있는 값들 -->
 			<tr>
-				<td>${vo.num}</td>
-				<td><a href="/delivery/owner/detail?num=${vo.num }">${vo.title}</a></td>
+				<td>${(pu.pageNum-1)*10+(i.index+1)}</td>
+				<td><a href="/delivery/owner/boarddetail?num=${vo.num }">${vo.title}</a></td>
 				<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" var="regdate"/>
 				<td>${regdate}</td>
 			</tr>

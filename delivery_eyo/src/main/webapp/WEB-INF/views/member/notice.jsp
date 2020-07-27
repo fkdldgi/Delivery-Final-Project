@@ -20,9 +20,9 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <c:forEach var="vo" items="${list}"> <!-- list있는 값들 -->
+	    <c:forEach var="vo" items="${list}" varStatus="i"> <!-- list있는 값들 -->
 		<tr>
-			<td>${vo.num}</td>
+			<td>${(pu.pageNum-1)*10+(i.index+1)}</td>
 			<td><a href="/delivery/member/detail?num=${vo.num }">${vo.title}</a></td>
 			<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" var="regdate"/>
 			<td>${regdate}</td>
