@@ -47,7 +47,14 @@
 			<h2>주문정보</h2>
 		</div>
 		<input type="hidden" name="shopNum" value="${vo.num }">
-		
+		<div class="form-group under_border">
+			<label for="min_price">최소주문금액</label><br> 
+			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" required>원
+		</div>
+		<div class="form-group under_border">
+			<label for="delivery_tip">지역별 배달팁</label><br> 
+			<input type="number" name="delivery_tip" id="delivery_tip" required>원
+		</div>
 
 		<div class="form-group form-check">
 			<label class="form-check-label"></label>
@@ -56,6 +63,11 @@
 	</form>
 </div>
 <script>
-
+//최소주문금액 최대길이 검증
+function maxLengthCheck(object) {
+	if (object.value.length > object.maxLength) {
+		object.value = object.value.slice(0, object.maxLength);
+	}
+}
 
 </script>

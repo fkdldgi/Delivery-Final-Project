@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jhta.delivery.dao.AddressDao;
 import com.jhta.delivery.dao.ShopDao;
 import com.jhta.delivery.vo.AddressVo;
+import com.jhta.delivery.vo.Delivery_LocationVo;
 import com.jhta.delivery.vo.ShopVo;
 
 @Service
@@ -17,12 +18,15 @@ public class ShopService {
 	private ShopDao shopDao;
 	@Autowired
 	private AddressDao addrDao;
+	@Autowired
+	private Delivery_LocationService del_locDao;
 	
 	//가게등록 및 주소등록 트랜잭션
 	@Transactional
-	public int insert(ShopVo shopVo,AddressVo addrVo) {
+	public int insert(ShopVo shopVo,AddressVo addrVo,Delivery_LocationVo del_locVo) {
 		addrDao.insert(addrVo);
 		shopDao.insert(shopVo);
+		del_locDao.insert(del_locVo);
 		return 1;
 	}
 	//기본정보 업데이트
