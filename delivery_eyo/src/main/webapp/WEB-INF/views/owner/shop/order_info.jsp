@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
 /* navbar랑 form 떨어지게 하기 */
 #div_wrap {
@@ -52,8 +54,23 @@
 			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" value="${shopVo.min_price }" required>원
 		</div>
 		<div class="form-group under_border">
-			<label for="delivery_tip">지역선택</label><br>
-			<input type="number" name="delivery_tip" id="delivery_tip" required>원
+			<label for="delivery_tip">배달팁 입력</label><br>
+			<input type="number" min="0" max="100000" step="500" maxlength="5" name="tip" id="tip" oninput="maxLengthCheck(this)" value="${shopVo.min_price }" required>원
+		</div>
+		<div class="form-group under_border">
+			<input type="hidden" name="sido" value="${del_locVo.sido }">
+			<input type="hidden" name="sigungu" value="${del_locVo.sigungu }">
+			<label>지역선택</label><br>
+			<p><b>${del_locVo.sido }></b> ${del_locVo.sigungu }</p>
+			<!-- 읍면동 -->
+			<c:set var="hnameArr" value="${fn:split(del_locVo.hname,',')}"/> <!-- 휴무일을 jstl split으로 쪼개기 -->
+			<div class="btn-group-toggle" data-toggle="buttons" id="chk1">			
+				<c:forEach items="${hnameArr }" var="hname">
+					<label class='btn btn-light border border-dark'> 
+						<input type='checkbox' autocomplete='off' name='hname' value='${hname }'>${hname }
+					</label>
+				</c:forEach>
+			</div>
 		</div>
 
 		<div class="form-group form-check">
