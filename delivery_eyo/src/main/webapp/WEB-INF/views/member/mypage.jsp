@@ -120,12 +120,14 @@
 				</tbody>
 			</table>
 			<button type="submit" class="btn btn-primary">수정완료</button>
-			<input type="text" name="num" value="${memberNum }">
+			<input type="hidden" name="num" value="${memberNum }">
 		</form>
 		<br>
 		<div style="margin-bottom: 50px; text-align: center;">
 			<button type="button" class="btn btn-primary"
 				onclick="location.href='/delivery/member/QnaList?memberNum=${sessionScope.memberNum}'">문의목록</button>
+			<button type="button" class="btn btn-primary"
+				onclick="location.href='/delivery/member/orderList?memberNum=${sessionScope.memberNum}'">주문목록</button>
 		</div>
 	</div>
 </body>
