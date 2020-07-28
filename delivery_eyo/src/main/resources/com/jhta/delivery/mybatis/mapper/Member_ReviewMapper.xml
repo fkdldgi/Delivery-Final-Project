@@ -30,6 +30,16 @@
                                                 where order_num in (select num from order_main 
                                                                                 where member_num=#{member_num})))
 	</select>
+	
+	<!-- 가게번호와 고객번호로 리뷰여부 판단하기 -->
+	<select id="reviewAble" parameterType="hashmap" resultType="com.jhta.delivery.vo.Order_MainVo">
+		select * from ORDER_MAIN 
+   			where review_status=0 
+        		and shop_num=#{shop_num}
+        		and member_num=#{member_num}
+	</select>
+	
+	
 	<!-- 멤버 번호와  -->
 <!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 --> 
 <!-- 	<select id="reviewAble" parameterType="hashmap" resultType="String"> -->

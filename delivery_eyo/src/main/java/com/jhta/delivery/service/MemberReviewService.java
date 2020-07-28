@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.delivery.dao.MemberReviewDao;
+import com.jhta.delivery.vo.Order_MainVo;
 import com.jhta.delivery.vo.ReviewVo;
 import com.jhta.delivery.vo.Review_ImgVo;
 
@@ -31,13 +32,18 @@ public class MemberReviewService {
 	}
 	
 	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
-	public String reviewAble(HashMap<String, Integer> map) {
-		return dao.reviewAble(map);
-	}
+//	public String reviewAble(HashMap<String, Integer> map) {
+//		return dao.reviewAble(map);
+//	}
 	
 	//주문한 고객이 리뷰를 썼는지
-	public List<ReviewVo> selectMemberReview(HashMap<String, Integer> map){
-		return dao.selectMemberReview(map);
+//	public List<ReviewVo> selectMemberReview(HashMap<String, Integer> map){
+//		return dao.selectMemberReview(map);
+//	}
+	
+	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
+	public List<Order_MainVo> reviewAble(HashMap<String, Integer> map) {
+		return dao.reviewAble(map);
 	}
 	
 	//멤버번호로 주문한 가게번호 가져오기

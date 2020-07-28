@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.delivery.vo.Order_MainVo;
 import com.jhta.delivery.vo.ReviewVo;
 import com.jhta.delivery.vo.Review_ImgVo;
 
@@ -34,8 +35,8 @@ public class MemberReviewDao {
 	}
 	
 	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
-	public String reviewAble(HashMap<String, Integer> map) {
-		return sqlSession.selectOne(NAMESPACE+".reviewAble", map);
+	public List<Order_MainVo> reviewAble(HashMap<String, Integer> map) {
+		return sqlSession.selectList(NAMESPACE+".reviewAble", map);
 	}
 	
 	//주문한 고객이 리뷰를 썼는지

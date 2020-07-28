@@ -15,6 +15,8 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			src="http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif"
 			style="width: 20%; height: 100px;" class="mr-3">
 		<div class="media-body">
+			<p hidden="hidden" id="shop_num">${info.num}</p>
+			<p hidden="hidden" id="owner_num">${info.owner_num }</p>
 			<p><h2 style="font-weight: bold;" class="mt-0">${info.name}</h2></p>
 			<p><h4>최소 결제금액 : <span style="color: red;">${info.min_price }</span>원</h4></p>
 			<p><h4>결재 수단 : <span style="color: green;">${info.payment_option}</span></h4></p>
@@ -40,6 +42,13 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 			aria-labelledby="nav-home-tab">
 			<div class="card-body">
+			<c:choose>
+				<c:when test="${mainmenu eq '[]' }">
+					<div style="width: 100%; height: 410px;">
+						<h1>등록된 메뉴가 없습니다.</h1>
+					</div>
+				</c:when>
+				<c:otherwise>
 				<c:forEach items="${mainmenu }" var="main">
 					<div class="row border-bottom" data-toggle="modal" data-target="#menuModal" onclick="javascript:menu_detail(${main.num})">
 <%-- 					<p>${main.num }</p> --%>
@@ -53,13 +62,26 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 						</div>
 					</div>
 				</c:forEach>
+				</c:otherwise>
+			</c:choose>	
 			</div>
 		</div>
 		<!-- 리뷰 넣는 부분 -->
 		<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 			<c:choose>
+				<c:when test="${reviewAble eq '[]'}">
+				</c:when>
+				<c:otherwise>
+					<h4 style="font-weight:bold; margin-top: 20px; margin-left: 70px; margin-bottom: 20px;">*작성 가능한 리뷰가 있습니다.</h4>
+					<div id="reviewImg"></div>
+					<textarea id="reviewText" style="margin-left: 50px;" rows="10" cols="83" placeholder="30자 이상 써주세요~"></textarea><br>
+					<input type="file" accept="image/*" id="ex_file" style="margin-left: 50px;" class="upload-hidden">
+					<button type="button" id="reviewBtn" class="btn btn-primary" style="width: 100px; height: 50px; margin-left: 555px; margin-bottom: 10px; margin-top: -30px;" >리뷰 등록</button>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
 				<c:when test="${review_member_list eq '[]' }">
-					<div style="width: 100%; height: 500px;">
+					<div style="width: 100%; height: 450px;">
 						<h1>등록된 리뷰가 없습니다.</h1>
 					</div>
 				</c:when>
@@ -220,7 +242,9 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 		</div>
 	</div>
 </div>
+
 <script>
+
 	//console.log('${sessionScope.memberId}') //아이디 세션 확인하기
 	
 	//메뉴 모달 띄우면서 출력값(메뉴,옵션메뉴) 뿌려주는 함수
@@ -434,4 +458,57 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 			alert('최소 주문금액보다 적습니다');
 		}
 	});
+	
+	//리뷰 작성 함수
+	$("#reviewBtn").on('click',function(){
+		var reviewLength = $('#reviewText').val().length;
+		if(reviewLength<30){
+			alert("30자 이상 입력해주세요~");
+		}else{
+			insertReveiw();
+		}
+	});
+	
+	//리뷰 이미지 함수
+	$("#file").change(function() {
+		readURL(this);
+	});
+	
+	//리뷰 넣는 함수
+	var insertReveiw = function(){
+		var shop_num = $('#shop_num').text();
+		var reviewText = $('#reviewText').val();
+		var member_num = '${sessionScope.memberNum}';
+		var owner_num = $('#owner_num').text();
+		
+		console.log('reviewText : ' + reviewText);
+		console.log('member_num : ' + member_num);
+		console.log('owner_num : ' + owner_num);
+		console.log('shop_num : ' + shop_num);
+		
+// 		$.ajax({
+// 	        url: "/delivery/store/reviewInsert",
+// 	        type: "post",
+// 	        data: JSON.stringify(num),
+// 	        dataType: "json",
+// 	        contentType: "application/json",
+// 	        success: function(data) {
+	        	
+// 				if(data.optionList[0] != null){
+// 					$("#modal-body").append("<p><h5 style='font-weight:bold;'>"+ data.optionList[0].category +"</h5></p>");
+// 					for(i in data.optionList){
+// 						$("#modal-body").append("<p><input type='checkbox' onclick='clickOption()' class='check' value="+ 
+// 								data.optionList[i].price +
+// 								',' + data.optionList[i].num + 
+// 								',' + data.optionList[i].name + ">&nbsp;&nbsp;" +
+// 								"<label>"+ data.optionList[i].name +"</label>" +
+// 								"<label style='float:right'>+"+ data.optionList[i].price +"원</label></p>"+
+// 								"<div id='optionNum' hidden >"+ data.optionList[i].num + "</div>");
+// 							}
+// 						}
+// 			        },error: function(errorThrown) {
+// 					alert(errorThrown.statusText);
+// 				}
+// 		});
+	}
 </script>
