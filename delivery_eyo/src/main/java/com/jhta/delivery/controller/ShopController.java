@@ -132,7 +132,7 @@ public class ShopController {
 			
 			ShopVo shopVo=new ShopVo(0,profile_img,name,introduce,tel,buildingCode,
 					address_detail,shop_category,min_price,payment_option,info,review_info,
-					personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
+					personal_day,open_time,close_time,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
 			
 			Delivery_LocationVo del_locVo=new Delivery_LocationVo(0,0,delivery_sido,delivery_sigungu,delivery_area);
 			

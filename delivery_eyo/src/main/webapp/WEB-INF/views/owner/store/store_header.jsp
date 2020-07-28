@@ -37,7 +37,7 @@
 					<div class="dropdown-menu">				
 						<a class="dropdown-item" href="${pageContext.request.contextPath }/owner/shop/basicinfo?num=${vo.num }">기본정보</a>
 						<a class="dropdown-item" href="${pageContext.request.contextPath }/owner/shop/operationinfo?num=${vo.num }">운영정보</a>
-						<a class="dropdown-item" href="/delivery/owner/store_manage/shop_info?num=${vo.num }">주문정보</a>
+						<a class="dropdown-item" href="${pageContext.request.contextPath }/owner/shop/orderinfo?num=${vo.num }">주문정보</a>
 						<a class="dropdown-item" href="/delivery/owner/store_manage/shop_info?num=${vo.num }">배달권역</a>
 					</div>
 				</div>

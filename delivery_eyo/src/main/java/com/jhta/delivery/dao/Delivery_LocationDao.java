@@ -16,4 +16,8 @@ public class Delivery_LocationDao {
 	public int insert(Delivery_LocationVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
+	//가게번호로 배달지역 얻어오기
+	public Delivery_LocationVo selectLoc(int num) {
+		return session.selectOne(NAMESPACE+".selectLoc",num);
+	}
 }

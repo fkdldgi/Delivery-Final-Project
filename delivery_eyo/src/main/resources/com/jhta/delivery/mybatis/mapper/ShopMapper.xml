@@ -5,8 +5,8 @@
 <mapper namespace="mybatis.ShopMapper">
 	<!-- 가게등록 -->
 	<insert id="insert" parameterType="shop">
-		insert into shop(num,profile_img,name,introduce,tel,buildingCode,address_detail,shop_category,min_price,payment_option,info,review_info,personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,reg_status,status,ultracall,addcount,owner_num,regdate)
-		values(SHOP_SEQ.NEXTVAL,#{profile_img},#{name},#{introduce},#{tel},#{buildingCode},#{address_detail},#{shop_category},#{min_price},#{payment_option},#{info},#{review_info},#{personal_day},#{open_time},#{close_time},#{delivery_area},#{mutual_name},#{addr},#{reg_num},0,0,0,0,#{owner_num},sysdate)
+		insert into shop(num,profile_img,name,introduce,tel,buildingCode,address_detail,shop_category,min_price,payment_option,info,review_info,personal_day,open_time,close_time,mutual_name,addr,reg_num,reg_status,status,ultracall,addcount,owner_num,regdate)
+		values(SHOP_SEQ.NEXTVAL,#{profile_img},#{name},#{introduce},#{tel},#{buildingCode},#{address_detail},#{shop_category},#{min_price},#{payment_option},#{info},#{review_info},#{personal_day},#{open_time},#{close_time},#{mutual_name},#{addr},#{reg_num},0,0,0,0,#{owner_num},sysdate)
 	</insert>
 	<!-- 기본정보 업데이트 -->
 	<update id="basicinfo_update" parameterType="hashmap">

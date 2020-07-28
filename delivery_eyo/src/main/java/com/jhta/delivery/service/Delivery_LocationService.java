@@ -15,4 +15,8 @@ public class Delivery_LocationService {
 	public int insert(Delivery_LocationVo vo) {
 		return dao.insert(vo);
 	}
+	//가게번호로 배달지역 얻어오기
+	public Delivery_LocationVo selectLoc(int num) {
+		return dao.selectLoc(num);
+	}
 }

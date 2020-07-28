@@ -6,4 +6,7 @@
 	<insert id="insert" parameterType="delivery_loc">
 		insert into delivery_location values(#{num},shop_seq.currval,#{sido},#{sigungu},#{hname})
 	</insert>
+	<select id="selectLoc" parameterType="int" resultType="delivery_loc">
+		select * from delivery_location where shop_num=#{num}
+	</select>
 </mapper>

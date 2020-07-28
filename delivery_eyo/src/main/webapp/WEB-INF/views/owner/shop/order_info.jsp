@@ -46,13 +46,13 @@
 		<div class="form-group under_border">
 			<h2>주문정보</h2>
 		</div>
-		<input type="hidden" name="shopNum" value="${vo.num }">
+		<input type="hidden" name="shopNum" value="${shopVo.num }">
 		<div class="form-group under_border">
 			<label for="min_price">최소주문금액</label><br> 
-			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" required>원
+			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" value="${shopVo.min_price }" required>원
 		</div>
 		<div class="form-group under_border">
-			<label for="delivery_tip">지역별 배달팁</label><br> 
+			<label for="delivery_tip">지역선택</label><br>
 			<input type="number" name="delivery_tip" id="delivery_tip" required>원
 		</div>
 
