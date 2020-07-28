@@ -53,11 +53,8 @@
 			<label for="min_price">최소주문금액</label><br> 
 			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" value="${shopVo.min_price }" required>원
 		</div>
-		<div class="form-group under_border">
-			<label for="delivery_tip">배달팁 입력</label><br>
-			<input type="number" min="0" max="100000" step="500" maxlength="5" name="tip" id="tip" oninput="maxLengthCheck(this)" value="${shopVo.min_price }" required>원
-		</div>
-		<div class="form-group under_border">
+		<button type="button" class="btn btn-primary" id="btn1" onclick="showTip()">추가</button> <!-- 폼 안의 버튼에 type="button"을 주면 버튼으로만 사용가능 -->
+		<div class="form-group under_border d-none" id="tip_wrap">
 			<input type="hidden" name="sido" value="${del_locVo.sido }">
 			<input type="hidden" name="sigungu" value="${del_locVo.sigungu }">
 			<label>지역선택</label><br>
@@ -70,6 +67,28 @@
 						<input type='checkbox' autocomplete='off' name='hname' value='${hname }'>${hname }
 					</label>
 				</c:forEach>
+				
+				<!-- 
+				위에 테스트해본것
+				<c:forEach items="${hnameArr }" var="hname">
+					<c:forEach items="${list }" var="del_tipVo">
+						<c:set var="tip_hnameArr" value="${fn:split(del_tipVo.hname,',')}"/>
+						<c:forEach items="${tip_hnameArr }" var="tiphname">
+							<c:if test="${tiphname!=hname }">
+								<label class='btn btn-light border border-dark'> 
+									<input type='checkbox' autocomplete='off' name='hname' value='${hname }'>${hname }
+								</label>
+							</c:if>
+						</c:forEach>
+					</c:forEach>
+				</c:forEach>
+				 -->
+				<br><br>
+				<label for="tip">배달팁 입력</label><br>
+				<input type="number" min="0" max="100000" step="500" maxlength="5" name="tip" id="tip" oninput="maxLengthCheck(this)" value="${shopVo.min_price }" required>원
+				<br><br>
+				<button type="button" class="btn btn-primary" id="cancleBtn" onclick="hideTip()">취소</button>
+				<button type="button" class="btn btn-primary" id="addBtn" onclick="addTip()">완료</button>
 			</div>
 		</div>
 
@@ -80,11 +99,60 @@
 	</form>
 </div>
 <script>
+//배달팁 추가 보이기
+function showTip(){
+	$("#tip_wrap").removeClass("d-none");
+	$("#btn1").addClass("d-none");
+}
+//배달팁 추가 숨기기
+function hideTip(){
+	$("#tip_wrap").addClass("d-none");
+	$("#btn1").removeClass("d-none");
+}
+function addTip(){
+	var shopNum=$('input[name="shopNum"]').val();
+	var tip=$("#tip").val();
+	var sido=$('input[name="sido"]').val();
+	var sigungu=$('input[name="sigungu"]').val();
+	var hnames=new Array();
+	$('input[name=hname]:checked').each(function(index){
+		hnames.push(this.value);	
+	});
+	var hname="";
+	for(let i=0; i<hnames.length; i++){
+		if(i==hnames.length-1){
+			hname+=hnames[i];
+		}else{
+			hname+=hnames[i]+",";
+		}
+	}
+	$.ajax({
+		url:"/delivery/owner/shop/deliveryTip",
+		data:{shop_num:shopNum,tip:tip,sido:sido,sigungu:sigungu,hname:hname},
+		success:function(data){
+			if(data==1){
+				alert('지역별 배달팁 설정완료');
+			}else{
+				alert("배달팁 설정 실패!");
+			}
+		}
+	});
+}
+
+$("label.btn").on('click',function(){ //라벨을 클릭했을 때
+	if($(this).hasClass('active')===true){ //active클래스가 존재한다는 것은 체크를 해제한 것
+		$(this).children().removeAttr('checked');
+	}else if($(this).hasClass('active')===false){
+		$(this).children().attr('checked',true);
+	}
+});
+
 //최소주문금액 최대길이 검증
 function maxLengthCheck(object) {
 	if (object.value.length > object.maxLength) {
 		object.value = object.value.slice(0, object.maxLength);
 	}
 }
+
 
 </script>
