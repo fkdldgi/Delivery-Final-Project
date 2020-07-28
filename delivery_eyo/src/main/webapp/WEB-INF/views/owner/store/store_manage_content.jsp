@@ -222,9 +222,9 @@
 			bb.removeAttr('id');
 			bb.attr('name','delete_menu_option');
 			bb.val(option_num);
-			
-			$("#aa").append(bb);
-			
+			if(bb.val() > 0){
+				$("#aa").append(bb);				
+			}			
 			aa.remove();
 		});
 		

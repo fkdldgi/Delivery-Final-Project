@@ -31,8 +31,8 @@ public class Owner_OrderDao {
 		return session.update(NAMESPACE+".Owner_UpdateTime", vo);
 	}
 	
-	// 배달이 완료된 계산값
-	public List<Owner_CalVo> end_cal(int num){
-		return session.selectList(NAMESPACE+".Owner_Cal", num);
+	// 계산값
+	public List<Owner_CalVo> calList(int num){
+		return session.selectList(NAMESPACE+".Owner_transaction", num);
 	}
 }

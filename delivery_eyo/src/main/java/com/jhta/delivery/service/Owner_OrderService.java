@@ -29,8 +29,8 @@ public class Owner_OrderService {
 		return dao.update_end_ex_time(vo);
 	}
 	
-	// 배달이 완료된 계산값
-	public List<Owner_CalVo> end_cal(int num){
-		return dao.end_cal(num);
+	// 계산값
+	public List<Owner_CalVo> calList(int num){
+		return dao.calList(num);
 	}
 }

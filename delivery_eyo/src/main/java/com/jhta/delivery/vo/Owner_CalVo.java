@@ -3,70 +3,45 @@ package com.jhta.delivery.vo;
 //  가게정산
 public class Owner_CalVo {
 
-	// 정산번호
-	private int num;
+	// 년도
+	private int year;
 	
-	// total price
-	private int total_price;
+	// 월
+	private int month;
 	
-	// ex_time
-	private String ex_time;
-	
-	// 배달완료 시간
-	private String end_time;
-	
-	// 배달상태
-	private String status;
+	// 총 가격
+	private int total_money;
 	
 	public Owner_CalVo() {}
 
-	public Owner_CalVo(int num, int total_price, String ex_time, String end_time, String status) {
-		super();
-		this.num = num;
-		this.total_price = total_price;
-		this.ex_time = ex_time;
-		this.end_time = end_time;
-		this.status = status;
-	}
-	
-	public String getStatus() {
-		return status;
+	public Owner_CalVo(int year, int month, int total_money) {
+		this.year = year;
+		this.month = month;
+		this.total_money = total_money;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public int getYear() {
+		return year;
 	}
 
-	public int getNum() {
-		return num;
+	public void setYear(int year) {
+		this.year = year;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public int getMonth() {
+		return month;
 	}
 
-	public int getTotal_price() {
-		return total_price;
+	public void setMonth(int month) {
+		this.month = month;
 	}
 
-	public void setTotal_price(int total_price) {
-		this.total_price = total_price;
+	public int getTotal_money() {
+		return total_money;
 	}
 
-	public String getEx_time() {
-		return ex_time;
-	}
-
-	public void setEx_time(String ex_time) {
-		this.ex_time = ex_time;
-	}
-
-	public String getEnd_time() {
-		return end_time;
-	}
-
-	public void setEnd_time(String end_time) {
-		this.end_time = end_time;
+	public void setTotal_money(int total_money) {
+		this.total_money = total_money;
 	}
 	
 	
