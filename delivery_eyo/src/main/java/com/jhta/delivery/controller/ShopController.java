@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jhta.delivery.service.Delivery_LocationService;
 import com.jhta.delivery.service.OwnerService;
 import com.jhta.delivery.service.ShopService;
 import com.jhta.delivery.vo.AddressVo;
+import com.jhta.delivery.vo.Delivery_LocationVo;
 import com.jhta.delivery.vo.OwnerVo;
 import com.jhta.delivery.vo.ShopVo;
 
@@ -108,11 +110,18 @@ public class ShopController {
 			//배달지역 동 or 리 배열
 			String[] addr_names= req.getParameterValues("addr_name");
 			//배열지역 시,도+시,군,구+동,리 합치기 (','로구분)
+//			for(int i=0; i<addr_names.length; i++) {
+//				if(i==addr_names.length-1) {
+//					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i];
+//				}else {
+//					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i]+",";
+//				}
+//			}
 			for(int i=0; i<addr_names.length; i++) {
 				if(i==addr_names.length-1) {
-					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i];
+					delivery_area+=addr_names[i];
 				}else {
-					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i]+",";
+					delivery_area+=addr_names[i]+",";
 				}
 			}
 			//로그인되어있는 아이디
@@ -123,10 +132,12 @@ public class ShopController {
 			
 			ShopVo shopVo=new ShopVo(0,profile_img,name,introduce,tel,buildingCode,
 					address_detail,shop_category,min_price,payment_option,info,review_info,
-					personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
+					personal_day,open_time,close_time,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
 			
-			//DB저장 트랜잭션처리(가게,주소)
-			shopService.insert(shopVo, addrVo);
+			Delivery_LocationVo del_locVo=new Delivery_LocationVo(0,0,delivery_sido,delivery_sigungu,delivery_area);
+			
+			//DB저장 트랜잭션처리(가게,주소,배달팁)
+			shopService.insert(shopVo, addrVo,del_locVo);
 			return ".owner.success";
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());

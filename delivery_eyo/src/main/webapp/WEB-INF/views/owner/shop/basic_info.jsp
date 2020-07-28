@@ -52,29 +52,37 @@
 		<input type="hidden" name="shopNum" value="${vo.num }"> 
 		<div class="form-group under_border">
 			<label for="">가게 프로필사진</label><br>
-			<img src="${pageContext.request.contextPath }/resources/profile/${profile_img }" class="rounded-circle" id="preview" width="70" height="70">
+			<img src="${pageContext.request.contextPath }/resources/profile/${vo.profile_img }" class="rounded-circle" id="preview" width="70" height="70">
 			<input type="hidden" name="profile_img" value="${profile_img }"> 
-			<input type="file" name="file1" accept="image/*" id="file" required>
+			<input type="file" name="file1" accept="image/*" id="file">
 		</div>
 		<div class="form-group under_border">
 			<label for="introduce">가게소개</label> 
-			<textarea class="form-control" cols="30" rows="5" placeholder="가게소개에 대한 내용을 입력하세요" id="introduce" name="introduce" required></textarea>
+			<textarea class="form-control" cols="30" rows="5" placeholder="가게소개에 대한 내용을 입력하세요" id="introduce" name="introduce">${vo.introduce }</textarea>
+		</div>
+		<div class="form-group under_border">
+			<label for="info">안내</label> 
+			<textarea class="form-control" cols="30" rows="5" placeholder="가게안내에 대한 내용을 입력하세요(선택)" id="info" name="info">${vo.info }</textarea>
+		</div>
+		<div class="form-group under_border">
+			<label for="review_info">리뷰안내</label>
+			<textarea class="form-control" cols="30" rows="5" placeholder="리뷰이벤트 또는 리뷰안내에 대한 내용을 입력하세요(선택)" id="review_info" name="review_info">${vo.review_info }</textarea>
 		</div>
 		<div class="form-group has-feedback under_border">
 			<label for="tel">전화번호</label> 
-			<input type="text" class="form-control" id="tel" placeholder="'-'를 빼고 입력해주세요." name="tel" required> 
+			<input type="text" class="form-control" id="tel" placeholder="'-'를 빼고 입력해주세요." name="tel" value="${vo.tel }" required> 
 			<span id="tel_err" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해 주세요.</span>
 		</div>
 		<div class="form-group has-feedback under_border">
-			<label>가게상태</label> 
+			<label>가게상태</label>
 			<div class="form-check">
 				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="status" value="0">close
+				<input type="radio"	class="form-check-input" name="status" value="0" <c:if test="${vo.status==0 }">checked</c:if>>close
 				</label>
 			</div>
 			<div class="form-check">
 				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="status" value="1" required>open
+				<input type="radio"	class="form-check-input" name="status" value="1"  <c:if test="${vo.status==1 }">checked</c:if> required>open
 				</label>
 			</div>
 		</div>	
