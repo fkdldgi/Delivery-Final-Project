@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.Delivery_TipMapper">
+	<insert id="insert" parameterType="delivery_tip">
+		insert into delivery_tip values(#{num},#{shop_num},#{tip},#{sido},#{sigungu},#{hname})
+	</insert>
+</mapper>
