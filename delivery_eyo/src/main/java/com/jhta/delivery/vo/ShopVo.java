@@ -50,9 +50,6 @@ public class ShopVo {
 	// 마감시간
 	private String close_time;
 
-	// 배달지역
-	private String delivery_area;
-
 	// 상호명
 	private String mutual_name;
 
@@ -84,9 +81,9 @@ public class ShopVo {
 
 	public ShopVo(int num, String profile_img, String name, String introduce, String tel, String buildingCode,
 			String address_detail, String shop_category, int min_price, String payment_option, String info,
-			String review_info, String personal_day, String open_time, String close_time, String delivery_area,
-			String mutual_name, String addr, String reg_num, int reg_status, int status, int ultracall, int addcount,
-			int owner_num, Date regdate) {
+			String review_info, String personal_day, String open_time, String close_time, String mutual_name,
+			String addr, String reg_num, int reg_status, int status, int ultracall, int addcount, int owner_num,
+			Date regdate) {
 		super();
 		this.num = num;
 		this.profile_img = profile_img;
@@ -103,7 +100,6 @@ public class ShopVo {
 		this.personal_day = personal_day;
 		this.open_time = open_time;
 		this.close_time = close_time;
-		this.delivery_area = delivery_area;
 		this.mutual_name = mutual_name;
 		this.addr = addr;
 		this.reg_num = reg_num;
@@ -233,14 +229,6 @@ public class ShopVo {
 
 	public void setClose_time(String close_time) {
 		this.close_time = close_time;
-	}
-
-	public String getDelivery_area() {
-		return delivery_area;
-	}
-
-	public void setDelivery_area(String delivery_area) {
-		this.delivery_area = delivery_area;
 	}
 
 	public String getMutual_name() {

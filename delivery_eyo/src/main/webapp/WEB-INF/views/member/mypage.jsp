@@ -42,6 +42,8 @@
 			$("input[name=tel]").removeAttr("readonly");
 			$("input[name=changedpwd]").removeAttr("readonly");
 			$("input[name=pwd]").removeAttr("readonly");
+			$("span[id=before]").removeAttr("hidden");
+			$("span[id=after]").Attr("hidden");
 		} else {
 			alert("비밀번호가 불일치합니다");
 		}
@@ -85,7 +87,9 @@
 									<input type="button" class="btn btn-outline-secondary"
 										onclick="pwdcheck()" value="비밀번호 확인">
 								</div>
-							</div> <span> *개인정보 보호를 위해 비밀번호 확인이 필요합니다</span>
+							</div> 
+							<span id="before"> *개인정보 보호를 위해 비밀번호 확인이 필요합니다</span>
+							<span id="after" hidden="hidden">비밀번호가 확인 되었습니다.</span>
 						</td>
 					</tr>
 					<tr>

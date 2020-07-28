@@ -1,10 +1,10 @@
 package com.jhta.delivery.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,15 +17,16 @@ public class OwnerMyPageController {
 	private OwnerService service;
 	
 	@GetMapping("/owner/mypage")
-	public String mypage(String id,HttpSession session) {
+	public String mypage(String id,Model model) {
 		//아이디로 해당회원 vo얻어오기
 		OwnerVo vo=service.idChk(id);
 		//세션에 비밀번호 저장
-		session.setAttribute("ownerPwd", vo.getPwd());
-		return ".owner.mypage.mypage_content";
+		model.addAttribute("ownerPwd", vo.getPwd());
+		return ".owner.mypage.reconfirm";
 	}
 	@PostMapping("/owner/mypage")
-	public String mypageOk(OwnerVo vo) {
+	public String mypageOk(String pwd,HttpSession session) {
+		session.setAttribute("ownerPwd",pwd);
 		return ".owner.mypage.home";
 	}
 }

@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jhta.delivery.service.Delivery_LocationService;
 import com.jhta.delivery.service.OwnerService;
 import com.jhta.delivery.service.ShopService;
 import com.jhta.delivery.vo.AddressVo;
+import com.jhta.delivery.vo.Delivery_LocationVo;
 import com.jhta.delivery.vo.OwnerVo;
 import com.jhta.delivery.vo.ShopVo;
 
@@ -40,22 +42,28 @@ public class ShopController {
 		
 		//업로드할 폴더 경로 얻어오기
 		String uploadPath=session.getServletContext().getRealPath("/resources/profile");
-		//전송된 파일명
-		String orgfileName=file1.getOriginalFilename();
-		//실제 저장할 파일명(중복되지 않도록)
-		//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
-		String savefileName=UUID.randomUUID()+"_"+orgfileName;
-		long filesize=file1.getSize();
+		String orgfileName="";
+		String savefileName="";
+		System.out.println(file1.getSize());
 		try {
-			//전송된 파일을 읽어오는 스트림
-			InputStream fis=file1.getInputStream();
-			//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
-			FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
-			//파일 복사하기
-			FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
-			fis.close();
-			fos.close();
-			String profile_img=uploadPath+"\\"+savefileName; //가게프로필 사진 경로
+			if(file1.getSize()!=0) {
+				//전송된 파일명
+				orgfileName=file1.getOriginalFilename();
+				//실제 저장할 파일명(중복되지 않도록)
+				//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
+				savefileName=UUID.randomUUID()+"_"+orgfileName;
+				//전송된 파일을 읽어오는 스트림
+				InputStream fis=file1.getInputStream();
+				//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
+				FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
+				//파일 복사하기 
+				FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
+				fis.close();
+				fos.close();
+			}else {
+				savefileName="default.png";
+			}
+			String profile_img=savefileName; //가게프로필 사진 파일명
 			String name=req.getParameter("name"); //가게명
 			String introduce=req.getParameter("introduce"); //가게소개
 			String tel=req.getParameter("tel"); //전화번호
@@ -102,11 +110,18 @@ public class ShopController {
 			//배달지역 동 or 리 배열
 			String[] addr_names= req.getParameterValues("addr_name");
 			//배열지역 시,도+시,군,구+동,리 합치기 (','로구분)
+//			for(int i=0; i<addr_names.length; i++) {
+//				if(i==addr_names.length-1) {
+//					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i];
+//				}else {
+//					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i]+",";
+//				}
+//			}
 			for(int i=0; i<addr_names.length; i++) {
 				if(i==addr_names.length-1) {
-					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i];
+					delivery_area+=addr_names[i];
 				}else {
-					delivery_area+=delivery_sido+" "+delivery_sigungu+" "+addr_names[i]+",";
+					delivery_area+=addr_names[i]+",";
 				}
 			}
 			//로그인되어있는 아이디
@@ -117,10 +132,12 @@ public class ShopController {
 			
 			ShopVo shopVo=new ShopVo(0,profile_img,name,introduce,tel,buildingCode,
 					address_detail,shop_category,min_price,payment_option,info,review_info,
-					personal_day,open_time,close_time,delivery_area,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
+					personal_day,open_time,close_time,mutual_name,addr,reg_num,0,0,0,0,ownerVo.getNum(),null);
 			
-			//DB저장 트랜잭션처리(가게,주소)
-			shopService.insert(shopVo, addrVo);
+			Delivery_LocationVo del_locVo=new Delivery_LocationVo(0,0,delivery_sido,delivery_sigungu,delivery_area);
+			
+			//DB저장 트랜잭션처리(가게,주소,배달팁)
+			shopService.insert(shopVo, addrVo,del_locVo);
 			return ".owner.success";
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());
