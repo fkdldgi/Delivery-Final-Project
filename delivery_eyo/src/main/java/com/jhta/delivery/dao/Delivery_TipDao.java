@@ -1,5 +1,7 @@
 package com.jhta.delivery.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,9 @@ public class Delivery_TipDao {
 	//지역배달팁추가
 	public int insert(Delivery_TipVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
+	}
+	//가게번호로 지역별배달팁 얻어오기
+	public List<Delivery_TipVo> selectTip(int shopNum){
+		return session.selectList(NAMESPACE+".selectTip",shopNum);
 	}
 }

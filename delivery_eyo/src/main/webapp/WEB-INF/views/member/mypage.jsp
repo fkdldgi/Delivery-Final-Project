@@ -52,12 +52,12 @@
 </script>
 <body>
 	<br>
-	<div class="container"
-		style="border: 1.5px solid orange; margin-bottom: 50px">
+	<div class="container "
+		style="border: 1.5px solid darkgray; margin-bottom: 50px">
 		<br> <img class="d-block mx-auto mb-4"
 			src="/delivery/resources/images/mypage_logo1.png" width="700"
 			height="150">
-		<hr style="border: 1px solid orange;">
+		<hr style="border: 1px solid darkgray;">
 		<form action="/delivery/member/mypageOk" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<tbody>
@@ -120,12 +120,14 @@
 				</tbody>
 			</table>
 			<button type="submit" class="btn btn-primary">수정완료</button>
-			<input type="text" name="num" value="${memberNum }">
+			<input type="hidden" name="num" value="${memberNum }">
 		</form>
 		<br>
 		<div style="margin-bottom: 50px; text-align: center;">
 			<button type="button" class="btn btn-primary"
 				onclick="location.href='/delivery/member/QnaList?memberNum=${sessionScope.memberNum}'">문의목록</button>
+			<button type="button" class="btn btn-primary"
+				onclick="location.href='/delivery/member/orderList?memberNum=${sessionScope.memberNum}'">주문목록</button>
 		</div>
 	</div>
 </body>

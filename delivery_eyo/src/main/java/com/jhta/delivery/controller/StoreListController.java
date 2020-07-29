@@ -22,7 +22,7 @@ public class StoreListController {
 	
 	@GetMapping("/member/storeList")
 	public String storeList(Model model,int startrow) {
-		int endrow=startrow+4;
+		int endrow=startrow+5;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startrow", startrow);
 		map.put("endrow", endrow);
@@ -37,7 +37,7 @@ public class StoreListController {
 	@ResponseBody
 	@RequestMapping(value = "/member/storeList1", method = RequestMethod.POST)
 	public List<ShopVo> init(@RequestBody int startrow) {
-		int endrow=startrow+4;
+		int endrow=startrow+5;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startrow", startrow);
 		map.put("endrow", endrow);
