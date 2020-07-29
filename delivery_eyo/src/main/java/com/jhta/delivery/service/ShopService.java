@@ -37,6 +37,10 @@ public class ShopService {
 	public int operation_info_update(HashMap<String, Object> map) {
 		return shopDao.operation_info_update(map);
 	}
+	//최소주문금액 업데이트
+	public int min_price_update(HashMap<String, Object> map) {
+		return shopDao.min_price_update(map);
+	}
 	public ShopVo selectShop(int num) {
 		return shopDao.selectShop(num);
 	}
