@@ -10,14 +10,19 @@ public class Owner_CalVo {
 	private int month;
 	
 	// ÃÑ °¡°Ý
-	private int total_money;
+	private int real_amount;
+	
+	// ÃÑ ¼ö¼ö·á
+	private int commission;
 	
 	public Owner_CalVo() {}
 
-	public Owner_CalVo(int year, int month, int total_money) {
+	public Owner_CalVo(int year, int month, int real_amount, int commission) {
+		super();
 		this.year = year;
 		this.month = month;
-		this.total_money = total_money;
+		this.real_amount = real_amount;
+		this.commission = commission;
 	}
 
 	public int getYear() {
@@ -36,13 +41,19 @@ public class Owner_CalVo {
 		this.month = month;
 	}
 
-	public int getTotal_money() {
-		return total_money;
+	public int getReal_amount() {
+		return real_amount;
 	}
 
-	public void setTotal_money(int total_money) {
-		this.total_money = total_money;
+	public void setReal_amount(int real_amount) {
+		this.real_amount = real_amount;
 	}
-	
-	
+
+	public int getCommission() {
+		return commission;
+	}
+
+	public void setCommission(int commission) {
+		this.commission = commission;
+	}
 }
