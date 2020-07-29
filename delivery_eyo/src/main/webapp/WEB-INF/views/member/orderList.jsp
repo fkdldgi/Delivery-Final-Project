@@ -10,13 +10,21 @@
 </head>
 <body>
 <div class="container">
-<div class="row no-gutters bg-light position-relative">
+<br>
+	<img src="/delivery/resources/images/myorderlist_logo.png" width="800" height="150" style="margin-left: 150px">
+<br>
+
+</div>
+<div class="container" >
+<div class="row no-gutters bg-light position-relative" style="border:1px soild darkgray; ">
 <!-- 사진 클릭시 해당 가게로 이동하게 함. -->
 <c:forEach var="list" items= "${list1}">
   <div class="col-md-6 mb-md-0 p-md-4">
+  <hr style="border: 1px solid darkgray;">
     <img src="${pageContext.request.contextPath }/resources/images/${list.PROFILE_IMG}" class="w-100" alt="/delivery/member/storeDetail">
   </div>
   <div class="col-md-6 position-static p-4 pl-md-0">
+  <hr style="border: 1px solid darkgray;">
     <h5 class="mt-0">${list.SHOPNAME}</h5>
     <p>주문 메뉴</p><br>
     <p>${list.NAME}</p>
