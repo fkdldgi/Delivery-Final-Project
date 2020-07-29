@@ -16,6 +16,10 @@
 	<update id="operationinfo_update" parameterType="hashmap">
 		update shop set shop_category=#{shop_category},payment_option=#{payment_option},open_time=#{open_time},close_time=#{close_time},personal_day=#{personal_day} where num=#{num}
 	</update>
+	<!-- 최소주문금액 업데이트 -->
+	<update id="min_price_update" parameterType="hashmap">
+		update shop set min_price=#{min_price} where num=#{num}
+	</update>
 	<!-- 가게번호로 가게정보 얻어오기 -->
 	<select id="selectShop" parameterType="int" resultType="shop">
 		select * from shop where num=#{num}
