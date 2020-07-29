@@ -65,16 +65,27 @@ public class Store_ManageController {
 		if (req.getParameterValues("option_name") != null) {
 
 			for (int i = 0; i < req.getParameterValues("option_name").length; i++) {
+				
 				int num_option = Integer.parseInt(req.getParameterValues("option_num")[i]);
+				int price_option = Integer.parseInt(req.getParameterValues("option_price")[i]);
+				
+				MenuOptionVo vo1 = new MenuOptionVo();
 				
 				if(num_option < 0) {
 					num_option = 0;
 				}
-				MenuOptionVo vo1 = new MenuOptionVo(num_option,
-						req.getParameterValues("option_name")[i],
-						Integer.parseInt(req.getParameterValues("option_price")[i]),
-						req.getParameterValues("option_category")[i],
-						Integer.parseInt(req.getParameterValues("option_menu_num")[i]));
+				
+				if(num_option < 0 && price_option==0) {
+					break;
+				}
+				
+				if(price_option > 0) {
+					vo1.setNum(num_option);
+					vo1.setName(req.getParameterValues("option_name")[i]);
+					vo1.setPrice(Integer.parseInt(req.getParameterValues("option_price")[i]));
+					vo1.setCategory(req.getParameterValues("option_category")[i]);
+					vo1.setMenu_num(Integer.parseInt(req.getParameterValues("option_menu_num")[i]));
+				}
 				
 				if(vo1.getNum()>0) {
 					// 메뉴옵션 수정
