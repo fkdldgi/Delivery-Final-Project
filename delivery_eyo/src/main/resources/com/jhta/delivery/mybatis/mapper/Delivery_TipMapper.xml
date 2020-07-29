@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.Delivery_TipMapper">
 	<insert id="insert" parameterType="delivery_tip">
-		insert into delivery_tip values(#{num},#{shop_num},#{tip},#{sido},#{sigungu},#{hname})
+		insert into delivery_tip values(delivery_tip_seq.nextval,#{shop_num},#{tip},#{sido},#{sigungu},#{hname})
 	</insert>
+	
+	<select id="selectTip" parameterType="int" resultType="delivery_tip">
+		select * from delivery_tip where shop_num=#{shop_num}
+	</select>
 </mapper>
