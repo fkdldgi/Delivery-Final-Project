@@ -29,7 +29,7 @@ public class Store_Manage_CalculateController {
 	public String manage_Ad(Model model, int num) {
 		
 		ShopVo vo = owner_service.shop_select(num); 
-		List<Owner_CalVo> calList = owner_orderService.end_cal(vo.getNum());
+		List<Owner_CalVo> calList = owner_orderService.calList(vo.getNum());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("calList",calList);
@@ -42,7 +42,7 @@ public class Store_Manage_CalculateController {
 	@ResponseBody
 	public String manage_cal(int num) {
 		
-		List<Owner_CalVo> calList = owner_orderService.end_cal(num);
+		List<Owner_CalVo> calList = owner_orderService.calList(num);
 		Gson gson=new Gson();
 		String jsonString=gson.toJson(calList);
 		
