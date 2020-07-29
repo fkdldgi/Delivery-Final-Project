@@ -67,6 +67,7 @@ public class MemberOrderController {
 		return ".member.memberOrder";
 	}
 	
+	//주문페이지에서 주문 api로 넘어가는 컨트롤러
 	@RequestMapping("/member/order")
 	public String order(HttpServletRequest req ) {
 //		System.out.println(req.getParameter("buildingCode"));
@@ -120,6 +121,7 @@ public class MemberOrderController {
 		int vol;
 		int lastPrice;
 		int price = 0;
+		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
 		
 		System.out.println("지번 어드레스 : " + req.getParameter("jibunAddress"));
 		
@@ -165,7 +167,9 @@ public class MemberOrderController {
 													req.getParameter("owner_request"), //사장님 요청사항
 													req.getParameter("rider_request"), //라이더 요청사항
 													Integer.parseInt(req.getParameter("lastPrice")), //총 주문금액
-													0 //분할결제인원 (미구현)
+													0, //분할결제인원 (미구현)
+													0, //리뷰 구분자
+													shopNum //가게 번호
 													);
 		
 		for(int i=0; i<req.getParameterValues("menuNum").length; i++) {

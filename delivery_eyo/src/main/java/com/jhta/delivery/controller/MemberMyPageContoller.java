@@ -1,5 +1,8 @@
 package com.jhta.delivery.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -8,12 +11,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.delivery.service.MemberService;
 import com.jhta.delivery.vo.MemberVo;
+import com.jhta.delivery.vo.OwnerVo;
+import com.jhta.delivery.vo.ShopVo;
 
 @Controller
 public class MemberMyPageContoller {
@@ -33,24 +39,42 @@ public class MemberMyPageContoller {
 		//업로드할 폴더 경로 얻어오기
 		String uploadPath=session.getServletContext().getRealPath("/resources/images");
 		//전송된 파일명
-		String orgfileName=file1.getOriginalFilename();
+		String orgfileName="";
 		//실제 저장할 파일명(중복되지 않도록)
 		//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
-		String savefileName=UUID.randomUUID()+"_"+orgfileName;
-		HashMap<String , Object> map= new HashMap<String, Object>();
-		System.out.println(pwd);
-		map.put("num", num);
-		map.put("email",email);
-		map.put("tel",tel);
-		map.put("pwd",pwd);
-		map.put("img",savefileName);
-		int n=service.update(map);
-		
-		if (n>0) {
+		String savefileName="";
+		try {
+			if(file1.getSize()!=0) {
+				//전송된 파일명
+				orgfileName=file1.getOriginalFilename();
+				//실제 저장할 파일명(중복되지 않도록)
+				//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
+				savefileName=UUID.randomUUID()+"_"+orgfileName;
+				//전송된 파일을 읽어오는 스트림
+				InputStream fis=file1.getInputStream();
+				//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
+				FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
+				//파일 복사하기 
+				FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
+				fis.close();
+				fos.close();
+			}else {
+				savefileName="default.png";
+			}
+			HashMap<String , Object> map= new HashMap<String, Object>();
+			map.put("num", num);
+			map.put("email",email);
+			map.put("tel",tel);
+			map.put("pwd",pwd);
+			map.put("img",savefileName);
+			int n=service.update(map);
+			
 			return ".member.mypage";
-		}else {
+		}catch(IOException ie) {
+			System.out.println(ie.getMessage());
 			return ".member.error";
 		}
+
 	}
 	
 }

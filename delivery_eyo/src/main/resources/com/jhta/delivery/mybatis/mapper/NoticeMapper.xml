@@ -10,22 +10,30 @@
 		(
 		select aa.*,rownum rnum from 
 			(
-			select * from notice where division=0 order by rownum desc
+			select * from notice 
+			<include refid="search"/>
+				where division=0
+			order by rownum desc
 			)aa
 		)
-		where <![CDATA[ rnum>=#{startRow} and rnum<=#{endRow}]]>
+		 <![CDATA[ 
+		 where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	
 	<!-- 기업회원 공지리스트 -->
-	<select id="Owner_noticeList" parameterType="hashmap" resultType="notice">
+	<select id="owner_noticeList" parameterType="hashmap" resultType="notice">
 		select * from
 		(
 			select aa.*, rownum rnum from
 			(
-				select * from notice where division=1 order by rownum desc
+				select * from notice 
+				<include refid="Owner_search"/>
+					where division=1
+				order by rownum desc
 			)aa
 		)
-		where <![CDATA[ rnum>=#{startRow} and rnum<=#{endRow}]]>
+		<![CDATA[
+		where rnum>=#{startRow} and rnum<=#{endRow}]]>
 	</select>
 	
 	<!-- 일반회원 공지사항 상세 -->
@@ -40,13 +48,14 @@
 	
 	<!-- 일반회원 전체 페이지수 -->
 	<select id="count" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) cnt from notice where division=0
+		select NVL(count(*),0) cnt from notice
 		<include refid="search"/>
 	</select>
 	
 	<!-- 기업회원 전체 페이지수 -->
 	<select id="Owner_noticeCount" resultType="int" parameterType="hashmap">
-		select NVL(count(*),0) cnt from notice where division=1
+		select NVL(count(*),0) cnt from notice 
+		<include refid="search"/>
 	</select>
 	
 	<!-- 일반회원 이전공지 -->
@@ -61,15 +70,11 @@
 	<!-- 기업회원 이전공지 -->
 	<select id="Owner_prev" parameterType="int" resultType="notice">
 		<![CDATA[
-			select *
-			from(
-			select *
-			from notice
-			where division=1
-			order by num desc)
-			where num < #{num}
-			and rownum = 1
-		]]>
+			select * from(
+		<![CDATA[
+		select * from notice where num < #{num} and division=1]]>
+		order by num desc
+		) where rownum=1
 	</select>
 	
 	<!-- 일반회원 다음공지 -->
@@ -84,28 +89,24 @@
 	
 	<!-- 기업회원 다음공지 -->
 	<select id="Owner_next" parameterType="int" resultType="notice">
-	<![CDATA[
-		select *
-		from(
-		select *
-		from board
-		where division = 1
-		order by num)
-		where num > #{num}
-		and rownum = 1
-		]]>
+		select * from
+		(
+		select * from notice where num > #{num} and division=1
+		order by num asc
+		)
+		where rownum=1
 	</select>
 	
 	<!--  일반회원 검색 -->
 	<sql id="search">
 		<if test="field!=null and field!=''">
-			where ${field} like '%'||#{keyword}||'%' and division=0
+			where ${field} like '%'||#{keyword}||'%'and division=0
 		</if>
 	</sql>
 	
 	<!-- 기업회원 검색 -->
 	<sql id="Owner_search">
-		<if test="field!=null and field=''">
+		<if test="field!=null and field!=''">
 			where ${field} like '%'||#{keyword}||'%' and division=1
 		</if>
 	</sql>

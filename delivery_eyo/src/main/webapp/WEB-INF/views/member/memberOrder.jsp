@@ -175,7 +175,7 @@
 	            pay_method : 'vbank',
 	            merchant_uid : 'merchant_' + new Date().getTime(),
 	            name : '주문명 : 배달이요 테스트 결제',
-	            amount : 100,
+	            amount : ${lastPrice },
 	            buyer_name :'${member.name }',
 	            buyer_tel :${member.tel},
 	            buyer_addr : addrData.address,

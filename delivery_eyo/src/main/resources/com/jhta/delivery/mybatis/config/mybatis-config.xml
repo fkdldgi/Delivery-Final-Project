@@ -30,5 +30,6 @@
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Owner_OrderMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Delivery_LocationMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Delivery_TipMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/OrderListMapper.xml"/>
 	</mappers>
 </configuration>
