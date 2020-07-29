@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://www.ibatis.com/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.OrderListMapper">
+	<!-- 세션에서 넘어온 회원번호로 주문내역 리스트 뽑아오기. -->
+	<select id="orderList" resultType="hashmap" parameterType="int">
+		select distinct orm.num,orm.member_num,om.menu_num,orm.start_time,orm.total_price,orm.shop_num,
+	    om.count,order_price,orm.total_price,mn.name,omo.num,shop.profile_img,shop.name shopname,mo.name,shop.owner_num
+	    from ORDER_MENU om, menu mn,ORDER_MAIN orm,shop shop,order_menu_option omo,menu_option mo
+	    where om.menu_num=mn.num and om.order_num=orm.num and orm.member_num = #{memberNum} and
+	    orm.shop_num=shop.num and omo.order_menu_num=om.num
+	</select>
+</mapper>  

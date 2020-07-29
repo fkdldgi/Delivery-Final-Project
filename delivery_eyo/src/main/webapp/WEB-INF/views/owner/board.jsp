@@ -27,6 +27,7 @@
      					<a class="nav-link">공지사항을 확인해주세요~</a>
      				</li>
      			</ul>
+     			<!--  
      			<form class="form-inline">
      				<div style="display: flex;">
      				<input class="form-control form-control-lg" type="search"
@@ -35,12 +36,14 @@
      				<button class="btn btn-outline-info btn-lg" type="submit">Search</button>
      				</div>
      			</form>
+     			-->
      		</div>
      	</nav>
      </div>
 </div>
+<br>
 <div class="container">
-	<img class="d-block mx-auto mb-4" src="/delivery/resources/images/owner_notice_logo" width="700" height="150">
+	<img class="d-block mx-auto mb-4" src="/delivery/resources/images/owner_notice_logo.png" width="700" height="150">
 	<table class="table">
 		<thead>
 			<tr>
@@ -50,10 +53,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="vo" items="${list}"  varStatus="i"> <!-- list있는 값들 -->
+			<c:forEach var="vo" items="${list}" varStatus="i"> <!-- list있는 값들 -->
 			<tr>
 				<td>${(pu.pageNum-1)*10+(i.index+1)}</td>
-				<td><a href="/delivery/owner/boarddetail?num=${vo.num }">${vo.title}</a></td>
+				<td><a href="/delivery/owner/boardDetail?num=${vo.num }">${vo.title}</a></td>
 				<fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd" var="regdate"/>
 				<td>${regdate}</td>
 			</tr>

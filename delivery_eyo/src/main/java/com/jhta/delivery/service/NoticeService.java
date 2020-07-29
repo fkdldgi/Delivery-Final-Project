@@ -17,6 +17,10 @@ public class NoticeService {
 		return dao.count(map);
 		
 	}
+	public int Owner_noticeCount(HashMap<String, Object>map) {
+		return dao.Owner_noticeCount(map);
+		
+	}
 	// 일반회원 전체공지
 	public List<NoticeVo> noticeList(HashMap<String, Object> map) {
 		return dao.noticeList(map);
