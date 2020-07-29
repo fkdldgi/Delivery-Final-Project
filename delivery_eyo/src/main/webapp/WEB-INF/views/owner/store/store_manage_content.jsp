@@ -206,6 +206,8 @@
 			var menu_num = $(this).parent().parent().parent().parent().find("input[name=menu_num]");
 			menu_option_num.val(menu_num.val());			
 			
+			// o
+			
 			// 위치 찾기
 			var location = $(this).parent().parent();
 			location.append(menu_option);
@@ -338,9 +340,10 @@
 	<!-- 메뉴옵션 복사-->
 	<div id="copy_menu_option" style="display: none;">
 		<br><input type="text" placeholder="옵션메뉴이름" name="option_name"><br>
-		<input type="text" placeholder="가격" name="option_price"><br>
+		<input type="number" placeholder="가격" name="option_price"><br>
 		<input type="text" placeholder="카테고리" name="option_category"><br>
-		<input type="text" value="-1" name="option_menu_num" hidden="hidden">
+		<input type="text" value="-1" name="option_menu_num" hidden="hidden"><br>
+		<input type="text" value="-1" name="option_num" hidden="hidden">
 	</div>
 
 	<!-- 복사할 버튼 -->
@@ -452,7 +455,7 @@
 														<c:if test="${menu.num == menu_option.menu_num }">
 															<div>
 																<br><input type="text" placeholder="옵션메뉴 이름" name="option_name" value="${menu_option.name }"><br>
-																<input type="text" placeholder="가격" name="option_price" value="${menu_option.price }"><br>
+																<input type="number" placeholder="가격" name="option_price" value="${menu_option.price }"><br>
 																<input type="text" placeholder="카테고리" name="option_category" value="${menu_option.category }"><br>
 																<input type="text" hidden="hidden" name="option_menu_num" value="${menu.num }">
 																<input type="text" hidden="hidden" name="option_num" value="${menu_option.num }">
