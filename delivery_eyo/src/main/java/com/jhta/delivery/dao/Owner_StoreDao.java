@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jhta.delivery.vo.MenuCategoryVo;
+import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 
 @Repository
@@ -56,4 +57,23 @@ public class Owner_StoreDao {
 		return session.selectOne(NAMESPACE+".selectMenu_CategoryNum", vo);
 	}
 	
+	// 메뉴옵션
+	public List<MenuOptionVo> menu_optionList(){
+		return session.selectList(NAMESPACE+".select_menu_option");
+	}
+	
+	// 메뉴옵션 추가
+	public int insert_menu_option(MenuOptionVo vo) {
+		return session.insert(NAMESPACE+".insert_menu_option", vo);
+	}
+	
+	// 메뉴옵션 수정
+	public int update_menu_option(MenuOptionVo vo) {
+		return session.update(NAMESPACE+".update_menu_option",vo);
+	}
+	
+	// 메뉴옵션 삭제
+	public int delete_menu_option(int num) {
+		return session.delete(NAMESPACE+".delete_menu_option", num);
+	}
 }
