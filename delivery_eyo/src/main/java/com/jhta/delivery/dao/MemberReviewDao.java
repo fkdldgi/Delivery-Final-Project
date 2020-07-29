@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.delivery.vo.MenuVo;
 import com.jhta.delivery.vo.Order_MainVo;
 import com.jhta.delivery.vo.ReviewVo;
 import com.jhta.delivery.vo.Review_ImgVo;
@@ -59,4 +60,13 @@ public class MemberReviewDao {
 		return sqlSession.insert(NAMESPACE+".reviewInsert", map);
 	} 
 	
+	// 리뷰 작성 후  ORDER_MAIN의 리뷰구분자 수정하기 
+	public int updateReviewStatus(int num) {
+		return sqlSession.update(NAMESPACE+".updateReviewStatus", num);
+	}
+	
+	// 주문 번호와 고객번호로 고객이 주문한 메뉴 정보(이름) 가져오기
+	public MenuVo getMenuNum(HashMap<String, Integer> map) {
+		return sqlSession.selectOne(NAMESPACE+".getMenuNum", map);
+	}
 }
