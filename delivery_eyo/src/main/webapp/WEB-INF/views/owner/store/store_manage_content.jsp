@@ -340,7 +340,7 @@
 		<br><input type="text" placeholder="옵션메뉴이름" name="option_name"><br>
 		<input type="text" placeholder="가격" name="option_price"><br>
 		<input type="text" placeholder="카테고리" name="option_category"><br>
-		<input type="text" value="-1" name="option_menu_num">
+		<input type="text" value="-1" name="option_menu_num" hidden="hidden">
 	</div>
 
 	<!-- 복사할 버튼 -->
