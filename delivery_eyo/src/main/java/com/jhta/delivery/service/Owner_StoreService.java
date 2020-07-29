@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jhta.delivery.dao.Owner_StoreDao;
 import com.jhta.delivery.vo.MenuCategoryVo;
+import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 
 @Service
@@ -52,5 +53,25 @@ public class Owner_StoreService {
 	// 메뉴카테고리번호 찾기
 	public int selectMenu_CategoryNum(MenuCategoryVo vo) {
 		return dao.selectMenu_CategoryNum(vo);
+	}
+	
+	// 메뉴옵션
+	public List<MenuOptionVo> menu_optionList(){
+		return dao.menu_optionList();
+	}
+	
+	// 메뉴옵션 추가
+	public int insert_menu_option(MenuOptionVo vo) {
+		return dao.insert_menu_option(vo);
+	}
+	
+	// 메뉴옵션 수정
+	public int update_menu_option(MenuOptionVo vo) {
+		return dao.update_menu_option(vo);
+	}
+	
+	// 메뉴옵션 삭제
+	public int delete_menu_option(int num) {
+		return dao.delete_menu_option(num);
 	}
 }

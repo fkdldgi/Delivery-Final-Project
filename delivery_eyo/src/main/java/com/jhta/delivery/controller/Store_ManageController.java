@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import com.jhta.delivery.service.OwnerService;
 import com.jhta.delivery.service.Owner_MenuService;
 import com.jhta.delivery.service.Owner_StoreService;
 import com.jhta.delivery.vo.MenuCategoryVo;
+import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 import com.jhta.delivery.vo.ShopVo;
 
@@ -46,10 +49,8 @@ public class Store_ManageController {
 	}
 
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
-	public String manage_update(Model model, 
-			@RequestParam(value = "owner_id") String id,  
-			@RequestParam(value = "Shop_num") int shop_num,
-			@RequestParam(value = "shop_info") String shop_info,
+	public String manage_update(Model model, HttpServletRequest req, @RequestParam(value = "owner_id") String id,
+			@RequestParam(value = "Shop_num") int shop_num, @RequestParam(value = "shop_info") String shop_info,
 			@RequestParam(value = "category_num") List<String> category_num,
 			@RequestParam(value = "menu_category_name") List<String> menu_category_name,
 			@RequestParam(value = "menu_name") List<String> menu_name,
@@ -59,25 +60,57 @@ public class Store_ManageController {
 			@RequestParam(value = "category_list_num") List<String> category_list_num,
 			@RequestParam(value = "trash_category", required = false) List<String> trash_category,
 			@RequestParam(value = "trash", required = false) List<String> trash) {
+
+		// 메뉴옵션 가져오기
+		if (req.getParameterValues("option_name") != null) {
+
+			for (int i = 0; i < req.getParameterValues("option_name").length; i++) {
+				int num_option = Integer.parseInt(req.getParameterValues("option_num")[i]);
+				
+				if(num_option < 0) {
+					num_option = 0;
+				}
+				MenuOptionVo vo1 = new MenuOptionVo(num_option,
+						req.getParameterValues("option_name")[i],
+						Integer.parseInt(req.getParameterValues("option_price")[i]),
+						req.getParameterValues("option_category")[i],
+						Integer.parseInt(req.getParameterValues("option_menu_num")[i]));
+				
+				if(vo1.getNum()>0) {
+					// 메뉴옵션 수정
+					store_service.update_menu_option(vo1);
+					
+				}else {
+					// 메뉴옵션 추가
+					store_service.insert_menu_option(vo1);
+				}
+			}
+		}
 		
-			System.out.println(id);
-			System.out.println("번호"+category_list_num);
-			System.out.println("이름"+menu_category_name);
-			System.out.println("category_num"+category_num);
-		// 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제 
-		if(trash_category != null) { 
-			for(String trash_category_string:trash_category) { 
-				int trash_category_num = Integer.parseInt(trash_category_string);
-				store_service.deleteMenu_Category(trash_category_num); 
-			} 
+		// 메뉴옵션 삭제하기
+		if(req.getParameterValues("delete_menu_option") != null) {
+			
+			for(int i = 0; i < req.getParameterValues("delete_menu_option").length; i++) {
+				
+				int a = Integer.parseInt(req.getParameterValues("delete_menu_option")[i]);
+				store_service.delete_menu_option(a);
+			}
 		}
 
-		// 삭제한 메뉴번호로 메뉴 DB에서 삭제 
-		if(trash != null) { 
-			for(String trash_string:trash) {
+		// 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제
+		if (trash_category != null) {
+			for (String trash_category_string : trash_category) {
+				int trash_category_num = Integer.parseInt(trash_category_string);
+				store_service.deleteMenu_Category(trash_category_num);
+			}
+		}
+
+		// 삭제한 메뉴번호로 메뉴 DB에서 삭제
+		if (trash != null) {
+			for (String trash_string : trash) {
 				int trash_num = Integer.parseInt(trash_string);
-				store_service.deleteMenu(trash_num); 
-			} 
+				store_service.deleteMenu(trash_num);
+			}
 		}
 
 		List<MenuVo> MenuVoList = new ArrayList<>();
@@ -169,7 +202,7 @@ public class Store_ManageController {
 		model.addAttribute("list", shopList);
 
 		if (id == null || id == "") {
-			return ".owner.error"; 
+			return ".owner.error";
 		} else {
 			return ".owner.store_manage";
 		}
@@ -183,17 +216,19 @@ public class Store_ManageController {
 		List<MenuVo> mainMenuList = store_service.mainMenuList(num);
 		List<MenuCategoryVo> menuCategoryList = menu_service.menuCategory(num);
 		List<MenuVo> menu = menu_service.menu(num);
+		List<MenuOptionVo> menu_optionList = store_service.menu_optionList();
+		System.out.println(menu_optionList);
 
 		model.addAttribute("mainMenuList", mainMenuList);
 		model.addAttribute("menuCategoryList", menuCategoryList);
 		model.addAttribute("menu", menu);
 		model.addAttribute("vo", vo);
 		model.addAttribute("Shop_num", num);
+		model.addAttribute("menu_optionList", menu_optionList);
 
 		if (vo == null) {
 			return ".owner.error";
-		} else {
-			return ".owner.store_manage_home";
 		}
+		return ".owner.store_manage_home";
 	}
 }

@@ -22,6 +22,14 @@ public class ShopDao {
 	public int basic_info_update(HashMap<String, Object> map) {
 		return session.update(NAMESPACE+".basicinfo_update",map);
 	}
+	//운영정보 업데이트
+	public int operation_info_update(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".operationinfo_update",map);
+	}
+	//최소주문금액 업데이트
+	public int min_price_update(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".min_price_update",map);
+	}
 	//가게번호로 가게정보얻어오기
 	public ShopVo selectShop(int num) {
 		return session.selectOne(NAMESPACE+".selectShop",num);

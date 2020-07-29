@@ -57,4 +57,28 @@
 		select num from menu_category
 		where name=#{name} and shop_num=#{shop_num}
 	</select>
+	
+	<!-- 메뉴옵션  구하기-->
+	<select id="select_menu_option" resultType="com.jhta.delivery.vo.MenuOptionVo">
+		select * from menu_option
+	</select>
+	
+	<!-- 메뉴옵션 추가 -->
+	<insert id="insert_menu_option" parameterType="com.jhta.delivery.vo.MenuOptionVo">
+		insert into menu_option
+		values(MENU_OPTION_SEQ.nextval,#{name},#{price},#{category},#{menu_num})
+	</insert>
+	
+	<!-- 메뉴옵션 수정 -->
+	<update id="update_menu_option" parameterType="com.jhta.delivery.vo.MenuOptionVo">
+		update menu_option
+		set name=#{name}, price=#{price}, category=#{category}
+		where num=#{num}
+	</update>
+	
+	<!-- 메뉴옵션 삭제 -->
+	<delete id="delete_menu_option" parameterType="int">
+		delete from menu_option
+		where num=#{num}
+	</delete>
 </mapper>
