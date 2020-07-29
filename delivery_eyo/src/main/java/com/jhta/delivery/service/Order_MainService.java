@@ -44,7 +44,7 @@ public class Order_MainService {
 			if(optionList != null) {
 				for(int j=0; j<optionList.size(); j++) {
 					int menu_menuNum = menuList.get(i).getMenu_num();
-					int option_menuOptionNum = optionList.get(j).getMunu_option_num();
+					int option_menuOptionNum = optionList.get(j).getmenu_option_num();
 					int option_menuNum = orderMinDao.getOrderMenuNumBy(option_menuOptionNum);
 					
 					if(menu_menuNum == option_menuNum) {
