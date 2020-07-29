@@ -65,7 +65,12 @@ public class Store_ManageController {
 		if (req.getParameterValues("option_name") != null) {
 
 			for (int i = 0; i < req.getParameterValues("option_name").length; i++) {
-				MenuOptionVo vo1 = new MenuOptionVo(Integer.parseInt(req.getParameterValues("option_num")[i]),
+				int num_option = Integer.parseInt(req.getParameterValues("option_num")[i]);
+				
+				if(num_option < 0) {
+					num_option = 0;
+				}
+				MenuOptionVo vo1 = new MenuOptionVo(num_option,
 						req.getParameterValues("option_name")[i],
 						Integer.parseInt(req.getParameterValues("option_price")[i]),
 						req.getParameterValues("option_category")[i],
