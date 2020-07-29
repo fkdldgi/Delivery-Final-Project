@@ -40,6 +40,19 @@
 	</select>
 	
 	
+	<!-- insert 부분 -->
+	
+	<!-- 리뷰 이미지 넣기 -->
+	<insert id="review_imgInsert" parameterType="hashmap">
+		insert into REVIEW_IMG values(REVIEW_IMG_SEQ.nextval,#{img_path},#{original_filename},#{save_filename})
+	</insert>
+	
+	<!-- 리뷰 넣기 -->
+	<insert id="reviewInsert" parameterType="hashmap">
+		insert into review values(REVIEW_SEQ.nextval,#{content},0,0,0,#{grade},sysdate,#{review_img_num},#{shop_num},#{member_num},#{owner_num})
+	</insert>
+	
+	
 	<!-- 멤버 번호와  -->
 <!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 --> 
 <!-- 	<select id="reviewAble" parameterType="hashmap" resultType="String"> -->

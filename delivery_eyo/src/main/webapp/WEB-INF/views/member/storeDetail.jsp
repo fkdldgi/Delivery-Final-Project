@@ -3,11 +3,23 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+	.starR{
+	  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	  background-size: auto 100%;
+	  width: 30px;
+	  height: 30px;
+	  display: inline-block;
+	  text-indent: -9999px;
+	  cursor: pointer;
+	}
+	.starR.on{background-position:0 0;}
+</style>
+
 
 <div class="container" style="width: 100%;">
   <div class="row" style="width: 100%;">
-    <div class="col-8" id="storeWrap"
-style="width: 90%; margin: auto; margin-bottom: 10px;">
+    <div class="col-8" id="storeWrap" style="width: 90%; margin: auto; margin-bottom: 10px;">
 	<c:out value="${param.info}" />
 	<div class="media position-relative"
 		style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;">
@@ -73,10 +85,22 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 				</c:when>
 				<c:otherwise>
 					<h4 style="font-weight:bold; margin-top: 20px; margin-left: 70px; margin-bottom: 20px;">*작성 가능한 리뷰가 있습니다.</h4>
-					<div id="reviewImg"></div>
-					<textarea id="reviewText" style="margin-left: 50px;" rows="10" cols="83" placeholder="30자 이상 써주세요~"></textarea><br>
-					<input type="file" accept="image/*" id="ex_file" style="margin-left: 50px;" class="upload-hidden">
-					<button type="button" id="reviewBtn" class="btn btn-primary" style="width: 100px; height: 50px; margin-left: 555px; margin-bottom: 10px; margin-top: -30px;" >리뷰 등록</button>
+					<form action="${pageContext.request.contextPath }/member/insertReview" enctype="multipart/form-data" method="post">
+						 <div class="starRev" style="margin-left: 45px; margin-bottom: 20px;">
+							<span class="starR on">별1</span>
+							<span class="starR">별2</span>
+							<span class="starR">별3</span>
+							<span class="starR">별4</span>
+							<span class="starR">별5</span>
+						</div>
+						<input type="text" name="member_num" value="${sessionScope.memberNum}" hidden="hidden">
+						<input type="text" name="owner_num" value="${info.owner_num }" hidden="hidden">
+						<input type="text" name="shop_num" value="${info.num}" hidden="hidden">
+						<div id="reviewImg"></div>
+						<textarea name="reviewText" style="margin-left: 50px;" rows="10" cols="83" placeholder="10자 이상 써주세요~"></textarea><br>
+						<input type="file" accept="image/*" name="file123" id="file" style="margin-left: 50px;" class="upload-hidden">
+						<button type="submit" id="reviewBtn" class="btn btn-primary" style="width: 100px; height: 50px; margin-left: 555px; margin-bottom: 10px; margin-top: -30px;" >리뷰 등록</button>
+					</form>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
@@ -460,55 +484,26 @@ style="width: 90%; margin: auto; margin-bottom: 10px;">
 	});
 	
 	//리뷰 작성 함수
-	$("#reviewBtn").on('click',function(){
+	function reviewCheck(){
 		var reviewLength = $('#reviewText').val().length;
-		if(reviewLength<30){
-			alert("30자 이상 입력해주세요~");
+		if(reviewLength<10){
+			alert("10자 이상 입력해주세요~");
+			return false;
 		}else{
-			insertReveiw();
+			return true;
 		}
-	});
+	};
 	
 	//리뷰 이미지 함수
 	$("#file").change(function() {
 		readURL(this);
 	});
 	
-	//리뷰 넣는 함수
-	var insertReveiw = function(){
-		var shop_num = $('#shop_num').text();
-		var reviewText = $('#reviewText').val();
-		var member_num = '${sessionScope.memberNum}';
-		var owner_num = $('#owner_num').text();
-		
-		console.log('reviewText : ' + reviewText);
-		console.log('member_num : ' + member_num);
-		console.log('owner_num : ' + owner_num);
-		console.log('shop_num : ' + shop_num);
-		
-// 		$.ajax({
-// 	        url: "/delivery/store/reviewInsert",
-// 	        type: "post",
-// 	        data: JSON.stringify(num),
-// 	        dataType: "json",
-// 	        contentType: "application/json",
-// 	        success: function(data) {
-	        	
-// 				if(data.optionList[0] != null){
-// 					$("#modal-body").append("<p><h5 style='font-weight:bold;'>"+ data.optionList[0].category +"</h5></p>");
-// 					for(i in data.optionList){
-// 						$("#modal-body").append("<p><input type='checkbox' onclick='clickOption()' class='check' value="+ 
-// 								data.optionList[i].price +
-// 								',' + data.optionList[i].num + 
-// 								',' + data.optionList[i].name + ">&nbsp;&nbsp;" +
-// 								"<label>"+ data.optionList[i].name +"</label>" +
-// 								"<label style='float:right'>+"+ data.optionList[i].price +"원</label></p>"+
-// 								"<div id='optionNum' hidden >"+ data.optionList[i].num + "</div>");
-// 							}
-// 						}
-// 			        },error: function(errorThrown) {
-// 					alert(errorThrown.statusText);
-// 				}
-// 		});
-	}
+	//별점 주기 함수
+	$('.starRev span').click(function(){
+	  $(this).parent().children('span').removeClass('on');
+	  $(this).addClass('on').prevAll('span').addClass('on');
+	  return false;
+	});
+	
 </script>

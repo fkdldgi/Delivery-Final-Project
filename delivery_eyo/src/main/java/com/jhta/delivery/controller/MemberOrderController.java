@@ -67,6 +67,7 @@ public class MemberOrderController {
 		return ".member.memberOrder";
 	}
 	
+	//주문페이지에서 주문 api로 넘어가는 컨트롤러
 	@RequestMapping("/member/order")
 	public String order(HttpServletRequest req ) {
 //		System.out.println(req.getParameter("buildingCode"));

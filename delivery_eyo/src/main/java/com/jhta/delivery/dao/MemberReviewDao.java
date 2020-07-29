@@ -48,4 +48,15 @@ public class MemberReviewDao {
 	public List<HashMap<String, Object>> getShopByMember(int member_num){
 		return sqlSession.selectList(NAMESPACE+".getShopByMember", member_num);
 	}
+	
+	// 리뷰 이미지 넣기
+	public int review_imgInsert(HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE+".review_imgInsert", map);
+	}
+	
+	// 리뷰 넣기 
+	public int reviewInsert(HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE+".reviewInsert", map);
+	} 
+	
 }
