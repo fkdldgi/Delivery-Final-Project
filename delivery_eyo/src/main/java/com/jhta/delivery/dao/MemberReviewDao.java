@@ -9,6 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.delivery.vo.MenuVo;
+import com.jhta.delivery.vo.Order_MainVo;
 import com.jhta.delivery.vo.ReviewVo;
 import com.jhta.delivery.vo.Review_ImgVo;
 
@@ -34,13 +36,37 @@ public class MemberReviewDao {
 	}
 	
 	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
-	public String reviewAble(HashMap<String, Integer> map) {
-		return sqlSession.selectOne(NAMESPACE+".reviewAble", map);
+	public List<Order_MainVo> reviewAble(HashMap<String, Integer> map) {
+		return sqlSession.selectList(NAMESPACE+".reviewAble", map);
 	}
 	
 	//주문한 고객이 리뷰를 썼는지
 	public List<ReviewVo> selectMemberReview(HashMap<String, Integer> map){
-		System.out.println("dao map" + map);
 		return sqlSession.selectList(NAMESPACE+".selectMemberReview", map);
+	}
+	
+	//멤버번호로 주문한 가게번호 가져오기
+	public List<HashMap<String, Object>> getShopByMember(int member_num){
+		return sqlSession.selectList(NAMESPACE+".getShopByMember", member_num);
+	}
+	
+	// 리뷰 이미지 넣기
+	public int review_imgInsert(HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE+".review_imgInsert", map);
+	}
+	
+	// 리뷰 넣기 
+	public int reviewInsert(HashMap<String, Object> map) {
+		return sqlSession.insert(NAMESPACE+".reviewInsert", map);
+	} 
+	
+	// 리뷰 작성 후  ORDER_MAIN의 리뷰구분자 수정하기 
+	public int updateReviewStatus(int num) {
+		return sqlSession.update(NAMESPACE+".updateReviewStatus", num);
+	}
+	
+	// 주문 번호와 고객번호로 고객이 주문한 메뉴 정보(이름) 가져오기
+	public MenuVo getMenuNum(HashMap<String, Integer> map) {
+		return sqlSession.selectOne(NAMESPACE+".getMenuNum", map);
 	}
 }

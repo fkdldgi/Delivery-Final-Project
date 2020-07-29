@@ -47,11 +47,17 @@ public class Order_MainVo {
 	// 분할결제인원
 	private int dutchpay_people;
 
+	//리뷰 구분자
+	private int review_status;
+	
+	//가게 번호
+	private int shop_num;
+	
 	public Order_MainVo() {}
 
 	public Order_MainVo(int num, Date start_time, Date end_ex_time, Date end_time, int member_num, String addr_num,
 			String addr_detail, int delivery_tip_num, String status, int rider_num, String owner_requests,
-			String rider_requests, int total_price, int dutchpay_people) {
+			String rider_requests, int total_price, int dutchpay_people, int review_status, int shop_num) {
 		super();
 		this.num = num;
 		this.start_time = start_time;
@@ -67,6 +73,8 @@ public class Order_MainVo {
 		this.rider_requests = rider_requests;
 		this.total_price = total_price;
 		this.dutchpay_people = dutchpay_people;
+		this.review_status = review_status;
+		this.shop_num = shop_num;
 	}
 
 	public int getNum() {
@@ -180,5 +188,21 @@ public class Order_MainVo {
 	public void setDutchpay_people(int dutchpay_people) {
 		this.dutchpay_people = dutchpay_people;
 	}
-	
+
+	public int getReview_status() {
+		return review_status;
+	}
+
+	public void setReview_status(int review_status) {
+		this.review_status = review_status;
+	}
+
+	public int getShop_num() {
+		return shop_num;
+	}
+
+	public void setShop_num(int shop_num) {
+		this.shop_num = shop_num;
+	}
+
 }

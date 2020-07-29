@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jhta.delivery.service.MemberReviewService;
 import com.jhta.delivery.service.MemberService;
 import com.jhta.delivery.service.StoreService;
+import com.jhta.delivery.vo.Order_MainVo;
 import com.jhta.delivery.vo.ReviewVo;
 
 @Controller
@@ -43,8 +44,21 @@ public class StoreDetailController {
 		//{OWNER_NUM=1, IMG=ff8dbb28-c729-438a-b0fc-af8b5dc429e8_irene-kredenets-sV0KXYrb-5s-unsplash.jpg, NUM=15, REGDATE=20/07/21,
 		//STEP=0, MEMBER_NUM=1, NAME=전효진, REF=0, GRADE=5, SHOP_NUM=1, GENDER=여자, CONTENT=가격이 사악하네요..., LEV=0}
 		
-//		System.out.println(list.get(0));
-//		System.out.println(list.get(0).get("REVIEW_IMG_NUM"));
+		//리뷰 조건 판단하기
+		HashMap<String, Integer> reviewMap = new HashMap<String, Integer>();
+		reviewMap.put("shop_num", num);
+		reviewMap.put("member_num", memberNum);
+		
+		List<Order_MainVo> reviewAble =  memberReviewservice.reviewAble(reviewMap);
+		
+		model.addAttribute("reviewAble", reviewAble.get(0));
+		
+		HashMap<String, Integer> getMenuMap = new HashMap<String, Integer>();
+		getMenuMap.put("order_main_num", reviewAble.get(0).getNum());
+		getMenuMap.put("member_num", memberNum);
+		
+		//고객이 주문한 메뉴의 정보(이름) 가져오는 함수
+		model.addAttribute("menuInfo", memberReviewservice.getMenuNum(getMenuMap));
 		model.addAttribute("review_member_list", list);
 		
 		model.addAttribute("info", mservice.storeInfo(num));

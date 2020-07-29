@@ -22,6 +22,57 @@
 		and r.member_num=m.num order by r.num desc
 	</select>
 	
+	<!-- 멤버번호로 주문한 가게번호 가져오기 -->
+	<select id="getShopByMember" parameterType="int" resultType="hashmap">
+		select shop_num from MENU_CATEGORY
+		where num in (select menu_category_num from MENU
+                        where num in (select menu_num from ORDER_MENU
+                                                where order_num in (select num from order_main 
+                                                                                where member_num=#{member_num})))
+	</select>
+	
+	<!-- 가게번호와 고객번호로 리뷰여부 판단하기 -->
+	<select id="reviewAble" parameterType="hashmap" resultType="com.jhta.delivery.vo.Order_MainVo">
+		select * from ORDER_MAIN 
+   			where review_status=0 
+        		and shop_num=#{shop_num}
+        		and member_num=#{member_num}
+        		and status='배달완료'
+	</select>
+	
+	<!-- 주문 번호와 고객번호로 고객이 주문한 메뉴 정보(이름) 가져오기,'배달완료',리뷰status=0인 조건 -->
+	<select id="getMenuNum" parameterType="hashmap" resultType="com.jhta.delivery.vo.MenuVo">
+		select * 
+		from MENU
+		where num = 
+		(select menu_num 
+			from ORDER_MENU menu,ORDER_MAIN main 
+			where main.review_status=0
+            and main.status='배달완료'
+            and main.num=MENU.order_num 
+			and MAIN.num=#{order_main_num} 
+			and MAIN.member_num=#{member_num})
+	</select>
+	
+	<!-- insert 부분 -->
+	
+	<!-- 리뷰 이미지 넣기 -->
+	<insert id="review_imgInsert" parameterType="hashmap">
+		insert into REVIEW_IMG values(REVIEW_IMG_SEQ.nextval,#{img_path},#{original_filename},#{save_filename})
+	</insert>
+	
+	<!-- 리뷰 넣기 -->
+	<insert id="reviewInsert" parameterType="hashmap">
+		insert into review values(REVIEW_SEQ.nextval,#{content},0,0,0,#{grade},sysdate,#{review_img_num},#{shop_num},#{member_num},#{owner_num})
+	</insert>
+	
+	<!-- 리뷰 작성 후  ORDER_MAIN의 리뷰구분자 수정하기 -->
+	<update id="updateReviewStatus" parameterType="int">
+		update ORDER_MAIN set review_status=1 where num=#{num}
+	</update>
+	
+	
+	<!-- 멤버 번호와  -->
 <!-- 고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 --> 
 <!-- 	<select id="reviewAble" parameterType="hashmap" resultType="String"> -->
 <!-- 		select NVL(count(*),0) chk -->

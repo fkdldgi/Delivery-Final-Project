@@ -5,23 +5,21 @@
 
 <!-- 가게목록 첫화면 불러오기 -->
 <div id="storeWrap" style="width: 70%; margin: auto;">
+	<div class="row">
 	<c:forEach var="list" items="${list }">
-		<div class="media position-relative"
-			style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;">
-			<img
-				src="http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif"
-				style="width: 20%; height: 100px;" class="mr-3">
+		<div class="media position-relative col-5"
+			style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px; margin-right: 20px;">
+			<img src="${pageContext.request.contextPath }/resources/profile/${list.profile_img }" style="width: 35%; height: 160px; margin-top: 12px;" class="mr-3">
 			<div class="media-body">
-				<p><h5 class="mt-0">${list.name}</h5></p>
+				<p><h3 style="font-weight: bold;" class="mt-0">${list.name}</h3></p>
 				<p>최소 결제금액 : ${list.min_price }원</p>
 				<p> ${list.info }</p>
 				<p> 전화번호 : ${list.reg_num }</p>
-				<p>리뷰 수 : 120 | 별점  : 4.2</p>
-				<p>가게번호 :  ${list.num}</p>
 				<a href="/delivery/member/storeDetail?num=${list.num }&owner_num=${list.owner_num }&memberNum=${sessionScope.memberNum }" class="stretched-link"></a>
 			</div>
 		</div>
 	</c:forEach>
+	</div>
 </div>
 
 
@@ -29,7 +27,7 @@
 <script type="text/javascript">
 	var startrow = 1;
 	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 	    	console.log($(document).height());
 	    	console.log($(window).height());
 	    	startrow = startrow + 5;
@@ -41,20 +39,18 @@
 	    	        contentType: "application/json",
 	    	        success: function(data) {
 	    	        	$(data).each(function(i,list){
-							var str = 	"<div class='media position-relative'" +
-							"style='border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;'>" +
-							"<img src='http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif'" +
-								"style='width: 20%; height: 100px;' class='mr-3'>" +
+							var str = 	"<div class='media position-relative col-5'" +
+							"style='border: 1px solid gray; margin-top: 10px; margin-bottom: 10px; margin-right: 20px;'>" +
+							"<img src='${pageContext.request.contextPath }/resources/profile/" + list.profile_img + "'" +
+								"style='width: 40%; height: 200px;' class='mr-3'>" +
 							"<div class='media-body'>" +
-								"<p><h5 class='mt-0'>" + list.name + "</h5></p>" +
+								"<p><h3 style='font-weight: bold;' class='mt-0'>" + list.name + "</h3></p>" +
 								"<p>최소 결제금액 : " + list.min_price + "원</p>" + 
-								"<p>전화번호 : " + list.reg_num + "</p>" +
-								"<p>리뷰 수 : 120 | 별점  : 4.2</p> " +	
-								"<p>가게번호 : " + list.num + "</p> " +
+								"<p>전화번호 : " + list.tel + "</p>" +
 								"<a href='/delivery/member/storeDetail?num=" + list.num +"&owner_num=" + list.owner_num +"&memberNum=${sessionScope.memberNum}' class='stretched-link'></a>" +
 							"</div>" +
 						"</div>";
-							$("#storeWrap").append(str);
+							$(".row").append(str);
 						});  
 	    	        },error: function(errorThrown) {
 					alert(errorThrown.statusText);
