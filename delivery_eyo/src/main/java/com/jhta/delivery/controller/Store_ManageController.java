@@ -83,10 +83,13 @@ public class Store_ManageController {
 		}
 		
 		// 메뉴옵션 삭제하기
-		for(int i = 0; i < req.getParameterValues("delete_menu_option").length; i++) {
+		if(req.getParameterValues("delete_menu_option") != null) {
 			
-			int a = Integer.parseInt(req.getParameterValues("delete_menu_option")[i]);
-			store_service.delete_menu_option(a);
+			for(int i = 0; i < req.getParameterValues("delete_menu_option").length; i++) {
+				
+				int a = Integer.parseInt(req.getParameterValues("delete_menu_option")[i]);
+				store_service.delete_menu_option(a);
+			}
 		}
 
 		// 삭제한 메뉴카테고리번호로 메뉴카테고리 DB에서 삭제
