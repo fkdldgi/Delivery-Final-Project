@@ -50,13 +50,15 @@ public class StoreDetailController {
 		reviewMap.put("member_num", memberNum);
 		
 		List<Order_MainVo> reviewAble =  memberReviewservice.reviewAble(reviewMap);
-		System.out.println("리뷰 판단 : " + reviewAble); 
 		
-		model.addAttribute("reviewAble", reviewAble);
+		model.addAttribute("reviewAble", reviewAble.get(0));
 		
+		HashMap<String, Integer> getMenuMap = new HashMap<String, Integer>();
+		getMenuMap.put("order_main_num", reviewAble.get(0).getNum());
+		getMenuMap.put("member_num", memberNum);
 		
-//		System.out.println(list.get(0));
-//		System.out.println(list.get(0).get("REVIEW_IMG_NUM"));
+		//고객이 주문한 메뉴의 정보(이름) 가져오는 함수
+		model.addAttribute("menuInfo", memberReviewservice.getMenuNum(getMenuMap));
 		model.addAttribute("review_member_list", list);
 		
 		model.addAttribute("info", mservice.storeInfo(num));

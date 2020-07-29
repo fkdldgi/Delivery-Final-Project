@@ -9,7 +9,7 @@
 	<c:forEach var="list" items="${list }">
 		<div class="media position-relative col-5"
 			style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px; margin-right: 20px;">
-			<img src="${pageContext.request.contextPath }/resources/images/${list.profile_img }" style="width: 40%; height: 200px;" class="mr-3">
+			<img src="${pageContext.request.contextPath }/resources/profile/${list.profile_img }" style="width: 35%; height: 160px; margin-top: 12px;" class="mr-3">
 			<div class="media-body">
 				<p><h3 style="font-weight: bold;" class="mt-0">${list.name}</h3></p>
 				<p>최소 결제금액 : ${list.min_price }원</p>
@@ -41,7 +41,7 @@
 	    	        	$(data).each(function(i,list){
 							var str = 	"<div class='media position-relative col-5'" +
 							"style='border: 1px solid gray; margin-top: 10px; margin-bottom: 10px; margin-right: 20px;'>" +
-							"<img src='${pageContext.request.contextPath }/resources/images/" + list.profile_img + "'" +
+							"<img src='${pageContext.request.contextPath }/resources/profile/" + list.profile_img + "'" +
 								"style='width: 40%; height: 200px;' class='mr-3'>" +
 							"<div class='media-body'>" +
 								"<p><h3 style='font-weight: bold;' class='mt-0'>" + list.name + "</h3></p>" +
