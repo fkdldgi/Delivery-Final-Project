@@ -10,6 +10,7 @@ import com.jhta.delivery.dao.Owner_StoreDao;
 import com.jhta.delivery.vo.MenuCategoryVo;
 import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
+import com.jhta.delivery.vo.Owner_CheckMenuVo;
 
 @Service
 public class Owner_StoreService {
@@ -73,5 +74,25 @@ public class Owner_StoreService {
 	// 메뉴옵션 삭제
 	public int delete_menu_option(int num) {
 		return dao.delete_menu_option(num);
+	}
+	
+	// 가게가 가진 메뉴카테고리, 메뉴, 메뉴옵션
+	public List<Owner_CheckMenuVo> checkMenuList(int num){
+		return dao.checkMenuList(num);
+	}
+	
+	// 메뉴카테고리 추가&수정
+	public int insertUpdate_MenuCategory(MenuCategoryVo vo) {
+		return dao.insertUpdate_MenuCategory(vo);
+	}
+	
+	// 메뉴 추가&수정
+	public int insertUpdate_Menu(MenuVo vo) {
+		return dao.insertUpdate_Menu(vo);
+	}
+	
+	// 메뉴옵션 추가&수정
+	public int insertUpdate_MenuOption(MenuOptionVo vo) {
+		return dao.insertUpdate_MenuOption(vo);
 	}
 }
