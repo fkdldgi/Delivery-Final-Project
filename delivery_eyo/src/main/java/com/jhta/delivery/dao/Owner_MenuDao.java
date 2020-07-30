@@ -31,4 +31,13 @@ public class Owner_MenuDao {
 	public List<MenuVo> menu(int num){
 		return session.selectList(NAMESPACE+".Menu",num);
 	}
+	
+	//메뉴번호중 가장 큰 값 가져오기
+	public int max_menu_num() {
+		return session.selectOne(NAMESPACE+".Max_menu_num");
+	}
+	//메뉴카테고리 번호 중 가장 큰 값 가져오기
+	public int max_menu_category_num() {
+		return session.selectOne(NAMESPACE+".Max_menu_category_num");
+	}
 }
