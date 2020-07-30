@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jhta.delivery.vo.MenuCategoryVo;
 import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
+import com.jhta.delivery.vo.Owner_CheckMenuVo;
 
 @Repository
 public class Owner_StoreDao {
@@ -76,4 +77,32 @@ public class Owner_StoreDao {
 	public int delete_menu_option(int num) {
 		return session.delete(NAMESPACE+".delete_menu_option", num);
 	}
+	
+	// 가게가 가진 메뉴카테고리, 메뉴, 메뉴옵션
+	public List<Owner_CheckMenuVo> checkMenuList(int num){
+		return session.selectList(NAMESPACE+".select_menuAll", num);
+	}
+	
+	// 메뉴카테고리 추가& 수정
+	public int insertUpdate_MenuCategory(MenuCategoryVo vo) {
+		return session.insert(NAMESPACE+".insertUpdate_Menu_category", vo);
+	}
+	
+	// 메뉴 추가&수정
+	public int insertUpdate_Menu(MenuVo vo) {
+		return session.insert(NAMESPACE+".insertUpdate_Menu", vo);
+	}
+	
+	// 메뉴옵션 추가&수정
+	public int insertUpdate_MenuOption(MenuOptionVo vo) {
+		return session.insert(NAMESPACE+".insertUpdate_MenuOption", vo);
+	}
 }
+
+
+
+
+
+
+
+
