@@ -15,13 +15,23 @@
 	
 	<!-- 가게번호로 리뷰 리스트 + 회원 정보 가져오기 -->
 	<select id="review_member_list" parameterType="int" resultType="hashmap">
-		select r.num,r.content,r.ref,r.lev,r.step,r.grade,r.regdate,r.review_img_num,r.shop_num,r.member_num,r.owner_num,m.name,m.img,m.gender
-		from review r,member m 
-		where shop_num=#{shop_num} and r.ref=0 
-		and r.lev=0 
-		and r.member_num=m.num order by r.num desc
+	select level,r.num,r.content,r.ref,r.lev,r.step,r.grade,r.regdate,r.review_img_num,r.shop_num,r.member_num,r.owner_num,m.name,m.img,m.gender
+		from review r,member m
+		where m.num(+)=r.member_num and r.shop_num=#{shop_num}
+		start with r.ref=0
+		connect by r.ref = prior r.num and r.member_num is null
 	</select>
 	
+	<!-- 가게번호로 리뷰 리스트 + 회원정보 + 사장님 댓글 가져오기 -->
+	<select id="reviewAll" parameterType="int" resultType="hashmap">
+		select re1.num reviewnum,re1.content membercontent,re1.grade,re1.review_img_num reviewimg,m.name,m.img,re2.content ownercontent,re2.ref
+			from review re1,review re2,member m
+			where re1.ref=0
+			and m.num=re1.member_num
+			and re1.shop_num=#{shop_num} 
+			and re2.ref != 0
+			order by re1.num desc
+	</select>
 	<!-- 멤버번호로 주문한 가게번호 가져오기 -->
 	<select id="getShopByMember" parameterType="int" resultType="hashmap">
 		select shop_num from MENU_CATEGORY
@@ -61,9 +71,14 @@
 		insert into REVIEW_IMG values(REVIEW_IMG_SEQ.nextval,#{img_path},#{original_filename},#{save_filename})
 	</insert>
 	
-	<!-- 리뷰 넣기 -->
-	<insert id="reviewInsert" parameterType="hashmap">
-		insert into review values(REVIEW_SEQ.nextval,#{content},0,0,0,#{grade},sysdate,#{review_img_num},#{shop_num},#{member_num},#{owner_num})
+	<!-- 리뷰 넣기(사진 없을 때) -->
+	<insert id="reviewInsertNo" parameterType="hashmap">
+		insert into review values(REVIEW_SEQ.nextval,#{content},0,0,0,#{grade},sysdate,0,#{shop_num},#{member_num},#{owner_num})
+	</insert>
+	
+	<!-- 리뷰 넣기(사진 있을 때) -->
+	<insert id="reviewInsertYes" parameterType="hashmap">
+		insert into review values(REVIEW_SEQ.nextval,#{content},0,0,0,#{grade},sysdate,REVIEW_IMG_SEQ.currval,#{shop_num},#{member_num},#{owner_num})
 	</insert>
 	
 	<!-- 리뷰 작성 후  ORDER_MAIN의 리뷰구분자 수정하기 -->
