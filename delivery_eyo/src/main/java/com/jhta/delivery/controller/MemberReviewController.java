@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhta.delivery.service.MemberReviewService;
-import com.jhta.delivery.vo.ShopVo;
+import com.jhta.delivery.vo.Order_MainVo;
 
 @Controller
 public class MemberReviewController {
@@ -26,12 +27,18 @@ public class MemberReviewController {
 	@RequestMapping("/member/insertReview")
 	public String init(MultipartFile file,HttpSession session,HttpServletRequest req) {
 		
+		//리뷰 점수
+		String grade = req.getParameter("on");
+		//주문 번호
+		int order_num = Integer.parseInt(req.getParameter("order_num"));
+		//가게 번호
 		int num = Integer.parseInt(req.getParameter("shop_num"));
+		//사장 번호
 		int owner_num = Integer.parseInt(req.getParameter("owner_num"));
+		//고객 번호
 		int memberNum = Integer.parseInt(req.getParameter("member_num"));
-		String reviewText = req.getParameter("reviewText");
-		String grade="";
 		
+		String reviewText = req.getParameter("reviewText");
 		System.out.println("shopnum : " + num);
 		System.out.println("owner_num : " + owner_num);
 		System.out.println("memberNum : " + memberNum);
@@ -43,6 +50,15 @@ public class MemberReviewController {
 		String uploadPath=session.getServletContext().getRealPath("/resources/reivew");
 		String orgfileName;
 		String savefileName;
+		
+		
+		HashMap<String, Integer> ablemap = new HashMap<String, Integer>();
+		ablemap.put("shop_num", num);
+		ablemap.put("member_num", memberNum);
+		List<Order_MainVo>  omList = memberRServiec.reviewAble(ablemap);
+		
+		Order_MainVo vo = omList.get(0);
+		System.out.println(vo);
 		
 		try {
 			
@@ -69,7 +85,8 @@ public class MemberReviewController {
 				imgMap.put("original_filename", orgfileName);
 				imgMap.put("save_filename", savefileName);
 				
-				//memberRServiec.review_imgInsert(imgMap);
+				//리뷰 이미지 넣기
+				memberRServiec.review_imgInsert(imgMap);
 				
 				reviewMap.put("review_img_num", "REVIEW_IMG_SEQ.CURRVAL");
 			}else {
@@ -83,7 +100,12 @@ public class MemberReviewController {
 			reviewMap.putIfAbsent("member_num", memberNum);
 			reviewMap.putIfAbsent("owner_num", owner_num);
 			
-			//memberRServiec.reviewInsert(reviewMap);
+			//리뷰 넣기
+			int n = memberRServiec.reviewInsert(reviewMap);
+			if(n>0) {
+			//주문 테이블의 리뷰 구분자 수정하기
+				memberRServiec.updateReviewStatus(order_num);
+			}
 			
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());

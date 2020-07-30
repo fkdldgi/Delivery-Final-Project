@@ -20,245 +20,19 @@
 	border-bottom: 1px solid black;
 }
 </style>
-<script>
-	// 메뉴 추가했다가 다시 삭제하는 거 안됨
-	var category_menu_menu = 0;
-	$(document).ready(function(){
-		
-		// main_menu 밑에 있는 메뉴 추가를 눌렀을 때 div가 추가됨
-		$('#add_main_menu').on('click',function(){	
-			var div2 = $('#copy_main_menu').clone();
-			div2.css("display","block");
-			div2.attr("name","main_menu");
-			div2.removeAttr("id");
-			$("div[name=append_main_menu]").append(div2);
-		});
-		
-		// main_menu 밑에 있는 메뉴 삭제를 눌렀을 때 div가 삭제 마지막 div인 경우에는 삭제 불가
-		$("#remove_main_menu").on('click',function(){
-			
-			var div = $('div[name=main_menu]');
-			if(div.length > 1){
-				div.last().remove();
-			}else{
-				alert("더 이상 삭제 불가합니다.");
-			}
-		});
-		
-		// 메뉴추가()
-		
-		/* $("input[name=add_menu]").on('click',function(){
-			
-			var copy_menu = $("#copy_menu").clone();
-			copy_menu.css('display','block');
-			copy_menu.attr('name','menu');
-			copy_menu.removeAttr('id');
-			
-			var a = $(this).parent();
-			a.prev().append(copy_menu);
-			
-		}); */
-		
-		
-			/*
-			주문안내 shop_info
-			메뉴이름 menu_name
-			메뉴설명 menu_info
-			메뉴가격 min_price
-			*/
-		var category_hit = 0;
-		// 카테고리 추가
-		$("#add_category_menu").on('click',function(){
-			// 카테고리 메뉴 복사
-			var copy_category_menu = $("#copy_category_menu").clone();
-			copy_category_menu.css('display','block');
-			copy_category_menu.attr('name','category_name');
-			// copy_category_menu.name='category_name';
-			copy_category_menu.removeAttr('id');
-			
-			// 바꿀값 얻어와서 int로 바꿈
-			var a = parseInt(copy_category_menu.find("input[name=category_num]").val());
-			// hit랑 합침
-			var b = a+category_hit;
-			category_menu_menu = b;
-			// 넣을 input타입 얻어오기
-			var c = copy_category_menu.find("input[name=category_num]");
-			// input타입 val 설정
-			c.attr("value",b);
-			
-			// 여러번할때마다 -1더함
-			category_hit += -1;
-			
-			console.log("가져온 값"+a);
-			console.log("새로 넣어야 할 값: "+b);
-			console.log(c);
-			console.log("가져온 값2"+a);
-			console.log("c타입:"+c.val());
-			console.log('---');
-			console.log(category_menu_menu);
-			
-			// 메뉴 복사
-			var copy_menu = $("#copy_menu").clone();
-			copy_menu.css('display','block');
-			copy_menu.attr('name','menu');
-			// copy_menu.name='menu';
-			copy_menu.removeAttr('id');
-			
-			// 버튼 복사
-			var copy_button = $("#copy_button").clone();
-			copy_button.css('display','block');
-			copy_button.removeAttr('id');
-			
-			// 전체를 감쌀 div 만들기
-			var div1 = $("#div1").clone();
-			div1.removeAttr('id');
-			div1.css('display','block');
-			div1.append(copy_category_menu);
-			div1.append(copy_menu);
-			div1.append(copy_button);
-			
-			var zzz=$("#add_menu_wrap").append(div1); 
-			div1.append("<input type='text' hidden='hidden' name='category_list_num' value='"+category_menu_menu+"'>");
-			
-			//"<input typ리 div 눌렀을 때 div숨기고, 나타내기
-			$("div[name=category_name]").on('click',function(){
-				var cate = $(this).nextAll();
-				// 위 아래로 나타태는 효과
-				cate.animate({
-					height: 'toggle'
-				});
-			});
-			
-		});
-		
-		// 카테고리 삭제
-		$("#remove_category_menu").on('click',function(){
-			// 전체 카테고리
-			var category = $("div[name=category]");
-			
-			// 전체 카테고리 중 마지막 div
-			var category1 = $("div[name=category]:last");
-			var num = category1.find("input[name=category_num]").val();
-			
-			var trash_category = $("#trash").clone();
-			trash_category.removeAttr('id');
-			trash_category.attr('name','trash_category');
-			trash_category.val(num);
-			
-			var trash_can = $("#trash_can");
-			trash_can.append(trash_category);
-			
-			if(category.length > 2){
-				category1.remove();
-			}else{
-				alert("대표메뉴는 삭제가 불가능 합니다.");
-			}
-		});
-		
-		/*메뉴랑 메뉴카테고리 추가할 때 ajax로 넘기기*/
-		
-		// 이미지 추가
-		$("img").on('click',function(e){
-			console.log('이미지 추가 버튼');
-		});
-		
-		// 카테고리 div 눌렀을 때 div숨기고, 나타내기
-		$("div[name=category_name]").on('click',function(){
-			var cate = $(this).nextAll();
-			// 위 아래로 나타태는 효과
-			cate.animate({
-				height: 'toggle'
-			});
-		});
-		
-		// 메뉴 삭제
-		$("input[name=remove_menu]").on("click",function(){			
-			var target = $(this).parent().prev().children("div[name=menu]:last");
-			var num = target.find("input[name=menu_num]").val();
-			var num1 = target.find("input[name=category_list_num]").val();
-			
-			if(num1 == -1){
-				target.remove();
-			}else{
-				
-			var trash = $("#trash").clone();
-			trash.removeAttr('id');
-			trash.attr('name','trash');
-			trash.val(num);
-			var trash_can = $("#trash_can");
-			trash_can.append(trash);
-			
-			target.remove();			
-			}
-		});
-		
-		// 메뉴옵션 추가
-		$("input[name=add_option]").on('click',function(){
-			
-			// menu_option넣을거 복사하기
-			var menu_option = $("#copy_menu_option").clone();
-			menu_option.removeAttr('id');
-			menu_option.css('display','block');
-			
-			// 어디에 속한 menu_option인지 확인
-			var menu_option_num = menu_option.find("input[name=option_menu_num]");
-			
-			var menu_num = $(this).parent().parent().parent().parent().find("input[name=menu_num]");
-			menu_option_num.val(menu_num.val());			
-			
-			// o
-			
-			// 위치 찾기
-			var location = $(this).parent().parent();
-			location.append(menu_option);
-		});
-		
-		// 메뉴옵션 삭제
-		$("input[name=delete_option]").on('click',function(){
-			
-			var location = $(this).parent().parent();
-			var aa = location.children("div:last");
-			var option_num = aa.find("input[name=option_num]").val();
-			
-			var bb = $("#bb").clone();
-			bb.removeAttr('id');
-			bb.attr('name','delete_menu_option');
-			bb.val(option_num);
-			if(bb.val() > 0){
-				$("#aa").append(bb);				
-			}			
-			aa.remove();
-		});
-		
-	});
-	
-	//메뉴 추가 함수
-	function menu_add(menu_category_num, aa){		
-		var copy_menu = $("#copy_menu").clone();
-		copy_menu.css('display','block');
-		copy_menu.attr('name','menu');
-		copy_menu.removeAttr('id');
-		
-		//var mcm = menu_category_num;
-		
-		if(menu_category_num >= 0){
-			// mcm=category_menu_menu;
-			copy_menu.append("<input type='text' hidden='hidden' name='category_list_num' value='"+menu_category_num+"'>");
-		}else{
-			
-			copy_menu.css('width','100%');
-			var a = $(aa).parent().parent().find("input[name=category_list_num]");
-			// var name_list_num = a.find("input[name=category_list_num]:last");
-			
-			//copy_menu.append("<input type='text' name='category_list_num' value='"+mcm+"'>");
-			copy_menu.append("<input type='text' hidden='hidden' name='category_list_num' value='"+a.val()+"'>");
-		}
-		
-		var b = $(aa).parent();
-		b.prev().append(copy_menu);
-	}
-</script>
+
 <body>
+	<c:forEach var="menu" items="${menu }" varStatus="i">
+		<c:if test="${i.last }">
+			<input type="hidden" id="last_menu_num" value="${menu.num }">
+		</c:if>
+	</c:forEach>
+	
+	<c:forEach var="list" items="${menuCategoryList }" varStatus="j">
+		<c:if test="${j.last }">
+			<input type="hidden" id="last_menuCategoryList_num" value="${list.num }">
+		</c:if>
+	</c:forEach>
 	<input id="trash" type="text" style="display: none;">
 	<!-- 삭제한 값 넣기 -->
 	<!-- 복사할 메인메뉴 -->
@@ -325,14 +99,17 @@
 			<div>
 				<div>
 					<br>
-					<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션 추가">
+					<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션 추가" onclick="SONG(this)">
 					<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션 삭제">
 				</div>
 				<div>
 					<br><input type="text" placeholder="옵션메뉴 이름" name="option_name"><br>
 					<input type="text" placeholder="가격" name="option_price"><br>
 					<input type="text" placeholder="카테고리" name="option_category"><br>
+					<input type="text" value="-1" name="option_menu_num"><br>
+					<input type="text" value="-1" name="option_num">
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -342,8 +119,8 @@
 		<br><input type="text" placeholder="옵션메뉴이름" name="option_name"><br>
 		<input type="number" placeholder="가격" name="option_price"><br>
 		<input type="text" placeholder="카테고리" name="option_category"><br>
-		<input type="text" value="-1" name="option_menu_num" hidden="hidden"><br>
-		<input type="text" value="-1" name="option_num" hidden="hidden">
+		<input type="text" value="-1" name="option_menu_num"><br>
+		<input type="text" value="-1" name="option_num">
 	</div>
 
 	<!-- 복사할 버튼 -->
@@ -448,7 +225,7 @@
 												<div>
 													<div>
 														<br>
-														<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션추가">
+														<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션추가" onclick="SONG(this)">
 														<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션삭제">
 													</div>
 													<c:forEach var="menu_option" items="${menu_optionList }">
@@ -457,8 +234,8 @@
 																<br><input type="text" placeholder="옵션메뉴 이름" name="option_name" value="${menu_option.name }"><br>
 																<input type="number" placeholder="가격" name="option_price" value="${menu_option.price }"><br>
 																<input type="text" placeholder="카테고리" name="option_category" value="${menu_option.category }"><br>
-																<input type="text" hidden="hidden" name="option_menu_num" value="${menu.num }">
-																<input type="text" hidden="hidden" name="option_num" value="${menu_option.num }">
+																<input type="text" name="option_menu_num" value="${menu.num }">
+																<input type="text" name="option_num" value="${menu_option.num }">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -496,7 +273,269 @@
 		</div>
 	</form>
 </body>
+<script>
+	// 메뉴 추가했다가 다시 삭제하는 거 안됨
+	var category_menu_menu = 0;
+	
+	//새로 생성된 메뉴번호
+	var last_menu_num=$("#last_menu_num");
+	var last_menu_num_val=$("#last_menu_num").val();
+	var add_menuNum=parseInt(last_menu_num_val);
+	
+	//새로 생성된 메뉴카테고리번호
+	var last_menuCategoryList_num=$("#last_menuCategoryList_num");
+	var last_menuCategoryList_num_val=$("#last_menuCategoryList_num").val();
+	var add_categoryNum=parseInt(last_menuCategoryList_num_val);
+		
+	// main_menu 밑에 있는 메뉴 추가를 눌렀을 때 div가 추가됨
+	$('#add_main_menu').on('click',function(){	
+		var div2 = $('#copy_main_menu').clone();
+		div2.css("display","block");
+		div2.attr("name","main_menu");
+		div2.removeAttr("id");
+		$("div[name=append_main_menu]").append(div2);
+	});
+	
+	// main_menu 밑에 있는 메뉴 삭제를 눌렀을 때 div가 삭제 마지막 div인 경우에는 삭제 불가
+	$("#remove_main_menu").on('click',function(){
+		
+		var div = $('div[name=main_menu]');
+		if(div.length > 1){
+			div.last().remove();
+		}else{
+			alert("더 이상 삭제 불가합니다.");
+		}
+	});
+	
+	var category_hit = 0;
+	// 카테고리 추가
+	$("#add_category_menu").on('click',function(){
+		add_menuNum++;
+		$("#copy_menu input[name=menu_num]").val(add_menuNum);
+		$("#copy_menu_option input[name=option_menu_num]").val(add_menuNum);
+		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
+		
+		add_categoryNum++;
+		$("#copy_category_menu input[name=category_num]").val(add_categoryNum);
+		
+		// 카테고리 메뉴 복사
+		var copy_category_menu = $("#copy_category_menu").clone();
+		copy_category_menu.css('display','block');
+		copy_category_menu.attr('name','category_name');
+		// copy_category_menu.name='category_name';
+		copy_category_menu.removeAttr('id');
+		
+		// 바꿀값 얻어와서 int로 바꿈
+		var a = parseInt(copy_category_menu.find("input[name=category_num]").val());
+		// hit랑 합침
+		var b = a+category_hit;
+		category_menu_menu = b;
+		// 넣을 input타입 얻어오기
+		var c = copy_category_menu.find("input[name=category_num]");
+		// input타입 val 설정
+		c.attr("value",b);
+		
+		// 여러번할때마다 -1더함
+		category_hit += -1;
+		
+		// 메뉴 복사
+		var copy_menu = $("#copy_menu").clone();
+		copy_menu.css('display','block');
+		copy_menu.attr('name','menu');
+		// copy_menu.name='menu';
+		copy_menu.removeAttr('id');
+		
+		// 버튼 복사
+		var copy_button = $("#copy_button").clone();
+		copy_button.css('display','block');
+		copy_button.removeAttr('id');
+		
+		// 전체를 감쌀 div 만들기
+		var div1 = $("#div1").clone();
+		div1.removeAttr('id');
+		div1.css('display','block');
+		div1.append(copy_category_menu);
+		div1.append(copy_menu);
+		div1.append(copy_button);
+		
+		var zzz=$("#add_menu_wrap").append(div1); 
+		div1.append("<input type='text' hidden='hidden' name='category_list_num' value='"+category_menu_menu+"'>");
+		
+		//"<input typ리 div 눌렀을 때 div숨기고, 나타내기
+		$("div[name=category_name]").on('click',function(){
+			var cate = $(this).nextAll();
+			// 위 아래로 나타태는 효과
+			cate.animate({
+				height: 'toggle'
+			});
+		});
+		
+	});
+	
+	// 카테고리 삭제
+	$("#remove_category_menu").on('click',function(){
+		// 전체 카테고리
+		var category = $("div[name=category]");
+		
+		// 전체 카테고리 중 마지막 div
+		var category1 = $("div[name=category]:last");
+		var num = category1.find("input[name=category_num]").val();
+		
+		var trash_category = $("#trash").clone();
+		trash_category.removeAttr('id');
+		trash_category.attr('name','trash_category');
+		trash_category.val(num);
+		
+		var trash_can = $("#trash_can");
+		trash_can.append(trash_category);
+		
+		if(category.length > 2){
+			category1.remove();
+		}else{
+			alert("대표메뉴는 삭제가 불가능 합니다.");
+		}
+	});
+	
+	/*메뉴랑 메뉴카테고리 추가할 때 ajax로 넘기기*/
+	
+	// 이미지 추가
+	$("img").on('click',function(e){
+		console.log('이미지 추가 버튼');
+	});
+	
+	// 카테고리 div 눌렀을 때 div숨기고, 나타내기
+	$("div[name=category_name]").on('click',function(){
+		var cate = $(this).nextAll();
+		// 위 아래로 나타태는 효과
+		cate.animate({
+			height: 'toggle'
+		});
+	});
+	
+	// 메뉴 삭제
+	$("input[name=remove_menu]").on("click",function(){			
+		var target = $(this).parent().prev().children("div[name=menu]:last");
+		var num = target.find("input[name=menu_num]").val();
+		var num1 = target.find("input[name=category_list_num]").val();
+		
+		if(num1 == -1){
+			target.remove();
+		}else{
+			
+		var trash = $("#trash").clone();
+		trash.removeAttr('id');
+		trash.attr('name','trash');
+		trash.val(num);
+		var trash_can = $("#trash_can");
+		trash_can.append(trash);
+		
+		target.remove();			
+		}
+	});
+	
+	// 메뉴옵션 추가
+/* 		$("input[name=add_option]").on('click',function(){
+		
+		console.log('1');
+		
+		// menu_option넣을거 복사하기
+		var menu_option = $("#copy_menu_option").clone();
+		menu_option.removeAttr('id');
+		menu_option.css('display','block');
+		
+		// 어디에 속한 menu_option인지 확인
+		var menu_option_num = menu_option.find("input[name=option_menu_num]");
+		
+		var menu_num = $(this).parent().parent().parent().parent().find("input[name=menu_num]");
+		menu_option_num.val(menu_num.val());			
+		
+		// o
+		
+		// 위치 찾기
+		var location = $(this).parent().parent();
+		location.append(menu_option);
+	}); */
+	
+	// 메뉴옵션 삭제
+	$("input[name=delete_option]").on('click',function(){
+		
+		var location = $(this).parent().parent();
+		var aa = location.children("div:last");
+		var option_num = aa.find("input[name=option_num]").val();
+		
+		var bb = $("#bb").clone();
+		bb.removeAttr('id');
+		bb.attr('name','delete_menu_option');
+		bb.val(option_num);
+		if(bb.val() > 0){
+			$("#aa").append(bb);				
+		}			
+		aa.remove();
+	});
+	
+	
 
+	
+	/* 여기까지 document.ready() 였음  */
+
+
+	
+	//메뉴 추가 함수
+	function menu_add(menu_category_num, aa){		
+		add_menuNum++;
+		$("#copy_menu input[name=menu_num]").val(add_menuNum);
+		$("#copy_menu_option input[name=option_menu_num]").val(add_menuNum);
+		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
+		
+		var copy_menu = $("#copy_menu").clone();
+		copy_menu.css('display','block');
+		copy_menu.attr('name','menu');
+		copy_menu.removeAttr('id');
+		
+		//var mcm = menu_category_num;
+		
+		if(menu_category_num >= 0){
+			// mcm=category_menu_menu;
+			copy_menu.append("<input type='text' hidden='hidden' name='category_list_num' value='"+menu_category_num+"'>");
+		}else{
+			
+			copy_menu.css('width','100%');
+			var a = $(aa).parent().parent().find("input[name=category_list_num]");
+			// var name_list_num = a.find("input[name=category_list_num]:last");
+			
+			//copy_menu.append("<input type='text' name='category_list_num' value='"+mcm+"'>");
+			copy_menu.append("<input type='text' hidden='hidden' name='category_list_num' value='"+a.val()+"'>");
+		}
+		
+		var b = $(aa).parent();
+		b.prev().append(copy_menu);
+	}
+	
+	//메뉴옵션 추가
+	function SONG(aa){
+		$("#copy_menu input[name=menu_num]").val(add_menuNum);
+		$("#copy_menu_option input[name=option_menu_num]").val(add_menuNum);
+		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
+		
+		// menu_option넣을거 복사하기
+		var menu_option = $("#copy_menu_option").clone();
+		menu_option.removeAttr('id');
+		menu_option.css('display','block');
+		
+		// 어디에 속한 menu_option인지 확인
+		var menu_option_num = menu_option.find("input[name=option_menu_num]");
+		
+		var menu_num = $(aa).parent().parent().parent().parent().find("input[name=menu_num]");
+		menu_option_num.val(menu_num.val());			
+		
+		// o
+		
+		// 위치 찾기
+		var location = $(aa).parent().parent();
+		location.append(menu_option);
+	};
+	
+</script>
 
 
 
