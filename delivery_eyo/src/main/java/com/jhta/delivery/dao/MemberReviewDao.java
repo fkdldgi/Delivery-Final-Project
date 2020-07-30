@@ -35,6 +35,11 @@ public class MemberReviewDao {
 		return sqlSession.selectList(NAMESPACE+".review_member_list", shop_num);
 	}
 	
+	// 가게번호로 리뷰 리스트 + 회원정보 + 사장님 댓글 가져오기 
+	public List<HashMap<String, Object>> reviewAll(int shop_num){
+		return sqlSession.selectList(NAMESPACE+".reviewAll", shop_num);
+	}
+	
 	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
 	public List<Order_MainVo> reviewAble(HashMap<String, Integer> map) {
 		return sqlSession.selectList(NAMESPACE+".reviewAble", map);
@@ -57,7 +62,14 @@ public class MemberReviewDao {
 	
 	// 리뷰 넣기 
 	public int reviewInsert(HashMap<String, Object> map) {
-		return sqlSession.insert(NAMESPACE+".reviewInsert", map);
+		System.out.println("DAO의 review_img_num : " + map.get("review_img_num"));
+		if(map.get("review_img_num").equals(0)) {
+			System.out.println("이미지가 없을 때 dao 진입");
+			return sqlSession.insert(NAMESPACE+".reviewInsertNo", map);
+		}else {
+			System.out.println("이미지가 있을 때 dao 진입");
+			return sqlSession.insert(NAMESPACE+".reviewInsertYes", map);
+		}
 	} 
 	
 	// 리뷰 작성 후  ORDER_MAIN의 리뷰구분자 수정하기 
