@@ -5,15 +5,22 @@
 
 <style>
 	.starR{
-	  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-	  background-size: auto 100%;
-	  width: 30px;
-	  height: 30px;
-	  display: inline-block;
-	  text-indent: -9999px;
-	  cursor: pointer;
+		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+		  background-size: auto 100%;
+		  width: 30px;
+		  height: 30px;
+		  display: inline-block;
+		  text-indent: -9999px;
+		  cursor: pointer;
 	}
 	.starR.on{background-position:0 0;}
+	
+	.reviewImg{
+		margin-left: 100px;
+		width: 500px; 
+		height: 400px; 
+		margin-bottom: 20px;
+	}
 </style>
 
 
@@ -24,8 +31,8 @@
 	<div class="media position-relative"
 		style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;">
 		<img
-			src="http://www.seoulfn.com/news/photo/201809/319058_113243_2622.gif"
-			style="width: 20%; height: 100px;" class="mr-3">
+			src="${pageContext.request.contextPath }/resources/profile/${info.profile_img }" 
+			style="width: 20%; height: 100px; margin-top: 20px;" class="mr-3">
 		<div class="media-body">
 			<p hidden="hidden" id="shop_num">${info.num}</p>
 			<p hidden="hidden" id="owner_num">${info.owner_num }</p>
@@ -65,7 +72,7 @@
 					<div class="row border-bottom" data-toggle="modal" data-target="#menuModal" onclick="javascript:menu_detail(${main.num})">
 <%-- 					<p>${main.num }</p> --%>
 						<div class="col-5">
-							<img src="${pageContext.request.contextPath }/resources/images/${main.img}" style="width: 250px; height: 150px; margin-top: 10px; margin-bottom: 10px;">
+							<img src="${pageContext.request.contextPath }/resources/menu/${main.img}" style="width: 250px; height: 150px; margin-top: 10px; margin-bottom: 10px;">
 						</div>
 						<div class="col-7">
 							<p><h2 style="font-weight: bold;">${main.name}</h2></p>
@@ -85,18 +92,22 @@
 				</c:when>
 				<c:otherwise>
 					<h4 style="font-weight:bold; margin-top: 20px; margin-left: 70px; margin-bottom: 20px;">*작성 가능한 리뷰가 있습니다.</h4>
+					<c:out value="${param.menuInfo}" />
+					<h1 style="font-weight: bold; text-align: center;"> ${menuInfo.name }</h1>
+					<img src="${pageContext.request.contextPath }/resources/menu/${menuInfo.img }" style="width: 80px; height: 100px; margin-left: 300px;">
 					<form action="${pageContext.request.contextPath }/member/insertReview" enctype="multipart/form-data" method="post">
-						 <div class="starRev" style="margin-left: 45px; margin-bottom: 20px;">
-							<span class="starR on">별1</span>
-							<span class="starR">별2</span>
-							<span class="starR">별3</span>
-							<span class="starR">별4</span>
-							<span class="starR">별5</span>
+						 <div class="starRev" style="margin-left: 45px; margin-bottom: 20px; margin-left: 250px;">
+							<span class="starR on"><input type="text" id="input" value="1" hidden="hidden"></span>
+							<span class="starR"><input type="text" id="input" value="2"  hidden="hidden"></span>
+							<span class="starR"><input type="text" id="input" value="3"  hidden="hidden"></span>
+							<span class="starR"><input type="text" id="input" value="4"  hidden="hidden"></span>
+							<span class="starR"><input type="text" id="input" value="5"  hidden="hidden"></span>
 						</div>
+						<input type="text" name="order_num" value=" ${reviewAble.num }" hidden="hidden">
 						<input type="text" name="member_num" value="${sessionScope.memberNum}" hidden="hidden">
 						<input type="text" name="owner_num" value="${info.owner_num }" hidden="hidden">
 						<input type="text" name="shop_num" value="${info.num}" hidden="hidden">
-						<div id="reviewImg"></div>
+						<img src="" id="reviewImg" class="">
 						<textarea name="reviewText" style="margin-left: 50px;" rows="10" cols="83" placeholder="10자 이상 써주세요~"></textarea><br>
 						<input type="file" accept="image/*" name="file123" id="file" style="margin-left: 50px;" class="upload-hidden">
 						<button type="submit" id="reviewBtn" class="btn btn-primary" style="width: 100px; height: 50px; margin-left: 555px; margin-bottom: 10px; margin-top: -30px;" >리뷰 등록</button>
@@ -285,7 +296,7 @@
 		        	$("#total").empty();
 					$("#modal-title").append("<h5 style='text-align: center;'>메뉴 상세</h5>");
 					$("#modal-title").append("<input type='text' id='menuNum' value='"+ data.menuInfo.num +"' hidden >");
-					$("#modal-body").append("<img src='${pageContext.request.contextPath}/resources/images/" + data.menuInfo.img +"' style='width:100%;'>");
+					$("#modal-body").append("<img src='${pageContext.request.contextPath}/resources/menu/" + data.menuInfo.img +"' style='width:100%;'>");
 					$("#modal-body").append("<p><h1 style='text-align: center; font-weight:bold;' id='menuName'>"+ data.menuInfo.name +"</h1></p>");
 					$("#modal-body").append("<p><h5 style='text-align: center;'> 설명 : "+ data.menuInfo.menu_info +"</h5></p>");
 					$("#modal-body").append("<label style='text-align: left;'><h5 style='font-weight:bold;'> 가격 :</h5></label><label style='text-align: right;'id='menuprice'><h4 style='font-weight:bold; color:red;'>"+ data.menuInfo.price +"</h4></label><label style='text-align: left;'><h5 style='font-weight:bold;'>원</h5></label>");
@@ -501,9 +512,32 @@
 	
 	//별점 주기 함수
 	$('.starRev span').click(function(){
-	  $(this).parent().children('span').removeClass('on');
-	  $(this).addClass('on').prevAll('span').addClass('on');
-	  return false;
+		$(this).parent().children('span').removeClass('on');
+		$(this).parent().children('span').children('#input').attr('name','');
+		$(this).addClass('on').prevAll('span').addClass('on');
+		$(this).children('#input').attr('name','on');
+		return false;
 	});
+	
+	//선택한 리뷰 이미지 붙이기
+		$("#file").change(function() {
+			readURL(this);
+		});
+
+		$("#reviewImg").change(function() {
+			$("#file").click();
+		});
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#reviewImg').attr('src', e.target.result);
+
+			}
+			$('#reviewImg').addClass('reviewImg');
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 	
 </script>
