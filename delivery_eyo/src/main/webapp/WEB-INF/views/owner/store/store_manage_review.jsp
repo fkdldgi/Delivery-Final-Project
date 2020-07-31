@@ -116,7 +116,7 @@
 					<c:when test="${list.save_filename == null }">
 					</c:when>
 					<c:otherwise>
-						<img src="/delivery/resources/review/${list.save_filename }" style="border-radius: 70%; width: 100%; height: 100%;">
+						<img src="${pageContext.request.contextPath }/resources/review/${list.save_filename }" style="border-radius: 70%; width: 100%; height: 100%;">
 					</c:otherwise>
 				</c:choose>
 			</div>

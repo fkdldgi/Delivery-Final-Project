@@ -15,6 +15,10 @@
 		<put-attribute name="footer" value="/WEB-INF/views/member/footer.jsp"/>	
 	</definition>
 	
+	<definition name=".rider.login" template="/WEB-INF/views/rider/layout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/rider/home.jsp"/>
+	</definition>
+	
 	<definition name=".join" template="/WEB-INF/views/owner/layout_join.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/owner/header.jsp"/>
 		<put-attribute name="content" value="/WEB-INF/views/owner/join.jsp"/>
@@ -47,6 +51,5 @@
 	<definition name=".member.*" extends=".member.main">
 		<put-attribute name="content" value="/WEB-INF/views/member/{1}.jsp"/>
 	</definition>
-	
 	
 </tiles-definitions>

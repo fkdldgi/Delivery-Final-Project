@@ -18,7 +18,7 @@ body {
 	padding-bottom: 40px;
 	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
 	background-repeat: no-repeat;
-	background: linear-gradient(to bottom right, #0098FF, #6BA8D1);
+	background: linear-gradient(to bottom right, #6495ED, #8CBDED);
 }
 
 .card {
@@ -56,40 +56,25 @@ body {
 </head>
 
 <body>
-	<div class="card align-middle"style="width: 900px; border-radius: 20px;">
-		<div class="card-title" style="margin-left:260px; margin-top: -50px;">
+	<div class="card align-middle"style="width: 600px; border-radius: 20px;">
+	<!-- 맨위에 뜨는 이미지 -->
+		<div class="card-title" style="margin-left:110px; margin-top: -50px;">
 			<img style="height: 350px;" src="/delivery/resources/images/logo_start.png">
 		</div>
 		<div class="card-body">
 				<h2 class="form-signin-heading" align="center" style="margin-bottom: 30px; 
-				margin-top: -130px;">무슨 회원이신가요?</h2>
+				margin-top: -130px;">라이더 회원에 오신것을 환영합니다.</h2>
 				<br>
 				<div class="card text-white bg-primary mb-3"
-					style="max-width: 18rem; float: left;
+					style="max-width: 18rem; text-align: center; 
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/member/main'">
-					<div class="card-header">일반회원</div>
-					<div class="card-body">
-						<h5 class="card-title">주문하러 가볼까요~?</h5>
-						<p class="card-text">배달이요 사이트로 가기</p>
-					</div>
+					<div class="card-header">
+					<span>로그인</span></div>
 				</div>
 				<div class="card text-white bg-secondary mb-3"
-					style="max-width: 18rem; float: left; margin-left: 85px;
+					style="max-width: 18rem; 
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/owner/main'">
-					<div class="card-header">기업회원</div>
-					<div class="card-body">
-						<h5 class="card-title">장사하러 가볼까요~?</h5>
-						<p class="card-text">사장님 사이트로 가기</p>
-					</div>
-				</div>
-				<div class="card text-white bg-info mb-3"
-					style="max-width: 18rem; float: right;
-					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/main'">
-					<div class="card-header">라이더회원</div>
-					<div class="card-body">
-						<h5 class="card-title">배달하러 가볼까요~?</h5>
-						<p class="card-text">라이더 사이트로 가기</p>
-					</div>
+					<div class="card-header" style="text-align: center;"><span>회원가입</span></div>
 				</div>
 		</div>
 	</div>
