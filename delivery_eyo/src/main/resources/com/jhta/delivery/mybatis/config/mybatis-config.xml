@@ -13,6 +13,7 @@
 		<typeAlias type="com.jhta.delivery.vo.AddressVo" alias="address"/>
 		<typeAlias type="com.jhta.delivery.vo.Delivery_TipVo" alias="delivery_tip"/>
 		<typeAlias type="com.jhta.delivery.vo.Delivery_LocationVo" alias="delivery_loc"/>
+		<typeAlias type="com.jhta.delivery.vo.Coupon_publishVo" alias="Coupon_publishVo"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/OwnerMapper.xml"/>
@@ -31,5 +32,7 @@
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Delivery_LocationMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/Delivery_TipMapper.xml"/>
 		<mapper resource="com/jhta/delivery/mybatis/mapper/OrderListMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/EventMapper.xml"/>
+		<mapper resource="com/jhta/delivery/mybatis/mapper/RiderMapper.xml"/>
 	</mappers>
 </configuration>

@@ -110,6 +110,16 @@
 			
 			<form action="/delivery/owner/store_manage/insertReview" method="post">
 			<input type="text" name="shop_num" value="${vo.num }" hidden="hidden">
+			<!-- 리뷰 이미지 -->
+			<div style="width: 200px; height: 200px; margin-left: 115px; margin-bottom: 10px; margin-top: 10px;">
+				<c:choose>
+					<c:when test="${list.save_filename == null }">
+					</c:when>
+					<c:otherwise>
+						<img src="${pageContext.request.contextPath }/resources/review/${list.save_filename }" style="border-radius: 70%; width: 100%; height: 100%;">
+					</c:otherwise>
+				</c:choose>
+			</div>
 			<input type="text" name="ref" value="${list.num }" hidden="hidden">
 			<div style="width: 100%; height: 250px;">
 				<!-- 리뷰내용 -->

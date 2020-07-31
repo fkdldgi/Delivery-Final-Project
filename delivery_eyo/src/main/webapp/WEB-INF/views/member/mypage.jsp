@@ -128,6 +128,8 @@
 				onclick="location.href='/delivery/member/QnaList?memberNum=${sessionScope.memberNum}'">문의목록</button>
 			<button type="button" class="btn btn-primary"
 				onclick="location.href='/delivery/member/orderList?memberNum=${sessionScope.memberNum}'">주문목록</button>
+			<button type="button" class="btn btn-primary"
+				onclick="location.href='/delivery/member/personalCoupon?memberNum=${sessionScope.memberNum}'">나의 쿠폰내역</button>
 		</div>
 	</div>
 </body>
