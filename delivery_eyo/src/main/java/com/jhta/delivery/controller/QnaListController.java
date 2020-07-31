@@ -70,11 +70,16 @@ public class QnaListController {
 			return ".member.error";
 		}
 	}
-	@RequestMapping(value = "/member/personalQna",method=RequestMethod.POST)
+	
+	@RequestMapping("/member/personalQna")
 	public String qnainsertOk(QnaVo vo) {
+		System.out.println("인서트 컨트롤러 접속");
+		System.out.println(vo.getMemberNum());
 		try {
+			System.out.println("qnaVo" + vo);
 			service.insert(vo);
 			//성공하면 다시 리스트로 돌아가도록
+			System.out.println("인서트 성공!");
 			return ".member.QnaList";
 		} catch (Exception e) {
 			// TODO: handle exception

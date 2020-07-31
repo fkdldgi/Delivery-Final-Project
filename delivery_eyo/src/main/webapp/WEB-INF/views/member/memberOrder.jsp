@@ -43,6 +43,8 @@
 		<input type="text" name="query" style="width: 60%;" hidden class="data">
 		<input type="text" name="addr_x" style="width: 60%;" hidden class="data">
 		<input type="text" name="addr_y" style="width: 60%;" hidden class="data">
+		
+	 	<input type="text" name="lastCoupon" value="0" class="data">
 	 	
 			<div class="col-8 card" style="width: 100%; margin: auto; margin-bottom: 10px;">
 				<div class="card bg-dark" style="width: 100%; height: 50px; color: white; text-align: left;">
@@ -73,8 +75,25 @@
 					<textarea name="rider_request" class="data" rows="2" cols="20" style="width: 80%;" placeholder="라이더님께 요청하는 사항입니다"></textarea>
 				</div>
 					<!-- 쿠폰 -->
-					<div class="card" style="width: 100%; height: 50px; color: black; text-align: left; background-color: lightgray;">
-					<h4 style="margin-top: 8px;">할인방법 선택</h4>
+					<div class="card" style="width: 100%; color: black; text-align: left; background-color: lightgray;">
+					<h4 style="margin-top: 8px;">사용가능 쿠폰 </h4>
+				</div>
+				<div style="width: 100%; margin-top: 10px;">
+					<h4 style="font-weight: bold;"><input type='radio' class="coupon" name='coupon' value='0' checked="checked">사용 안함</h4><br>
+					<input type="text" class="couponPrice" name="couponPrice" value="0" hidden >
+					<c:forEach var='couponList' items='${couponList }'>
+						<h4 style="font-weight: bold;"><input type='radio' class="coupon" name='coupon' value='${couponList.CNUM},${couponList.CPNUM},${couponList.DISCOUNT_PRICE }'>${couponList.CNAME }</h4><br>
+						<c:choose>
+							<c:when test="${couponList.CDISCOUNT_TYPE eq won}">
+								<input type="text" class="couponPrice" name="couponPrice" value="${couponList.DISCOUNT_PRICE }" hidden >
+								<h3 style="margin-top: -30px; float: left;">${couponList.DISCOUNT_PRICE } 원</h3>
+								<h5>최소 주문금액 : ${couponList.CMIN_PRICE } 원</h5>
+							</c:when>
+							<c:otherwise>
+								<h1>퍼센티지 할인입니다</h1> 
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</div>
 			</div>
 			<!-- 주문내역 부분 -->
@@ -107,9 +126,10 @@
 						<h5 style="margin-top: 5px;">총 결제금액</h5>
 					</div>
 					<div class="col" style="text-align: right;">
-						<h5 style="margin-top: 5px;"><span>${lastPrice }</span>원</h5>
+						<h5 style="margin-top: 5px;"><span id='totalPrice'>${lastPrice }</span>원</h5>
+						<input type="text" name='dumyPrice' value="${lastPrice }" hidden="hidden">
 						<!-- 최종가격 보내기 -->
-						<input type="text" name="lastPrice" value="${lastPrice }" hidden class="data">
+						<input type="text" name="lastPrice" value="${lastPrice }" hidden="hidden" class="data">
 					</div>
 				</div>
 				<br><input type="button" id="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: -20px;" value="결제하기">
@@ -167,6 +187,7 @@
  
 	 $("input[value='결제하기']").on('click',function(){
 	        var IMP = window.IMP; // 생략가능
+	        var lastPrice = $('input[name=lastPrice]').val()
 	        IMP.init('imp42126053'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	        var msg;
 	 		console.log('11112222')
@@ -175,7 +196,7 @@
 	            pay_method : 'vbank',
 	            merchant_uid : 'merchant_' + new Date().getTime(),
 	            name : '주문명 : 배달이요 테스트 결제',
-	            amount : ${lastPrice },
+	            amount : lastPrice,
 	            buyer_name :'${member.name }',
 	            buyer_tel :${member.tel},
 	            buyer_addr : addrData.address,
@@ -201,5 +222,31 @@
 	                msg += '에러내용 : ' + rsp.error_msg;
 	            } 
 	        });
+	 });
+	 
+	 $('.coupon').click(function(){
+		 var couponInfo = $(':radio[name="coupon"]:checked').val();
+		 var split;
+		 var cNum;
+		 var cPrice;
+		 console.log('쿠폰의 정보 : ' + couponInfo);
+		 if(couponInfo != 0){
+			 split = couponInfo.split(',');
+			 cNum = split[0];
+			 cpNum = split[1];
+			 cPrice = split[2];
+		 }else{
+			 cNum = 0;
+			 cpNum = 0;
+			 cPrice = 0;
+		 }
+		 console.log('cPrice : ' + cPrice);
+		 var calNum = $('input[name=dumyPrice]').val();
+		 
+		 console.log('calNum : ' + calNum);
+		 console.log('계산 : ' + (calNum-cPrice));
+		 $('input[name=lastCoupon]').val(couponInfo);
+		 $('input[name=lastPrice]').val((calNum-cPrice));
+		 $('#totalPrice').text((calNum-cPrice));
 	 });
 </script>  
