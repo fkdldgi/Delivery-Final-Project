@@ -54,7 +54,26 @@ body {
 <title>배달이요~</title>
 
 </head>
-
+<script>
+	// 로그인모달에 function
+	function check_form(){
+		var id = $("#inputId").val();
+		var pwd = $("#inputPwd").val();
+		$.ajax({
+			url: "/delivery/rider/login",
+			data: {id:id,pwd:pwd},
+			dataType: "text",
+			success:function(data){
+				console.log(data);
+				if(data==1){
+					location.href=""
+				}else{
+					alert("아이디 또는 비밀번호를 확인해 주세요.");
+				}
+			}
+		});
+	}
+</script>
 <body>
 	<div class="card align-middle"style="width: 600px; border-radius: 20px;">
 	<!-- 맨위에 뜨는 이미지 -->
@@ -65,21 +84,97 @@ body {
 				<h2 class="form-signin-heading" align="center" style="margin-bottom: 30px; 
 				margin-top: -130px;">라이더 회원에 오신것을 환영합니다.</h2>
 				<br>
+				<!-- 로그인을 누르면 모달 -->
 				<div class="card text-white bg-primary mb-3"
 					style="max-width: 18rem; text-align: center; 
-					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/member/main'">
+					cursor:pointer" data-toggle="modal" data-target="#loginModal">
 					<div class="card-header">
 					<span>로그인</span></div>
 				</div>
+				
+				<!-- 회원가입 누르면 모달 -->
 				<div class="card text-white bg-secondary mb-3"
 					style="max-width: 18rem; 
-					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/owner/main'">
+					cursor:pointer" data-toggle="modal" data-target="#joinModal">
 					<div class="card-header" style="text-align: center;"><span>회원가입</span></div>
+				</div>
+				<div style="text-align: center;">
+					<a href="#">아이디/비밀번호 찾기</a>
 				</div>
 		</div>
 	</div>
-
-	<div class="modal"></div>
+	<!-- 로그인 모달 -->
+	<form class="form-inline" method="post">
+		<div class="modal fade in" id="loginModal" tabindex="-1" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">로그인</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="close">
+							<span aria-hidden="true">x</span>
+						</button>
+					</div>
+					
+					<!-- 로그인 내용 입력(모달) -->
+					<div class="modal-body">
+						<div class="row">
+							<label for="inputId" class="col-xs-6 col-md-4">아이디</label>
+							<input type="text" name="login_id" id="inputId" class="form-control" placeholder="아이디" required autofocus>
+						</div>
+						<div class="row">
+							<label for="inputPwd" class="col-xs-6 col-md-4">비밀번호</label>
+							<input type="password" name="login_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required>
+						</div>
+					</div>
+					
+					<!-- 모달 fotter -->
+					<div class="modal-fotter">
+		                <button type="button" id="login_user" class="btn btn-link float-right" onclick="return check_form()">로그인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- 회원가입 모달 -->
+	<form class="form-inline" method="post">
+		<div class="modal fade in" id="joinModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">회원가입</h4>
+						<button class="close" data-dismiss="modal" aria-label="close">
+							<span aria-hidden="true">x</span>
+						</button> 
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<label for="inputId" class="col-xs-6 col-md-4">아이디</label>
+							<input type="text" name="join_id" id="inputId" class="form-control" placeholder="아이디" required autofocus>
+						</div>
+						<div class="row">
+							<label for="inputPwd" class="col-xs-6 col-md-4">비밀번호</label>
+							<input type="password" name="join_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required>
+						</div>
+						<div class="row">
+							<label for="inputName" class="col-xs-6 col-md-4">이름</label>
+							<input type="text" name="join_name" id="inputName" class="form-control" placeholder="이름" required>
+						</div>
+						<div class="row">
+							<label for="inputPhone" class="col-xs-6 col-md-4">전화번호</label>
+							<input type="text" name="join_phone" id="inputPhone" class="form-control" placeholder="'-'없이 입력해주세요." required>
+						</div>
+						<div class="row">
+							<label for="inputEmail" class="col-xs-6 col-md-4">이메일</label>
+							<input type="text" name="join_Email" id="inputEmail" class="form-control" placeholder="이메일" required>
+						</div>
+					</div>
+					<div class="modal-fotter">
+						<button type="button" id="join_user" class="btn btn-link float-right" onclick="return check_join()">가입</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
