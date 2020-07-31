@@ -44,11 +44,31 @@
 	<select id="getOrderMenuNumBy" parameterType="int" resultType="int">
 		select menu_num from MENU_OPTION where num=#{num}
 	</select>
-		
+	
+	<!-- 회원번호와 최소 가격으로 사용 가능한 쿠폰 리스트 가져오기 -->
+	<select id="useableCoupon" parameterType="hashmap" resultType="hashmap">
+		select c.num cnum,c.name cname,c.discount_type discount_type,c.discount_price discount_price,c.regdate cregdate,c.startdate cstartdate,
+            c.enddate cenddate,c.status cstatus,c.cp_count ccp_count,c.min_price cmin_price,
+            cp.num cpnum,cp.member_num cmember_num,cp.coupon_num cpcoupon_num,cp.regdate cpregdate,cp.status cpstatus,cp.order_num cporder_num
+		from COUPON c,COUPON_PUBLISH cp
+		where c.num = cp.coupon_num
+		and c.enddate>=sysdate
+		and <![CDATA[ c.startdate<sysdate ]]>
+		and cp.status=2
+		and cp.member_num=#{member_num}
+		and <![CDATA[ c.min_price <= #{last_price}]]>
+	</select>	
 <!--/////////////////////////// //////////////////////-->	
 
 
 <!-- ///////////////update 부분 ////////////////////// -->
+
+	<!-- 발행쿠폰 번호와 회원번호로 상태와 주문번호 변경 (사용한 쿠폰으로 변경)-->
+	<update id="updateCoupon" parameterType="hashmap">
+		update COUPON_PUBLISH 
+		set status=1,order_num=ORDER_MAIN_SEQ.CURRVAL
+		where num=#{num}
+	</update>
 
 <!-- /////////////////////////////////////////////// -->
 </mapper>
