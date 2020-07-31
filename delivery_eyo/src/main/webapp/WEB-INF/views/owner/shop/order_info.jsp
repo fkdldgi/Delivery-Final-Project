@@ -41,7 +41,7 @@
 	font-weight: 700;
 }
 
-/* 배달지역 margin */
+/* 읍면동 margin */
 #chk1 label{
 	margin: 0px 15px 5px 0px;
 }

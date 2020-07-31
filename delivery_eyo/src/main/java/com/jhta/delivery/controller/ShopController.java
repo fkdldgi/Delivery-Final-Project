@@ -142,6 +142,9 @@ public class ShopController {
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());
 			return ".owner.error";
+		}catch(Exception e) { //Service에서 트랜잭션 오류 발생시 예외처리발생
+			System.out.println(e.getMessage());
+			return ".owner.error";
 		}
 	}
 }
