@@ -56,8 +56,8 @@ body {
 </head>
 
 <body>
-	<div class="card align-middle"style="width: 600px; border-radius: 20px;">
-		<div class="card-title" style="margin-left:110px; margin-top: -50px;">
+	<div class="card align-middle"style="width: 900px; border-radius: 20px;">
+		<div class="card-title" style="margin-left:260px; margin-top: -50px;">
 			<img style="height: 350px;" src="/delivery/resources/images/logo_start.png">
 		</div>
 		<div class="card-body">
@@ -65,7 +65,7 @@ body {
 				margin-top: -130px;">무슨 회원이신가요?</h2>
 				<br>
 				<div class="card text-white bg-primary mb-3"
-					style="max-width: 18rem; float: left; 
+					style="max-width: 18rem; float: left;
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/member/main'">
 					<div class="card-header">일반회원</div>
 					<div class="card-body">
@@ -74,12 +74,21 @@ body {
 					</div>
 				</div>
 				<div class="card text-white bg-secondary mb-3"
-					style="max-width: 18rem; float: right;
+					style="max-width: 18rem; float: left; margin-left: 85px;
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/owner/main'">
 					<div class="card-header">기업회원</div>
 					<div class="card-body">
 						<h5 class="card-title">장사하러 가볼까요~?</h5>
 						<p class="card-text">사장님 사이트로 가기</p>
+					</div>
+				</div>
+				<div class="card text-white bg-info mb-3"
+					style="max-width: 18rem; float: right;
+					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/main'">
+					<div class="card-header">라이더회원</div>
+					<div class="card-body">
+						<h5 class="card-title">배달하러 가볼까요~?</h5>
+						<p class="card-text">라이더 사이트로 가기</p>
 					</div>
 				</div>
 		</div>
