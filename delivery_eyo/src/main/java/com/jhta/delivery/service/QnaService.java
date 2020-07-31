@@ -39,10 +39,10 @@ public class QnaService {
 		return dao.insert(vo);
 		
 	}
-	@Transactional
-	public int insert(Qna_ImgVo vo) {
-		return dao1.insert(vo);
-		
-	}
+//	@Transactional
+//	public int insert(Qna_ImgVo vo) {
+//		return dao1.insert(vo);
+//		
+//	}
 	
 }
