@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container col-md-6">
-<h1>공지사항</h1>
+<h1 style="text-align: center;">공지사항</h1>
     <div class="card">
         <div class="card-body">
             <h4 class="card-title mb-3">${vo.title }</h4>
@@ -21,9 +21,11 @@
                 <i class="far fa-clock"></i> ${regdate}
                	에 작성된 글
             </h6>
-            <p class="card-text">${vo.content }</p>
+             <hr style="border: 1px solid darkgray;">
+            <p class="card-text" style="text-align: center;">${vo.content }</p>
         </div>
-        <div class="card-body">
+        <div class="card-body" >
+        	 <hr style="border: 1px solid darkgray;">
             <span>이전글</span>
 			<a href="/delivery/member/detail?num=${pre.num }">${pre.title }</a></td>
 			<br>
