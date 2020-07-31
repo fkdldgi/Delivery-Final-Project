@@ -25,12 +25,21 @@ public class MemberReviewController {
 	private MemberReviewService memberRServiec;
 	
 	@RequestMapping("/member/insertReview")
-	public String init(MultipartFile file,HttpSession session,HttpServletRequest req) {
-		
+	public String init(MultipartFile file123,HttpSession session,HttpServletRequest req) {
+		System.out.println("리뷰 컨트롤러 접속");
 		//리뷰 점수
 		String grade = req.getParameter("on");
+		if(grade == null) {
+			grade = "1";
+		}
+		System.out.println("점수 : " + grade);
 		//주문 번호
 		int order_num = Integer.parseInt(req.getParameter("order_num"));
+		System.out.println("주문 번호 : " + order_num);
+//		if(req.getParameter("order_num") != "") {
+//			int order_num = Integer.parseInt(req.getParameter("order_num").trim());
+//			System.out.println("order_num : " + req.getParameter("order_num").trim());
+//		}
 		//가게 번호
 		int num = Integer.parseInt(req.getParameter("shop_num"));
 		//사장 번호
@@ -45,9 +54,9 @@ public class MemberReviewController {
 		System.out.println("reviewText : " + reviewText);
 		
 		HashMap<String, Object> imgMap = new HashMap<String, Object>();
-		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
 		
-		String uploadPath=session.getServletContext().getRealPath("/resources/reivew");
+		String uploadPath=session.getServletContext().getRealPath("/resources/review");
+		System.out.println("uploadPath : " + uploadPath);
 		String orgfileName;
 		String savefileName;
 		
@@ -55,23 +64,28 @@ public class MemberReviewController {
 		HashMap<String, Integer> ablemap = new HashMap<String, Integer>();
 		ablemap.put("shop_num", num);
 		ablemap.put("member_num", memberNum);
-		List<Order_MainVo>  omList = memberRServiec.reviewAble(ablemap);
+//		List<Order_MainVo>  omList = memberRServiec.reviewAble(ablemap);
 		
-		Order_MainVo vo = omList.get(0);
-		System.out.println(vo);
+//		Order_MainVo vo = omList.get(0);
+//		System.out.println("vo 출력 : " + vo);
 		
 		try {
-			
-			if(file != null) {
+			System.out.println("file123 : " + file123);
+			System.out.println("file123 size : " + file123.getSize());
+			HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+			if(file123.getSize() != 0) {
+				System.out.println("파일이 존재함");
 				//전송된 파일명
-				orgfileName=file.getOriginalFilename();
+				orgfileName=file123.getOriginalFilename();
 				//실제 저장할 파일명(중복되지 않도록)
 				//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
 				savefileName=UUID.randomUUID()+"_"+orgfileName;
 				//전송된 파일을 읽어오는 스트림
-				InputStream fis=file.getInputStream();
+				InputStream fis=file123.getInputStream();
+				System.out.println("파일이 getInputStream");
 				//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
 				FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
+				System.out.println("파일이 FileOutputStream");
 				//파일 복사하기 
 				FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
 				fis.close();
@@ -88,8 +102,9 @@ public class MemberReviewController {
 				//리뷰 이미지 넣기
 				memberRServiec.review_imgInsert(imgMap);
 				
-				reviewMap.put("review_img_num", "REVIEW_IMG_SEQ.CURRVAL");
+				reviewMap.put("review_img_num", 1);
 			}else {
+				System.out.println("review_img_num : 0 진입");
 				savefileName="default.png";
 				reviewMap.put("review_img_num", 0);
 			}
@@ -98,7 +113,8 @@ public class MemberReviewController {
 			reviewMap.putIfAbsent("grade", grade);
 			reviewMap.putIfAbsent("shop_num", num);
 			reviewMap.putIfAbsent("member_num", memberNum);
-			reviewMap.putIfAbsent("owner_num", owner_num);
+			//사장님 댓글을 구분하기 위해 사장번호는 null로 넣도록 변경했음
+			reviewMap.putIfAbsent("owner_num", 0);
 			
 			//리뷰 넣기
 			int n = memberRServiec.reviewInsert(reviewMap);
@@ -106,11 +122,12 @@ public class MemberReviewController {
 			//주문 테이블의 리뷰 구분자 수정하기
 				memberRServiec.updateReviewStatus(order_num);
 			}
-			
+			System.out.println("리뷰 구분자 수정 후");
 		}catch(IOException ie) {
 			System.out.println(ie.getMessage());
 			return ".owner.error";
 		}
+		System.out.println("리턴 전");
 		return "redirect:/member/storeDetail?num=" + num + "&owner_num=" + owner_num + "&memberNum=" + memberNum;
 	}
 }

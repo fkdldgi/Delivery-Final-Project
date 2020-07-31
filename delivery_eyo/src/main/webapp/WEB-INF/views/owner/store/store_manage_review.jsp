@@ -66,14 +66,15 @@
 		<div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid lightgray;">
 			<!-- 맨 위에 있을 한줄 -->
 			<div style="width: 100%; height: 50px; ">
+			
 				<!-- 이미지가 있는지 없는지 -->
 				<div style="width: 10%; height: 100%; float:left; text-align: right;">
 					<c:choose>
-						<c:when test="${list.img == 0 }">
+						<c:when test="${list.img == null }">
 							<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
 						</c:when>
 						<c:otherwise>
-							<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
+							<img src="/delivery/resources/${list.img }" style="border-radius: 70%; width: 50px; height: 50px;">
 						</c:otherwise>
 					</c:choose>
 				</div>

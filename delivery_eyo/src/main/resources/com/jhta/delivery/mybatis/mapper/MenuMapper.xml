@@ -9,12 +9,22 @@
         order by priority asc
 	</select>
 	
+	<!-- 카테고리 번호 MAX값 가져오기  -->
+	<select id="Max_menu_category_num" resultType="int">
+		select max(num) max_num from menu_category 
+	</select>
+	
 	<!-- 가게번호로 메뉴옵션 알아오기 -->
 	<select id="Menu" parameterType="int" resultType="com.jhta.delivery.vo.MenuVo">
 		select bb.*
 		from menu_category aa, menu bb
 		where aa.num = bb.menu_category_num
     		and aa.shop_num = #{num}
+	</select>
+
+	<!-- 메뉴번호 MAX값 가져오기 -->
+	<select id="Max_menu_num" resultType="int">
+		select max(num) max_num from menu
 	</select>
 	
 	<!-- 가게번호로 메뉴옵션 알아오기 -->

@@ -88,7 +88,8 @@
 		<!-- 리뷰 넣는 부분 -->
 		<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 			<c:choose>
-				<c:when test="${reviewAble eq '[]'}">
+				<c:when test="${reviewAble eq 'impossible'}">
+					<h1>작성할 리뷰가 없습니다</h1>
 				</c:when>
 				<c:otherwise>
 					<h4 style="font-weight:bold; margin-top: 20px; margin-left: 70px; margin-bottom: 20px;">*작성 가능한 리뷰가 있습니다.</h4>
@@ -103,7 +104,8 @@
 							<span class="starR"><input type="text" id="input" value="4"  hidden="hidden"></span>
 							<span class="starR"><input type="text" id="input" value="5"  hidden="hidden"></span>
 						</div>
-						<input type="text" name="order_num" value=" ${reviewAble.num }" hidden="hidden">
+						<!-- 주문번호 부분 -->
+						<input type="text" nam e="order_num" value="${order_num}" hidden="hidden">
 						<input type="text" name="member_num" value="${sessionScope.memberNum}" hidden="hidden">
 						<input type="text" name="owner_num" value="${info.owner_num }" hidden="hidden">
 						<input type="text" name="shop_num" value="${info.num}" hidden="hidden">
@@ -125,15 +127,7 @@
 						<div class="card">
 							<!-- 리뷰 회원 프로필 이미지 -->
 							<c:choose>
-								<c:when test="${rmList eq null}">
-									<div style="width: 10%; height: 100%; float:left; text-align: right;">
-										<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
-									</div>
-									<div style="width: 85%; height: 100%; float: left; margin-left: 5px;">
-										<span>${rmList.NAME }님</span>
-									</div>
-								</c:when> 
-								<c:otherwise>
+								<c:when test="${rmList.NUM ne null && rmList.REF == 0 } ">
 									<div style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
 										<div style="width: 10%; height: 100%; float:left; text-align: right; margin-right: 10px;">
 											<img src="/delivery/resources/images/${rmList.IMG }" style="border-radius: 70%; width: 50px; height: 50px;">
@@ -161,6 +155,14 @@
 											</c:choose>
 										</div>
 									</div>
+								</c:when>
+								<c:otherwise>
+									<div style="width: 10%; height: 100%; float:left; text-align: right;">
+										<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
+									</div>
+									<div style="width: 85%; height: 100%; float: left; margin-left: 5px;">
+										<span>${rmList.NAME }님</span>
+									</div>
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
@@ -175,7 +177,7 @@
 <%-- 												<p>이미지 경로 : ${img.img_path }</p> --%>
 <%-- 												<p>이미지 원본파일 이름 : ${img.original_filename }</p> --%>
 <%-- 												<p>이미지 저장파일 이름 : ${img.save_filename }</p> --%>
-												<img src="/delivery/resources/images/${img.original_filename }" style=" width: 600px; height: 400px; margin: auto; margin-top: 20px; margin-bottom: 20px;"> 
+												<img src="${pageContext.request.contextPath }/resources/review/${img.save_filename }" style=" width: 600px; height: 400px; margin: auto; margin-top: 20px; margin-bottom: 20px;"> 
 											</c:when>
 											<c:otherwise></c:otherwise>
 										</c:choose>
@@ -189,6 +191,18 @@
 <%-- 							<p>리뷰 점수 : ${rmList.GRADE }</p> --%>
 							<h5 style="margin-left: 60px; margin-bottom: 30px;">${rmList.CONTENT }</h5>
 <!-- 							<p>---------------------------</p> -->
+							<c:forEach items="${ownerReview }" var="ownerReview">
+								<c:choose>
+									<c:when test="${rmList.NUM == ownerReview.REF }">
+										<div class="card" style="background-color: lightgray;">
+											<h1>사장님 댓글</h1>
+											<p>${ownerReview.CONTENT }</p>
+										</div>
+									</c:when>
+									<c:otherwise>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</div>
 					</c:forEach>
 				</c:otherwise>
