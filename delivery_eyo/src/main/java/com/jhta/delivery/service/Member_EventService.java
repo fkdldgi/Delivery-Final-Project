@@ -15,4 +15,7 @@ public class Member_EventService {
 	public Coupon_publishVo selectcoupon(HashMap<String, Object> map) {
 		return dao.selectcoupon(map);	
 	}
+	public int insertcoupon(HashMap<String, Object> map) {
+		return dao.insertcoupon(map);
+	}
 }

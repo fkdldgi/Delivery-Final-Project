@@ -11,8 +11,6 @@
 		<hr style="border: 1px solid darkgray;">
 	<br>
 		<h1>1주년 기념 이벤트</h1>
-		<h1>${memberNum }</h1>
-		<h1>${coupon_num }</h1>
 	<br>
 		<hr style="border: 1px solid darkgray;">
 	<br>
@@ -34,7 +32,11 @@ function coupon(memberNum ,coupon_num){
 		url:"/delivery/member/event",
 		data:{memberNum:memberNum,coupon_num:coupon_num},
 		success:function(data){
-			alert(data);
+			if (data===0) {
+				alert("이미 발급된 쿠폰입니다");
+			}else if(data===1){
+				alert("쿠폰이 발급되었습니다. (마이페이지 나의 쿠폰함에서 확인 가능합니다)");
+			}
 		}
 	});
 }

@@ -4,6 +4,11 @@
   "http://www.ibatis.com/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.EventMapper">
 	<!-- insert 쿠폰 추가 COUPON_PUBLISH -->
+	<insert id="insertcoupon" parameterType="hashmap"> 
+		insert into coupon_publish(num,member_num,coupon_num,regdate,status,order_num)
+	 	select COUPON_PUBLISH_SEQ.nextval num,#{memberNum} member_num,#{coupon_num} coupon_num, sysdate regdate,'2' status,null order_num
+	 	from coupon where num=#{coupon_num}
+	</insert>
 	<!-- select 쿠폰 유무 확인 COUPON_PUBLISH 세션으로 넘어온 번호로 조회.-->
 	<select id="couponchk" resultType="Coupon_publishVo" parameterType="hashmap">
 		select * from COUPON_PUBLISH where member_num=#{memberNum} and coupon_num=#{coupon_num}

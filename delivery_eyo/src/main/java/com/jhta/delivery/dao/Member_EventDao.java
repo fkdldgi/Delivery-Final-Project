@@ -17,4 +17,7 @@ public class Member_EventDao {
 	public Coupon_publishVo selectcoupon(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".couponchk", map);
 	}
+	public int insertcoupon(HashMap<String, Object> map) {
+		return session.insert(NAMESPACE+".insertcoupon", map);
+	}
 }

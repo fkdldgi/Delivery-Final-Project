@@ -45,8 +45,6 @@ public class EventController {
 		model.addAttribute("memberNum",memberNum);
 		return ".member.event04";
 	}
-	
-	
 	@RequestMapping("/member/event")
 	@ResponseBody
 	public int event01(int coupon_num,int memberNum) {
@@ -57,13 +55,11 @@ public class EventController {
 		Coupon_publishVo cvo=service.selectcoupon(map);
 		System.out.println(cvo);
 		if(cvo!=null) { //이미 쿠폰발급됨
-			
 			return 0;
 		}else { //쿠폰발급 가능
 			//쿠폰발급하기
+			service.insertcoupon(map);
 			return 1;
 		}
-
-
 	}
 }
