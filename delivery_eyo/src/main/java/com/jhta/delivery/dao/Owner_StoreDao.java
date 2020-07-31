@@ -97,6 +97,22 @@ public class Owner_StoreDao {
 	public int insertUpdate_MenuOption(MenuOptionVo vo) {
 		return session.insert(NAMESPACE+".insertUpdate_MenuOption", vo);
 	}
+	
+	//메뉴카테고리 번호로 메뉴카테고리 정보 가져오기
+	public MenuCategoryVo select_menu_categoryOne(int category_num) {
+		return session.selectOne(NAMESPACE+".select_menu_categoryOne",category_num);
+	}
+	
+	//메뉴번호로 메뉴정보 가져오기
+	public MenuVo select_menuOne(int menu_num) {
+		return session.selectOne(NAMESPACE+".select_menuOne",menu_num);
+	}
+	
+	//메뉴옵션번호로 메뉴옵션정보 가져오기
+	public MenuOptionVo select_menu_optionOne(int option_num) {
+		return session.selectOne(NAMESPACE+".select_menu_optionOne",option_num);
+	}
+	
 }
 
 

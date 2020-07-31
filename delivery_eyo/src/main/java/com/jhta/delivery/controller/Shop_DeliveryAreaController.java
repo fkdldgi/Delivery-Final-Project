@@ -31,8 +31,7 @@ public class Shop_DeliveryAreaController {
 	}
 	@PostMapping("/owner/shop/deliveryLocation")
 	public String deliveryLocationOk(HttpServletRequest req) {
-		
-		int num=Integer.parseInt(req.getParameter("num"));
+		int num=Integer.parseInt(req.getParameter("num")); //가게번호
 		Delivery_LocationVo locVo=del_LocService.selectLoc(num);
 		String originalSido=locVo.getSido();
 		String originalSigungu=locVo.getSigungu();

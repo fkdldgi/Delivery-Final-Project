@@ -11,11 +11,13 @@
 	<insert id="reInsert" parameterType="hashmap">
 		insert into delivery_location values(delivery_location_seq.nextval,#{num},#{sido},#{sigungu},#{hname})
 	</insert>
+	<!-- 가게번호로 배달지역 얻어오기 -->
 	<select id="selectLoc" parameterType="int" resultType="delivery_loc">
 		select * from delivery_location where shop_num=#{num}
 	</select>
+	<!--  -->
 	<delete id="delete" parameterType="int">
-		delete from delivery_location where num=#{num}
+		delete from delivery_location where shop_num=#{num}
 	</delete>
 	<update id="update" parameterType="hashmap">
 		update from delivery_location set hname=#{hname} where num=#{num}

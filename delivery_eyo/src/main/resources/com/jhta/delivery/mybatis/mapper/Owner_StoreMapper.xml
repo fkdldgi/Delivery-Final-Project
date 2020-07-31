@@ -131,8 +131,20 @@
 		values (menu_option_seq.nextval, #{name}, #{price}, #{category}, #{menu_num})
 	</insert>
 	
-	<!-- 메뉴, 메뉴옵션 합친거 -->
+	<!-- 메뉴카테고리번호로 메뉴카테고리 얻어오기 -->
+	<select id="select_menu_categoryOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuCategoryVo">
+		select * from menu_category where num=#{category_num}
+	</select>
 	
+	<!-- 메뉴번호로 메뉴얻어오기 -->
+	<select id="select_menuOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuVo">
+		select * from menu where num=#{menu_num}
+	</select>
+	
+	<!-- 메뉴옵션번호로 메뉴옵션 얻어오기 -->
+	<select id="select_menu_optionOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuOptionVo">
+		select * from menu_option num=#{option_num}
+	</select>
 </mapper>
 
 

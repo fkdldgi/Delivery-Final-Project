@@ -54,7 +54,7 @@
 
 </style>
 <div id="div_wrap">
-	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shop/orderinfo" method="post">
+	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shop/deliveryLocation" method="post">
 		<input type="hidden" name="num" value="${vo.num }">
 		<div class="form-group under_border" id="deliveryArea">
 			<label for="sel1">배달지역</label> 

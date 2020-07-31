@@ -24,50 +24,36 @@
 <body>
 
 	<input type="hidden" id="last_menu_num" value="${max_menu_num}">
-	${max_menu_num}
 	<input type="hidden" id="last_menuCategoryList_num" value="${max_menu_category_num}">
-${max_menu_category_num}
 	<input id="trash" type="text" style="display: none;">
 	<!-- 삭제한 값 넣기 -->
 	<!-- 복사할 메인메뉴 -->
 	<div id="copy_main_menu" style="display: none;">
 		<div>
-			<div
-				style="width: 50%; height: 200px; float: left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
-				<input name="menu_name"
-					style="width: 70%; margin: 15px; margin-top: 30px;" type="text"
-					placeholder="메뉴이름" required="required"> <br> <input
-					style="width: 70%; margin: 15px; margin-top: 0px;" type="text"
-					placeholder="메뉴구성" required="required"> <br> <input
-					style="width: 70%; margin: 15px; margin-top: 0px;" type="text"
-					placeholder="가격" required="required">
+			<div style="width: 50%; height: 200px; float: left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
+				<input name="menu_name" style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름" required="required"> 
+				<br> 
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성" required="required"> 
+				<br> 
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격" required="required">
 			</div>
 		</div>
-		<div
-			style="margin-top: 20px; width: 50%; height: 200px; float: right; text-align: center; border-right: 3px solid #FC5230;">
-			<img
-				style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;"
-				src="/delivery/resources/images/plus2.png">
+		<div style="margin-top: 20px; width: 50%; height: 200px; float: right; text-align: center; border-right: 3px solid #FC5230;">
+			<img style="margin-left: 50px; width: 500px; height: 180px; border: 1px solid black;" src="/delivery/resources/images/plus2.png">
 		</div>
 	</div>
 
 	<!-- 복사할 카테고리메뉴 -->
-	<div id="copy_category_menu"
-		style="display: none; margin: auto; margin-top: 20px; width: 80%; height: 100%">
-		<input type="text" name="category_num" style="display: none;"
-			value="-1">
-		<div
-			style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
+	<div id="copy_category_menu" style="display: none; margin: auto; margin-top: 20px; width: 80%; height: 100%">
+		<input type="text" name="category_num" style="display: none;" value="-1">
+		<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
 			<div style="position: relative; text-align: center; height: 40px;">
 				<div style="display: inline-block; text-align: center; width: 40%;">
 					<h2>
-						<input name="menu_category_name"
-							style="text-align: center; width: 100%;" type="text"
-							required="required" placeholder="메뉴카테고리명을 입력해 주세요.">
+						<input name="menu_category_name" style="text-align: center; width: 100%;" type="text" required="required" placeholder="메뉴카테고리명을 입력해 주세요.">
 					</h2>
 				</div>
-				<div
-					style="position: absolute; display: inline-block; text-align: right; right: 1px;">
+				<div style="position: absolute; display: inline-block; text-align: right; right: 1px;">
 					<h2>∧∨</h2>
 				</div>
 			</div>
@@ -81,15 +67,13 @@ ${max_menu_category_num}
 		<div class="menu_wrap"
 			style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 			<h2>
-				<input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요."
-					style="width: 40%;" required="required">
+				<input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 40%;" required="required">
 			</h2>
-			<span>메뉴설명:&nbsp;<input name="menu_info" type="text"
-				placeholder="메뉴설명을 입력해 주세요." style="width: 35%;" required="required"></span>
-			<br> <span>가격:&nbsp;&nbsp;<input type="number" min="0"
-				max="100000" step="500" maxlength="6" required="required"
-				name="min_price" oninput="maxLengthCheck(this)" placeholder="가격">원
-			</span><br>
+			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;" required="required"></span>
+			<br> 
+			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" required="required" name="min_price" oninput="maxLengthCheck(this)" placeholder="가격">원
+			</span>
+			<br>
 			<div>
 				<div>
 					<br>
@@ -119,13 +103,8 @@ ${max_menu_category_num}
 
 	<!-- 복사할 버튼 -->
 	<div id="copy_button" style="text-align: center; display: none;">
-		<input name="add_menu" type="button"
-			style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-			value="메뉴 추가" onclick='menu_add(-1,this)'> 
-			<input
-			name="remove_menu" type="button"
-			style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-			value="메뉴 삭제" onclick='menu_delete(this)'>
+		<input name="add_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" value="메뉴 추가" onclick='menu_add(-1,this)'> 
+		<input name="remove_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" value="메뉴 삭제" onclick='menu_delete(this)'>
 	</div>
 
 	<div id="div1" name="category" style="display: none;"></div>
@@ -142,11 +121,9 @@ ${max_menu_category_num}
 			<input type="text" id="bb">
 		</div>
 		<!-- 아이디 -->
-		<input type="text" name="owner_id" hidden="hidden"
-			value="${sessionScope.ownerId }">
+		<input type="text" name="owner_id" hidden="hidden" value="${sessionScope.ownerId }">
 		<!-- 가게번호 얻어오기 -->
-		<input type="text" name="Shop_num" value="${Shop_num }"
-			hidden="hidden">
+		<input type="text" name="shop_num" value="${shop_num }" hidden="hidden">
 		<div id="trash_can" style="display: none;"></div>
 
 		<div id="menu_wrap">
@@ -154,37 +131,29 @@ ${max_menu_category_num}
 				<br>
 				<div>
 					<h1>${sessionScope.ownerId }회원님의 ${requestScope.vo.name }</h1>
-					<p>위치: ${requestScope.vo.addr }
+					<p>위치: ${requestScope.vo.addr }</p>
 				</div>
 				<div id="menu_bar">
 					<h3 style="text-align: center;">메뉴관리</h3>
 				</div>
 				<h4 style="margin-left: 15px;">
-					주문안내: &nbsp;&nbsp;<input name="shop_info" style="width: 30%;"
-						type="text" placeholder="주문안내" value="${requestScope.vo.info }">
+					주문안내: &nbsp;&nbsp;
+					<input name="shop_info" style="width: 30%;" type="text" placeholder="주문안내" value="${requestScope.vo.info }">
 				</h4>
 
 				<!-- 메뉴카테고리 명 -->
 				<c:forEach var="list" items="${menuCategoryList }">
 					<div name="category">
-						<div name="category_name"
-							style="margin: auto; margin-top: 20px; width: 80%; height: 100%">
-							<input type="text" name="category_num" style="display: none;"
-								value="${list.num }">
-							<div
-								style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
-								<div
-									style="position: relative; text-align: center; height: 40px;">
-									<div
-										style="display: inline-block; text-align: center; width: 40%;">
+						<div name="category_name" style="margin: auto; margin-top: 20px; width: 80%; height: 100%">
+							<input type="text" name="category_num" style="display: none;" value="${list.num }">
+							<div style="margin-top: 10px; width: 100%; font-weight: 900; background-color: lightgray; padding: 10px; border: none;">
+								<div style="position: relative; text-align: center; height: 40px;">
+									<div style="display: inline-block; text-align: center; width: 40%;">
 										<h2>
-											<input name="menu_category_name"
-												style="text-align: center; width: 100%;" type="text"
-												placeholder="메뉴카테고리명을 입력해 주세요." value="${list.name }">
+											<input name="menu_category_name" style="text-align: center; width: 100%;" type="text" placeholder="메뉴카테고리명을 입력해 주세요." value="${list.name }">
 										</h2>
 									</div>
-									<div
-										style="position: absolute; display: inline-block; text-align: right; right: 1px;">
+									<div style="position: absolute; display: inline-block; text-align: right; right: 1px;">
 										<h2>∧∨</h2>
 									</div>
 								</div>
@@ -194,29 +163,15 @@ ${max_menu_category_num}
 							<c:forEach var="menu" items="${menu }">
 								<c:if test="${list.num == menu.menu_category_num }">
 									<!-- 메뉴 -->
-									<div name="menu"
-										style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
-										
-										<input type="text" name="menu_num" value="${menu.num}"
-											style="display: none;">
-
-										<div
-											style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+									<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
+										<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
+										<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 											<!-- 여기에 input append해주기 -->
 											<h2>
-												<input name="menu_name" type="text"
-													placeholder="메뉴이름을 입력해 주세요." value="${menu.name }"
-													style="width: 40%;">
-												
-												
+												<input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;">
 											</h2>
-											<span>메뉴설명:&nbsp;<input name="menu_info"
-												placeholder="메뉴설명을 입력해 주세요." type="text"
-												value="${menu.menu_info }" style="width: 35%;"></span> <br>
-											<span>가격:&nbsp;&nbsp;<input value="${menu.price }"
-												type="number" min="0" max="100000" step="500" maxlength="6"
-												name="min_price" oninput="maxLengthCheck(this)"
-												placeholder="가격"></span> 
+											<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span> <br>
+											<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" oninput="maxLengthCheck(this)" placeholder="가격"></span> 
 												<input type="text" name="category_list_num" style="display: none;" value="${list.num }"><br>
 												<div>
 													<div>
@@ -244,28 +199,20 @@ ${max_menu_category_num}
 
 						<!-- 메뉴추가, 삭제 버튼 -->
 						<div style="text-align: center;">
-							<input name="add_menu" type="button"
-								style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-								value="메뉴 추가" onclick='menu_add(${list.num},this)'> <input
-								name="remove_menu" type="button"
-								style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-								value="메뉴 삭제" onclick='menu_delete(this)'>
+							<input name="add_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" value="메뉴 추가" onclick='menu_add(${list.num},this)'> 
+							<input name="remove_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" value="메뉴 삭제" onclick='menu_delete(this)'>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
 			<!-- 카테고리메뉴 추가, 삭제 버튼  -->
 			<div style="text-align: center; margin-top: 30px;">
-				<input id="add_category_menu" type="button"
-					style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-					value="카테고리메뉴 추가"> <input id="remove_category_menu"
-					type="button" style="width: 40%; margin-top: 20px;"
-					class="btn btn-primary" value="카테고리메뉴 삭제">
+				<input id="add_category_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" value="카테고리메뉴 추가"> 
+				<input id="remove_category_menu" type="button" style="width: 40%; margin-top: 20px;" class="btn btn-primary" value="카테고리메뉴 삭제">
 			</div>
 		</div>
 		<div style="text-align: right; width: 80%; margin-top: 50px;">
-			<input id="update_menu" type="submit" class="btn btn-lg btn-primary"
-				value="수정완료">
+			<input id="update_menu" type="submit" class="btn btn-lg btn-primary" value="수정완료">
 		</div>
 	</form>
 </body>
@@ -486,7 +433,6 @@ ${max_menu_category_num}
 	
 	//메뉴옵션 추가
 	function SONG(aa){		
-		
 		// menu_option넣을거 복사하기
 		var menu_option = $("#copy_menu_option").clone();
 		menu_option.removeAttr('id');

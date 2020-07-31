@@ -73,7 +73,7 @@
 				</c:forEach>
 				<br><br>
 				<label for="tip">배달팁 입력</label><br>
-				<input type="number" min="0" max="100000" step="500" maxlength="5" name="tip" id="tip" oninput="maxLengthCheck(this)" value="${vo.min_price }" required>원
+				<input type="number" min="0" max="100000" step="500" maxlength="5" name="tip" id="tip" oninput="maxLengthCheck(this)" value="0" required>원
 				<br><br>
 				<button type="button" class="btn btn-primary" id="cancleBtn" onclick="hideTip()">취소</button>
 				<button type="button" class="btn btn-primary" id="addBtn" onclick="addTip()">완료</button>
