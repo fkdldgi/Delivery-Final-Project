@@ -81,4 +81,86 @@
 		delete from menu_option
 		where num=#{num}
 	</delete>
+	
+	<!-- 가게가 가진 메뉴카테고리, 메뉴, 메뉴옵션 -->
+	<select id="select_menuAll" parameterType="int" resultType="com.jhta.delivery.vo.Owner_CheckMenuVo">
+		select distinct mc.num mc_num, mc.name mc_name,
+        	mm.num mm_num, mm.name mm_name, mm.menu_info mm_info, mm.price mm_price, mm.img mm_img, mm.menu_category_num mm_category,
+            	mo.num mo_num, mo.name mo_name, mo.price mo_price, mo.category mo_category, mo.menu_num mo_menu_num
+		from shop sp, menu_category mc, menu mm, menu_option mo
+		where sp.num=mc.shop_num and mm.menu_category_num=mc.num and mo.menu_num=mm.num and mc.shop_num=#{num} and
+    		mm.menu_category_num in(select num from menu_category where shop_num=#{num}) and
+        		mo.menu_num in(select num from menu where menu_category_num in(select num from menu_category where shop_num=#{num}))
+	</select>
+	
+	<!-- 오라클에서 이미 있는 값이면 update 없는 값이면 insert해줌 -->
+	<!-- 메뉴카테고리 -->
+	<insert id="insertUpdate_Menu_category" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
+		merge into menu_category mc
+		using dual
+		on (mc.num=#{num})
+		when matched then
+		update set mc.name=#{name}, mc.main_menu=#{main_menu}
+		when not matched then
+		insert (mc.num, mc.name, mc.priority, mc.shop_num, mc.main_menu)
+		values(menu_category_seq.nextval,#{name},6,#{shop_num},#{main_menu})
+	</insert>
+	
+	<!-- 메뉴 -->
+	<insert id="insertUpdate_Menu" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
+		merge into menu mm
+		using dual
+		on (mm.num=#{num})
+		when matched then
+		update set mm.name=#{name}, mm.menu_info=#{menu_info}, 
+				mm.price=#{price}, mm.menu_category_num=#{menu_category_num}
+		when not matched then
+		insert (mm.num, mm.name, mm.menu_info, mm.price, mm.status, mm.img, mm.menu_category_num, mm.priority)
+		values (menu_seq.nextval, #{name}, #{menu_info}, #{price},1,'img1',#{menu_category_num}, 5)
+	</insert>
+	
+	<!-- 메뉴옵션 -->
+	<insert id="insertUpdate_MenuOption" parameterType="com.jhta.delivery.vo.MenuCategoryVo">
+		merge into menu_option mo
+		using dual
+		on (mo.num=#{num})
+		when matched then
+		update set mo.name=#{name}, mo.price=#{price}, mo.category=#{category}
+		when not matched then
+		insert (mo.num, mo.name, mo.price, mo.category, mo.menu_num)
+		values (menu_option_seq.nextval, #{name}, #{price}, #{category}, #{menu_num})
+	</insert>
+	
+	<!-- 메뉴, 메뉴옵션 합친거 -->
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

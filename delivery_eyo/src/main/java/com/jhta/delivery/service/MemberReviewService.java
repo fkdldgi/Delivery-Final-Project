@@ -32,6 +32,11 @@ public class MemberReviewService {
 		return dao.review_member_list(shop_num);
 	}
 	
+	// 가게번호로 리뷰 리스트 + 회원정보 + 사장님 댓글 가져오기 
+	public List<HashMap<String, Object>> reviewAll(int shop_num){
+		return dao.reviewAll(shop_num);
+	}
+	
 	//고객번호와 가게번호를 받아 리뷰작성 조건 판단하기 
 //	public String reviewAble(HashMap<String, Integer> map) {
 //		return dao.reviewAble(map);
@@ -59,6 +64,7 @@ public class MemberReviewService {
 	
 	// 리뷰 넣기 
 	public int reviewInsert(HashMap<String, Object> map) {
+		System.out.println("서비스의 review_img_num : " + map.get("review_img_num"));
 		return dao.reviewInsert(map);
 	} 
 	

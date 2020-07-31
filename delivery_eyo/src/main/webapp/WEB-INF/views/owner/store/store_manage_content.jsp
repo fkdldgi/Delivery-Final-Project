@@ -22,17 +22,11 @@
 </style>
 
 <body>
-	<c:forEach var="menu" items="${menu }" varStatus="i">
-		<c:if test="${i.last }">
-			<input type="hidden" id="last_menu_num" value="${menu.num }">
-		</c:if>
-	</c:forEach>
-	
-	<c:forEach var="list" items="${menuCategoryList }" varStatus="j">
-		<c:if test="${j.last }">
-			<input type="hidden" id="last_menuCategoryList_num" value="${list.num }">
-		</c:if>
-	</c:forEach>
+
+	<input type="hidden" id="last_menu_num" value="${max_menu_num}">
+	${max_menu_num}
+	<input type="hidden" id="last_menuCategoryList_num" value="${max_menu_category_num}">
+${max_menu_category_num}
 	<input id="trash" type="text" style="display: none;">
 	<!-- 삭제한 값 넣기 -->
 	<!-- 복사할 메인메뉴 -->
@@ -100,7 +94,7 @@
 				<div>
 					<br>
 					<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션 추가" onclick="SONG(this)">
-					<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션 삭제">
+					<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션 삭제" onclick="delete_option1(this)">
 				</div>
 				<div>
 					<br><input type="text" placeholder="옵션메뉴 이름" name="option_name"><br>
@@ -127,19 +121,22 @@
 	<div id="copy_button" style="text-align: center; display: none;">
 		<input name="add_menu" type="button"
 			style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-			value="메뉴 추가" onclick='menu_add(-1,this)'> <input
+			value="메뉴 추가" onclick='menu_add(-1,this)'> 
+			<input
 			name="remove_menu" type="button"
 			style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-			value="메뉴 삭제">
+			value="메뉴 삭제" onclick='menu_delete(this)'>
 	</div>
 
 	<div id="div1" name="category" style="display: none;"></div>
+	
 	<!-- 
 	주문안내 shop_info
 	메뉴이름 menu_name
 	메뉴설명 menu_info
 	메뉴가격 min_price
- -->
+ 	-->
+ 	
 	<form action="/delivery/owner/store_manage" method="post">
 		<div id="aa" hidden="hidden" >
 			<input type="text" id="bb">
@@ -219,14 +216,13 @@
 											<span>가격:&nbsp;&nbsp;<input value="${menu.price }"
 												type="number" min="0" max="100000" step="500" maxlength="6"
 												name="min_price" oninput="maxLengthCheck(this)"
-												placeholder="가격"></span> <input type="text"
-												name="category_list_num" style="display: none;"
-												value="${list.num }"><br>
+												placeholder="가격"></span> 
+												<input type="text" name="category_list_num" style="display: none;" value="${list.num }"><br>
 												<div>
 													<div>
 														<br>
 														<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션추가" onclick="SONG(this)">
-														<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션삭제">
+														<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션삭제" onclick="delete_option1(this)">
 													</div>
 													<c:forEach var="menu_option" items="${menu_optionList }">
 														<c:if test="${menu.num == menu_option.menu_num }">
@@ -253,7 +249,7 @@
 								value="메뉴 추가" onclick='menu_add(${list.num},this)'> <input
 								name="remove_menu" type="button"
 								style="width: 40%; margin-top: 20px;" class="btn btn-primary"
-								value="메뉴 삭제">
+								value="메뉴 삭제" onclick='menu_delete(this)'>
 						</div>
 					</div>
 				</c:forEach>
@@ -281,7 +277,6 @@
 	var last_menu_num=$("#last_menu_num");
 	var last_menu_num_val=$("#last_menu_num").val();
 	var add_menuNum=parseInt(last_menu_num_val);
-	
 	//새로 생성된 메뉴카테고리번호
 	var last_menuCategoryList_num=$("#last_menuCategoryList_num");
 	var last_menuCategoryList_num_val=$("#last_menuCategoryList_num").val();
@@ -311,9 +306,10 @@
 	// 카테고리 추가
 	$("#add_category_menu").on('click',function(){
 		add_menuNum++;
-		$("#copy_menu input[name=menu_num]").val(add_menuNum);
-		$("#copy_menu_option input[name=option_menu_num]").val(add_menuNum);
-		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
+		$("#copy_menu input[name=menu_num]").val(add_menuNum); //메뉴의 text를 바꿔줌
+		$("#copy_menu input[name=menu_num]").attr("value",add_menuNum); //메뉴의 value를 바꿔줌
+		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum); //메뉴옵션번호의 텍스트를 바꿔줌
+		$("#copy_menu").find("input[name=option_menu_num]").attr("value",add_menuNum); //메뉴옵션번호의 value속성을 바꿔줌
 		
 		add_categoryNum++;
 		$("#copy_category_menu input[name=category_num]").val(add_categoryNum);
@@ -359,7 +355,7 @@
 		div1.append(copy_button);
 		
 		var zzz=$("#add_menu_wrap").append(div1); 
-		div1.append("<input type='text' hidden='hidden' name='category_list_num' value='"+category_menu_menu+"'>");
+		div1.append("<input type='text' hidden='hidden' name='category_list_num' value='"+add_categoryNum+"'>");
 		
 		//"<input typ리 div 눌렀을 때 div숨기고, 나타내기
 		$("div[name=category_name]").on('click',function(){
@@ -396,8 +392,6 @@
 		}
 	});
 	
-	/*메뉴랑 메뉴카테고리 추가할 때 ajax로 넘기기*/
-	
 	// 이미지 추가
 	$("img").on('click',function(e){
 		console.log('이미지 추가 버튼');
@@ -413,66 +407,43 @@
 	});
 	
 	// 메뉴 삭제
-	$("input[name=remove_menu]").on("click",function(){			
-		var target = $(this).parent().prev().children("div[name=menu]:last");
+	function menu_delete(aa){
+		var target = $(aa).parent().prev().children("div[name=menu]:last");
 		var num = target.find("input[name=menu_num]").val();
 		var num1 = target.find("input[name=category_list_num]").val();
 		
-		if(num1 == -1){
+		if(num1 == undefined){
+			console.log('2');
+			console.log(target);
 			target.remove();
 		}else{
 			
-		var trash = $("#trash").clone();
-		trash.removeAttr('id');
-		trash.attr('name','trash');
-		trash.val(num);
-		var trash_can = $("#trash_can");
-		trash_can.append(trash);
-		
-		target.remove();			
+			var trash = $("#trash").clone();
+			trash.removeAttr('id');
+			trash.attr('name','trash');
+			trash.val(num);
+			var trash_can = $("#trash_can");
+			trash_can.append(trash);
+			
+			target.remove();			
 		}
-	});
+	}
 	
-	// 메뉴옵션 추가
-/* 		$("input[name=add_option]").on('click',function(){
-		
-		console.log('1');
-		
-		// menu_option넣을거 복사하기
-		var menu_option = $("#copy_menu_option").clone();
-		menu_option.removeAttr('id');
-		menu_option.css('display','block');
-		
-		// 어디에 속한 menu_option인지 확인
-		var menu_option_num = menu_option.find("input[name=option_menu_num]");
-		
-		var menu_num = $(this).parent().parent().parent().parent().find("input[name=menu_num]");
-		menu_option_num.val(menu_num.val());			
-		
-		// o
-		
-		// 위치 찾기
-		var location = $(this).parent().parent();
-		location.append(menu_option);
-	}); */
 	
 	// 메뉴옵션 삭제
-	$("input[name=delete_option]").on('click',function(){
+	function delete_option1(aa){
+		console.log('1');
+		var location = $(aa).parent().parent();
+		var bb = location.children("div:last");
+		var option_num = bb.find("input[name=option_num]").val();
 		
-		var location = $(this).parent().parent();
-		var aa = location.children("div:last");
-		var option_num = aa.find("input[name=option_num]").val();
+		var cc = $("#bb").clone();
+		cc.removeAttr('id');
+		cc.attr('name','delete_menu_option');
+		cc.val(option_num);
 		
-		var bb = $("#bb").clone();
-		bb.removeAttr('id');
-		bb.attr('name','delete_menu_option');
-		bb.val(option_num);
-		if(bb.val() > 0){
-			$("#aa").append(bb);				
-		}			
-		aa.remove();
-	});
-	
+		bb.remove();
+	}
 	
 
 	
@@ -483,10 +454,12 @@
 	//메뉴 추가 함수
 	function menu_add(menu_category_num, aa){		
 		add_menuNum++;
-		$("#copy_menu input[name=menu_num]").val(add_menuNum);
-		$("#copy_menu_option input[name=option_menu_num]").val(add_menuNum);
-		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
 		
+		$("#copy_menu input[name=menu_num]").val(add_menuNum); //메뉴의 text를 바꿔줌
+		$("#copy_menu input[name=menu_num]").attr("value",add_menuNum); //메뉴의 value를 바꿔줌
+		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
+		$("#copy_menu").find("input[name=option_menu_num]").attr("value",add_menuNum);
+
 		var copy_menu = $("#copy_menu").clone();
 		copy_menu.css('display','block');
 		copy_menu.attr('name','menu');
@@ -512,10 +485,7 @@
 	}
 	
 	//메뉴옵션 추가
-	function SONG(aa){
-		$("#copy_menu input[name=menu_num]").val(add_menuNum);
-		$("#copy_menu_option input[name=option_menu_num]").val(add_menuNum);
-		$("#copy_menu").find("input[name=option_menu_num]").val(add_menuNum);
+	function SONG(aa){		
 		
 		// menu_option넣을거 복사하기
 		var menu_option = $("#copy_menu_option").clone();
@@ -526,7 +496,8 @@
 		var menu_option_num = menu_option.find("input[name=option_menu_num]");
 		
 		var menu_num = $(aa).parent().parent().parent().parent().find("input[name=menu_num]");
-		menu_option_num.val(menu_num.val());			
+		menu_option_num.val(menu_num.val());	
+		menu_option_num.attr("value",menu_num.val()); //메뉴옵션번호의 value속성을 바꿈
 		
 		// o
 		
