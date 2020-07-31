@@ -14,13 +14,13 @@
 	<div class="carousel-inner">
 		<div class="carousel-item active" data-interval="1000">
 			<img
-				src="https://cdn.dominos.co.kr/admin/upload/banner/20200401_sJg8GN4w.jpg"
-				class="d-block w-100 h-100" alt="...">
+				src="/delivery/resources/images/main_1year_01.png"
+				class="d-block w-100 h-50" alt="...">
 		</div>
 		<div class="carousel-item" data-interval="1000">
 			<img
-				src="https://cdn.dominos.co.kr/admin/upload/banner/20200701_7vEr0cKK.jpg"
-				class="d-block w-100 h-100" alt="...">
+				src="/delivery/resources/images/main_summer_enent_01.png"
+				class="d-block w-100 h-50" alt="...">
 		</div>
 		<div class="carousel-item" data-interval="1000">
 			<img
