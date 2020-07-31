@@ -27,6 +27,7 @@
 			$("input[name=pwd]").removeAttr("readonly");
 			$("span[id=before]").removeAttr("hidden");
 			$("span[id=after]").Attr("hidden");
+			$("input[name=status]:radio").removeAttr("disabled");
 		} else {
 			alert("비밀번호가 불일치합니다");
 		}
@@ -99,9 +100,9 @@
 									<c:set var="ttt2" value="true"></c:set>
 								</c:otherwise>
 							</c:choose>
-							<input type="radio" id="rest" name="status" value='1' style="float: left; margin-top: 5px;" checked="${ttt }">
+							<input type="radio" id="rest" name="status" value='1' style="float: left; margin-top: 5px;" disabled="disabled" checked="${ttt }">
 							<label for="rest">휴면중</label>
-							<input type="radio" id="run" name="status" value='2' style="margin-top:5px; margin-left: 50px;" checked="${ttt2 }">
+							<input type="radio" id="run" name="status" value='2' style="margin-top:5px; margin-left: 50px;" disabled="disabled" checked="${ttt2 }">
 							<label for="run">활동중</label>
 						</td>
  					</tr>
