@@ -23,218 +23,186 @@
 	}
 </style>
 
-
 <div class="container" style="width: 100%;">
-  <div class="row" style="width: 100%;">
-    <div class="col-8" id="storeWrap" style="width: 90%; margin: auto; margin-bottom: 10px;">
-	<c:out value="${param.info}" />
-	<div class="media position-relative"
-		style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;">
-		<img
-			src="${pageContext.request.contextPath }/resources/profile/${info.profile_img }" 
-			style="width: 20%; height: 100px; margin-top: 20px;" class="mr-3">
-		<div class="media-body">
-			<p hidden="hidden" id="shop_num">${info.num}</p>
-			<p hidden="hidden" id="owner_num">${info.owner_num }</p>
-			<p><h2 style="font-weight: bold;" class="mt-0">${info.name}</h2></p>
-			<p><h4>최소 결제금액 : <span style="color: red;">${info.min_price }</span>원</h4></p>
-			<p><h4>결재 수단 : <span style="color: green;">${info.payment_option}</span></h4></p>
-		</div>
-	</div>
-	
-	<nav>
-		<div class="nav nav-tabs" id="nav-tab" role="tablist"
-			style="width: 100%;">
-			<a class="nav-item nav-link active" id="nav-home-tab"
-				data-toggle="tab" href="#nav-home" role="tab"
-				aria-controls="nav-home" aria-selected="true"
-				style="width: 33%; border: 1px solid blue;"><h4 style="font-weight: bold;">메뉴</h4></a> <a
-				class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-				href="#nav-profile" role="tab" aria-controls="nav-profile"
-				aria-selected="false" style="width: 33%; border: 1px solid green;"><h4 style="font-weight: bold;">리뷰</h4></a>
-			<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
-				href="#nav-contact" role="tab" aria-controls="nav-contact"
-				aria-selected="false" style="width: 34%; border: 1px solid gray;"><h4 style="font-weight: bold;">가게정보</h4></a>
-		</div>
-	</nav>
-	<div class="tab-content" id="nav-tabContent" style="border: 1px solid black;">
-		<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-			aria-labelledby="nav-home-tab">
-			<div class="card-body">
-			<c:choose>
-				<c:when test="${mainmenu eq '[]' }">
-					<div style="width: 100%; height: 410px;">
-						<h1>등록된 메뉴가 없습니다.</h1>
-					</div>
-				</c:when>
-				<c:otherwise>
-				<c:forEach items="${mainmenu }" var="main">
-					<div class="row border-bottom" data-toggle="modal" data-target="#menuModal" onclick="javascript:menu_detail(${main.num})">
-<%-- 					<p>${main.num }</p> --%>
-						<div class="col-5">
-							<img src="${pageContext.request.contextPath }/resources/menu/${main.img}" style="width: 250px; height: 150px; margin-top: 10px; margin-bottom: 10px;">
-						</div>
-						<div class="col-7">
-							<p><h2 style="font-weight: bold;">${main.name}</h2></p>
-							<p><h5>${main.menu_info}</h5></p>
-							<p><h4 style="color: red;">${main.price}원</h4></p>
-						</div>
-					</div>
-				</c:forEach>
-				</c:otherwise>
-			</c:choose>	
+	<div class="row" style="width: 100%;">
+		<div class="col-8" id="storeWrap" style="width: 90%; margin: auto; margin-bottom: 10px;">
+			<c:out value="${param.info}" />
+			<div class="media position-relative" style="border: 1px solid gray; margin-top: 10px; margin-bottom: 10px;">
+				<img src="${pageContext.request.contextPath }/resources/profile/${info.profile_img }" style="width: 20%; height: 100px; margin-top: 20px;" class="mr-3">
+				<div class="media-body">
+					<p hidden="hidden" id="shop_num">${info.num}</p>
+					<p hidden="hidden" id="owner_num">${info.owner_num }</p>
+					<p><h2 style="font-weight: bold;" class="mt-0">${info.name}</h2></p>
+					<p><h4>최소 결제금액 : <span style="color: red;">${info.min_price }</span>원</h4></p>
+					<p><h4>결재 수단 : <span style="color: green;">${info.payment_option}</span></h4></p>
+				</div>
 			</div>
-		</div>
-		<!-- 리뷰 넣는 부분 -->
-		<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-			<c:choose>
-				<c:when test="${reviewAble eq 'impossible'}">
-					<h1>작성할 리뷰가 없습니다</h1>
-				</c:when>
-				<c:otherwise>
-					<h4 style="font-weight:bold; margin-top: 20px; margin-left: 70px; margin-bottom: 20px;">*작성 가능한 리뷰가 있습니다.</h4>
-					<c:out value="${param.menuInfo}" />
-					<h1 style="font-weight: bold; text-align: center;"> ${menuInfo.name }</h1>
-					<img src="${pageContext.request.contextPath }/resources/menu/${menuInfo.img }" style="width: 80px; height: 100px; margin-left: 300px;">
-					<form action="${pageContext.request.contextPath }/member/insertReview" enctype="multipart/form-data" method="post">
-						 <div class="starRev" style="margin-left: 45px; margin-bottom: 20px; margin-left: 250px;">
-							<span class="starR on"><input type="text" id="input" value="1" hidden="hidden"></span>
-							<span class="starR"><input type="text" id="input" value="2"  hidden="hidden"></span>
-							<span class="starR"><input type="text" id="input" value="3"  hidden="hidden"></span>
-							<span class="starR"><input type="text" id="input" value="4"  hidden="hidden"></span>
-							<span class="starR"><input type="text" id="input" value="5"  hidden="hidden"></span>
+	
+		<nav>
+			<div class="nav nav-tabs" id="nav-tab" role="tablist" style="width: 100%;">
+				<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+					aria-controls="nav-home" aria-selected="true" style="width: 33%; border: 1px solid blue;"><h4 style="font-weight: bold;">메뉴</h4></a>
+				<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile"
+					aria-selected="false" style="width: 33%; border: 1px solid green;"><h4 style="font-weight: bold;">리뷰</h4></a>
+				<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+					href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" style="width: 34%; border: 1px solid gray;"><h4 style="font-weight: bold;">가게정보</h4></a>
+			</div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent" style="border: 1px solid black;">
+			<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+				<div class="card-body">
+					<c:choose>
+						<c:when test="${mainmenu eq '[]' }">
+							<div style="width: 100%; height: 410px;">
+								<h1>등록된 메뉴가 없습니다.</h1>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${mainmenu }" var="main">
+								<div class="row border-bottom" data-toggle="modal" data-target="#menuModal" onclick="javascript:menu_detail(${main.num})">
+									<div class="col-5">
+										<img src="${pageContext.request.contextPath }/resources/menu/${main.img}" style="width: 250px; height: 150px; margin-top: 10px; margin-bottom: 10px;">
+									</div>
+									<div class="col-7">
+										<p><h2 style="font-weight: bold;">${main.name}</h2></p>
+										<p><h5>${main.menu_info}</h5></p>
+										<p><h4 style="color: red;">${main.price}원</h4></p>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>	
+				</div>
+			</div>
+			<!-- 리뷰 넣는 부분 -->
+			<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+				<c:choose>
+					<c:when test="${reviewAble eq 'impossible'}">
+						<h1>작성할 리뷰가 없습니다</h1>
+					</c:when>
+					<c:otherwise>
+						<h4 style="font-weight:bold; margin-top: 20px; margin-left: 70px; margin-bottom: 20px;">*작성 가능한 리뷰가 있습니다.</h4>
+						<c:out value="${param.menuInfo}" />
+						<h1 style="font-weight: bold; text-align: center;"> ${menuInfo.name }</h1>
+						<img src="${pageContext.request.contextPath }/resources/menu/${menuInfo.img }" style="width: 80px; height: 100px; margin-left: 300px;">
+						<form action="${pageContext.request.contextPath }/member/insertReview" enctype="multipart/form-data" method="post">
+							 <div class="starRev" style="margin-left: 45px; margin-bottom: 20px; margin-left: 250px;">
+								<span class="starR on"><input type="text" id="input" value="1" hidden="hidden"></span>
+								<span class="starR"><input type="text" id="input" value="2"  hidden="hidden"></span>
+								<span class="starR"><input type="text" id="input" value="3"  hidden="hidden"></span>
+								<span class="starR"><input type="text" id="input" value="4"  hidden="hidden"></span>
+								<span class="starR"><input type="text" id="input" value="5"  hidden="hidden"></span>
+							</div>
+							<!-- 주문번호 부분 -->
+							<input type="text" nam e="order_num" value="${order_num}" hidden="hidden">
+							<input type="text" name="member_num" value="${sessionScope.memberNum}" hidden="hidden">
+							<input type="text" name="owner_num" value="${info.owner_num }" hidden="hidden">
+							<input type="text" name="shop_num" value="${info.num}" hidden="hidden">
+							<img src="" id="reviewImg" class="">
+							<textarea name="reviewText" style="margin-left: 50px;" rows="10" cols="83" placeholder="10자 이상 써주세요~"></textarea><br>
+							<input type="file" accept="image/*" name="file123" id="file" style="margin-left: 50px;" class="upload-hidden">
+							<button type="submit" id="reviewBtn" class="btn btn-primary" style="width: 100px; height: 50px; margin-left: 555px; margin-bottom: 10px; margin-top: -30px;" >리뷰 등록</button>
+						</form>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${review_member_list eq '[]' }">
+						<div style="width: 100%; height: 450px;">
+							<h1>등록된 리뷰가 없습니다.</h1>
 						</div>
-						<!-- 주문번호 부분 -->
-						<input type="text" nam e="order_num" value="${order_num}" hidden="hidden">
-						<input type="text" name="member_num" value="${sessionScope.memberNum}" hidden="hidden">
-						<input type="text" name="owner_num" value="${info.owner_num }" hidden="hidden">
-						<input type="text" name="shop_num" value="${info.num}" hidden="hidden">
-						<img src="" id="reviewImg" class="">
-						<textarea name="reviewText" style="margin-left: 50px;" rows="10" cols="83" placeholder="10자 이상 써주세요~"></textarea><br>
-						<input type="file" accept="image/*" name="file123" id="file" style="margin-left: 50px;" class="upload-hidden">
-						<button type="submit" id="reviewBtn" class="btn btn-primary" style="width: 100px; height: 50px; margin-left: 555px; margin-bottom: 10px; margin-top: -30px;" >리뷰 등록</button>
-					</form>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${review_member_list eq '[]' }">
-					<div style="width: 100%; height: 450px;">
-						<h1>등록된 리뷰가 없습니다.</h1>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${review_member_list }" var="rmList">
-						<div class="card">
-							<!-- 리뷰 회원 프로필 이미지 -->
-							<c:choose>
-								<c:when test="${rmList.NUM ne null && rmList.REF == 0 } ">
-									<div style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
-										<div style="width: 10%; height: 100%; float:left; text-align: right; margin-right: 10px;">
-											<img src="/delivery/resources/images/${rmList.IMG }" style="border-radius: 70%; width: 50px; height: 50px;">
-										</div>
-										<div style="width: 60%; height: 100%; margin-left: 15px; margin-top: 10px; float:left">
-											<h4 style="font-weight: bold;">${rmList.NAME }님</h4>
-										</div>
-										<div style="width: 30%;">
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${review_member_list }" var="rmList">
+							<div class="card">
+								<!-- 리뷰 회원 프로필 이미지 -->
+									<c:choose>
+										<c:when test="${rmList.REF eq 0 }">
+											<div style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+											<div style="width: 10%; height: 100%; float:left; text-align: right; margin-right: 10px;">
 											<c:choose>
-												<c:when test="${rmList.GRADE eq '5' }">
-													<img src="/delivery/resources/images/star_5.png" style="width: 100px; height: 25px;">
+												<c:when test="${rmList.IMG ne null }">
+													<img src="/delivery/resources/images/${rmList.IMG }" style="border-radius: 70%; width: 50px; height: 50px;">
 												</c:when>
-												<c:when test="${rmList.GRADE eq '4' }">
-													<img src="/delivery/resources/images/star_4.png" style="width: 100px; height: 25px;">
-												</c:when>
-												<c:when test="${rmList.GRADE eq '3' }">
-													<img src="/delivery/resources/images/star_3.png" style="width: 100px; height: 25px;">
-												</c:when>
-												<c:when test="${rmList.GRADE eq '2' }">
-													<img src="/delivery/resources/images/star_2.png" style="width: 100px; height: 25px;">
-												</c:when>
-												<c:when test="${rmList.GRADE eq '1' }">
-													<img src="/delivery/resources/images/star_1.png" style="width: 100px; height: 25px;">
-												</c:when>
+												<c:otherwise>
+													<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
+												</c:otherwise>
 											</c:choose>
+											</div>
+											<div style="width: 60%; height: 100%; margin-left: 15px; margin-top: 10px; float:left">
+												<h4 style="font-weight: bold;">${rmList.NAME }님</h4>
+											</div>
+											<div style="width: 30%;">
+												<c:choose>
+													<c:when test="${rmList.GRADE eq '5' }">
+														<img src="/delivery/resources/images/star_5.png" style="width: 100px; height: 25px;">
+													</c:when>
+													<c:when test="${rmList.GRADE eq '4' }">
+														<img src="/delivery/resources/images/star_4.png" style="width: 100px; height: 25px;">
+													</c:when>
+													<c:when test="${rmList.GRADE eq '3' }">
+														<img src="/delivery/resources/images/star_3.png" style="width: 100px; height: 25px;">
+													</c:when>
+													<c:when test="${rmList.GRADE eq '2' }">
+														<img src="/delivery/resources/images/star_2.png" style="width: 100px; height: 25px;">
+													</c:when>
+													<c:when test="${rmList.GRADE eq '1' }">
+														<img src="/delivery/resources/images/star_1.png" style="width: 100px; height: 25px;">
+													</c:when>
+												</c:choose>
+												<c:choose>
+													<c:when test="${rmList.REVIEW_IMG_NUM ne null}">
+														<c:forEach items="${reviewImg }" var="img">
+															<c:choose>
+																<c:when test="${rmList.REVIEW_IMG_NUM == img.num }">
+																	<img src="${pageContext.request.contextPath }/resources/review/${img.save_filename }" style=" width: 600px; height: 400px; margin-left :50px; margin-top: 20px; margin-bottom: 20px;"> 
+																</c:when>
+															</c:choose>
+														</c:forEach>
+													</c:when>
+												</c:choose>
+											</div>
 										</div>
-									</div>
-								</c:when>
-								<c:otherwise>
-									<div style="width: 10%; height: 100%; float:left; text-align: right;">
-										<img src="/delivery/resources/images/user.png" style="border-radius: 70%; width: 50px; height: 50px;">
-									</div>
-									<div style="width: 85%; height: 100%; float: left; margin-left: 5px;">
-										<span>${rmList.NAME }님</span>
-									</div>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when test="${rmList.REVIEW_IMG_NUM eq null}">
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${reviewImg }" var="img">
-										<c:choose>
-											<c:when test="${rmList.REVIEW_IMG_NUM == img.num }">
-<!-- 												<p>=============이미지 부분===========</p> -->
-<%-- 												<p>이미지 번호 : ${img.num }</p> --%>
-<%-- 												<p>이미지 경로 : ${img.img_path }</p> --%>
-<%-- 												<p>이미지 원본파일 이름 : ${img.original_filename }</p> --%>
-<%-- 												<p>이미지 저장파일 이름 : ${img.save_filename }</p> --%>
-												<img src="${pageContext.request.contextPath }/resources/review/${img.save_filename }" style=" width: 600px; height: 400px; margin: auto; margin-top: 20px; margin-bottom: 20px;"> 
-											</c:when>
-											<c:otherwise></c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-<%-- 							<p>사장 번호 : ${rmList.OWNER_NUM }</p> --%>
-<%-- 							<p>리뷰 번호 : ${rmList.NUM }</p> --%>
-<%-- 							<p>리뷰 등록일 : ${rmList.OWNER_NUM }</p> --%>
-<%-- 							<p>사장 번호 : ${rmList.OWNER_NUM }</p> --%>
-<%-- 							<p>리뷰 점수 : ${rmList.GRADE }</p> --%>
-							<h5 style="margin-left: 60px; margin-bottom: 30px;">${rmList.CONTENT }</h5>
-<!-- 							<p>---------------------------</p> -->
-							<c:forEach items="${ownerReview }" var="ownerReview">
-								<c:choose>
-									<c:when test="${rmList.NUM == ownerReview.REF }">
-										<div class="card" style="background-color: lightgray;">
-											<h1>사장님 댓글</h1>
-											<p>${ownerReview.CONTENT }</p>
-										</div>
+										<h5 style="margin-left: 60px; margin-bottom: 30px;">${rmList.CONTENT }</h5>	
 									</c:when>
 									<c:otherwise>
+										<div class="card" style="background-color: lightgray;">
+											<h4 style="font-weight: bold;">사장님 </h4>
+											<h5 style="font-weight: bold; margin-left: 80px; margin-bottom: 30px; margin-top: 10px;">${rmList.CONTENT }</h5>
+										</div>
 									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<!-- 가게정보 넣는 부분 -->
-		<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-			<div class="card" style="width: 100%;">
-				<h3 style="font-weight: bold; margin-top: 20px;">가게 소개</h3>
-				<br>
-				<h4 style="margin-bottom: 20px;">${info.introduce }</h4>
+									</c:choose>	
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
-			<div class="card" style="width: 100%;">
-				<h3 style="font-weight: bold; margin-top: 20px;">안내 및 혜택</h3>
-				<br>
-				<h4 style="margin-bottom: 20px;">${info.review_info }</h4>
-			</div>
-			<div class="card" style="width: 100%;">
-				<h3 style="font-weight: bold; margin-top: 20px;">영업 정보</h3>
-				<br>
-				<div class="row row-cols-2" style="margin-bottom: 20px;">
-					<div class="col-2">운영시간</div>
-					<div class="col-10">매일- 오전 ${info.open_time } ~ 오후 ${info.close_time }</div>
-					<div class="col-2">휴무일</div>
-					<div class="col-10">${info.personal_day }</div>
-					<div class="col-2">전화번호</div>
-					<div class="col-10">${info.tel }</div>
+			<!-- 가게정보 넣는 부분 -->
+			<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+				<div class="card" style="width: 100%;">
+					<h3 style="font-weight: bold; margin-top: 20px;">가게 소개</h3>
+					<br>
+					<h4 style="margin-bottom: 20px;">${info.introduce }</h4>
+				</div>
+				<div class="card" style="width: 100%;">
+					<h3 style="font-weight: bold; margin-top: 20px;">안내 및 혜택</h3>
+					<br>
+					<h4 style="margin-bottom: 20px;">${info.review_info }</h4>
+				</div>
+				<div class="card" style="width: 100%;">
+					<h3 style="font-weight: bold; margin-top: 20px;">영업 정보</h3>
+					<br>
+					<div class="row row-cols-2" style="margin-bottom: 20px;">
+						<div class="col-2">운영시간</div>
+						<div class="col-10">매일- 오전 ${info.open_time } ~ 오후 ${info.close_time }</div>
+						<div class="col-2">휴무일</div>
+						<div class="col-10">${info.personal_day }</div>
+						<div class="col-2">전화번호</div>
+						<div class="col-10">${info.tel }</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+		</div>
     <!-- 주문표(장바구니) 부분 -->
 	<div class="card sticky-top" id="cart" style="width:25%; height: 600px; border: 0px solid black; margin-top: 10px; margin-left: -90px;" >
 		<div class="bg-dark" style="width: 100%; height: 10%; border: 0px solid black; color: white;">
@@ -255,8 +223,8 @@
 			<button type="button" id='orderBtn' class='btn btn-primary btn-lg' style="width: 100%; height: 30%;">주문하기</button>
 		</div>
 	</div>    
-  </div> 
-  </div>
+	</div>
+</div>
 
 
 <!-- Modal -->

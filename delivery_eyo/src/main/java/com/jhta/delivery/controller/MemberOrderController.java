@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.delivery.service.MemberService;
+import com.jhta.delivery.service.OrderCouponService;
 import com.jhta.delivery.service.Order_MainService;
 import com.jhta.delivery.service.Order_MenuService;
 import com.jhta.delivery.service.Order_Menu_OptionService;
@@ -35,6 +37,8 @@ public class MemberOrderController {
 	private Order_MainService orderMainService;
 	@Autowired
 	private StoreService storeService;
+	@Autowired
+	private OrderCouponService couponService;
 	
 	//주문 페이지로 이동하는 컨트롤러
 	@RequestMapping("/member/orderPage")
@@ -61,15 +65,25 @@ public class MemberOrderController {
 		System.out.println("model : " + model);
 		MemberVo memVo = memService.idChk(id);
 		
+		//해당 회원의 사용 가능한 쿠폰 가져오기
+		HashMap<String, Object> couponMap = new HashMap<String, Object>();
+		couponMap.put("member_num", memVo.getNum());
+		couponMap.put("last_price", Integer.parseInt(lastPrice));
+		List<HashMap<String, Object>> couponList = couponService.useableCoupon(couponMap);
+		System.out.println("사용 가능 쿠폰 리스트 값 : " + couponList);
+		
+		model.addAttribute("couponList", couponList);
 		model.addAttribute("member", memVo);
 		model.addAttribute("shopNum", shopNum);
 		model.addAttribute("lastPrice", Integer.parseInt(lastPrice));
 		return ".member.memberOrder";
 	}
 	
+//////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	//주문페이지에서 주문 api로 넘어가는 컨트롤러
 	@RequestMapping("/member/order")
-	public String order(HttpServletRequest req ) {
+	public String order(HttpServletRequest req) {
 //		System.out.println(req.getParameter("buildingCode"));
 //		System.out.println(req.getParameter("zonecode"));
 //		System.out.println(req.getParameter("address"));
@@ -117,6 +131,16 @@ public class MemberOrderController {
 	//		System.out.println("옵션 번호 : " + req.getParameterValues("optionNum")[0]);
 	//	System.out.println("옵션 번호 : " + req.getParameter("optionNum"));
 		System.out.println("수량 : " + req.getParameter("volume").trim());
+		
+		
+		System.out.println("쿠폰 정보 :" + req.getParameter("lastCoupon"));
+		String couponInfo = req.getParameter("lastCoupon");
+		//int cNum = Integer.parseInt(couponInfo.split(",")[0]);
+		int cpNum = Integer.parseInt(couponInfo.split(",")[1]);
+		//int cPrice = Integer.parseInt(couponInfo.split(",")[2]);
+		
+		HashMap<String, Object> couponMap = new HashMap<String, Object>();
+		couponMap.put("num", cpNum);
 		
 		int vol;
 		int lastPrice;
@@ -196,7 +220,7 @@ public class MemberOrderController {
 			}
 		}
 		try {
-			orderMainService.orderInsert(orderMainvo, menuList, optionList, addVo);
+			orderMainService.orderInsert(orderMainvo, menuList, optionList, addVo, couponMap);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
