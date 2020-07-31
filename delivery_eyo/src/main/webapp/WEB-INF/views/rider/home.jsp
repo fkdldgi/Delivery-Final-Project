@@ -64,14 +64,38 @@ body {
 			data: {id:id,pwd:pwd},
 			dataType: "text",
 			success:function(data){
-				console.log(data);
 				if(data==1){
-					location.href=""
+					location.href="/delivery/rider/main";
 				}else{
 					alert("아이디 또는 비밀번호를 확인해 주세요.");
 				}
 			}
 		});
+	}
+	
+	function check_join(){
+		var id = $("#joinId").val();		
+		var a = 0;
+		
+		$.ajax({
+			url: "/delivery/rider/checkId",
+			dataType:"text",
+			data: {id:id},
+			async: false,
+			success:function(data){
+				if(data=="fail"){
+					alert("이미 존재하는 아이디 입니다.");
+					a=1;
+				}else{
+					a=2;
+				}
+			}
+		});
+		if(a==1){			
+			return false;
+		}else{
+			return true;
+		}
 	}
 </script>
 <body>
@@ -119,11 +143,11 @@ body {
 					<div class="modal-body">
 						<div class="row">
 							<label for="inputId" class="col-xs-6 col-md-4">아이디</label>
-							<input type="text" name="login_id" id="inputId" class="form-control" placeholder="아이디" required autofocus>
+							<input type="text" name="login_id" id="inputId" class="form-control" placeholder="아이디" required="required">
 						</div>
 						<div class="row">
 							<label for="inputPwd" class="col-xs-6 col-md-4">비밀번호</label>
-							<input type="password" name="login_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required>
+							<input type="password" name="login_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required="required">
 						</div>
 					</div>
 					
@@ -136,7 +160,7 @@ body {
 		</div>
 	</form>
 	<!-- 회원가입 모달 -->
-	<form class="form-inline" method="post">
+	<form class="form-inline" method="post" action="/delivery/rider/join" onsubmit="return check_join()">
 		<div class="modal fade in" id="joinModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -148,28 +172,28 @@ body {
 					</div>
 					<div class="modal-body">
 						<div class="row">
-							<label for="inputId" class="col-xs-6 col-md-4">아이디</label>
-							<input type="text" name="join_id" id="inputId" class="form-control" placeholder="아이디" required autofocus>
+							<label for="joinId" class="col-xs-6 col-md-4">아이디</label>
+							<input type="text" name="id" id="joinId" class="form-control" placeholder="아이디" required>
 						</div>
 						<div class="row">
-							<label for="inputPwd" class="col-xs-6 col-md-4">비밀번호</label>
-							<input type="password" name="join_pwd" id="inputPwd" class="form-control" placeholder="비밀번호" required>
+							<label for="joinPwd" class="col-xs-6 col-md-4">비밀번호</label>
+							<input type="password" name="pwd" id="joinPwd" class="form-control" placeholder="비밀번호" required="required">
 						</div>
 						<div class="row">
-							<label for="inputName" class="col-xs-6 col-md-4">이름</label>
-							<input type="text" name="join_name" id="inputName" class="form-control" placeholder="이름" required>
+							<label for="joinName" class="col-xs-6 col-md-4">이름</label>
+							<input type="text" name="name" id="joinName" class="form-control" placeholder="이름" required="required">
 						</div>
 						<div class="row">
-							<label for="inputPhone" class="col-xs-6 col-md-4">전화번호</label>
-							<input type="text" name="join_phone" id="inputPhone" class="form-control" placeholder="'-'없이 입력해주세요." required>
+							<label for="joinPhone" class="col-xs-6 col-md-4">전화번호</label>
+							<input type="text" name="phone" id="joinPhone" class="form-control" placeholder="'-'없이 입력해주세요." required="required">
 						</div>
 						<div class="row">
-							<label for="inputEmail" class="col-xs-6 col-md-4">이메일</label>
-							<input type="text" name="join_Email" id="inputEmail" class="form-control" placeholder="이메일" required>
+							<label for="joinEmail" class="col-xs-6 col-md-4">이메일</label>
+							<input type="email" name="email" id="joinEmail" class="form-control" placeholder="이메일" required="required">
 						</div>
 					</div>
 					<div class="modal-fotter">
-						<button type="button" id="join_user" class="btn btn-link float-right" onclick="return check_join()">가입</button>
+						<button type="submit" id="join_user" class="btn btn-link float-right">가입</button>
 					</div>
 				</div>
 			</div>
@@ -188,5 +212,6 @@ body {
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
