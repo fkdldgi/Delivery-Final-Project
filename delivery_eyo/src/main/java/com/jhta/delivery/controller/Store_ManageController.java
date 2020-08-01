@@ -99,6 +99,7 @@ public class Store_ManageController {
 				if(category_list_num==category_num) { //해당 메뉴카테고리 소속의 메뉴일 경우
 					menu_vo.setNum(menu_num); //메뉴번호 set
 					menu_vo.setName(menu_name); //메뉴이름 set
+					System.out.println(menu_name);
 					menu_vo.setMenu_info(menu_info); //메뉴설명 set
 					menu_vo.setPrice(menu_price); //메뉴가격 set
 					menu_vo.setMenu_category_num(category_list_num); //메뉴카테고리번호(소속) set

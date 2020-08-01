@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jhta.delivery.dao.Owner_MenuDao;
 import com.jhta.delivery.dao.Owner_StoreDao;
 import com.jhta.delivery.vo.MenuCategoryVo;
 import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 import com.jhta.delivery.vo.Owner_CheckMenuVo;
-import com.jhta.delivery.vo.Temp_MenuVo;
+
 
 @Service
 public class Owner_StoreService {
@@ -27,10 +26,6 @@ public class Owner_StoreService {
 		for(int i=0; i<category_list.size(); i++) {
 			MenuCategoryVo categoryVo=category_list.get(i);
 			int category_num=categoryVo.getNum();
-			String menu_category_name=categoryVo.getName();
-			int priority=categoryVo.getPriority();
-			int shop_num=categoryVo.getShop_num();
-			int main_menu=categoryVo.getMain_menu();
 			List<MenuVo> menu_list=categoryVo.getMenu_list();
 			
 			if(dao.select_menu_categoryOne(category_num)==null) { //해당번호의 메뉴카테고리가 존재하지 않을 경우 insert
@@ -38,11 +33,26 @@ public class Owner_StoreService {
 				//새로운 카테고리에 메뉴 insert
 				for(int j=0; j<menu_list.size(); j++) {
 					MenuVo menuVo=menu_list.get(j);
-					dao.insertMenu_newCategory(menuVo);
+					int menu_num=menuVo.getNum(); //메뉴번호
+					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
+					if(dao.select_menuOne(menu_num)==null) { //해당번호의 메뉴가 존재하지 않을 경우 insert
+						dao.insertMenu_newCategory(menuVo);
+					}else { //해당번호의 메뉴가 존재 할 경우 update
+						dao.updateMenu(menuVo);
+					}
 				}
 			}else { //해당번호의 메뉴카테고리가 존재 할 경우 update
-				dao.updateMenu_Category(menu_categoryVo);
-
+				dao.updateMenu_Category(categoryVo);
+				for(int j=0; j<menu_list.size(); j++) {
+					MenuVo menuVo=menu_list.get(j);
+					int menu_num=menuVo.getNum(); //메뉴번호
+					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
+					if(dao.select_menuOne(menu_num)==null) { //해당번호의 메뉴가 존재하지 않을 경우 insert
+						dao.insertMenu_newCategory(menuVo);
+					}else { //해당번호의 메뉴가 존재 할 경우 update
+						dao.updateMenu(menuVo);
+					}
+				}
 			}
 			
 		}
