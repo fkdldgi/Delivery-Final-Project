@@ -1,6 +1,8 @@
 package com.jhta.delivery.controller;
 
 import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.delivery.service.RiderService;
+import com.jhta.delivery.vo.Order_MainVo;
+import com.jhta.delivery.vo.RiderOrderVo;
 import com.jhta.delivery.vo.RiderVo;
 
 @Controller
@@ -46,7 +50,7 @@ public class RiderController {
 		RiderVo vo = new RiderVo(0,id,pwd,name,phone,email,0,null);
 		service.insertRider(vo);
 		
-		return ".rider.rider.home";
+		return home();
 	}
 	
 	// 아이디 중복확인
@@ -54,6 +58,7 @@ public class RiderController {
 	@ResponseBody
 	public String checkId(String id) {
 		RiderVo vo = service.RiderIdcheck(id);
+		System.out.println(vo);
 		// 존재하는 아이디가 있을 경우
 		if(vo!=null) {
 			return "fail";
@@ -69,8 +74,25 @@ public class RiderController {
 		return ".rider.login";
 	}
 	
+	// 배달에서 주문승인 리스트(아무도 안받은거)
+	@RequestMapping("/rider/riderorderList")
+	@ResponseBody
+	public List<RiderOrderVo> deliveryList() {
+		
+		List<RiderOrderVo> riderOrderList = service.riderOrderList();
+		
+		return riderOrderList;
+	}
 	
-	
+	// 배달에서 배달승인 리스트
+	@RequestMapping("/rider/acceptList")
+	@ResponseBody
+	public List<RiderOrderVo> successList(int num){
+		
+		List<RiderOrderVo> riderSuccessList = service.riderAcceptList(num);
+		
+		return riderSuccessList;
+	}
 	
 	
 	

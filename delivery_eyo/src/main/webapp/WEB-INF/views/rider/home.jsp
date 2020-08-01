@@ -54,50 +54,6 @@ body {
 <title>배달이요~</title>
 
 </head>
-<script>
-	// 로그인모달에 function
-	function check_form(){
-		var id = $("#inputId").val();
-		var pwd = $("#inputPwd").val();
-		$.ajax({
-			url: "/delivery/rider/login",
-			data: {id:id,pwd:pwd},
-			dataType: "text",
-			success:function(data){
-				if(data==1){
-					location.href="/delivery/rider/main";
-				}else{
-					alert("아이디 또는 비밀번호를 확인해 주세요.");
-				}
-			}
-		});
-	}
-	
-	function check_join(){
-		var id = $("#joinId").val();		
-		var a = 0;
-		
-		$.ajax({
-			url: "/delivery/rider/checkId",
-			dataType:"text",
-			data: {id:id},
-			async: false,
-			success:function(data){
-				if(data=="fail"){
-					alert("이미 존재하는 아이디 입니다.");
-					a=1;
-				}else{
-					a=2;
-				}
-			}
-		});
-		if(a==1){			
-			return false;
-		}else{
-			return true;
-		}
-	}
-</script>
 <body>
 	<div class="card align-middle"style="width: 600px; border-radius: 20px;">
 	<!-- 맨위에 뜨는 이미지 -->
@@ -214,4 +170,86 @@ body {
 		crossorigin="anonymous"></script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
+<script>
+	
+	// 로그인모달에 function
+	function check_form(){
+		var id = $("#inputId").val();
+		var pwd = $("#inputPwd").val();
+		$.ajax({
+			url: "/delivery/rider/login",
+			data: {id:id,pwd:pwd},
+			dataType: "text",
+			success:function(data){
+				if(data==1){
+					location.href="/delivery/rider/main";
+				}else{
+					alert("아이디 또는 비밀번호를 확인해 주세요.");
+				}
+			}
+		});
+	}
+	
+	// 회원가입 버튼
+	function check_join(){
+		
+		var a = 0;
+		
+  		// 비밀번호 검증
+		var pwd = $("#joinPwd").val();
+		// 비밀번호 검증할 정규 표현식
+		var reg = /^.{8,}$/;
+		if(reg.test(pwd)){
+		}else{
+			alert("비밀번호는 8자리 이상으로 입력하셔야 합니다.");	
+			return false;
+		}
+		
+		// 이름 검증(아직 안됨)
+		var name = $("joinName").val();
+		// 이름 검증할 정규 표현식
+		let reg1 = /^[가-힣]{2,4}$/;
+		if(reg1.test(name)){
+		}else{
+			alert("이름을 다시 확인해 주세요");	
+			return false;
+		}
+		
+		// 전화 검증
+		var phone = $("joinPhone").val();
+		// 전화번호 검증할 정규 표현식
+ 		let reg2=/\d{11}$/;
+
+		if (reg2.test(phone)) {//정규표현식을 통과 한다면
+		}else{
+			alert("전화번호를 다시 확인해 주세요.");		
+			return false;
+		} 
+		
+		
+		// 아이디 검사
+		var id = $("#joinId").val();	
+		
+		$.ajax({
+			url: "/delivery/rider/checkId",
+			dataType:"text",
+			data: {id:id},
+			async: false,
+			success:function(data){
+				if(data=="fail"){
+					alert("이미 존재하는 아이디 입니다.");
+					a=1;
+				}else{
+					a=2;
+				}
+			}
+		});
+		 
+		if(a==1){			
+			return false;
+		}else{
+			return true;
+		} 
+	}
+</script>
 </html>

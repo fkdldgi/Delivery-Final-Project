@@ -1,11 +1,14 @@
 package com.jhta.delivery.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhta.delivery.vo.Order_MainVo;
+import com.jhta.delivery.vo.RiderOrderVo;
 import com.jhta.delivery.vo.RiderVo;
 
 @Repository
@@ -49,4 +52,32 @@ public class RiderDao {
 	public int riderUpdate(RiderVo vo) {
 		return session.update(NAMESPACE+".RiderUpdate", vo);
 	}
+	
+	// 라이더가 받지 않은 주문승인 리스트
+	public List<RiderOrderVo> riderOrderList(){
+		return session.selectList(NAMESPACE+".RiderOrderList");
+	}
+	
+	// 라이더가 배달승인받은 리스트
+	public List<RiderOrderVo> riderAcceptList(int num){
+		return session.selectList(NAMESPACE+".RiderAcceptList", num);
+	}
+	
+	// 라이더가 배달완료한 리스트
+	public List<RiderOrderVo> riderSuccessList(int num){
+		return session.selectList(NAMESPACE+".RiderSuccessList", num);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
