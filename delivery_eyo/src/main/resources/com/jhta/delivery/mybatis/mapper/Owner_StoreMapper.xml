@@ -24,11 +24,18 @@
 		delete from menu_category where num=#{num}
 	</delete>
 	
-	<!-- 메뉴 추가 -->
+	<!-- 메뉴 추가(기존 카테고리리에 추가하는 경우) -->
 	<insert id="insertMenu" parameterType="com.jhta.delivery.vo.MenuVo">
 		insert into menu
 		values(MENU_SEQ.nextval,#{name},#{menu_info},#{price},
 									1,'img',#{menu_category_num},4)
+	</insert>
+	
+	<!-- 메뉴 추가 (새로운 카테고리에 추가하는 경우) -->
+	<insert id="insertMenu_newCategory" parameterType="com.jhta.delivery.vo.MenuVo">
+		insert into menu
+		values(MENU_SEQ.nextval,#{name},#{menu_info},#{price},
+									1,'img',MENU_CATEGORY_SEQ.currval,4)
 	</insert>
 	
 	<!-- 메뉴카테고리 추가 -->

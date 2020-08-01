@@ -21,9 +21,9 @@ import com.jhta.delivery.vo.MenuCategoryVo;
 import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 import com.jhta.delivery.vo.ShopVo;
-import com.jhta.delivery.vo.Temp_MenuCategoryVo;
-import com.jhta.delivery.vo.Temp_MenuOptionVo;
-import com.jhta.delivery.vo.Temp_MenuVo;
+import com.jhta.delivery.vo.MenuCategoryVo;
+import com.jhta.delivery.vo.MenuOptionVo;
+import com.jhta.delivery.vo.MenuVo;
 
 @Controller
 public class Store_ManageController {
@@ -74,19 +74,19 @@ public class Store_ManageController {
 		String[] option_categoryArr=req.getParameterValues("option_category");
 		String[] option_menu_numArr=req.getParameterValues("option_menu_num");
 		
-		List<Temp_MenuCategoryVo> category_list=new ArrayList<Temp_MenuCategoryVo>();
-		List<Temp_MenuVo> menu_list=new ArrayList<Temp_MenuVo>(); //메뉴 리스트
-		List<Temp_MenuOptionVo> menu_option_list=new ArrayList<Temp_MenuOptionVo>(); //메뉴옵션리스트
+		List<MenuCategoryVo> category_list=new ArrayList<MenuCategoryVo>();
+		List<MenuVo> menu_list=new ArrayList<MenuVo>(); //메뉴 리스트
+		List<MenuOptionVo> menu_option_list=new ArrayList<MenuOptionVo>(); //메뉴옵션리스트
 		//카테고리 for문
 		for(int i=0; i<category_numArr.length; i++) {
 			int category_num=Integer.parseInt(category_numArr[i]);
 			String menu_category_name=menu_category_nameArr[i];
 			//카테고리 추가
-			Temp_MenuCategoryVo category_vo=new Temp_MenuCategoryVo();
-			category_vo.setCategory_num(category_num);
-			category_vo.setMenu_category_name(menu_category_name);
+			MenuCategoryVo category_vo=new MenuCategoryVo();
+			category_vo.setNum(category_num);
+			category_vo.setName(menu_category_name);
 			category_vo.setShop_num(shop_num);
-			category_list.add(category_vo); //카테고리 리스트에 카테고리 VO 추가
+			
 			//메뉴 for문
 			for(int j=0; j<menu_numArr.length; j++) {
 				int menu_num=Integer.parseInt(menu_numArr[j]);
@@ -95,15 +95,14 @@ public class Store_ManageController {
 				int menu_price=Integer.parseInt(menu_priceArr[j]); //메뉴가격
 				int category_list_num=Integer.parseInt(category_list_numArr[j]); //메뉴카테고리번호(소속)
 				
-				Temp_MenuVo menu_vo=new Temp_MenuVo(); //메뉴 VO
-				menu_vo.setMenu_num(menu_num); //메뉴번호 set
-				menu_vo.setMenu_name(menu_name); //메뉴이름 set
-				menu_vo.setMenu_info(menu_info); //메뉴설명 set
-				menu_vo.setMenu_price(menu_price); //메뉴가격 set
-				menu_vo.setCategory_list_num(category_list_num); //메뉴카테고리번호(소속) set
-			
-				menu_list.add(menu_vo); //메뉴 리스트에 메뉴 VO 추가
-				
+				MenuVo menu_vo=new MenuVo(); //메뉴 VO
+				if(category_list_num==category_num) { //해당 메뉴카테고리 소속의 메뉴일 경우
+					menu_vo.setNum(menu_num); //메뉴번호 set
+					menu_vo.setName(menu_name); //메뉴이름 set
+					menu_vo.setMenu_info(menu_info); //메뉴설명 set
+					menu_vo.setPrice(menu_price); //메뉴가격 set
+					menu_vo.setMenu_category_num(category_list_num); //메뉴카테고리번호(소속) set
+				}
 				//메뉴옵션 for문
 				for(int k=0; k<option_numArr.length; k++) {
 					int option_num=Integer.parseInt(option_numArr[k]); //메뉴옵션번호
@@ -112,20 +111,24 @@ public class Store_ManageController {
 					String option_categoty=option_categoryArr[k]; //옵션카테고리명
 					int option_menu_num=Integer.parseInt(option_menu_numArr[k]); //메뉴번호(소속)
 					
-					Temp_MenuOptionVo option_vo=new Temp_MenuOptionVo();
-					option_vo.setOption_num(option_num);
-					option_vo.setOption_name(option_name);
-					option_vo.setOption_price(option_price);
-					option_vo.setOption_categoty(option_categoty);
-					option_vo.setOption_menu_num(option_menu_num);
-				
-					menu_option_list.add(option_vo); //메뉴옵션 리스트에 옵션 VO 추가
+					MenuOptionVo option_vo=new MenuOptionVo();
+					if(option_menu_num==menu_num) { //해당 메뉴 소속의 메뉴옵션일 경우
+						option_vo.setNum(option_num);
+						option_vo.setName(option_name);
+						option_vo.setPrice(option_price);
+						option_vo.setCategory(option_categoty);
+						option_vo.setMenu_num(option_menu_num);
+					
+						menu_option_list.add(option_vo); //메뉴옵션 리스트에 옵션 VO 추가
+					}
 				}
 				menu_vo.setMenu_option_list(menu_option_list);
+				menu_list.add(menu_vo); //메뉴 리스트에 메뉴 VO 추가
 			}
 			category_vo.setMenu_list(menu_list); //메뉴카테고리에 메뉴리스트 넣기
+			category_list.add(category_vo); //카테고리 리스트에 카테고리 VO 추가
 		}
-		
+		int n=store_service.menuUpdateAndInsertTransaction(category_list);
 		
 		// 메뉴옵션 삭제하기
 		if(req.getParameterValues("delete_menu_option") != null) {

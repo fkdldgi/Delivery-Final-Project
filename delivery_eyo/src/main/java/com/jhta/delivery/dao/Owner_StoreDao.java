@@ -33,9 +33,14 @@ public class Owner_StoreDao {
 		return session.delete(NAMESPACE+".deleteMenu_Category", num);
 	}
 	
-	// 메뉴추가
+	// 메뉴추가(기존 카테고리리에 추가하는 경우)
 	public int insertMenu(MenuVo vo) {
 		return session.insert(NAMESPACE+".insertMenu", vo);
+	}
+	
+	// 메뉴 추가 (새로운 카테고리에 추가하는 경우)
+	public int insertMenu_newCategory(MenuVo vo) {
+		return session.insert(NAMESPACE+".insertMenu_newCategory",vo);
 	}
 	
 	// 메뉴카테고리 추가

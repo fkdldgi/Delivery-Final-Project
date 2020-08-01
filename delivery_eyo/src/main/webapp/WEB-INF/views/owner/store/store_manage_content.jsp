@@ -22,7 +22,6 @@
 </style>
 
 <body>
-
 	<input type="hidden" id="last_menu_num" value="${max_menu_num}">
 	<input type="hidden" id="last_menuCategoryList_num" value="${max_menu_category_num}">
 	<input id="trash" type="text" style="display: none;">
@@ -71,7 +70,7 @@
 			</h2>
 			<span>메뉴설명:&nbsp;<input name="menu_info" type="text" placeholder="메뉴설명을 입력해 주세요." style="width: 35%;" required="required"></span>
 			<br> 
-			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" required="required" name="min_price" oninput="maxLengthCheck(this)" placeholder="가격">원
+			<span>가격:&nbsp;&nbsp;<input type="number" min="0" max="100000" step="500" maxlength="6" required="required" name="menu_price" oninput="maxLengthCheck(this)" placeholder="가격">원
 			</span>
 			<br>
 			<div>
@@ -171,7 +170,7 @@
 												<input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;">
 											</h2>
 											<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span> <br>
-											<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" oninput="maxLengthCheck(this)" placeholder="가격"></span> 
+											<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="menu_price" oninput="maxLengthCheck(this)" placeholder="가격"></span> 
 												<input type="text" name="category_list_num" style="display: none;" value="${list.num }"><br>
 												<div>
 													<div>
