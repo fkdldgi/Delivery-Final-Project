@@ -27,6 +27,41 @@ input {
 </style>
 </head>
 <body>
+<!-- 맨 위에 뜨는 nav바 -->
+<div>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="font-family: 'Do Hyeon', sans-serif;">
+		<a class="navbar-brand mx-auto" style="font-size:24px;">어서오세요 배달이요입니다.</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#store_manage"
+			aria-controls="store_manage" aria-expanded="false"
+			aria-label="Toggle navigation">
+		</button>
+		<div class="collapse navbar-collapse" id="store_manage">
+			<ul class="navbar-nav mr-auto">
+				<!-- 가게인사랑 가게운영 href랑 떨어지게 하기 위해서 넣음 -->
+				<li class="nav-item active">
+     				<a class="nav-link" href="#">
+     					<span class="sr-only">
+     						(current)
+     					</span>
+     				</a>
+     			</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/delivery/owner/store_manage?id=${sessionScope.ownerId }" 
+								id="store_managehref" style="font-size:22px;">
+						가게운영
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/delivery/owner/board/" style="font-size:22px;">
+						공지사항
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-4">

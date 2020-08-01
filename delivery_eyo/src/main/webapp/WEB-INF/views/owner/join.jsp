@@ -32,12 +32,15 @@ input {
 <body>
 	<div class="container">
 		<div class="row justify-content-center">
+			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<img id="store_img" class="nav-link"
-					src="/delivery/resources/images/logo.PNG">
+					src="/delivery/resources/images/logo.PNG" style="width:100%;">
 			</div>
+			<div class="col-md-4"></div>
 		</div>
-		<form action="${pageContext.request.contextPath }/owner/join" method="post" id="joinForm" onsubmit="return submitAction();">
+		<br>
+		<form action="${pageContext.request.contextPath }/owner/join" method="post" id="joinForm" onsubmit="return submitAction();" style="width:60%;margin: 0 auto;">
 			<div class="form-group has-feedback">
 				<label class="control-label" for="id">아이디</label> 
 				<input class="form-control" type="text" name="id" id="id" /> 
@@ -74,9 +77,14 @@ input {
 				<span id="telErr" class="help-block">올바른 전화번호 형식이 아닙니다. 다시 입력해주세요.</span> 
 				<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 			</div>
+			<br>
 			<div class="row justify-content-end">
-				<button class="col-md-1 btn btn-outline-secondary" type="reset">취소</button>
-				<button class="col-md-1 btn btn-outline-primary" type="submit">가입</button>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" type="reset">취소</button>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" type="submit">가입</button>
+				</div>
 			</div>
 		</form>
 	</div>

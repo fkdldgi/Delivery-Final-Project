@@ -19,8 +19,8 @@
 </style>
 			<!-- 맨 위에 뜨는 nav바 -->
 <div>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-		<a class="navbar-brand mx-auto">어서오세요 배달이요입니다.</a>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="font-family: 'Do Hyeon', sans-serif;">
+		<a class="navbar-brand mx-auto" style="font-size:24px;">어서오세요 배달이요입니다.</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#store_manage"
 			aria-controls="store_manage" aria-expanded="false"
@@ -38,12 +38,12 @@
      			</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/delivery/owner/store_manage?id=${sessionScope.ownerId }" 
-								id="store_managehref">
+								id="store_managehref" style="font-size:20px;">
 						가게운영
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/delivery/owner/board/">
+					<a class="nav-link" href="/delivery/owner/board/" style="font-size:20px;">
 						공지사항
 					</a>
 				</li>
@@ -65,20 +65,20 @@
 			<img
 				src="/delivery/resources/images/owner_carousel1.png"
 				class="d-block w-75 h-50" 
-				 style="margin: auto; border: 4px solid #2FA599; width:100% !important;"
+				 style="margin: auto; border: 4px solid #2FA599; width:100% !important;height:500px !important;"
 				 alt="...">
 		</div>
 		<div class="carousel-item" data-interval="3000">
 			<img
 				src="/delivery/resources/images/owner_carousel2.png"
 				class="d-block w-75 h-75"
-				 style="margin: auto; border: 4px solid #FCAB1E; width:100% !important;" alt="...">
+				 style="margin: auto; border: 4px solid #FCAB1E; width:100% !important;height:500px !important;" alt="...">
 		</div>
 		<div class="carousel-item" data-interval="3000">
 			<img
 				src="/delivery/resources/images/owner_carousel3.png"
 				class="d-block w-75 h-100"
-				 style="margin: auto; border: 4px solid #139164; width:100% !important;" alt="...">
+				 style="margin: auto; border: 4px solid #139164; width:100% !important;height:500px !important;" alt="...">
 		</div>
 		<div class="slide-count-wrap">
 			<span class="slide-count"><span class="current"></span>  <span
