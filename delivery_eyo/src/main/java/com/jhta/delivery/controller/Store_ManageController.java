@@ -1,6 +1,7 @@
 package com.jhta.delivery.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,9 @@ import com.jhta.delivery.vo.MenuCategoryVo;
 import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 import com.jhta.delivery.vo.ShopVo;
+import com.jhta.delivery.vo.Temp_MenuCategoryVo;
+import com.jhta.delivery.vo.Temp_MenuOptionVo;
+import com.jhta.delivery.vo.Temp_MenuVo;
 
 @Controller
 public class Store_ManageController {
@@ -70,42 +74,56 @@ public class Store_ManageController {
 		String[] option_categoryArr=req.getParameterValues("option_category");
 		String[] option_menu_numArr=req.getParameterValues("option_menu_num");
 		
-		
+		List<Temp_MenuCategoryVo> category_list=new ArrayList<Temp_MenuCategoryVo>();
+		List<Temp_MenuVo> menu_list=new ArrayList<Temp_MenuVo>(); //메뉴 리스트
+		List<Temp_MenuOptionVo> menu_option_list=new ArrayList<Temp_MenuOptionVo>(); //메뉴옵션리스트
 		//카테고리 for문
 		for(int i=0; i<category_numArr.length; i++) {
 			int category_num=Integer.parseInt(category_numArr[i]);
-			String category_name=menu_category_nameArr[i];
-			if(store_service.select_menu_categoryOne(category_num)==null) {
-				//카테고리 추가
-				MenuCategoryVo categoryVo=new MenuCategoryVo(0,category_name,0,shop_num,0);
-				int n=store_service.insertMenu_Category(categoryVo);
-			}else {
-				//카테고리 업데이트
-				
-			}
+			String menu_category_name=menu_category_nameArr[i];
+			//카테고리 추가
+			Temp_MenuCategoryVo category_vo=new Temp_MenuCategoryVo();
+			category_vo.setCategory_num(category_num);
+			category_vo.setMenu_category_name(menu_category_name);
+			category_vo.setShop_num(shop_num);
+			category_list.add(category_vo); //카테고리 리스트에 카테고리 VO 추가
 			//메뉴 for문
 			for(int j=0; j<menu_numArr.length; j++) {
 				int menu_num=Integer.parseInt(menu_numArr[j]);
-				if(store_service.select_menuOne(menu_num)==null) {
-					//추가
-					
-				}else {
-					//업데이트
-					
-				}
+				String menu_name=menu_nameArr[j]; //메뉴이름
+				String menu_info=menu_infoArr[j]; //메뉴설명
+				int menu_price=Integer.parseInt(menu_priceArr[j]); //메뉴가격
+				int category_list_num=Integer.parseInt(category_list_numArr[j]); //메뉴카테고리번호(소속)
+				
+				Temp_MenuVo menu_vo=new Temp_MenuVo(); //메뉴 VO
+				menu_vo.setMenu_num(menu_num); //메뉴번호 set
+				menu_vo.setMenu_name(menu_name); //메뉴이름 set
+				menu_vo.setMenu_info(menu_info); //메뉴설명 set
+				menu_vo.setMenu_price(menu_price); //메뉴가격 set
+				menu_vo.setCategory_list_num(category_list_num); //메뉴카테고리번호(소속) set
+			
+				menu_list.add(menu_vo); //메뉴 리스트에 메뉴 VO 추가
 				
 				//메뉴옵션 for문
 				for(int k=0; k<option_numArr.length; k++) {
-					int option_num=Integer.parseInt(option_numArr[k]);
-					if(store_service.select_menu_optionOne(option_num)==null) {
-						//추가
-						
-					}else {
-						//업데이트
-						
-					}
+					int option_num=Integer.parseInt(option_numArr[k]); //메뉴옵션번호
+					String option_name=option_nameArr[k]; //메뉴옵션이름
+					int option_price=Integer.parseInt(option_priceArr[k]); //메뉴옵션가격
+					String option_categoty=option_categoryArr[k]; //옵션카테고리명
+					int option_menu_num=Integer.parseInt(option_menu_numArr[k]); //메뉴번호(소속)
+					
+					Temp_MenuOptionVo option_vo=new Temp_MenuOptionVo();
+					option_vo.setOption_num(option_num);
+					option_vo.setOption_name(option_name);
+					option_vo.setOption_price(option_price);
+					option_vo.setOption_categoty(option_categoty);
+					option_vo.setOption_menu_num(option_menu_num);
+				
+					menu_option_list.add(option_vo); //메뉴옵션 리스트에 옵션 VO 추가
 				}
+				menu_vo.setMenu_option_list(menu_option_list);
 			}
+			category_vo.setMenu_list(menu_list); //메뉴카테고리에 메뉴리스트 넣기
 		}
 		
 		
@@ -160,9 +178,14 @@ public class Store_ManageController {
 		List<MenuOptionVo> menu_optionList = store_service.menu_optionList();
 		System.out.println(menu_optionList);
 		
-		int max_menu_num=menu_service.max_menu_num();
-		int max_menu_category_num=menu_service.max_menu_category_num();
-		System.out.println();
+		int max_menu_num=0;
+		if(menu_service.max_menu_num()!=null) {
+			max_menu_num=Integer.parseInt(menu_service.max_menu_num());
+		}
+		int max_menu_category_num=0;
+		if(menu_service.max_menu_category_num()!=null) {
+			max_menu_category_num=Integer.parseInt(menu_service.max_menu_category_num());
+		}
 		model.addAttribute("max_menu_num",max_menu_num);
 		model.addAttribute("max_menu_category_num",max_menu_category_num);
 		model.addAttribute("mainMenuList", mainMenuList);
