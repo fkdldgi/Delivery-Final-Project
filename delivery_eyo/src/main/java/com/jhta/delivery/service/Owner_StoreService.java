@@ -29,24 +29,43 @@ public class Owner_StoreService {
 			List<MenuVo> menu_list=categoryVo.getMenu_list();
 			
 			if(dao.select_menu_categoryOne(category_num)==null) { //해당번호의 메뉴카테고리가 존재하지 않을 경우 insert
-				dao.insertMenu_Category(categoryVo); //메뉴카테고리 추가
 				//새로운 카테고리에 메뉴 insert
+				dao.insertMenu_Category(categoryVo); //메뉴카테고리 추가
 				for(int j=0; j<menu_list.size(); j++) {
 					MenuVo menuVo=menu_list.get(j);
-					int menu_num=menuVo.getNum(); //메뉴번호
 					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
-					dao.insertMenu_newCategory(menuVo);
+					dao.insertMenu_newCategory(menuVo); //메뉴카테고리 추가
+					System.out.println(menuVo.getName()+"Song");
+//					for(int k=0; k<menu_option_list.size(); k++) { //새로운 메뉴옵션 리스트 insert
+//						MenuOptionVo menu_optionVo=menu_option_list.get(k); //메뉴옵션 리스트
+//						dao.insert_menu_option_newMenu(menu_optionVo); //새로운 메뉴에 옵션추가
+//					}
 				}
 			}else { //해당번호의 메뉴카테고리가 존재 할 경우 update
 				dao.updateMenu_Category(categoryVo);
-				for(int j=0; j<menu_list.size(); j++) {
+				for(int j=0; j<menu_list.size(); j++) { //메뉴 수 만큼 반복
 					MenuVo menuVo=menu_list.get(j);
 					int menu_num=menuVo.getNum(); //메뉴번호
 					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
 					if(dao.select_menuOne(menu_num)==null) { //해당번호의 메뉴가 존재하지 않을 경우 insert
 						dao.insertMenu(menuVo);
+//						for(int k=0; k<menu_option_list.size(); k++) { //새로운 메뉴옵션 리스트 insert
+//							MenuOptionVo menu_optionVo=menu_option_list.get(k);
+//							dao.insert_menu_option_newMenu(menu_optionVo); //새로운 메뉴에 옵션추가
+//						}
 					}else { //해당번호의 메뉴가 존재 할 경우 update
 						dao.updateMenu(menuVo);
+//						for(int k=0; k<menu_option_list.size(); k++) { //기존 메뉴옵션 리스트 update
+//							MenuOptionVo menu_optionVo=menu_option_list.get(k);
+//							int menu_option_num=menu_optionVo.getNum(); //메뉴옵션 번호
+//							if(dao.select_menu_optionOne(menu_option_num)==null) { // 메뉴 옵션번호가 존재하지 않을 경우 insert
+//								System.out.println(dao.select_menu_optionOne(menu_option_num));
+//								dao.insert_menu_option(menu_optionVo); //기존 메뉴에 옵션추가
+//							}else {
+//								System.out.println(dao.select_menu_optionOne(menu_option_num));
+//								dao.update_menu_option(menu_optionVo); //기존 메뉴에 옵션수정
+//							}
+//						}
 					}
 				}
 			}

@@ -68,9 +68,13 @@ public class Owner_StoreDao {
 		return session.selectList(NAMESPACE+".select_menu_option");
 	}
 	
-	// 메뉴옵션 추가
+	// 메뉴옵션 추가(기존 메뉴에 옵션 추가)
 	public int insert_menu_option(MenuOptionVo vo) {
 		return session.insert(NAMESPACE+".insert_menu_option", vo);
+	}
+	// 메뉴옵션 추가(새로운 메뉴에 옵션 추가)
+	public int insert_menu_option_newMenu(MenuOptionVo vo) {
+		return session.insert(NAMESPACE+".insert_menu_option_newMenu", vo);
 	}
 	
 	// 메뉴옵션 수정

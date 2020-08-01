@@ -69,10 +69,16 @@
 		select * from menu_option
 	</select>
 	
-	<!-- 메뉴옵션 추가 -->
+	<!-- 메뉴옵션 추가(기존 메뉴에 추가하는 경우) -->
 	<insert id="insert_menu_option" parameterType="com.jhta.delivery.vo.MenuOptionVo">
 		insert into menu_option
 		values(MENU_OPTION_SEQ.nextval,#{name},#{price},#{category},#{menu_num})
+	</insert>
+	
+	<!-- 메뉴옵션 추가(새로운 메뉴에 추가하는 경우) -->
+	<insert id="insert_menu_option_newMenu" parameterType="com.jhta.delivery.vo.MenuOptionVo">
+		insert into menu_option
+		values(MENU_OPTION_SEQ.nextval,#{name},#{price},#{category},MENU_SEQ.currval)
 	</insert>
 	
 	<!-- 메뉴옵션 수정 -->
@@ -149,7 +155,7 @@
 	
 	<!-- 메뉴옵션번호로 메뉴옵션 얻어오기 -->
 	<select id="select_menu_optionOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuOptionVo">
-		select * from menu_option num=#{option_num}
+		select * from menu_option where num=#{option_num}
 	</select>
 </mapper>
 
