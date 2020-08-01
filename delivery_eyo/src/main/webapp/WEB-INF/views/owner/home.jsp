@@ -10,7 +10,7 @@
 <style>
 	#carouselExampleInterval{
 		height: 700px;
-		margin-top: 50px;
+		/* margin-top: 50px; */
 	}
 	
 	#carouselExampleInterval2{
@@ -65,20 +65,20 @@
 			<img
 				src="/delivery/resources/images/owner_carousel1.png"
 				class="d-block w-75 h-50" 
-				 style="margin: auto; border: 4px solid #2FA599"
+				 style="margin: auto; border: 4px solid #2FA599; width:100% !important;"
 				 alt="...">
 		</div>
 		<div class="carousel-item" data-interval="3000">
 			<img
 				src="/delivery/resources/images/owner_carousel2.png"
 				class="d-block w-75 h-75"
-				 style="margin: auto; border: 4px solid #FCAB1E" alt="...">
+				 style="margin: auto; border: 4px solid #FCAB1E; width:100% !important;" alt="...">
 		</div>
 		<div class="carousel-item" data-interval="3000">
 			<img
 				src="/delivery/resources/images/owner_carousel3.png"
 				class="d-block w-75 h-100"
-				 style="margin: auto; border: 4px solid #139164" alt="...">
+				 style="margin: auto; border: 4px solid #139164; width:100% !important;" alt="...">
 		</div>
 		<div class="slide-count-wrap">
 			<span class="slide-count"><span class="current"></span>  <span

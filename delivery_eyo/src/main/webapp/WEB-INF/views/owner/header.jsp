@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<!-- views/header.jsp -->
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script>
 	$(document).ready(function(){
 	   $('#logo').click(function(){
@@ -36,6 +37,11 @@
 		});
 	}
 </script>
+<style>
+	body{
+		/* font-family: 'Do Hyeon', sans-serif; */
+	}
+</style>
 <nav class="navbar navbar-expand-lg navbar-light" style="border-bottom:1px solid #dee2e6;">
 
 	<img id="logo" class="nav-link" alt="Logo" src="/delivery/resources/images/logo.PNG">
