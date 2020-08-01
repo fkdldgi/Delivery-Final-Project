@@ -35,11 +35,7 @@ public class Owner_StoreService {
 					MenuVo menuVo=menu_list.get(j);
 					int menu_num=menuVo.getNum(); //메뉴번호
 					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
-					if(dao.select_menuOne(menu_num)==null) { //해당번호의 메뉴가 존재하지 않을 경우 insert
-						dao.insertMenu_newCategory(menuVo);
-					}else { //해당번호의 메뉴가 존재 할 경우 update
-						dao.updateMenu(menuVo);
-					}
+					dao.insertMenu_newCategory(menuVo);
 				}
 			}else { //해당번호의 메뉴카테고리가 존재 할 경우 update
 				dao.updateMenu_Category(categoryVo);
@@ -48,7 +44,7 @@ public class Owner_StoreService {
 					int menu_num=menuVo.getNum(); //메뉴번호
 					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
 					if(dao.select_menuOne(menu_num)==null) { //해당번호의 메뉴가 존재하지 않을 경우 insert
-						dao.insertMenu_newCategory(menuVo);
+						dao.insertMenu(menuVo);
 					}else { //해당번호의 메뉴가 존재 할 경우 update
 						dao.updateMenu(menuVo);
 					}
