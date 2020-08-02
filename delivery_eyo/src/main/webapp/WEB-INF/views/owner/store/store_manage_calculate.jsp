@@ -23,62 +23,16 @@
 	  	</button>
   	</div>
   
-    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+    <div class="container" style="margin: auto; padding: auto; width: 80%; height: 500px; border: 1px solid red;">
+    	<div class="row">
+    		<c:forEach var="index" begin="1" end="12">
+    			<div class="col" style="text-align: center;">
+	    			<c:out value="${index}" />
+    			</div>
+    		</c:forEach>
+    	</div>
+    </div>
   </body>
-    <script type="text/javascript">
-    google.charts.load('current', {
-		'packages' : [ 'corechart' ]
-	});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
-		var num = ${vo.num};
-		
-		$.getJSON({
-			url : "/delivery/owner/store_manage/calculate1",
-			data : {num : num},
-			success : function(data) {
-				
-				
-				var array = new Array();
-				array[0] = [ 'tt', '판매' ];
-				$(data).each(function(i, arr) {
-					console.log(arr.num);
-					var subArray = [i, arr.total_price];
-						array[++i] = subArray;
-						
-				});
-				var data2 = google.visualization.arrayToDataTable(array);
-
-				var options = {
-					title : '월별 실적  [단위:원]',
-					hAxis : {
-						title : '${vo.name}',
-						titleTextStyle : {
-							color : '#333'
-						}
-						,minValue : 1
-						,ticks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-					},
-					vAxis : {
-						minValue : 0
-					}
-				};
-
-				var chart = new google.visualization.AreaChart(document
-						.getElementById('chart_div'));
-
-				chart.draw(data2, options);
-			}
-		});
-	}
-  
-		 //console.log(data);
-		 //$("#chart_div").empty();
-		 //getData(data);
-  		// $.getJSON("/delivery/owner/store_manage/calculate1?num="+num,function(data){
-      
-    </script>
 </html>
 
 

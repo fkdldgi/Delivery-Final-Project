@@ -1,5 +1,7 @@
 package com.jhta.delivery.vo;
 
+import java.util.List;
+
 public class MenuVo {
 
 	// 메뉴번호
@@ -26,10 +28,13 @@ public class MenuVo {
 	// 우선순위
 	private int priority;
 	
+	//메뉴옵션 리스트
+	private List<MenuOptionVo> menu_option_list;
+	
 	public MenuVo() {}
 
 	public MenuVo(int num, String name, String menu_info, int price, Integer status, String img, int menu_category_num,
-			int priority) {
+			int priority, List<MenuOptionVo> menu_option_list) {
 		super();
 		this.num = num;
 		this.name = name;
@@ -39,6 +44,7 @@ public class MenuVo {
 		this.img = img;
 		this.menu_category_num = menu_category_num;
 		this.priority = priority;
+		this.menu_option_list = menu_option_list;
 	}
 
 	public int getNum() {
@@ -104,4 +110,14 @@ public class MenuVo {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+
+	public List<MenuOptionVo> getMenu_option_list() {
+		return menu_option_list;
+	}
+
+	public void setMenu_option_list(List<MenuOptionVo> menu_option_list) {
+		this.menu_option_list = menu_option_list;
+	}
+
+	
 }

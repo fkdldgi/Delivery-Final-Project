@@ -28,27 +28,21 @@ public class Store_Manage_CalculateController {
 	@RequestMapping("/owner/store_manage/calculate")
 	public String manage_Ad(Model model, int num) {
 		
-		ShopVo vo = owner_service.shop_select(num); 
+		ShopVo vo = owner_service.shop_select(num);
+		
+		// 정산된 계산값
 		List<Owner_CalVo> calList = owner_orderService.calList(vo.getNum());
+		
+		// 정산대기 계산값
+		List<Owner_CalVo> waiting_calList = owner_orderService.waiting_calList(vo.getNum());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("calList",calList);
+		model.addAttribute("waiting_calList",waiting_calList);
 		
 		return ".owner.store.store_manage_calculate";
 	}
 	
-	// JSON
-	@RequestMapping("/owner/store_manage/calculate1")
-	@ResponseBody
-	public String manage_cal(int num) {
-		
-		List<Owner_CalVo> calList = owner_orderService.calList(num);
-		Gson gson=new Gson();
-		String jsonString=gson.toJson(calList);
-		
-		
-		return jsonString;
-	}
 }
 
 
