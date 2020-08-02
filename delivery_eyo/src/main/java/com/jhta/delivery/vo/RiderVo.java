@@ -25,6 +25,12 @@ public class RiderVo {
 	// 라이더 상태
 	private int status;
 	
+	@Override
+	public String toString() {
+		return "RiderVo [num=" + num + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", phone=" + phone
+				+ ", email=" + email + ", status=" + status + ", regdate=" + regdate + "]";
+	}
+
 	// 라이더 가입일
 	private Date regdate;
 	
