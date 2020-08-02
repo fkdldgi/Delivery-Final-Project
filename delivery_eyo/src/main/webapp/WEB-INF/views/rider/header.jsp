@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<!-- views/header.jsp -->
-		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-		
 <script>
 	$(document).ready(function(){
 	   $('#logo').click(function(){
-		   location.href="/delivery/owner/main";
+		   location.href="/delivery/rider/main";
 	   });
 	});
 	function check_form(){
@@ -30,19 +28,13 @@
 	}
 	function logout(){
 		$.ajax({
-			url:"${pageContext.request.contextPath}/owner/logout",
+			url:"${pageContext.request.contextPath}/rider/logout",
 			success:function(data){
-				location.reload();
-				location.href="${pageContext.request.contextPath}/owner/main";
+				location.href=data;
 			}
 		});
 	}
 </script>
-<style>
-	body{
-		/* font-family: 'Do Hyeon', sans-serif; */
-	}
-</style>
 <nav class="navbar navbar-expand-lg navbar-light" style="border-bottom:1px solid #dee2e6;">
 
 	<img id="logo" class="nav-link" alt="Logo" src="/delivery/resources/images/logo.PNG">
@@ -52,23 +44,20 @@
 	
 	<ul class="navbar-nav">
 		<c:choose>
-			<c:when test="${empty sessionScope.ownerId }">
+			<c:when test="${empty sessionScope.riderId }">
 				 <li class="nav-item">
 					<a class="nav-link btn btn-link" data-toggle="modal" data-target="#myModal">로그인</a>
 		         </li>			
 			</c:when>
 			<c:otherwise>
 				<li class="nav-item">
-					<a class="nav-link" href="">${sessionScope.ownerName } 님</a>
+					<a class="nav-link" href="">${sessionScope.riderId } 님</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="${pageContext.request.contextPath }/owner/mypage?id=${ownerId}">내정보</a>
+					<a class="nav-link" href="/delivery/rider/update?num=${sessionScope.riderNum }">내정보</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="">고객센터</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="javascript:logout();">로그아웃</a>
+					<a class="nav-link" href="/delivery/rider/logout">로그아웃</a>
 				</li>
 			</c:otherwise>
 		</c:choose>
@@ -105,10 +94,5 @@
 				</div>
 			</div>
 		</form>
-		<c:if test="${empty sessionScope.ownerId }">
-			<li class="nav-item">
-				<a class="nav-link" href="/delivery/owner/join">회원가입</a>
-			</li>
-		</c:if>
 	</ul>
-</nav>		
+</nav>	

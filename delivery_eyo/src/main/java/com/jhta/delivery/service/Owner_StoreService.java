@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.delivery.dao.Owner_StoreDao;
 import com.jhta.delivery.vo.MenuCategoryVo;
@@ -12,10 +13,62 @@ import com.jhta.delivery.vo.MenuOptionVo;
 import com.jhta.delivery.vo.MenuVo;
 import com.jhta.delivery.vo.Owner_CheckMenuVo;
 
+
 @Service
 public class Owner_StoreService {
 	@Autowired
 	private Owner_StoreDao dao;
+	
+	
+	//메뉴카테고리,메뉴,메뉴옵션 추가 or 업데이트 트랜잭션
+	@Transactional
+	public int menuUpdateAndInsertTransaction(List<MenuCategoryVo> category_list){
+		for(int i=0; i<category_list.size(); i++) {
+			MenuCategoryVo categoryVo=category_list.get(i);
+			int category_num=categoryVo.getNum();
+			List<MenuVo> menu_list=categoryVo.getMenu_list();
+			if(dao.select_menu_categoryOne(category_num)==null) { //해당번호의 메뉴카테고리가 존재하지 않을 경우 insert
+				//새로운 카테고리에 메뉴 insert
+				dao.insertMenu_Category(categoryVo); //메뉴카테고리 추가
+				for(int j=0; j<menu_list.size(); j++) {
+					MenuVo menuVo=menu_list.get(j);
+					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
+					dao.insertMenu_newCategory(menuVo); //메뉴카테고리 추가
+					for(int k=0; k<menu_option_list.size(); k++) { //새로운 메뉴옵션 리스트 insert
+						MenuOptionVo menu_optionVo=menu_option_list.get(k); //메뉴옵션 리스트
+						dao.insert_menu_option_newMenu(menu_optionVo); //새로운 메뉴에 옵션추가
+					}
+				}
+			}else { //해당번호의 메뉴카테고리가 존재 할 경우 update
+				dao.updateMenu_Category(categoryVo);
+				for(int j=0; j<menu_list.size(); j++) { //메뉴 수 만큼 반복
+					MenuVo menuVo=menu_list.get(j);
+					int menu_num=menuVo.getNum(); //메뉴번호
+					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
+					if(dao.select_menuOne(menu_num)==null) { //해당번호의 메뉴가 존재하지 않을 경우 insert
+						dao.insertMenu(menuVo);
+						for(int k=0; k<menu_option_list.size(); k++) { //새로운 메뉴옵션 리스트 insert
+							MenuOptionVo menu_optionVo=menu_option_list.get(k);
+							dao.insert_menu_option_newMenu(menu_optionVo); //새로운 메뉴에 옵션추가
+						}
+					}else { //해당번호의 메뉴가 존재 할 경우 update
+						dao.updateMenu(menuVo);
+						for(int k=0; k<menu_option_list.size(); k++) { //기존 메뉴옵션 리스트 update
+							MenuOptionVo menu_optionVo=menu_option_list.get(k);
+							int menu_option_num=menu_optionVo.getNum(); //메뉴옵션 번호
+							if(dao.select_menu_optionOne(menu_option_num)==null) { // 메뉴 옵션번호가 존재하지 않을 경우 insert
+								dao.insert_menu_option(menu_optionVo); //기존 메뉴에 옵션추가
+							}else {
+								dao.update_menu_option(menu_optionVo); //기존 메뉴에 옵션수정
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		return 1;
+	}
 	
 	public List<MenuVo> mainMenuList(int num){
 		return dao.mainMenuList(num);
@@ -94,5 +147,20 @@ public class Owner_StoreService {
 	// 메뉴옵션 추가&수정
 	public int insertUpdate_MenuOption(MenuOptionVo vo) {
 		return dao.insertUpdate_MenuOption(vo);
+	}
+	
+	//메뉴카테고리 번호로 메뉴카테고리 정보 가져오기
+	public MenuCategoryVo select_menu_categoryOne(int category_num) {
+		return dao.select_menu_categoryOne(category_num);
+	}
+		
+	//메뉴번호로 메뉴정보 가져오기
+	public MenuVo select_menuOne(int menu_num) {
+		return dao.select_menuOne(menu_num);
+	}
+	
+	//메뉴옵션번호로 메뉴옵션정보 가져오기
+	public MenuOptionVo select_menu_optionOne(int option_num) {
+		return dao.select_menu_optionOne(option_num);
 	}
 }

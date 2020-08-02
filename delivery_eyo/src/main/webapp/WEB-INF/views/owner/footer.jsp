@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 		<!-- footer.jsp -->
+<style>
+	.jumbotron {
+		background-image: url(/delivery/resources/images/footer01.png);
+		background-size: cover;
+		height: 200px;
+		margin-bottom: 0px;
+	}
+</style>    
 <div class="jumbotron">
-	<h2>면접 정리</h2>
+	
 </div>

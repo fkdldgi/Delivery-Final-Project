@@ -1,5 +1,6 @@
 package com.jhta.delivery.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,8 +32,29 @@ public class Owner_OrderDao {
 		return session.update(NAMESPACE+".Owner_UpdateTime", vo);
 	}
 	
-	// 계산값
+	// 정산대기 계산값
+	public List<Owner_CalVo> waiting_calList(int num){
+		return session.selectList(NAMESPACE+".Owner_waiting_transaction", num);
+	}
+	
+	// 정산된 계산값
 	public List<Owner_CalVo> calList(int num){
 		return session.selectList(NAMESPACE+".Owner_transaction", num);
 	}
+	
+	// 정산검색
+	public List<Owner_CalVo> cal_search(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".Owner_Cal_Search", map);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

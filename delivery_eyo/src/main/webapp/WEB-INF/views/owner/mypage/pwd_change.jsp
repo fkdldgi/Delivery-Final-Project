@@ -27,28 +27,58 @@ input {
 </style>
 </head>
 <body>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-4">
-				<img id="store_img" class="nav-link" src="/delivery/resources/images/logo.PNG">
-			</div>
+<!-- 맨 위에 뜨는 nav바 -->
+<div>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="font-family: 'Do Hyeon', sans-serif;">
+		<a class="navbar-brand mx-auto" style="font-size:24px;">어서오세요 배달이요입니다.</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#store_manage"
+			aria-controls="store_manage" aria-expanded="false"
+			aria-label="Toggle navigation">
+		</button>
+		<div class="collapse navbar-collapse" id="store_manage">
+			<ul class="navbar-nav mr-auto">
+				<!-- 가게인사랑 가게운영 href랑 떨어지게 하기 위해서 넣음 -->
+				<li class="nav-item active">
+     				<a class="nav-link" href="#">
+     					<span class="sr-only">
+     						(current)
+     					</span>
+     				</a>
+     			</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/delivery/owner/store_manage?id=${sessionScope.ownerId }" 
+								id="store_managehref" style="font-size:22px;">
+						가게운영
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/delivery/owner/board/" style="font-size:22px;">
+						공지사항
+					</a>
+				</li>
+			</ul>
 		</div>
+	</nav>
+</div>
+
+	<div class="container" style="font-family: 'Do Hyeon', sans-serif;">
 		<h2>계정정보</h2><br>
 		<form action="${pageContext.request.contextPath }/owner/pwdChange" method="post" id="joinForm" onsubmit="return submitAction();">
 			<input type="hidden" name="id" value="${ownerId }">
-			<div class="form-group has-feedback">
+			<div class="form-group has-feedback" style="font-size:20px;">
 				<label class="control-label" for="pwd">현재 비밀번호</label> 
 				<input class="form-control" type="password" id="pwd" /> 
 				<span id="pwdErr" class="help-block">8글자 이상 입력하세요.</span>
 				<span id="originalPwdErr" class="help-block">현재 비밀번호와 일치하지 않습니다.</span>
 			</div>
-			<div class="form-group has-feedback">
+			<div class="form-group has-feedback" font-size:20px;>
 				<label class="control-label" for="pwd">새 비밀번호</label> 
 				<input class="form-control" type="password" name="pwd" id="newPwd" /> 
 				<span id="newPwdErr" class="help-block">8글자 이상 입력하세요.</span> 
 				<span id="sameNewPwdErr" class="help-block">현재 비밀번호와 다른 비밀번호를 입력하세요.</span> 
 			</div>
-			<div class="form-group has-feedback">
+			<div class="form-group has-feedback" font-size:20px;>
 				<label class="control-label" for="rePwd">새 비밀번호 재확인</label> 
 				<input class="form-control" type="password" id="rePwd" />
 				<span id="rePwdErr" class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해주세요.</span> 

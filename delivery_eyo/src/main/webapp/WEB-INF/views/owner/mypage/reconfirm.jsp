@@ -26,8 +26,8 @@ a {
 }
 </style>
 <div>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-		<a class="navbar-brand mx-auto">어서오세요 배달이요입니다.</a>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark"  style="font-family: 'Do Hyeon', sans-serif;">
+		<a class="navbar-brand mx-auto" style="font-size:24px;">어서오세요 배달이요입니다.</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#store_manage"
 			aria-controls="store_manage" aria-expanded="false"
@@ -45,12 +45,12 @@ a {
      			</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/delivery/owner/store_manage?id=${sessionScope.ownerId }" 
-								id="store_managehref">
+								id="store_managehref" style="font-size:22px;">
 						가게운영
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/delivery/owner/board/">
+					<a class="nav-link" href="/delivery/owner/board/" style="font-size:22px;">
 						공지사항
 					</a>
 				</li>
@@ -67,9 +67,9 @@ a {
 	    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요.">
 	    <span id="pwdErr" class="help-block">8글자 이상 입력하세요.</span>
 	    <span id="pwdErr2" class="help-block">비밀번호를 다시 확인해주세요.</span>
-	    <a href="" class="pwfind">비밀번호 찾기</a>
+	   <!--  <a href="" class="pwfind">비밀번호 찾기</a> -->
 	  </div>
-	  <button class="col-md-1 btn btn-outline-primary" type="submit">확인</button>
+	  <button class="col-md-1 btn btn-info" type="submit">확인</button>
 	</form>
 </div>
 <script>

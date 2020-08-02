@@ -1,5 +1,6 @@
 package com.jhta.delivery.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -28,26 +29,31 @@ public class Store_Manage_CalculateController {
 	@RequestMapping("/owner/store_manage/calculate")
 	public String manage_Ad(Model model, int num) {
 		
-		ShopVo vo = owner_service.shop_select(num); 
+		ShopVo vo = owner_service.shop_select(num);
+		
+		// 정산된 계산값
 		List<Owner_CalVo> calList = owner_orderService.calList(vo.getNum());
+		
+		// 정산대기 계산값
+		List<Owner_CalVo> waiting_calList = owner_orderService.waiting_calList(vo.getNum());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("calList",calList);
+		model.addAttribute("waiting_calList",waiting_calList);
 		
 		return ".owner.store.store_manage_calculate";
 	}
 	
-	// JSON
-	@RequestMapping("/owner/store_manage/calculate1")
+	@RequestMapping("/owner/store_cal")
 	@ResponseBody
-	public String manage_cal(int num) {
+	public List<Owner_CalVo> store_cal(int num, String year, String month) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("num",num);
+		map.put("year", year);
+		map.put("month", month);
 		
-		List<Owner_CalVo> calList = owner_orderService.calList(num);
-		Gson gson=new Gson();
-		String jsonString=gson.toJson(calList);
-		
-		
-		return jsonString;
+		List<Owner_CalVo> list = owner_orderService.cal_search(map);
+		return list;
 	}
 }
 

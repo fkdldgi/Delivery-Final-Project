@@ -84,7 +84,7 @@ body {
 				</div>
 				<div class="card text-white bg-info mb-3"
 					style="max-width: 18rem; float: right;
-					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/main'">
+					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/home'">
 					<div class="card-header">라이더회원</div>
 					<div class="card-body">
 						<h5 class="card-title">배달하러 가볼까요~?</h5>
