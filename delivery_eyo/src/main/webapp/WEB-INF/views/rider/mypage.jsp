@@ -9,33 +9,16 @@
 </head>
 <script>
 	$(document).ready(function() {
-
-		$("#file").change(function() {
-			readURL(this);
-		});
-
-		$("#preview").change(function() {
-			$("#file").click();
+		var num = $("input[name=num]").val();
+		$("#drop").on('click',function(){
+			location.href="/delivery/rider/drop?num="+num;
 		});
 	});
 
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview').attr('src', e.target.result);
-
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
 	function pwdcheck() {
 		var inputpwd = document.getElementById("inputpwd").value;
 		var orgpwd = document.getElementById("orgpwd").value;
-
-		//var inputpwd = $("input[name=inputpwd]").val();
-		console.log(inputpwd);
-		console.log(orgpwd);
+		
 		if (inputpwd === orgpwd) {
 			alert("비밀번호가 일치합니다");
 			$("input[name=email]").removeAttr("readonly");
@@ -44,10 +27,10 @@
 			$("input[name=pwd]").removeAttr("readonly");
 			$("span[id=before]").removeAttr("hidden");
 			$("span[id=after]").Attr("hidden");
+			$("input[name=status]:radio").removeAttr("disabled");
 		} else {
 			alert("비밀번호가 불일치합니다");
 		}
-
 	}
 </script>
 <body>
@@ -58,20 +41,12 @@
 			src="/delivery/resources/images/mypage_logo1.png" width="700"
 			height="150">
 		<hr style="border: 1px solid darkgray;">
-		<form action="/delivery/member/mypageOk" method="post" enctype="multipart/form-data">
+		<form action="/delivery/rider/mypageOk" method="post" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<div class="form-group under_border" style="text-align: center;">
-							<br> <img src="${pageContext.request.contextPath }/resources/images/${vo.img}"
-								class="rounded-circle" id="preview" width="200" height="200">
-							<br> <label>프로필사진 변경하기</label> <br> 
-							<input type="file" name="file1" accept="image/*" id="file">
-						</div>
-					</tr>
-					<tr>
 						<th>아이디</th>
-						<td><input type="text" value="${vo.id}" id="title"
+						<td><input type="text" value="${vo.id}" id="title" name="id"
 							class="form-control" readonly="readonly" /></td>
 					</tr>
 					<tr>
@@ -109,28 +84,45 @@
 					</tr>
 					<tr>
 						<th>전화번호:</th>
-						<td><input type="text" value="${vo.tel}"
-							class="form-control-file" name="tel" readonly="readonly"></td>
+						<td><input type="text" value="${vo.phone}"
+							class="form-control-file" name="phone" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<th>가입일</th>
-						<td><input type="text" value="${vo.regdate}"
-							class="form-control-file" name="regdate" readonly="readonly"></td>
-					</tr>
+						<th>상태</th>
+						<td>
+							<c:choose>
+								<c:when test="${vo.status==2 }">
+									<c:set var="ttt" value="true"></c:set>
+									<c:set var="ttt2" value="false"></c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="ttt" value="false"></c:set>
+									<c:set var="ttt2" value="true"></c:set>
+								</c:otherwise>
+							</c:choose>
+							<input type="radio" id="rest" name="status" value='1' style="float: left; margin-top: 5px;" disabled="disabled" checked="${ttt }">
+							<label for="rest">휴면중</label>
+							<input type="radio" id="run" name="status" value='2' style="margin-top:5px; margin-left: 50px;" disabled="disabled" checked="${ttt2 }">
+							<label for="run">활동중</label>
+						</td>
+ 					</tr>
 				</tbody>
 			</table>
-			<button type="submit" class="btn btn-primary">수정완료</button>
-			<input type="hidden" name="num" value="${memberNum }">
+			<div style="float: right;">
+				<button type="submit" class="btn btn-primary" style="margin: 10px;">수정완료</button>
+				<input type="button" class="btn btn-primary" value="탈퇴하기" style="margin: 10px;" id="drop">
+				<input type="hidden" name="num" value="${vo.num }">
+			</div>
 		</form>
-		<br>
-		<div style="margin-bottom: 50px; text-align: center;">
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='/delivery/member/QnaList?memberNum=${sessionScope.memberNum}'">문의목록</button>
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='/delivery/member/orderList?memberNum=${sessionScope.memberNum}'">주문목록</button>
-			<button type="button" class="btn btn-primary"
-				onclick="location.href='/delivery/member/personalCoupon?memberNum=${sessionScope.memberNum}'">나의 쿠폰내역</button>
-		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
 </html>

@@ -1,12 +1,14 @@
 package com.jhta.delivery.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jhta.delivery.dao.AddressDao;
+import com.jhta.delivery.dao.OrderCouponDao;
 import com.jhta.delivery.dao.Order_MainDao;
 import com.jhta.delivery.dao.Order_MenuDao;
 import com.jhta.delivery.dao.Order_Menu_OptionDao;
@@ -26,6 +28,8 @@ public class Order_MainService {
 	private Order_Menu_OptionDao orderOptionDao;
 	@Autowired
 	private AddressDao addDao;
+	@Autowired
+	private OrderCouponDao couponDao;
 	//주문 입력부분
 	public int insert(Order_MainVo vo) {
 		return orderMinDao.insert(vo);
@@ -33,7 +37,7 @@ public class Order_MainService {
 	
 	//주문 - 주문 메뉴 - 주문 메뉴 옵션 트랜잭션 처리(최초 실행)
 	@Transactional
-	public int orderInsert(Order_MainVo vo1, ArrayList<Order_MenuVo> menuList, ArrayList<Order_Menu_OptionVo> optionList, AddressVo addVo) {
+	public int orderInsert(Order_MainVo vo1, ArrayList<Order_MenuVo> menuList, ArrayList<Order_Menu_OptionVo> optionList, AddressVo addVo,HashMap<String, Object> couponMap) {
 		AddressVo avo=addDao.selectByBuildingcode(addVo.getBuildingCode());
 		if(avo == null) {
 			addDao.insert(addVo);
@@ -53,6 +57,7 @@ public class Order_MainService {
 				}
 			}
 		}
+		couponDao.updateCoupon(couponMap);
 		return 1;
 	}
 	

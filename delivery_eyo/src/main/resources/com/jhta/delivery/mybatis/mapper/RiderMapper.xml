@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://www.ibatis.com/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.RiderMapper">
+	<!-- 라이더회원 로그인 -->
+	<select id="RiderOne" parameterType="hashmap" resultType="com.jhta.delivery.vo.RiderVo">
+		select * from rider 
+		where id=#{id} and pwd=#{pwd} and (status=2 or status=1)
+	</select>
+	
+	<!-- 라이더회원 회원가입 -->
+	<insert id="insertRider" parameterType="com.jhta.delivery.vo.RiderVo">
+		insert into rider
+		values(RIDER_SEQ.nextval,#{id},#{pwd},#{name},#{phone},#{email},2,sysdate)
+	</insert>
+	
+	<!-- 라이더 아이디확인 -->
+	<select id="RiderIdcheck" resultType="com.jhta.delivery.vo.RiderVo" parameterType="string">
+		select * from rider
+		where id=#{id}
+	</select>
+	
+	<!-- 라이더 회원 아이디찾기 -->
+	<select id="RiderId" parameterType="com.jhta.delivery.vo.RiderVo" resultType="string">
+		select * from rider
+		where name=#{name}, phone=#{phone}, email=#{email}
+	</select>
+	
+	<!-- 라이더 회원 비밀번호찾기 -->
+	<select id="RiderPwd" parameterType="com.jhta.delivery.vo.RiderVo" resultType="string">
+		select * from rider
+		where id=#{id}, name=#{name}, email=#{email}, phone=#{phone}
+	</select>
+	
+	<!-- 라이더 정보 -->
+	<select id="RiderInfo" parameterType="int" resultType="com.jhta.delivery.vo.RiderVo">
+		select * from rider
+		where num=#{num}
+	</select>
+	
+	<!-- 라이더 정보수정 -->
+	<select id="RiderUpdate" parameterType="com.jhta.delivery.vo.RiderVo">
+		update rider
+		set id=#{id}, pwd=#{pwd}, name=#{name}, email=#{email}, phone=#{phone}
+		where num=#{num}
+	</select>
+	
+	<!-- 라이더휴면 -->
+	<update id="RiderDrop" parameterType="int">
+		update rider
+		set status=0
+		where num=#{num}
+	</update>
+</mapper>  
