@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style type="text/css">
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 
@@ -14,11 +15,12 @@ body {
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	padding-top: 80px;
+	padding-top: 150px;
 	padding-bottom: 40px;
 	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
 	background-repeat: no-repeat;
 	background: linear-gradient(to bottom right, #0098FF, #6BA8D1);
+	
 }
 
 .card {
@@ -27,6 +29,7 @@ body {
 	margin-bottom: 10px; /* Added */
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
 		rgba(0, 0, 0, 0.19);
+	font-family: 'Do Hyeon', sans-serif;
 }
 
 .form-signin .form-control {
@@ -64,33 +67,41 @@ body {
 				<h2 class="form-signin-heading" align="center" style="margin-bottom: 30px; 
 				margin-top: -130px;">무슨 회원이신가요?</h2>
 				<br>
-				<div class="card text-white bg-primary mb-3"
-					style="max-width: 18rem; float: left;
-					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/member/main'">
-					<div class="card-header">일반회원</div>
-					<div class="card-body">
-						<h5 class="card-title">주문하러 가볼까요~?</h5>
-						<p class="card-text">배달이요 사이트로 가기</p>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card text-white bg-primary mb-3"
+						style="max-width: 14rem;
+						cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/member/main'">
+						<div class="card-header">일반회원</div>
+						<div class="card-body">
+							<h5 class="card-title">주문하러 가볼까요~?</h5>
+							<p class="card-text">배달이요 사이트로 가기</p>
+						</div>
 					</div>
 				</div>
-				<div class="card text-white bg-secondary mb-3"
-					style="max-width: 18rem; float: left; margin-left: 85px;
+				<div class="col-md-4">
+					<div class="card text-white bg-secondary mb-3"
+					style="max-width: 14rem; margin:0 auto;
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/owner/main'">
-					<div class="card-header">기업회원</div>
-					<div class="card-body">
-						<h5 class="card-title">장사하러 가볼까요~?</h5>
-						<p class="card-text">사장님 사이트로 가기</p>
+						<div class="card-header">기업회원</div>
+						<div class="card-body">
+							<h5 class="card-title">장사하러 가볼까요~?</h5>
+							<p class="card-text">사장님 사이트로 가기</p>
+						</div>
 					</div>
 				</div>
-				<div class="card text-white bg-info mb-3"
-					style="max-width: 18rem; float: right;
-					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/home'">
-					<div class="card-header">라이더회원</div>
-					<div class="card-body">
-						<h5 class="card-title">배달하러 가볼까요~?</h5>
-						<p class="card-text">라이더 사이트로 가기</p>
+				<div class="col-md-4">
+					<div class="card text-white bg-info mb-3"
+						style="max-width: 14rem;
+						cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/home'">
+						<div class="card-header">라이더회원</div>
+						<div class="card-body">
+							<h5 class="card-title">배달하러 가볼까요~?</h5>
+							<p class="card-text">라이더 사이트로 가기</p>
+						</div>
 					</div>
 				</div>
+			</div>
 		</div>
 	</div>
 
