@@ -4,10 +4,7 @@ package com.jhta.delivery.vo;
 public class Owner_CalVo {
 
 	// 년도
-	private int year;
-	
-	// 월
-	private int month;
+	private String year;
 	
 	// 총 가격
 	private int real_amount;
@@ -17,28 +14,19 @@ public class Owner_CalVo {
 	
 	public Owner_CalVo() {}
 
-	public Owner_CalVo(int year, int month, int real_amount, int commission) {
+	public Owner_CalVo(String year, int real_amount, int commission) {
 		super();
 		this.year = year;
-		this.month = month;
 		this.real_amount = real_amount;
 		this.commission = commission;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
-	}
-
-	public int getMonth() {
-		return month;
-	}
-
-	public void setMonth(int month) {
-		this.month = month;
 	}
 
 	public int getReal_amount() {
