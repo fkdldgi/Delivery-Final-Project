@@ -3,8 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style type="text/css">
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+
+*{
+	font-family: 'Do Hyeon', sans-serif;
+}
 
 html {
 	height: 100%;
@@ -65,7 +70,7 @@ body {
 				margin-top: -130px;">무슨 회원이신가요?</h2>
 				<br>
 				<div class="card text-white bg-primary mb-3"
-					style="max-width: 18rem; float: left;
+					style="max-width: 18rem; float: left; margin-left: 50px;
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/member/main'">
 					<div class="card-header">일반회원</div>
 					<div class="card-body">
@@ -83,7 +88,7 @@ body {
 					</div>
 				</div>
 				<div class="card text-white bg-info mb-3"
-					style="max-width: 18rem; float: right;
+					style="max-width: 18rem; float: right; margin-right: 60px;
 					cursor:pointer" onclick = "window.location.href='${pageContext.request.contextPath}/rider/home'">
 					<div class="card-header">라이더회원</div>
 					<div class="card-body">
