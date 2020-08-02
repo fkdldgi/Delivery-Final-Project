@@ -74,8 +74,6 @@ public class Store_ManageController {
 		
 		List<MenuCategoryVo> category_list=new ArrayList<MenuCategoryVo>(); //메뉴카테고리 리스트
 		//카테고리 for문
-		System.out.println(category_numArr.length+"카테고리갯수");
-		System.out.println(category_numArr[0]+","+category_numArr[1]);
 		for(int i=0; i<category_numArr.length; i++) {
 			List<MenuVo> menu_list=new ArrayList<MenuVo>(); //메뉴 리스트
 			int category_num=Integer.parseInt(category_numArr[i]);
@@ -118,11 +116,7 @@ public class Store_ManageController {
 					}
 				}
 				menu_vo.setMenu_option_list(menu_option_list);
-				System.out.println(category_list_num);
-				System.out.println(category_num);
-				System.out.println("가타오?");
 				if(category_list_num==category_num) { //해당 메뉴카테고리 소속의 메뉴일 경우
-					System.out.println("같은 소속자");
 					menu_vo.setNum(menu_num); //메뉴번호 set
 					menu_vo.setName(menu_name); //메뉴이름 set
 					menu_vo.setMenu_info(menu_info); //메뉴설명 set
@@ -130,10 +124,6 @@ public class Store_ManageController {
 					menu_vo.setMenu_category_num(category_list_num); //메뉴카테고리번호(소속) set
 					menu_list.add(menu_vo); //메뉴 리스트에 메뉴 VO 추가
 				}
-				System.out.println("보라돌이");
-			}
-			for(MenuVo menu:menu_list) {
-				System.out.println(menu.getName());
 			}
 			category_vo.setMenu_list(menu_list); //메뉴카테고리에 메뉴리스트 넣기
 			category_list.add(category_vo); //카테고리 리스트에 카테고리 VO 추가
