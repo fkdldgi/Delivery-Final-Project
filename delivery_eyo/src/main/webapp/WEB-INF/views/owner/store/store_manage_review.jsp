@@ -56,7 +56,7 @@
 
 <!-- img 넣는 div -->
 <div style="margin: auto; padding: auto; width: 80%; text-align: center;">
-	<img src="/delivery/resources/images/review.png" style="margin: auto; margin-top: 0px; margin-bottom: 0px; padding: auto; padding-top: 0px; padding-bottom: 0px; width: 500px; height: 150px;">
+	<img src="/delivery/resources/images/owner_review.png" style="margin: auto; margin-top: 0px; margin-bottom: 0px; padding: auto; padding-top: 0px; padding-bottom: 0px; width: 500px; height: 150px;">
 </div>
 
 <!-- 댓글 넣을 div -->

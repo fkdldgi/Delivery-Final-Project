@@ -1,5 +1,6 @@
 package com.jhta.delivery.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -43,6 +44,17 @@ public class Store_Manage_CalculateController {
 		return ".owner.store.store_manage_calculate";
 	}
 	
+	@RequestMapping("/owner/store_cal")
+	@ResponseBody
+	public List<Owner_CalVo> store_cal(int num, String year, String month) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("num",num);
+		map.put("year", year);
+		map.put("month", month);
+		
+		List<Owner_CalVo> list = owner_orderService.cal_search(map);
+		return list;
+	}
 }
 
 

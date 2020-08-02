@@ -1,5 +1,6 @@
 package com.jhta.delivery.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class Owner_OrderService {
 	// 정산된 계산값
 	public List<Owner_CalVo> calList(int num){
 		return dao.calList(num);
+	}
+	
+	// 정산검색
+	public List<Owner_CalVo> cal_search(HashMap<String,Object> map){
+		return dao.cal_search(map);
 	}
 }

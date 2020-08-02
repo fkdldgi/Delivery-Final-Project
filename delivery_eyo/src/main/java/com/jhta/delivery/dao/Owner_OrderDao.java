@@ -1,5 +1,6 @@
 package com.jhta.delivery.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,4 +41,20 @@ public class Owner_OrderDao {
 	public List<Owner_CalVo> calList(int num){
 		return session.selectList(NAMESPACE+".Owner_transaction", num);
 	}
+	
+	// 정산검색
+	public List<Owner_CalVo> cal_search(HashMap<String, Object> map){
+		return session.selectList(NAMESPACE+".Owner_Cal_Search", map);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
