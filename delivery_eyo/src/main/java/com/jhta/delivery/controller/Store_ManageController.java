@@ -1,18 +1,25 @@
 package com.jhta.delivery.controller;
 
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jhta.delivery.service.OwnerService;
 import com.jhta.delivery.service.Owner_MenuService;
@@ -37,22 +44,29 @@ public class Store_ManageController {
 
 	@GetMapping("/owner/store_manage")
 	public String manage(Model model, String id) {
-
+		
 		List<ShopVo> shopList = service.shop_list(id);
 		model.addAttribute("list", shopList);
-
+		
 		if (id == null || id == "") {
 			return ".owner.error"; // 이거 수정해요
 		} else {
 			return ".owner.store_manage";
 		}
 	}
-
+	
 	@PostMapping("/owner/store_manage") // 배열로 받아야함
 	public String manage_update(Model model, HttpServletRequest req,
+			HttpSession session,
+			MultipartHttpServletRequest mtfRequest,
 			@RequestParam(value = "owner_id") String id,
 			@RequestParam(value = "trash_category", required = false) List<String> trash_category,
 			@RequestParam(value = "trash", required = false) List<String> trash) {
+		
+		
+		//업로드할 폴더 경로 얻어오기
+		String uploadPath=session.getServletContext().getRealPath("/resources/menu");
+		List<MultipartFile> fileList=mtfRequest.getFiles("file1");
 		
 		//가게번호
 		int shop_num=Integer.parseInt(req.getParameter("shop_num"));
@@ -85,8 +99,35 @@ public class Store_ManageController {
 			category_vo.setName(menu_category_name);
 			category_vo.setShop_num(shop_num);
 			
+			String orgfileName="";
+			String savefileName="";
 			//메뉴 for문
 			for(int j=0; j<menu_numArr.length; j++) {
+				savefileName="";
+				try {
+					MultipartFile mf=fileList.get(j);
+					if(mf.getSize()!=0) { //선택된 파일이 있을 경우 파일업로드
+						//전송된 파일명
+						orgfileName=mf.getOriginalFilename();//원본파일명
+						//실제 저장할 파일명(중복되지 않도록)
+						//UUID.randomUUID() 중복되지않는 난수값을 얻어옴
+						savefileName=UUID.randomUUID()+"_"+orgfileName;
+						//전송된 파일을 읽어오는 스트림
+						InputStream fis=mf.getInputStream();
+						//전송된 파일을 서버에 복사(업로드) 하기위한 출력스트림
+						FileOutputStream fos=new FileOutputStream(uploadPath+"\\"+savefileName);
+						//파일 복사하기 
+						FileCopyUtils.copy(fis, fos); //spring이 갖고있는 메소드(fis에서 읽어와서 fos에 저장)
+						fis.close();
+						fos.close();
+					}else {
+					//	savefileName="default.png";
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+					return ".owner.error";
+				}
+
 				List<MenuOptionVo> menu_option_list=new ArrayList<MenuOptionVo>(); //메뉴옵션리스트
 				int menu_num=Integer.parseInt(menu_numArr[j]);
 				String menu_name=menu_nameArr[j]; //메뉴이름
@@ -121,6 +162,7 @@ public class Store_ManageController {
 					menu_vo.setName(menu_name); //메뉴이름 set
 					menu_vo.setMenu_info(menu_info); //메뉴설명 set
 					menu_vo.setPrice(menu_price); //메뉴가격 set
+					menu_vo.setImg(savefileName); //저장된 이미지명
 					menu_vo.setMenu_category_num(category_list_num); //메뉴카테고리번호(소속) set
 					menu_list.add(menu_vo); //메뉴 리스트에 메뉴 VO 추가
 				}

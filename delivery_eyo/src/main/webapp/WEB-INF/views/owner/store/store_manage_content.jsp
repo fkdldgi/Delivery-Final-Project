@@ -18,6 +18,11 @@
 	padding-bottom: 10px;
 	font-family: 'Do Hyeon', sans-serif;
 }
+
+/* input file 가리기 */
+#file{
+	display: none;
+}
 </style>
 
 <body >
@@ -63,6 +68,10 @@
 		style="display: none; width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 		<input type="text" name="menu_num" value="-1" style="display: none;">
 		<div class="menu_wrap">
+			<div class="form-group under_border">
+				<img src="/delivery/resources/menu/default.png" class="rounded-circle" width="100" height="100" onclick="showFile(this)">
+				<input type="file" name="file1" accept="image/*" id="file">
+			</div>
 			<label>메뉴 이름</label>
 			<input type="text" name="menu_name" placeholder="메뉴이름을 입력해 주세요." style="width: 100%;" required="required"  class="form-control">
 			<br>
@@ -117,7 +126,7 @@
 	메뉴가격 min_price
  	-->
  	
-	<form action="/delivery/owner/store_manage" method="post">
+	<form action="/delivery/owner/store_manage" method="post" enctype="multipart/form-data">
 		<div id="aa" hidden="hidden" >
 			<input type="text" id="bb">
 		</div>
@@ -172,6 +181,13 @@
 										<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
 										<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 											<!-- 여기에 input append해주기 -->
+											<div class="form-group under_border">
+												<c:if test="${menu.img}">
+												
+												</c:if>
+												<img src="/delivery/resources/menu/${menu.img }" class="rounded-circle" width="100" height="100" onclick="showFile(this)">
+												<input type="file" name="file1" accept="image/*" id="file">
+											</div>
 											<h2>
 												<input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;" class="form-control">
 											</h2>
@@ -458,6 +474,27 @@
 		location.append(menu_option);
 	};
 	
+	//프로필사진 변경시 readURL함수 호출
+	$(document).on('change','input[name=file1]',function(){
+		readURL(this);
+	});
+	
+	//이미지 클릭 시 파일 띄우기
+	function showFile(img){
+		var file=$(img).siblings("input[name=file1]");
+		file.click();
+	}
+	
+	//프로필사진 선택시 미리보여주기
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            	$(input).siblings("img").attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 
 
