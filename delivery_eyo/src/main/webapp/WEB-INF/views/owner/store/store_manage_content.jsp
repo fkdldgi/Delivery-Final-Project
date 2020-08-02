@@ -173,7 +173,7 @@
 										<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
 											<!-- 여기에 input append해주기 -->
 											<h2>
-												<input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;">
+												<input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;" class="form-control">
 											</h2>
 											<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span> <br>
 											<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="menu_price" oninput="maxLengthCheck(this)" placeholder="가격"></span> 
@@ -181,8 +181,8 @@
 												<div>
 													<div>
 														<br>
-														<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션추가" onclick="SONG(this)">
-														<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-primary btn-sm" value="옵션삭제" onclick="delete_option1(this)">
+														<input name="add_option" style="margin-right: 10px;" type="button" class="btn btn-outline-info btn-sm" value="옵션추가" onclick="SONG(this)">
+														<input name="delete_option" style="margin-right: 10px;" type="button" class="btn btn-outline-info btn-sm" value="옵션삭제" onclick="delete_option1(this)">
 													</div>
 													<c:forEach var="menu_option" items="${menu_optionList }">
 														<c:if test="${menu.num == menu_option.menu_num }">
