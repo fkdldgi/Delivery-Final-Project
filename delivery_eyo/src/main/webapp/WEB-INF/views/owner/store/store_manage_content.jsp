@@ -119,8 +119,7 @@
 
 	<div id="div1" name="category" style="display: none;"></div>
 	
-	<!-- 
-	.
+	<!--
 	주문안내 shop_info
 	메뉴이름 menu_name
 	메뉴설명 menu_info
