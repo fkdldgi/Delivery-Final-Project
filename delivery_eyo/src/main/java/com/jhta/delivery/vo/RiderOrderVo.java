@@ -3,6 +3,9 @@ package com.jhta.delivery.vo;
 // 라이더 오더에 대한거
 public class RiderOrderVo {
 	
+	// 주문번호
+	private int om_num;
+	
 	// 주문시간
 	private String start_time;
 	
@@ -27,6 +30,9 @@ public class RiderOrderVo {
 	// 가게전화번호
 	private String shop_phone;
 	
+	// 가게주소
+	private String shop_addr;
+	
 	// 건물관리번호
 	private String shop_building_number;
 	
@@ -47,11 +53,12 @@ public class RiderOrderVo {
 	
 	public RiderOrderVo() {}
 
-	public RiderOrderVo(String start_time, String ex_time, String end_time, String status, String requests,
+	public RiderOrderVo(int om_num, String start_time, String ex_time, String end_time, String status, String requests,
 			int total_price, String shop_name, String shop_phone, String shop_building_number,
 			String shop_address_detail, String member_name, String member_phone, String member_building_number,
-			String member_address_detail) {
+			String member_address_detail, String shop_addr) {
 		super();
+		this.om_num = om_num;
 		this.start_time = start_time;
 		this.ex_time = ex_time;
 		this.end_time = end_time;
@@ -66,6 +73,23 @@ public class RiderOrderVo {
 		this.member_phone = member_phone;
 		this.member_building_number = member_building_number;
 		this.member_address_detail = member_address_detail;
+		this.shop_addr = shop_addr;
+	}	
+	
+	public int getOm_num() {
+		return om_num;
+	}
+
+	public void setOm_num(int om_num) {
+		this.om_num = om_num;
+	}
+
+	public String getShop_addr() {
+		return shop_addr;
+	}
+
+	public void setShop_addr(String shop_addr) {
+		this.shop_addr = shop_addr;
 	}
 
 	public String getStart_time() {

@@ -51,10 +51,22 @@ public class RiderService {
 	public List<RiderOrderVo> riderOrderList(){
 		return dao.riderOrderList();
 	}
+	
+	// 라이더가 배달승인
+	public int RiderAcceptOrder(HashMap<String, Object> map) {
+		return dao.RiderAcceptOrder(map);
+	}
+	
 	// 라이더가 배달승인받은 리스트
 	public List<RiderOrderVo> riderAcceptList(int num){
 		return dao.riderAcceptList(num);
 	}
+	
+	// 라이더가 배달완료
+	public int RiderSuccessOrder(HashMap<String, Object> map) {
+		return dao.RiderSuccessOrder(map);
+	}
+	
 	// 라이더가 배달완료한 리스트
 	public List<RiderOrderVo> riderSuccessList(int num){
 		return dao.riderSuccessList(num);

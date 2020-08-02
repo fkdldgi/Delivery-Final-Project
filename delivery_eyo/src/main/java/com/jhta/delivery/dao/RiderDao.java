@@ -58,9 +58,19 @@ public class RiderDao {
 		return session.selectList(NAMESPACE+".RiderOrderList");
 	}
 	
+	// 라이더가 배달승인
+	public int RiderAcceptOrder(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".RiderAcceptOrder", map);
+	}
+	
 	// 라이더가 배달승인받은 리스트
 	public List<RiderOrderVo> riderAcceptList(int num){
 		return session.selectList(NAMESPACE+".RiderAcceptList", num);
+	}
+	
+	// 라이더가 배달완료
+	public int RiderSuccessOrder(HashMap<String, Object> map) {
+		return session.update(NAMESPACE+".RiderSuccessOrder", map);
 	}
 	
 	// 라이더가 배달완료한 리스트

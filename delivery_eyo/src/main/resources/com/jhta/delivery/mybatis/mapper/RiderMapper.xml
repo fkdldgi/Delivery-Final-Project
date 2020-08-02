@@ -55,8 +55,8 @@
 	
 	<!-- 라이더가 받지않은 주문승인 리스트 -->
 	<select id="RiderOrderList" resultType="com.jhta.delivery.vo.RiderOrderVo">
-		select om.start_time start_time, om.end_ex_time ex_time, om.end_time end_time, om.status status, om.rider_requests requests,
-    		om.total_price total_price, sp.name shop_name, sp.tel shop_phone, sp.building_management_number shop_building_number,
+		select om.num om_num, to_char(om.start_time,'yyyy-MM-dd HH24:MI:SS') start_time, to_char(om.end_ex_time,'yyyy-MM-dd HH24:MI:SS') ex_time, to_char(om.end_time,'yyyy-MM-dd HH24:MI:SS') end_time, om.status status, om.rider_requests requests,
+    		om.total_price total_price, sp.name shop_name, sp.tel shop_phone, sp.addr shop_addr, sp.building_management_number shop_building_number,
     		sp.address_detail shop_address_detail, mm.name member_name, mm.tel member_phone,
     		mm.building_management_number member_building_number, mm.address_detail member_address_detail
 		from shop sp, member mm, (select * from order_main where rider_num is null) om
@@ -64,10 +64,17 @@
 		order by om.end_ex_time desc
 	</select>
 	
+	<!-- 라이더가 배달승인 -->
+	<update id="RiderAcceptOrder" parameterType="hashmap">
+		update order_main
+		set rider_num=#{rider_num}, status='배달승인'
+		where num=#{num}
+	</update>
+	
 	<!-- 라이더가 배달승인받은 리스트 -->
 	<select id="RiderAcceptList" parameterType="int" resultType="com.jhta.delivery.vo.RiderOrderVo">
-		select om.start_time start_time, om.end_ex_time ex_time, om.end_time end_time, om.status status, om.rider_requests requests,
-    		om.total_price total_price, sp.name shop_name, sp.tel shop_phone, sp.building_management_number shop_building_number,
+		select om.num om_num, to_char(om.start_time,'yyyy-MM-dd HH24:MI:SS') start_time, to_char(om.end_ex_time,'yyyy-MM-dd HH24:MI:SS') ex_time, to_char(om.end_time,'yyyy-MM-dd HH24:MI:SS') end_time, om.status status, om.rider_requests requests,
+    		om.total_price total_price, sp.name shop_name, sp.tel shop_phone, sp.addr shop_addr, sp.building_management_number shop_building_number,
     		sp.address_detail shop_address_detail, mm.name member_name, mm.tel member_phone,
     		mm.building_management_number member_building_number, mm.address_detail member_address_detail
 		from shop sp, member mm, (select * from order_main where rider_num=#{num}) om
@@ -75,10 +82,17 @@
 		order by om.end_ex_time desc
 	</select>
 	
+	<!-- 라이더가 배달완료 -->
+	<update id="RiderSuccessOrder" parameterType="hashmap">
+		update order_main
+		set status='배달완료', end_time=sysdate
+		where num=#{num} and rider_num=#{rider_num}
+	</update>
+	
 	<!-- 라이더가 배달완료한 리스트 -->
 	<select id="RiderSuccessList" parameterType="int" resultType="com.jhta.delivery.vo.RiderOrderVo">
-		select om.start_time start_time, om.end_ex_time ex_time, om.end_time end_time, om.status status, om.rider_requests requests,
-    		om.total_price total_price, sp.name shop_name, sp.tel shop_phone, sp.building_management_number shop_building_number,
+		select om.num om_num, to_char(om.start_time,'yyyy-MM-dd HH24:MI:SS') start_time, to_char(om.end_ex_time,'yyyy-MM-dd HH24:MI:SS') ex_time, to_char(om.end_time,'yyyy-MM-dd HH24:MI:SS') end_time, om.status status, om.rider_requests requests,
+    		om.total_price total_price, sp.name shop_name, sp.tel shop_phone, sp.addr shop_addr, sp.building_management_number shop_building_number,
     		sp.address_detail shop_address_detail, mm.name member_name, mm.tel member_phone,
     		mm.building_management_number member_building_number, mm.address_detail member_address_detail
 		from shop sp, member mm, (select * from order_main where rider_num=#{num}) om
