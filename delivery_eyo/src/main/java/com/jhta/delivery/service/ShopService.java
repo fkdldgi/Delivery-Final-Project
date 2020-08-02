@@ -23,11 +23,10 @@ public class ShopService {
 	
 	//가게등록 및 주소등록 트랜잭션
 	@Transactional
-	public int insert(ShopVo shopVo,AddressVo addrVo,Delivery_LocationVo del_locVo) {
+	public void insert(ShopVo shopVo,AddressVo addrVo,Delivery_LocationVo del_locVo) throws Exception {
 		addrDao.insert(addrVo);
 		shopDao.insert(shopVo);
 		del_locDao.insert(del_locVo);
-		return 1;
 	}
 	//기본정보 업데이트
 	public int basic_info_update(HashMap<String, Object> map) {

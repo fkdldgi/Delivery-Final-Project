@@ -10,7 +10,7 @@
 	</select>
 	
 	<!-- 카테고리 번호 MAX값 가져오기  -->
-	<select id="Max_menu_category_num" resultType="int">
+	<select id="Max_menu_category_num" resultType="String">
 		select max(num) max_num from menu_category 
 	</select>
 	
@@ -23,7 +23,7 @@
 	</select>
 
 	<!-- 메뉴번호 MAX값 가져오기 -->
-	<select id="Max_menu_num" resultType="int">
+	<select id="Max_menu_num" resultType="String">
 		select max(num) max_num from menu
 	</select>
 	

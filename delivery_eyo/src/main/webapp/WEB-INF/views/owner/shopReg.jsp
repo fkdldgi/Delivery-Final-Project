@@ -8,7 +8,7 @@
 
 /* navbar랑 form 떨어지게 하기 */
 #div_wrap {
-	margin-top: 50px;
+	margin-top: 20px;
 }
 /* form 가운데 위치하기 input이 border에 너무 붙지 않게 떼어내줌 */
 #form_wrap {
@@ -20,10 +20,12 @@
 /* 글자 밑에 언더바 넣고, 언더바 위치 설정 */
 .under_border {
 	padding-bottom: 20px;
-	border-bottom: 1px solid #ced4da;
-	margin-bottom: 30px;
+/* 	border-bottom: 1px solid #ced4da; */
+	margin-bottom: 35px;
 }
-
+.under_border>label{
+	font-size:24px
+}
 /* input 왼쪽으로 밀기 */
 #shop_open_time {
 	float: left;
@@ -99,8 +101,8 @@
 </style>
 
 <div>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand">가게추가</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-family: 'Do Hyeon', sans-serif;">
+		<a class="navbar-brand" style="font-size:24px;">가게추가</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -114,7 +116,7 @@
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<button id="add_store" class="btn btn-primary btn-lg">가게등록</button>
+					<button id="add_store" class="btn btn-info btn-lg">가게등록</button>
 				</li>
 			</ul>
 		</div>
@@ -127,11 +129,13 @@
 	null 가능
 	결제방법, 가게소개, 안내, 휴무일, 리뷰안내, 가게상태, 울트라콜, 광고클릭수
  -->
-<div id="div_wrap">
+<div id="div_wrap" style="font-family: 'Do Hyeon', sans-serif;">
 	<form id="form_wrap" action="${pageContext.request.contextPath }/owner/shopReg" method="post" enctype="multipart/form-data">
-		<div class="form-group under_border">
-			<h2>가게정보</h2>
+		<div class="form-group "style="font-family: 'Do Hyeon', sans-serif;font-size:50px;">
+			<p style="margin: 0px;">가게정보</p>
+			<hr>
 		</div>
+			<br>
 		<div class="form-group under_border">
 			<label for="">가게 프로필사진</label><br>
 			<img src="/delivery/resources/images/default.png" class="rounded-circle" id="preview" width="70" height="70">
@@ -161,60 +165,69 @@
 		<div class="form-group under_border">
 			<label>가게카테고리</label> 
 			<div class="btn-group-toggle" data-toggle="buttons" id="shop_categories">
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='프랜차이즈'>프랜차이즈
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='치킨'>치킨
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='중국집'>중국집
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='양식'>양식
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='한식'>한식
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='카페'>카페
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='일식'>일식
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='족발/보쌈'>족발/보쌈
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='야식'>야식
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' name='shop_category' value='분식'>분식
 				</label>
 			</div>
 		</div>
+		<hr>
 		<div class="form-group under_border">
 			<label for="min_price">최소주문금액</label><br> 
-			<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" required>원
+			<div class="row">
+				<div class="col-md-3">
+					<input type="number" min="0" max="100000" step="500" maxlength="6" name="min_price" id="min_price" oninput="maxLengthCheck(this)" class="form-control"required>
+				</div>
+				<div class="col-md-1" style="padding: 0px;">
+					<label style="margin-top:7px;font-size:24px;">원</label>
+				</div>
+			</div>
 		</div>
 		<div class="form-group under_border">
 			<label>결제방법</label>
 			<div class="form-check">
-				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option" value="만나서결제" required>만나서결제
+				<label class="form-check-label"  style="font-size:22px;"> 
+				<input type="radio"	class="form-check-input" name="payment_option" value="만나서결제" style="margin-top:8px;" required>만나서결제
+				</label>
+			</div>
+			<div class="form-check"> 
+				<label class="form-check-label" style="font-size:22px;"> 
+				<input type="radio"	class="form-check-input" name="payment_option" value="바로결제" style="margin-top:8px;">바로결제
 				</label>
 			</div>
 			<div class="form-check">
-				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option" value="바로결제">바로결제
-				</label>
-			</div>
-			<div class="form-check">
-				<label class="form-check-label"> 
-				<input type="radio"	class="form-check-input" name="payment_option" value="만나서결제,바로결제">만나서결제,바로결제
+				<label class="form-check-label" style="font-size:22px;"> 
+				<input type="radio"	class="form-check-input" name="payment_option" value="만나서결제,바로결제" style="margin-top:8px;">만나서결제,바로결제
 				</label>
 			</div>
 		</div>
+		<hr>
 		<div class="form-group under_border">
 			<label for="info">안내</label> 
 			<textarea class="form-control" cols="30" rows="5" placeholder="가게안내에 대한 내용을 입력하세요(선택)" id="info" name="info"></textarea>
@@ -223,31 +236,32 @@
 			<label for="review_info">리뷰안내</label>
 			<textarea class="form-control" cols="30" rows="5" placeholder="리뷰이벤트 또는 리뷰안내에 대한 내용을 입력하세요(선택)" id="review_info" name="review_info"></textarea>
 		</div>
+		<hr>
 		<div class="form-group under_border">
 			<label for="">휴무일</label><br>
 			<div class="btn-group-toggle" data-toggle="buttons" id="personal_days">
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='연중무휴'>연중무휴
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='월'>월
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='화'>화
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='수'>수
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='목'>목
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='금'>금
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='토'>토
 				</label>
-				<label class='btn btn-light border border-dark'>
+				<label class='btn btn-outline-info'>
 					<input type='checkbox' autocomplete='off' name='personal_day' value='일'>일
 				</label>
 			</div>
@@ -256,16 +270,15 @@
 			<label>운영시간</label>
 			<div>
 				<div class="row">
-					<a id="open_time" class="col-md-2">오픈시간: </a> 
-					<input type="text" class="form-control col-md-3" id="shop_open_time" name="open_time" required>
-					<a id="open_close" class="col-md-1">~</a> 
-					<a id="close_time" class="col-md-2">마감시간: </a> 
-					<input type="text" class="form-control col-md-3" id="shop_close_time" name="close_time" required>
+					<a id="open_time" style="padding:5px 15px;">오픈시간: </a> 
+					<input type="text" class="form-control col-md-2" id="shop_open_time" name="open_time" style="padding-right:0px;" required>
+					<a id="open_close" style="padding:5px 15px 5px 25px;">~</a> 
+					<a id="close_time"  style="padding:5px 15px;">마감시간: </a> 
+					<input type="text" class="form-control col-md-2" id="shop_close_time" name="close_time" style="padding:0px;"required>
 				</div>
 			</div>
 		</div>
-		
-		
+		<hr>
 		<div class="form-group under_border" id="deliveryArea">
 			<label for="sel1">배달지역</label> 
 			<select class="form-control" id="sel1">
@@ -292,10 +305,12 @@
 			<!-- 읍면동 -->
 			<div class="btn-group-toggle" data-toggle="buttons" id="chk1"></div>
 		</div>
+		<hr>
 		<div class="form-group under_border">
 			<label for="mutual_name">상호명</label> 
 			<input type="text" class="form-control" id="mutual_name" placeholder="가게 상호명을 입력해 주세요." name="mutual_name" required>
 		</div>
+		<hr>
 		<div class="form-group under_border">
 			<h2>사업자정보</h2>
 		</div>
@@ -323,8 +338,9 @@
  -->
 		<div class="form-group form-check">
 			<label class="form-check-label"></label>
-			<input type="submit" id="btn1" class="btn btn-primary btn-lg float-right" value="가게등록">
+			<input type="submit" id="btn1" class="btn btn-info btn-lg float-right" value="가게등록">
 		</div>
+		<br>
 	</form>
 </div>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -555,7 +571,7 @@
 			dataType:'json',
 			success:function(data){
 				data.result.forEach(function(item,index,array){
-					chk1.append("<label class='btn btn-light border border-dark'>"+ 
+					chk1.append("<label class='btn btn-outline-info'>"+ 
 									"<input type='checkbox' autocomplete='off' name='addr_name' value='"+item.addr_name+"'>"+item.addr_name+
 								"</label>");
 				});

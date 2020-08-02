@@ -29,7 +29,12 @@ public class Owner_OrderService {
 		return dao.update_end_ex_time(vo);
 	}
 	
-	// 계산값
+	// 정산대기 계산값
+	public List<Owner_CalVo> waiting_calList(int num){
+		return dao.waiting_calList(num);
+	}
+	
+	// 정산된 계산값
 	public List<Owner_CalVo> calList(int num){
 		return dao.calList(num);
 	}
