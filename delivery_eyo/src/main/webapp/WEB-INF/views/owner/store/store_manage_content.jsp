@@ -36,9 +36,9 @@
 			<div style="width: 50%; height: 200px; float: left; margin-top: 20px; text-align: center; border-left: 3px solid #FC5230;">
 				<input name="menu_name" style="width: 70%; margin: 15px; margin-top: 30px;" type="text" placeholder="메뉴이름" required="required"> 
 				<br> 
-				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성" required="required"> 
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="메뉴구성" class="form-control" required="required"> 
 				<br> 
-				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격" required="required">
+				<input style="width: 70%; margin: 15px; margin-top: 0px;" type="text" placeholder="가격" class="form-control" required="required">
 			</div>
 		</div>
 		<div style="margin-top: 20px; width: 50%; height: 200px; float: right; text-align: center; border-right: 3px solid #FC5230;">
@@ -94,8 +94,8 @@
 					<br><input type="text" placeholder="옵션메뉴 이름" name="option_name" class="form-control"><br>
 					<input type="text" placeholder="가격" name="option_price" class="form-control"><br>
 					<input type="text" placeholder="카테고리" name="option_category" class="form-control"><br>
-					<input type="text" value="-1" name="option_menu_num" class="form-control"><br>
-					<input type="text" value="-1" name="option_num" class="form-control">
+					<input type="hidden" value="-1" name="option_menu_num" class="form-control"><br>
+					<input type="hidden" value="-1" name="option_num" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -107,8 +107,8 @@
 		<br><input type="text" placeholder="옵션메뉴이름" name="option_name" class="form-control"><br>
 		<input type="number" placeholder="가격" name="option_price" class="form-control"><br>
 		<input type="text" placeholder="카테고리" name="option_category" class="form-control"><br>
-		<input type="text" value="-1" name="option_menu_num" class="form-control"><br>
-		<input type="text" value="-1" name="option_num" class="form-control">
+		<input type="hidden" value="-1" name="option_menu_num" class="form-control"><br>
+		<input type="hidden" value="-1" name="option_num" class="form-control">
 	</div>
 
 	<!-- 복사할 버튼 -->
@@ -180,21 +180,27 @@
 									<!-- 메뉴 -->
 									<div name="menu" style="width: 80%; margin: auto; margin-top: 0px; padding-top: 0px; border: 1px solid lightgray;">
 										<input type="text" name="menu_num" value="${menu.num}" style="display: none;">
-										<div style="margin-top: 15px; margin-bottom: 15px; padding-left: 100px;">
+										<div  class="menu_wrap" style="margin-top: 15px; margin-bottom: 15px;">
 											<!-- 여기에 input append해주기 -->
 											<div class="form-group under_border">
 												<c:if test="${menu.img}">
 												
 												</c:if>
-												<img src="/delivery/resources/menu/${menu.img }" class="rounded-circle" width="100" height="100" onclick="showFile(this)">
+												<img src="/delivery/resources/menu/${menu.img }" style="border-radius: 200px;"width="200" height="200" onclick="showFile(this)">
 												<input type="file" name="file1" accept="image/*" id="file">
 											</div>
-											<h2>
-												<input name="menu_name" type="text" placeholder="메뉴이름을 입력해 주세요." value="${menu.name }" style="width: 40%;" class="form-control">
-											</h2>
-											<span>메뉴설명:&nbsp;<input name="menu_info" placeholder="메뉴설명을 입력해 주세요." type="text" value="${menu.menu_info }" style="width: 35%;"></span> <br>
-											<span>가격:&nbsp;&nbsp;<input value="${menu.price }" type="number" min="0" max="100000" step="500" maxlength="6" name="menu_price" oninput="maxLengthCheck(this)" placeholder="가격"></span> 
-												<input type="text" name="category_list_num" style="display: none;" value="${list.num }"><br>
+											<label>메뉴 이름</label>
+												<input type="text" name="menu_name" value="${menu.name }" placeholder="메뉴이름을 입력해 주세요." style="width: 100%;" required="required"  class="form-control">
+												<br>
+												<label>메뉴 설명</label>
+												<input name="menu_info" type="text" value="${menu.menu_info }" placeholder="메뉴설명을 입력해 주세요." style="width: 100%;" required="required"  class="form-control">
+												<br>
+												<label>가격</label>
+												<div class="row">
+													<input type="number" value="${menu.price }" min="0" max="100000" step="500" maxlength="6" required="required" name="menu_price" oninput="maxLengthCheck(this)" placeholder="가격"  class="form-control" style="width: 30%;margin-left:11px;">
+													<label style="padding:5px">원</label>
+												</div>
+												<input type="text" name="category_list_num" style="display: none;" value="${list.num }" class="form-control"><br>
 												<div>
 													<div>
 														<br>
@@ -207,8 +213,8 @@
 																<br><input type="text" placeholder="옵션메뉴 이름" name="option_name" value="${menu_option.name }" class="form-control"><br>
 																<input type="number" placeholder="가격" name="option_price" value="${menu_option.price }" class="form-control"><br>
 																<input type="text" placeholder="카테고리" name="option_category" value="${menu_option.category }" class="form-control"><br>
-																<input type="text" name="option_menu_num" value="${menu.num }" class="form-control">
-																<input type="text" name="option_num" value="${menu_option.num }" class="form-control">
+																<input type="hidden" name="option_menu_num" value="${menu.num }" class="form-control">
+																<input type="hidden" name="option_num" value="${menu_option.num }" class="form-control">
 															</div>
 														</c:if>
 													</c:forEach>
