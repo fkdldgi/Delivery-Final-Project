@@ -27,7 +27,7 @@ display:flex
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3d85ff3401d499d8c4830a9da98833bd&libraries=services"></script>		
 <script>
 		
-    //주소-좌표 변환 객체를 생성
+    //주소-좌표 변환 객체를 생성.
     var geocoder = new daum.maps.services.Geocoder();
     function sample5_execDaumPostcode() {
         new daum.Postcode({ 
