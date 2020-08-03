@@ -78,9 +78,6 @@ body {
 					cursor:pointer" data-toggle="modal" data-target="#joinModal">
 					<div class="card-header" style="text-align: center;"><span>회원가입</span></div>
 				</div>
-				<div style="text-align: center;">
-					<a href="#">아이디/비밀번호 찾기</a>
-				</div>
 		</div>
 	</div>
 	<!-- 로그인 모달 -->
@@ -203,29 +200,7 @@ body {
 		}else{
 			alert("비밀번호는 8자리 이상으로 입력하셔야 합니다.");	
 			return false;
-		}
-		
-		// 이름 검증(아직 안됨)
-		var name = $("joinName").val();
-		// 이름 검증할 정규 표현식
-		let reg1 = /^[가-힣]{2,4}$/;
-		if(reg1.test(name)){
-		}else{
-			alert("이름을 다시 확인해 주세요");	
-			return false;
-		}
-		
-		// 전화 검증
-		var phone = $("joinPhone").val();
-		// 전화번호 검증할 정규 표현식
- 		let reg2=/\d{11}$/;
-
-		if (reg2.test(phone)) {//정규표현식을 통과 한다면
-		}else{
-			alert("전화번호를 다시 확인해 주세요.");		
-			return false;
-		} 
-		
+		}		
 		
 		// 아이디 검사
 		var id = $("#joinId").val();	
