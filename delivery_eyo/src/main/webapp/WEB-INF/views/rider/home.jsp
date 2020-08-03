@@ -78,9 +78,6 @@ body {
 					cursor:pointer" data-toggle="modal" data-target="#joinModal">
 					<div class="card-header" style="text-align: center;"><span>회원가입</span></div>
 				</div>
-				<div style="text-align: center;">
-					<a href="#">아이디/비밀번호 찾기</a>
-				</div>
 		</div>
 	</div>
 	<!-- 로그인 모달 -->
