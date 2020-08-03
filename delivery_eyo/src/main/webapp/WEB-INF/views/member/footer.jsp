@@ -5,7 +5,7 @@
 .jumbotron {
 background-image: url(/delivery/resources/images/footer01.png);
 background-size: cover;
-height: 150px;}
+height: 200px;margin-bottom: 0px;}
 </style>    
 <div class="jumbotron" >
 </div>

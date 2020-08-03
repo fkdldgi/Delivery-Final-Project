@@ -42,9 +42,12 @@ public class MemberService {
 	public MemberVo memberInfo(int num) {
 		return dao.memberInfo(num);
 	}
+	//회원정보 수정
 	public int update(HashMap<String, Object> map) {
 		return dao.update(map);
 	}
-
-	
+	//회원보유쿠폰
+	public List<HashMap<String, Object>> personalcouponlist(int memberNum){
+		return dao.personalcouponlist(memberNum);
+	}
 }

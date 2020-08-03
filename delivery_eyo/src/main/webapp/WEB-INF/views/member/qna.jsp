@@ -68,7 +68,7 @@
 	
 	    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 	      <div class="card-body" id="detail1">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	        환불한 금액은 일주일 이내로 처리됩니다.
 	      </div>
 	    </div>
 	  </div>
@@ -76,13 +76,13 @@
 	    <div class="card-header" id="headingTwo">
 	      <h2 class="mb-0">
 	        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" id="btn2">
-	        - 주문한 음식이 배달되지 않아요
+	        - 주문한 음식이 배달되지 않아요.
 	        </button>
 	      </h2>
 	    </div>
 	    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 	      <div class="card-body" id="detail2">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	        배달은 사장님한테 직접 문의하세요.
 	      </div>
 	    </div>
 	  </div>
@@ -96,7 +96,7 @@
 	    </div>
 	    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
 	      <div class="card-body" id="detail3">
-	        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	        음식에 이물질이 발견된 경우에는 112에 신고해주세요.
 	      </div>
 	    </div>
 	  </div>
@@ -110,7 +110,7 @@
 	    </div>
 	    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
 	      <div class="card-body" id="detail4">
-	        4번 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	        안녕하세요 사장님 사장님 회원가입의 경우 초반페이지에서 사장님용 사이트로 이동후에 회원가입을 해주시면 됩니다.
 	      </div>
 	    </div>
 	  </div>
@@ -124,7 +124,7 @@
 	    </div>
 	    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
 	      <div class="card-body" id="detail5">
-	        5번 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	        리뷰수정은 불가능합니다.
 	      </div>
 	    </div>
 	  </div>

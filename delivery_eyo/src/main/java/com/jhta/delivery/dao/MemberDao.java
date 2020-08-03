@@ -43,8 +43,13 @@ public class MemberDao {
 	public MemberVo memberInfo(int memberNum) {
 		return session.selectOne(NAMESPACE+".memberInfo", memberNum);
 	}
+	//회원정보 업데이트
 	public int update(HashMap<String, Object> map) {
 		return session.update(NAMESPACE+".update",map);
 		
+	}
+	//회원보유쿠폰
+	public List<HashMap<String, Object>> personalcouponlist(int memberNum){
+		return session.selectList(NAMESPACE+".selectpersonalcoupon", memberNum);
 	}
 }
