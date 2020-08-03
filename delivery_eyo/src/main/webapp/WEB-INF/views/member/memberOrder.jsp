@@ -44,7 +44,7 @@
 		<input type="text" name="addr_x" style="width: 60%;" hidden class="data">
 		<input type="text" name="addr_y" style="width: 60%;" hidden class="data">
 		
-	 	<input type="text" name="lastCoupon" value="0" class="data">
+	 	<input type="text" name="lastCoupon" value="0" class="data" hidden>
 	 	
 			<div class="col-8 card" style="width: 100%; margin: auto; margin-bottom: 10px;">
 				<div class="card bg-dark" style="width: 100%; height: 50px; color: white; text-align: left;">

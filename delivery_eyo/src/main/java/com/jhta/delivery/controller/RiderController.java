@@ -80,7 +80,6 @@ public class RiderController {
 	public List<RiderOrderVo> deliveryList() {
 		
 		List<RiderOrderVo> riderOrderList = service.riderOrderList();
-		System.out.println("1111111111111111111111"+riderOrderList.toString());
 		return riderOrderList;
 	}
 	

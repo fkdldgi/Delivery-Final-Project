@@ -102,8 +102,6 @@ $.ajax({
 var chk1=$("#chk1");
 //배달지역 시군구 얻어오기(accessToken은 4시간동안 유효)
 $("#sel1").change(function(){
-	
-	
 	var cityNum=this.value;
 	var sel2=$("#sel2");
 	if($("#deliveryArea input[name='delivery_sido']")!=null){

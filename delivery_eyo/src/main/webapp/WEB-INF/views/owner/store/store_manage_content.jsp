@@ -148,14 +148,6 @@
 					<h2 style="text-align: center;">메뉴관리</h2>
 					<hr>
 				</div>
-				<div class="row">
-					<h4 style="margin-left: 100px;line-height:37px;">
-						주문안내: &nbsp;&nbsp;
-					</h4>
-						<input name="shop_info" style="width: 30%;" type="text" placeholder="주문안내" value="${requestScope.vo.info }" class="form-control">
-					
-				</div>
-
 				<!-- 메뉴카테고리 명 -->
 				<c:forEach var="list" items="${menuCategoryList }">
 					<div name="category">

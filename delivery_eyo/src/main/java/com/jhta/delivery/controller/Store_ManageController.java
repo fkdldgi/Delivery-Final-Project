@@ -49,7 +49,7 @@ public class Store_ManageController {
 		model.addAttribute("list", shopList);
 		
 		if (id == null || id == "") {
-			return ".owner.error"; // 이거 수정해요
+			return ".owner.error";
 		} else {
 			return ".owner.store_manage";
 		}
