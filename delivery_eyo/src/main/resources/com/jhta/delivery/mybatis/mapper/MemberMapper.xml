@@ -21,7 +21,7 @@
 		select * from shop where num=#{num}
 	</select>
 	
-	<!-- 회원 조회 -->
+	<!-- 회원 조회 .-->
 	<select id="selectOne" parameterType="hashmap" resultType="member">
 		select * from member where id=#{id} and pwd=#{pwd}
 	</select>
