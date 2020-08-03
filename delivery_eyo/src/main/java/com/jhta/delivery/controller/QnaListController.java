@@ -71,10 +71,10 @@ public class QnaListController {
 		}
 	}
 	
-	@RequestMapping("/member/personalQna")
+	@PostMapping("/member/personalQna")
 	public String qnainsertOk(QnaVo vo) {
-		System.out.println("인서트 컨트롤러 접속");
-		System.out.println(vo.getMemberNum());
+//		System.out.println("인서트 컨트롤러 접속");
+//		System.out.println(vo.getMemberNum());
 		try {
 			System.out.println("qnaVo" + vo);
 			service.insert(vo);
