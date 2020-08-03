@@ -27,12 +27,41 @@ input {
 </style>
 </head>
 <body>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-4">
-				<img id="store_img" class="nav-link" src="/delivery/resources/images/logo.PNG">
-			</div>
+<!-- 맨 위에 뜨는 nav바 -->
+<div>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="font-family: 'Do Hyeon', sans-serif;">
+		<a class="navbar-brand mx-auto" style="font-size:24px;">어서오세요 배달이요입니다.</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#store_manage"
+			aria-controls="store_manage" aria-expanded="false"
+			aria-label="Toggle navigation">
+		</button>
+		<div class="collapse navbar-collapse" id="store_manage">
+			<ul class="navbar-nav mr-auto">
+				<!-- 가게인사랑 가게운영 href랑 떨어지게 하기 위해서 넣음 -->
+				<li class="nav-item active">
+     				<a class="nav-link" href="#">
+     					<span class="sr-only">
+     						(current)
+     					</span>
+     				</a>
+     			</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/delivery/owner/store_manage?id=${sessionScope.ownerId }" 
+								id="store_managehref" style="font-size:22px;">
+						가게운영
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/delivery/owner/board/" style="font-size:22px;">
+						공지사항
+					</a>
+				</li>
+			</ul>
 		</div>
+	</nav>
+</div>
+	<div class="container"  style="font-family: 'Do Hyeon', sans-serif;padding:50px;">
 		<h2>회원정보</h2><br>
 		<form action="${pageContext.request.contextPath }/owner/owner_update" method="post" id="updateForm" onsubmit="return submitAction();">
 			<input type="hidden" name="id" value="${ownerId }">
@@ -52,9 +81,14 @@ input {
 				<span id="emailErr" class="help-block">올바른 이메일 형식이 아닙니다. 다시 입력해주세요.</span> 
 				<span class="glyphicon glyphicon-ok form-control-feedback"></span>
 			</div>
+			<br>
 			<div class="row justify-content-end">
-				<button class="col-md-1 btn btn-outline-secondary" type="reset" onclick="history.go(-1)">취소</button>
-				<button class="col-md-1 btn btn-outline-primary" type="submit">수정</button>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" type="reset" onclick="history.go(-1)">취소</button>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" type="submit">가입</button>
+				</div>
 			</div>
 		</form>
 	</div>

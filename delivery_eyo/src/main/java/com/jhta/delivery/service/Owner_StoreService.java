@@ -30,7 +30,7 @@ public class Owner_StoreService {
 			if(dao.select_menu_categoryOne(category_num)==null) { //해당번호의 메뉴카테고리가 존재하지 않을 경우 insert
 				//새로운 카테고리에 메뉴 insert
 				dao.insertMenu_Category(categoryVo); //메뉴카테고리 추가
-				for(int j=0; j<menu_list.size(); j++) {
+				for(int j=0; j<menu_list.size(); j++) { //새로운 카테고리에 새로운 메뉴 추가
 					MenuVo menuVo=menu_list.get(j);
 					List<MenuOptionVo> menu_option_list=menuVo.getMenu_option_list(); //메뉴옵션리스트
 					dao.insertMenu_newCategory(menuVo); //메뉴카테고리 추가
