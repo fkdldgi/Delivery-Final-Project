@@ -1,11 +1,14 @@
 package com.jhta.delivery.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhta.delivery.dao.RiderDao;
+import com.jhta.delivery.vo.Order_MainVo;
+import com.jhta.delivery.vo.RiderOrderVo;
 import com.jhta.delivery.vo.RiderVo;
 
 @Service
@@ -44,4 +47,41 @@ public class RiderService {
 	public int riderUpdate(RiderVo vo) {
 		return dao.riderUpdate(vo);
 	}
+	// 라이더가 받지 않은 주문승인리스트
+	public List<RiderOrderVo> riderOrderList(){
+		return dao.riderOrderList();
+	}
+	
+	// 라이더가 배달승인
+	public int RiderAcceptOrder(HashMap<String, Object> map) {
+		return dao.RiderAcceptOrder(map);
+	}
+	
+	// 라이더가 배달승인받은 리스트
+	public List<RiderOrderVo> riderAcceptList(int num){
+		return dao.riderAcceptList(num);
+	}
+	
+	// 라이더가 배달완료
+	public int RiderSuccessOrder(HashMap<String, Object> map) {
+		return dao.RiderSuccessOrder(map);
+	}
+	
+	// 라이더가 배달완료한 리스트
+	public List<RiderOrderVo> riderSuccessList(int num){
+		return dao.riderSuccessList(num);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 package com.jhta.delivery.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,18 @@ public class Owner_OrderService {
 		return dao.update_end_ex_time(vo);
 	}
 	
-	// 계산값
+	// 정산대기 계산값
+	public List<Owner_CalVo> waiting_calList(int num){
+		return dao.waiting_calList(num);
+	}
+	
+	// 정산된 계산값
 	public List<Owner_CalVo> calList(int num){
 		return dao.calList(num);
+	}
+	
+	// 정산검색
+	public List<Owner_CalVo> cal_search(HashMap<String,Object> map){
+		return dao.cal_search(map);
 	}
 }

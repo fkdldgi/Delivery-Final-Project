@@ -29,7 +29,6 @@ public class RiderLoginController {
 	public String updateInfo(Model model, int num) {
 		
 		RiderVo vo = service.riderInfo(num);
-		
 		model.addAttribute("vo", vo);
 		
 		return ".rider.mypage";

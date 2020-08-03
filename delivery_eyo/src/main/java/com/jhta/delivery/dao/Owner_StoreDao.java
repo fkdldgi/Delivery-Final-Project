@@ -33,9 +33,14 @@ public class Owner_StoreDao {
 		return session.delete(NAMESPACE+".deleteMenu_Category", num);
 	}
 	
-	// 메뉴추가
+	// 메뉴추가(기존 카테고리리에 추가하는 경우)
 	public int insertMenu(MenuVo vo) {
 		return session.insert(NAMESPACE+".insertMenu", vo);
+	}
+	
+	// 메뉴 추가 (새로운 카테고리에 추가하는 경우)
+	public int insertMenu_newCategory(MenuVo vo) {
+		return session.insert(NAMESPACE+".insertMenu_newCategory",vo);
 	}
 	
 	// 메뉴카테고리 추가
@@ -63,9 +68,13 @@ public class Owner_StoreDao {
 		return session.selectList(NAMESPACE+".select_menu_option");
 	}
 	
-	// 메뉴옵션 추가
+	// 메뉴옵션 추가(기존 메뉴에 옵션 추가)
 	public int insert_menu_option(MenuOptionVo vo) {
 		return session.insert(NAMESPACE+".insert_menu_option", vo);
+	}
+	// 메뉴옵션 추가(새로운 메뉴에 옵션 추가)
+	public int insert_menu_option_newMenu(MenuOptionVo vo) {
+		return session.insert(NAMESPACE+".insert_menu_option_newMenu", vo);
 	}
 	
 	// 메뉴옵션 수정
@@ -97,6 +106,22 @@ public class Owner_StoreDao {
 	public int insertUpdate_MenuOption(MenuOptionVo vo) {
 		return session.insert(NAMESPACE+".insertUpdate_MenuOption", vo);
 	}
+	
+	//메뉴카테고리 번호로 메뉴카테고리 정보 가져오기
+	public MenuCategoryVo select_menu_categoryOne(int category_num) {
+		return session.selectOne(NAMESPACE+".select_menu_categoryOne",category_num);
+	}
+	
+	//메뉴번호로 메뉴정보 가져오기
+	public MenuVo select_menuOne(int menu_num) {
+		return session.selectOne(NAMESPACE+".select_menuOne",menu_num);
+	}
+	
+	//메뉴옵션번호로 메뉴옵션정보 가져오기
+	public MenuOptionVo select_menu_optionOne(int option_num) {
+		return session.selectOne(NAMESPACE+".select_menu_optionOne",option_num);
+	}
+	
 }
 
 

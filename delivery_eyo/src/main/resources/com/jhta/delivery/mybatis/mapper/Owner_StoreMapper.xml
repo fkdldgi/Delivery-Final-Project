@@ -24,11 +24,18 @@
 		delete from menu_category where num=#{num}
 	</delete>
 	
-	<!-- 메뉴 추가 -->
+	<!-- 메뉴 추가(기존 카테고리리에 추가하는 경우) -->
 	<insert id="insertMenu" parameterType="com.jhta.delivery.vo.MenuVo">
 		insert into menu
 		values(MENU_SEQ.nextval,#{name},#{menu_info},#{price},
-									1,'img',#{menu_category_num},4)
+									1,#{img},#{menu_category_num},4)
+	</insert>
+	
+	<!-- 메뉴 추가 (새로운 카테고리에 추가하는 경우) -->
+	<insert id="insertMenu_newCategory" parameterType="com.jhta.delivery.vo.MenuVo">
+		insert into menu
+		values(MENU_SEQ.nextval,#{name},#{menu_info},#{price},
+									1,#{img},MENU_CATEGORY_SEQ.currval,4)
 	</insert>
 	
 	<!-- 메뉴카테고리 추가 -->
@@ -40,8 +47,10 @@
 	<!-- 메뉴 수정 -->
 	<update id="updateMenu" parameterType="com.jhta.delivery.vo.MenuVo">
 		update menu
-		set name=#{name}, menu_info=#{menu_info}, price=#{price},
-				menu_category_num=#{menu_category_num}
+		set name=#{name}, menu_info=#{menu_info}, price=#{price}
+		<if test='img!=""'>
+			,img=#{img}
+		</if>
 		where num=#{num}
 	</update>
 	
@@ -63,10 +72,16 @@
 		select * from menu_option
 	</select>
 	
-	<!-- 메뉴옵션 추가 -->
+	<!-- 메뉴옵션 추가(기존 메뉴에 추가하는 경우) -->
 	<insert id="insert_menu_option" parameterType="com.jhta.delivery.vo.MenuOptionVo">
 		insert into menu_option
 		values(MENU_OPTION_SEQ.nextval,#{name},#{price},#{category},#{menu_num})
+	</insert>
+	
+	<!-- 메뉴옵션 추가(새로운 메뉴에 추가하는 경우) -->
+	<insert id="insert_menu_option_newMenu" parameterType="com.jhta.delivery.vo.MenuOptionVo">
+		insert into menu_option
+		values(MENU_OPTION_SEQ.nextval,#{name},#{price},#{category},MENU_SEQ.currval)
 	</insert>
 	
 	<!-- 메뉴옵션 수정 -->
@@ -131,8 +146,20 @@
 		values (menu_option_seq.nextval, #{name}, #{price}, #{category}, #{menu_num})
 	</insert>
 	
-	<!-- 메뉴, 메뉴옵션 합친거 -->
+	<!-- 메뉴카테고리번호로 메뉴카테고리 얻어오기 -->
+	<select id="select_menu_categoryOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuCategoryVo">
+		select * from menu_category where num=#{category_num}
+	</select>
 	
+	<!-- 메뉴번호로 메뉴얻어오기 -->
+	<select id="select_menuOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuVo">
+		select * from menu where num=#{menu_num}
+	</select>
+	
+	<!-- 메뉴옵션번호로 메뉴옵션 얻어오기 -->
+	<select id="select_menu_optionOne" parameterType="int" resultType="com.jhta.delivery.vo.MenuOptionVo">
+		select * from menu_option where num=#{option_num}
+	</select>
 </mapper>
 
 

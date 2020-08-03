@@ -33,11 +33,11 @@ public class Owner_MenuDao {
 	}
 	
 	//메뉴번호중 가장 큰 값 가져오기
-	public int max_menu_num() {
+	public String max_menu_num() {
 		return session.selectOne(NAMESPACE+".Max_menu_num");
 	}
 	//메뉴카테고리 번호 중 가장 큰 값 가져오기
-	public int max_menu_category_num() {
+	public String max_menu_category_num() {
 		return session.selectOne(NAMESPACE+".Max_menu_category_num");
 	}
 }

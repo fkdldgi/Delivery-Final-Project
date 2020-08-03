@@ -22,12 +22,13 @@
 		if (inputpwd === orgpwd) {
 			alert("비밀번호가 일치합니다");
 			$("input[name=email]").removeAttr("readonly");
-			$("input[name=tel]").removeAttr("readonly");
+			$("input[name=phone]").removeAttr("readonly");
 			$("input[name=changedpwd]").removeAttr("readonly");
 			$("input[name=pwd]").removeAttr("readonly");
+			$("input[name=name]").removeAttr("readonly");
 			$("span[id=before]").removeAttr("hidden");
-			$("span[id=after]").Attr("hidden");
-			$("input[name=status]:radio").removeAttr("disabled");
+			$("span[id=after]").attr("hidden");
+			$("input[name=status]").attr("disabled",false);
 		} else {
 			alert("비밀번호가 불일치합니다");
 		}
@@ -55,7 +56,7 @@
 							<div class="input-group mb-3">
 								<!-- 원래 비밀번호 가져옴 orgpwd -->
 								<input type="text" id=orgpwd value="${vo.pwd}" hidden="hidden">
-								<input type="text" class="form-control" id="inputpwd"
+								<input type="password" class="form-control" id="inputpwd"
 									placeholder="비밀번호를 입력하세요" aria-label="Recipient's username"
 									aria-describedby="button-addon2">
 								<div class="input-group-append">
@@ -100,9 +101,11 @@
 									<c:set var="ttt2" value="true"></c:set>
 								</c:otherwise>
 							</c:choose>
-							<input type="radio" id="rest" name="status" value='1' style="float: left; margin-top: 5px;" disabled="disabled" checked="${ttt }">
+							<input type="radio" id="rest" name="status" value='1' style="float: left; 
+								margin-top: 5px;" disabled="disabled" checked="${ttt }">
 							<label for="rest">휴면중</label>
-							<input type="radio" id="run" name="status" value='2' style="margin-top:5px; margin-left: 50px;" disabled="disabled" checked="${ttt2 }">
+							<input type="radio" id="run" name="status" value='2' style="margin-top:5px; 
+								margin-left: 50px;" disabled="disabled" checked="${ttt2 }">
 							<label for="run">활동중</label>
 						</td>
  					</tr>
