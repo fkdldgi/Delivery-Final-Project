@@ -18,7 +18,7 @@ public class OwnerService {
 	public int insert(OwnerVo vo) {
 		return dao.insert(vo);
 	}
-	//
+	//·Î±×ÀÎ
 	public OwnerVo selectOne(HashMap<String, Object> map) {
 		return dao.selectOne(map);
 	}

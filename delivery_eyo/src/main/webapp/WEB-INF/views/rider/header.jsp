@@ -37,7 +37,7 @@
 </script>
 <nav class="navbar navbar-expand-lg navbar-light" style="border-bottom:1px solid #dee2e6;">
 
-	<img id="logo" class="nav-link" alt="Logo" src="/delivery/resources/images/logo.PNG">
+	<img id="logo" class="nav-link" alt="Logo" src="/delivery/resources/images/rider111.PNG">
 	
 	<ul class="navbar-nav mr-auto">
 	</ul>

@@ -62,7 +62,7 @@
 		</div>
 	</nav>
 </div>
-<div style="margin: auto; padding: auto;font-family: 'Do Hyeon', sans-serif;">
+<div style="margin: auto; padding: auto;font-family: 'Do Hyeon', sans-serif;padding:20px;">
 	<div style="height: 1000px;">
 		<c:forEach var="list" items="${list }">
 			<div class="card">
