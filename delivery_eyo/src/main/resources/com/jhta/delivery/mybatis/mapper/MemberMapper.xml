@@ -38,6 +38,12 @@
 	<select id="memberInfo" parameterType="int" resultType="member">
 		select * from member where num=#{memberNum}
 	</select>
+	<select id="selectpersonalcoupon" resultType="hashmap" parameterType="int">
+		select name ,discount_price,min_price,startdate,enddate,cp.coupon_num,cp.status status
+		from coupon c ,coupon_publish cp 
+		where c.num= cp.coupon_num and c.status=1 and  member_num=#{memberNum}
+	</select>
+	
 	
 	
 </mapper>

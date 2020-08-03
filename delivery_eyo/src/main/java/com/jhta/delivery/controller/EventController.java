@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.delivery.service.Member_EventService;
@@ -22,25 +23,25 @@ public class EventController {
 		return ".member.event_main";
 	}
 	@RequestMapping("/member/event01")
-	public String event01(Model model,int coupon_num,int memberNum) {
+	public String event01(Model model,int coupon_num,@RequestParam(value = "memberNum",defaultValue = "0") int memberNum) {
 		model.addAttribute("coupon_num",coupon_num);
 		model.addAttribute("memberNum",memberNum);
 		return ".member.event01";
 	}
 	@RequestMapping("/member/event02")
-	public String event02(Model model,int coupon_num,int memberNum) {
+	public String event02(Model model,int coupon_num,@RequestParam(value = "memberNum",defaultValue = "0") int memberNum) {
 		model.addAttribute("coupon_num",coupon_num);
 		model.addAttribute("memberNum",memberNum);
 		return ".member.event02";
 	}
 	@RequestMapping("/member/event03")
-	public String event03(Model model,int coupon_num,int memberNum) {
+	public String event03(Model model,int coupon_num,@RequestParam(value = "memberNum",defaultValue = "0") int memberNum) {
 		model.addAttribute("coupon_num",coupon_num);
 		model.addAttribute("memberNum",memberNum);
 		return ".member.event03";
 	}
 	@RequestMapping("/member/event04")
-	public String event04(Model model,int coupon_num,int memberNum) {
+	public String event04(Model model,int coupon_num,@RequestParam(value = "memberNum",defaultValue = "0") int memberNum) {
 		model.addAttribute("coupon_num",coupon_num);
 		model.addAttribute("memberNum",memberNum);
 		return ".member.event04";
