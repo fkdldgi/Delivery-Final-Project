@@ -15,16 +15,16 @@
 <body>
 <div class="container">
 	<div id="thumbimg">
-		<img name="01" class="img-responsive" src="/delivery/resources/images/event_thumb01.jpg"  width="1000" height="250" onclick="location.href='/delivery/member/event01?coupon_num=2&memberNum=${memberNum}'">
+		<img name="01" class="img-responsive" src="/delivery/resources/images/event_thumb01.jpg"  width="1000" height="250" onclick="location.href='/delivery/member/event01?coupon_num=21&memberNum=${memberNum}'">
 	</div>
 	<div id="thumbimg">
-		<img name="01" class="img-responsive" src="/delivery/resources/images/event_thumb02.jpg" width="1000" height="250" onclick="location.href='/delivery/member/event02?coupon_num=3&memberNum=${memberNum}'"> 
+		<img name="01" class="img-responsive" src="/delivery/resources/images/event_thumb02.jpg" width="1000" height="250" onclick="location.href='/delivery/member/event02?coupon_num=22&memberNum=${memberNum}'"> 
 	</div>
 	<div id="thumbimg">
-		<img name="01" class="img-responsive" src="/delivery/resources/images/event_thumb03.png"  width="1000" height="250" onclick="location.href='/delivery/member/event03?coupon_num=4&memberNum=${memberNum}'"> 
+		<img name="01" class="img-responsive" src="/delivery/resources/images/event_thumb03.png"  width="1000" height="250" onclick="location.href='/delivery/member/event03?coupon_num=23&memberNum=${memberNum}'"> 
 	</div>
 	<div id="thumbimg">
-		<img  name="01" class="img-responsive" src="/delivery/resources/images/event_thumb04.jpg"  width="1000" height="250" onclick="location.href='/delivery/member/event04?coupon_num=5&memberNum=${memberNum}'"> 
+		<img  name="01" class="img-responsive" src="/delivery/resources/images/event_thumb04.jpg"  width="1000" height="250" onclick="location.href='/delivery/member/event04?coupon_num=24&memberNum=${memberNum}'"> 
 	</div>
 </div>
 </body>

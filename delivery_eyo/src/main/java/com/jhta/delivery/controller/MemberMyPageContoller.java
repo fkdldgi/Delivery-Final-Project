@@ -46,7 +46,7 @@ public class MemberMyPageContoller {
 		return ".member.personalCoupon";
 	}
 	@PostMapping("/member/mypageOk")
-	public String changemypage(int num,String email,String tel,String pwd,MultipartFile file1,HttpSession session) {
+	public String changemypage(int num,String email,String tel,String pwd,MultipartFile file1,HttpSession session,Model model) {
 		System.out.println("5678");
 		//업로드할 폴더 경로 얻어오기
 		String uploadPath=session.getServletContext().getRealPath("/resources/images");
@@ -80,6 +80,9 @@ public class MemberMyPageContoller {
 			map.put("pwd",pwd);
 			map.put("img",savefileName);
 			int n=service.update(map);
+			MemberVo vo=service.memberInfo(num);
+
+			model.addAttribute("vo",vo);
 			
 			return ".member.mypage";
 		}catch(IOException ie) {
