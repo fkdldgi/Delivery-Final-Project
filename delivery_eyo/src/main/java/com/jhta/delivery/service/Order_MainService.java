@@ -61,6 +61,30 @@ public class Order_MainService {
 		return 1;
 	}
 	
+	@Transactional
+	public int orderInsert2(Order_MainVo vo1, ArrayList<Order_MenuVo> menuList, ArrayList<Order_Menu_OptionVo> optionList, AddressVo addVo) {
+		AddressVo avo=addDao.selectByBuildingcode(addVo.getBuildingCode());
+		if(avo == null) {
+			addDao.insert(addVo);
+		}
+		orderMinDao.insert(vo1);
+		for(int i=0; i<menuList.size(); i++) {
+			orderMenuDao.insert(menuList.get(i));
+			if(optionList != null) {
+				for(int j=0; j<optionList.size(); j++) {
+					int menu_menuNum = menuList.get(i).getMenu_num();
+					int option_menuOptionNum = optionList.get(j).getmenu_option_num();
+					int option_menuNum = orderMinDao.getOrderMenuNumBy(option_menuOptionNum);
+					
+					if(menu_menuNum == option_menuNum) {
+						orderOptionDao.insert(optionList.get(j));
+					}
+				}
+			}
+		}
+		return 1;
+	}
+	
 	//메뉴 번호로 매뉴 가격 가져오기
 	public int getMenuPrice(int num) {
 		return orderMinDao.getMenuPrice(num);
