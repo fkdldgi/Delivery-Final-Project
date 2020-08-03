@@ -5,16 +5,24 @@
 <mapper namespace="mybatis.ShopMapper">
 	<!-- 가게등록 -->
 	<insert id="insert" parameterType="shop">
-		insert into shop(num,profile_img,name,introduce,tel,buildingCode,address_detail,shop_category,min_price,payment_option,info,review_info,personal_day,open_time,close_time,mutual_name,addr,reg_num,reg_status,status,ultracall,addcount,owner_num,regdate)
-		values(SHOP_SEQ.NEXTVAL,#{profile_img},#{name},#{introduce},#{tel},#{buildingCode},#{address_detail},#{shop_category},#{min_price},#{payment_option},#{info},#{review_info},#{personal_day},#{open_time},#{close_time},#{mutual_name},#{addr},#{reg_num},0,0,0,0,#{owner_num},sysdate)
+		insert into shop(num,profile_img,name,introduce,tel,buildingCode,
+		address_detail,shop_category,min_price,payment_option,
+		info,review_info,personal_day,open_time,close_time,mutual_name,addr,
+		reg_num,reg_status,status,ultracall,addcount,owner_num,regdate)
+		values(SHOP_SEQ.NEXTVAL,#{profile_img},#{name},#{introduce},#{tel},#{buildingCode},
+		#{address_detail},#{shop_category},#{min_price},
+		#{payment_option},#{info},#{review_info},#{personal_day},#{open_time},#{close_time},
+		#{mutual_name},#{addr},#{reg_num},0,0,0,0,#{owner_num},sysdate)
 	</insert>
 	<!-- 기본정보 업데이트 -->
 	<update id="basicinfo_update" parameterType="hashmap">
-		update shop set profile_img=#{profile_img},introduce=#{introduce},info=#{info},review_info=#{review_info},tel=#{tel},status=#{status} where num=#{num}
+		update shop set profile_img=#{profile_img},introduce=#{introduce},info=#{info},
+		review_info=#{review_info},tel=#{tel},status=#{status} where num=#{num}
 	</update>
 	<!-- 운영정보 업데이트 -->
 	<update id="operationinfo_update" parameterType="hashmap">
-		update shop set shop_category=#{shop_category},payment_option=#{payment_option},open_time=#{open_time},close_time=#{close_time},personal_day=#{personal_day} where num=#{num}
+		update shop set shop_category=#{shop_category},payment_option=#{payment_option},
+		open_time=#{open_time},close_time=#{close_time},personal_day=#{personal_day} where num=#{num}
 	</update>
 	<!-- 최소주문금액 업데이트 -->
 	<update id="min_price_update" parameterType="hashmap">

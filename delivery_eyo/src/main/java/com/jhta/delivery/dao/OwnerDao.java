@@ -20,7 +20,7 @@ public class OwnerDao {
 	public int insert(OwnerVo vo) {
 		return session.insert(NAMESPACE+".insert",vo);
 	}
-	//
+	//·Î±×ÀÎ
 	public OwnerVo selectOne(HashMap<String, Object> map) {
 		return session.selectOne(NAMESPACE+".selectOne",map);
 	}
