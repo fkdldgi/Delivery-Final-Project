@@ -20,8 +20,9 @@
 
 </script>
 <body>
-	<div style="margin: auto; padding: auto; text-align: center;">
-		<img src="/delivery/resources/images/owner_order.png" style="width: 750px; height: 200px;">
+	<!-- img 넣는 div -->
+	<div style="margin: auto; padding: auto; width: 80%; text-align: center;">
+		<img src="/delivery/resources/images/owner_order.png" style="margin: auto; margin-top: 0px; margin-bottom: 0px; padding: auto; padding-top: 0px; padding-bottom: 0px; width: 500px; height: 150px;">
 	</div>
 	
 	<!-- 가게에 들어온 주문 확인하기 -->

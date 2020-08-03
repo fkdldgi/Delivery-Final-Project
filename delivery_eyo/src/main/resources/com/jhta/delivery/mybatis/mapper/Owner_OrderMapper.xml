@@ -45,18 +45,26 @@
 	
 	<!-- 정산 대기중인 계산값 -->	
 	<select id="Owner_waiting_transaction" parameterType="int" resultType="com.jhta.delivery.vo.Owner_CalVo">
-		select substr(cal_date,1,2) year, substr(cal_date,4,2) month, sum(real_amount)real_amount, sum(commission) commission
+		select to_char(cal_date,'yyyy-mm') year, sum(real_amount) real_amount, sum(commission) commission
 		from settlement
 		where shop_num=#{num} and settlement_status=0
-		group by substr(cal_date,1,2), substr(cal_date,4,2)
+		group by ROLLUP(to_char(cal_date,'yyyy-mm'))
 	</select>
 	
 	<!-- 정산이 완료된 계산값 -->
 	<select id="Owner_transaction" parameterType="int" resultType="com.jhta.delivery.vo.Owner_CalVo">
-		select substr(cal_date,1,2) year, substr(cal_date,4,2) month, sum(real_amount)real_amount, sum(commission) commission
+		select to_char(cal_date,'yyyy-mm') year, sum(real_amount) real_amount, sum(commission) commission
 		from settlement
 		where shop_num=#{num} and settlement_status=1
-		group by substr(cal_date,1,2), substr(cal_date,4,2)
+		group by ROLLUP(to_char(cal_date,'yyyy-mm'))
+	</select>
+	
+	<!-- 정산검색 -->
+	<select id="Owner_Cal_Search" parameterType="hashmap" resultType="com.jhta.delivery.vo.Owner_CalVo">
+		select to_char(cal_date,'yyyy-mm') year, sum(real_amount) real_amount, sum(commission) commission
+		from settlement
+		where shop_num=#{num} and settlement_status=1 and to_char(cal_date,'yyyy')=#{year} and to_char(cal_date,'mm')=#{month}
+		group by ROLLUP(to_char(cal_date,'yyyy-mm'))
 	</select>
 	
 	
