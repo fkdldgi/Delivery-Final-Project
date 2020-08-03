@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 추가 (comments는 null) -->
 	<insert id="insert" parameterType="Qna">
-		insert into inquiry_board values(INQUIRY_BOARD_seq.nextval,#{name},#{email},#{category},#{title},#{content},sysdate,4,#{memberNum},null)
+		insert into inquiry_board values(INQUIRY_BOARD_seq.nextval,#{name},#{email},#{category},#{title},#{content},sysdate,61,#{memberNum},null)
 	</insert>
 	<!-- 상세 -->
 	<select id="detail" parameterType="int" resultType="Qna">
