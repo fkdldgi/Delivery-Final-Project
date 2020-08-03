@@ -88,53 +88,6 @@ input {
 			</div>
 		</form>
 	</div>
-
-
-	<!-- 
-	<div>
-	<form method="post" action="${pageContext.request.contextPath }/owner/join" id="joinForm">
-		<div class="row justify-content-center">
-			<div class="col-md-4">
-				<img id="store_img" class="nav-link" src="/delivery/resources/images/logo.PNG">
-			</div>
-		</div>
-		<table id="join_table" class="table text-center">
-			<tr>
-				<td>아이디</td>
-				<td><input  class="input check-id error" type="text" name="id" placeholder="아이디를 입력하세요." required="required"></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="pwd" placeholder="비밀번호를 입력하세요." required="required"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>비밀번호재확인</td>
-				<td><input type="password" name="rePwd" placeholder="비밀번호를 입력하세요." required="required"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="name" placeholder="이름을 입력하세요." required="required"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td><input type="text" name="email" placeholder="이메일을 입력하세요." required="required"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td><input type="text" name="tel" placeholder="전화번호를 입력하세요." required="required"></td>
-				<td></td>
-			</tr>
-		</table>
-		<div class="row justify-content-end">
-			<button class="col-md-1 btn btn-outline-secondary" type="reset">취소</button>
-			<button class="col-md-1 btn btn-outline-primary" type="submit">가입</button> 
-		</div>
-	</form>
-	</div>-->
 </body>
 <script type="text/javascript">
 //아이디 입력란에 keyup 이벤트가 일어 났을때 실행할 함수 등록 
