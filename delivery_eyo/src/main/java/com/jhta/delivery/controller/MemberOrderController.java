@@ -84,61 +84,12 @@ public class MemberOrderController {
 	//주문페이지에서 주문 api로 넘어가는 컨트롤러
 	@RequestMapping("/member/order")
 	public String order(HttpServletRequest req) {
-//		System.out.println(req.getParameter("buildingCode"));
-//		System.out.println(req.getParameter("zonecode"));
-//		System.out.println(req.getParameter("address"));
-//		System.out.println(req.getParameter("addressEnglish"));
-//		System.out.println(req.getParameter("addressType"));
-//		System.out.println(req.getParameter("userSelectedType"));
-//		System.out.println(req.getParameter("userLanguageType"));
-//		System.out.println(req.getParameter("roadAddress"));
-//		System.out.println(req.getParameter("roadAddressEnglish"));
-//		System.out.println(req.getParameter("jibunAddress"));
-//		System.out.println(req.getParameter("jibunAddressEnglish"));
-//		System.out.println(req.getParameter("buildingName"));
-//		System.out.println(req.getParameter("apartment"));
-//		System.out.println(req.getParameter("sido"));
-//		System.out.println(req.getParameter("sigungu"));
-//		System.out.println(req.getParameter("sigunguCode"));
-//		System.out.println(req.getParameter("roadnameCode"));
-//		System.out.println(req.getParameter("bcode"));
-//		System.out.println(req.getParameter("roadname"));
-//		System.out.println(req.getParameter("bname"));
-//		System.out.println(req.getParameter("bname1"));
-//		System.out.println(req.getParameter("bname2"));
-//		System.out.println(req.getParameter("hname"));
-//		System.out.println(req.getParameter("query"));
-//		System.out.println(req.getParameter("addr_x"));
-//		System.out.println(req.getParameter("addr_y"));
-		
-		
-//		
-//		System.out.println(req.getParameter("shopNum"));
-//		System.out.println(req.getParameter("memberNum"));
-//		System.out.println(req.getParameter("userAddr"));
-//		System.out.println(req.getParameter("addr_detail"));
-//		System.out.println(req.getParameter("tel"));
-//		System.out.println(req.getParameter("owner_request"));
-//		System.out.println(req.getParameter("rider_request"));
-//		System.out.println(req.getParameter("menuNum"));
-//		System.out.println(req.getParameter("optionNum"));
-//		System.out.println(req.getParameter("volume").trim());
-//		System.out.println(req.getParameter("lastPrice"));
-		
-		System.out.println("메뉴 번호 크기 : " + req.getParameterValues("menuNum").length);
-//		System.out.println("옵션 번호 크기 : " + req.getParameterValues("optionNum").length);
-		System.out.println("메뉴 번호 : " + req.getParameterValues("menuNum")[0]);
-	//		System.out.println("옵션 번호 : " + req.getParameterValues("optionNum")[0]);
-	//	System.out.println("옵션 번호 : " + req.getParameter("optionNum"));
-		System.out.println("수량 : " + req.getParameter("volume").trim());
-		
-		
-		System.out.println("쿠폰 정보 :" + req.getParameter("lastCoupon"));
-		String couponInfo = req.getParameter("lastCoupon");
-		//int cNum = Integer.parseInt(couponInfo.split(",")[0]);
-		int cpNum = Integer.parseInt(couponInfo.split(",")[1]);
-		//int cPrice = Integer.parseInt(couponInfo.split(",")[2]);
-		
+		int cpNum=0;
+		String couponInfo = req.getParameter("lastCoupon").trim();
+		if(!(couponInfo.equals("0"))) {
+			cpNum = Integer.parseInt(couponInfo.split(",")[1]);
+			System.out.println("쿠폰 사용 안할 때 : " + cpNum);
+		}
 		HashMap<String, Object> couponMap = new HashMap<String, Object>();
 		couponMap.put("num", cpNum);
 		
@@ -146,9 +97,6 @@ public class MemberOrderController {
 		int lastPrice;
 		int price = 0;
 		int shopNum = Integer.parseInt(req.getParameter("shopNum"));
-		
-		System.out.println("지번 어드레스 : " + req.getParameter("jibunAddress"));
-		
 		AddressVo addVo = new AddressVo(
 				req.getParameter("buildingCode"),
 				req.getParameter("zonecode"),
@@ -220,7 +168,13 @@ public class MemberOrderController {
 			}
 		}
 		try {
-			orderMainService.orderInsert(orderMainvo, menuList, optionList, addVo, couponMap);
+			if(cpNum==0) {
+				System.out.println("쿠폰 미사용");
+				orderMainService.orderInsert2(orderMainvo, menuList, optionList, addVo);
+			}else {
+				System.out.println("쿠폰 사용");
+				orderMainService.orderInsert(orderMainvo, menuList, optionList, addVo, couponMap);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

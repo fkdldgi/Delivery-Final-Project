@@ -47,11 +47,6 @@ public class Store_Manage_ReviewController {
 		
 		vo.setOwner_num(shop_vo.getOwner_num());
 		
-		System.out.println(vo.getContent());
-		System.out.println(vo.getRegdate());
-		System.out.println(vo.getRef());
-		System.out.println(vo.getShop_num());
-		
 		// ¸®ºäµî·Ï
 		owner_review_service.insert_OwnerRereview(vo);
 		
