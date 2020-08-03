@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -32,6 +33,17 @@ public class MemberMyPageContoller {
 		System.out.println("11");
 		model.addAttribute("vo",vo);
 		return ".member.mypage";
+	}
+	//회원이 가진 쿠폰 정보 조회.
+	@RequestMapping(value = "/member/personalCoupon")
+	public String personalCoupon(int memberNum,Model model) {
+		List<HashMap<String, Object>> list1=service.personalcouponlist(memberNum);
+		System.out.println("회원이 가진 쿠폰 리스트" + list1);
+		model.addAttribute("list1",list1);
+		model.addAttribute("list1",list1);
+		model.addAttribute("list1",list1);
+		model.addAttribute("memberNum", memberNum);
+		return ".member.personalCoupon";
 	}
 	@PostMapping("/member/mypageOk")
 	public String changemypage(int num,String email,String tel,String pwd,MultipartFile file1,HttpSession session) {

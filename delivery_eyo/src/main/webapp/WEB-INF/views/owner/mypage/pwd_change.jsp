@@ -62,7 +62,7 @@ input {
 	</nav>
 </div>
 
-	<div class="container" style="font-family: 'Do Hyeon', sans-serif;">
+	<div class="container" style="font-family: 'Do Hyeon', sans-serif;padding:50px;">
 		<h2>계정정보</h2><br>
 		<form action="${pageContext.request.contextPath }/owner/pwdChange" method="post" id="joinForm" onsubmit="return submitAction();">
 			<input type="hidden" name="id" value="${ownerId }">
@@ -83,9 +83,14 @@ input {
 				<input class="form-control" type="password" id="rePwd" />
 				<span id="rePwdErr" class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해주세요.</span> 
 			</div>
+			<br>
 			<div class="row justify-content-end">
-				<button class="col-md-1 btn btn-outline-secondary" type="reset" onclick="history.go(-1)">취소</button>
-				<button class="col-md-1 btn btn-outline-primary" type="submit">가입</button>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" type="reset" onclick="history.go(-1)">취소</button>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" type="submit">가입</button>
+				</div>
 			</div>
 		</form>
 	</div>

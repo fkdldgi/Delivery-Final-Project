@@ -7,11 +7,11 @@
 	<!-- 대표메뉴 리스트 가져오기 -->
 	<select id="mainMenuList" parameterType="int" resultType="com.jhta.delivery.vo.MenuVo">
 		select * from menu
-		where menu_category_num=(select num from MENU_CATEGORY 
+		where menu_category_num in (select num from MENU_CATEGORY 
                                	where shop_num=(select num 
 												from shop 
 												where num=#{num}) 
-                                and main_menu=1) 
+                                and main_menu=0) 
         order by priority asc
 	</select>
 	

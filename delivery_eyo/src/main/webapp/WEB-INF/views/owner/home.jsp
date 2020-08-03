@@ -9,12 +9,12 @@
 </script>
 <style>
 	#carouselExampleInterval{
-		height: 700px;
-		/* margin-top: 50px; */
+		height: 500px;
+		 margin-top: 50px; 
 	}
 	
 	#carouselExampleInterval2{
-		height: 700px;
+		height: 500px;
 	}
 </style>
 			<!-- 맨 위에 뜨는 nav바 -->
@@ -65,20 +65,20 @@
 			<img
 				src="/delivery/resources/images/owner_carousel1.png"
 				class="d-block w-75 h-50" 
-				 style="margin: auto; border: 4px solid #2FA599; width:100% !important;height:500px !important;"
+				 style="margin: auto; border: 4px solid #2FA599; width:75% !important;height:450px !important;"
 				 alt="...">
 		</div>
 		<div class="carousel-item" data-interval="3000">
 			<img
 				src="/delivery/resources/images/owner_carousel2.png"
 				class="d-block w-75 h-75"
-				 style="margin: auto; border: 4px solid #FCAB1E; width:100% !important;height:500px !important;" alt="...">
+				 style="margin: auto; border: 4px solid #FCAB1E; width:75% !important;height:450px !important;" alt="...">
 		</div>
 		<div class="carousel-item" data-interval="3000">
 			<img
 				src="/delivery/resources/images/owner_carousel3.png"
 				class="d-block w-75 h-100"
-				 style="margin: auto; border: 4px solid #139164; width:100% !important;height:500px !important;" alt="...">
+				 style="margin: auto; border: 4px solid #139164; width:75% !important;height:450px !important;" alt="...">
 		</div>
 		<div class="slide-count-wrap">
 			<span class="slide-count"><span class="current"></span>  <span
@@ -104,7 +104,7 @@
 	<div class="carousel-inner">
 		<div class="carousel-item active">
 			<img
-				style="margin: auto; border: 4px solid #FECCBE;"
+				style="margin: auto; border: 4px solid #FECCBE; height:450px !important;"
 				src="/delivery/resources/images/Hoxy.png"
 				class="d-block w-75 h-50" 
 				 alt="...">

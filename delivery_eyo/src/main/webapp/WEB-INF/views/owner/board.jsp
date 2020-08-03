@@ -6,8 +6,8 @@
 <!-- 맨위에 띄워지는 공지사항 nav -->
 <div>
     <div>
-     	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-     		<a class="navbar-brand" href="#">공지사항</a>
+     	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-family: 'Do Hyeon', sans-serif;">
+     		<a class="navbar-brand" href="#" style="font-size:24px;">공지사항</a>
      		<button class="navbar-toggler" type="button" data-toggle="collapse" 
 	     		data-target="#navbarColor01" 
 	     		aria-controls="navbarColor01" aria-expanded="false"
@@ -24,7 +24,7 @@
      					</a>
      				</li>
      				<li class="nav-item">
-     					<a class="nav-link">공지사항을 확인해주세요~</a>
+     					<a class="nav-link" style="font-size:22px;">공지사항을 확인해주세요~</a>
      				</li>
      			</ul>
      			<!--  
@@ -42,7 +42,7 @@
      </div>
 </div>
 <br>
-<div class="container">
+<div class="container" style="min-height: 700px;">
 	<img class="d-block mx-auto mb-4" src="/delivery/resources/images/owner_notice_logo.png" width="700" height="150">
 	<table class="table">
 		<thead>
@@ -82,14 +82,24 @@
 </div>
 	<div>
 		<form method="post" action="/delivery/owner/board">
-			<select name="field">
-				<option value="title"
-					<c:if test="${field=='title' }">seleted</c:if>>제목</option>
-				<option value="content"
-					<c:if test="${field=='content' }">seleted</c:if>>내용</option>
-			</select>
-			<input type="text" name="keyword">
-			<input type="submit" name="검색">		
+			<br>
+			<div class="row">
+				<div class="col-md-2">
+					<select name="field" class="form-control">
+						<option value="title"
+							<c:if test="${field=='title' }">seleted</c:if>>제목</option>
+						<option value="content"
+							<c:if test="${field=='content' }">seleted</c:if>>내용</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<input type="text" name="keyword" class="form-control">
+				</div>
+				<div class="col-md-1" style="padding:3px;">
+					<input type="submit" name="검색" class="btn btn-outline-info btn-sm">		
+				</div>
+			</div>
+			<br>
 		</form>
 	</div>
 </div>

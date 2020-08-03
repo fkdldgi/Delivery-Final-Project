@@ -28,8 +28,11 @@
 <script type="text/javascript">
 
 function coupon(memberNum ,coupon_num){
-	console.log(memberNum);
-	console.log(coupon_num);
+	if (memberNum==0) {
+		alert("로그인 후 사용가능합니다.");
+		location.href="/delivery/member/event_main"
+		return
+	}
 	$.ajax({
 		url:"/delivery/member/event",
 		data:{memberNum:memberNum,coupon_num:coupon_num},

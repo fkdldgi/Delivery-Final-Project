@@ -58,7 +58,7 @@
 		(select menu_num 
 			from ORDER_MENU menu,ORDER_MAIN main 
 			where main.review_status=0
-            and main.status='배달완료'
+            and main.status='정산완료'
             and main.num=MENU.order_num 
 			and MAIN.num=#{order_main_num} 
 			and MAIN.member_num=#{member_num})

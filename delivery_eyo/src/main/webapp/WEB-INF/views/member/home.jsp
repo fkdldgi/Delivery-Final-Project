@@ -3,48 +3,50 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 이벤트 슬라이드 div -->
-<div style="height: 500px;" id="carouselExampleInterval"
-	class="carousel slide" data-ride="carousel">
-	<ol class="carousel-indicators">
-		<li data-target="#carouselExampleInterval" data-slide-to="0"
-			class="active"></li>
-		<li data-target="#carouselExampleInterval" data-slide-to="1"></li>
-		<li data-target="#carouselExampleInterval" data-slide-to="2"></li>
-	</ol>
-	<div class="carousel-inner">
-		<div class="carousel-item active" data-interval="1000">
-			<img
-				src="/delivery/resources/images/main_1year_01.png"
-				class="d-block w-100 h-50" alt="...">
+<div class="container">
+	<div style="height: 450px;" id="carouselExampleInterval"
+		class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleInterval" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carouselExampleInterval" data-slide-to="1"></li>
+			<li data-target="#carouselExampleInterval" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" style="height: 450px">
+			<div class="carousel-item active" data-interval="1000">
+				<img
+					src="/delivery/resources/images/main_1year_01.png"
+					class="d-block w-100" alt="..." style="height: 450px;">
+			</div>
+			<div class="carousel-item" data-interval="1000">
+				<img
+					src="/delivery/resources/images/main_summer_enent_01.png"
+					class="d-block w-100" alt="..." style="height: 450px;">
+			</div>
+			<div class="carousel-item" data-interval="1000">
+				<img
+					src="/delivery/resources/images/main_healthy_event.png"
+					class="d-block w-100" alt="..." style="height: 450px;">
+			</div>
+			<div class="slide-count-wrap">
+				<span class="slide-count"><span class="current">1</span> / <span
+					class="total">3</span></span> <a href="javascript:;" class="btn-play">btnPlay</a>
+			</div>
 		</div>
-		<div class="carousel-item" data-interval="1000">
-			<img
-				src="/delivery/resources/images/main_summer_enent_01.png"
-				class="d-block w-100 h-50" alt="...">
-		</div>
-		<div class="carousel-item" data-interval="1000">
-			<img
-				src="https://cdn.dominos.co.kr/admin/upload/banner/20200702_QYoGi71J.jpg"
-				class="d-block w-100 h-100" alt="...">
-		</div>
-		<div class="slide-count-wrap">
-			<span class="slide-count"><span class="current">1</span> / <span
-				class="total">3</span></span> <a href="javascript:;" class="btn-play">btnPlay</a>
-		</div>
+		<a class="carousel-control-prev" href="#carouselExampleInterval"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleInterval"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
 	</div>
-	<a class="carousel-control-prev" href="#carouselExampleInterval"
-		role="button" data-slide="prev"> <span
-		class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-		class="sr-only">Previous</span>
-	</a> <a class="carousel-control-next" href="#carouselExampleInterval"
-		role="button" data-slide="next"> <span
-		class="carousel-control-next-icon" aria-hidden="true"></span> <span
-		class="sr-only">Next</span>
-	</a>
 </div>
 
 <!-- 카테로그 블록 div -->
-<div class="row" style="width: 80%; margin: auto; margin-bottom: 100px;">
+<div class="row" style="width: 80%; margin: auto; margin-bottom: 100px; margin-top: 100px;">
 	<!-- 오늘의 혜택 블록 -->
 	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
 		<a href="/delivery/member/event_main" class="thumbnail"> <img
