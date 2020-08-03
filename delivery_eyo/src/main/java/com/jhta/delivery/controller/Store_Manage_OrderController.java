@@ -44,9 +44,6 @@ public class Store_Manage_OrderController {
 	@PostMapping("/owner/store_manage/order_accept")
 	public String manage_order_accept(Model model, int num, Owner_OrderVo vo) {
 		
-		System.out.println(vo.getMain_num());
-		System.out.println(vo.getEnd_ex_time());
-		
 		vo.setStatus("¡÷πÆΩ¬¿Œ");
 		
 		int n = owner_order_service.update_end_ex_time(vo);
