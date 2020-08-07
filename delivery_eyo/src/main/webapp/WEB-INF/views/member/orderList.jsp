@@ -21,7 +21,7 @@
 <c:forEach var="list" items= "${list1}">
   <div class="col-md-6 mb-md-0 p-md-4">
   <hr style="border: 1px solid darkgray;">
-    <img src="${pageContext.request.contextPath }/resources/images/${list.PROFILE_IMG}" class="w-100" alt="/delivery/member/storeDetail">
+    <img src="${pageContext.request.contextPath }/resources/profile/${list.PROFILE_IMG}" class="w-100" alt="/delivery/member/storeDetail">
   </div>
   <div class="col-md-6 position-static p-4 pl-md-0">
   <hr style="border: 1px solid darkgray;">

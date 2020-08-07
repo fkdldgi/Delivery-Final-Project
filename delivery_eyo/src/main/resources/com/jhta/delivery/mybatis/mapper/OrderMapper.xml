@@ -6,7 +6,7 @@
 <!--/////////////// insert 부분 //////////////////////-->	
 	<!-- 주문  -->
 	<insert id="Order_Main_insert" parameterType="com.jhta.delivery.vo.Order_MainVo">
-		insert into ORDER_MAIN values(ORDER_MAIN_SEQ.nextval,sysdate,null,null,#{member_num},#{addr_num},#{addr_detail},61,'주문요청',101,#{owner_requests},#{rider_requests},#{total_price},0,0,#{shop_num})
+		insert into ORDER_MAIN values(ORDER_MAIN_SEQ.nextval,sysdate,null,null,#{member_num},#{addr_num},#{addr_detail},61,'주문요청',null,#{owner_requests},#{rider_requests},#{total_price},0,0,#{shop_num})
 	</insert>
 	
 	<!-- 주문메뉴  -->

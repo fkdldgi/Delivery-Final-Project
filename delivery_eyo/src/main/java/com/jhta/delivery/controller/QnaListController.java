@@ -79,8 +79,7 @@ public class QnaListController {
 			System.out.println("qnaVo" + vo);
 			service.insert(vo);
 			//성공하면 다시 리스트로 돌아가도록
-			System.out.println("인서트 성공!");
-			return ".member.QnaList";
+			return ".member.home";
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());

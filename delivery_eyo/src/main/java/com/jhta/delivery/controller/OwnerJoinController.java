@@ -22,7 +22,7 @@ public class OwnerJoinController {
 	public String joinOk(OwnerVo vo) {
 		try {
 			service.insert(vo);
-			return ".owner.success";
+			return ".owner.home";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return ".owner.error";

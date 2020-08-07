@@ -32,14 +32,14 @@
 	
 	
 	<!-- 가게 리스트 -->
-	<select id="shopList" parameterType="hashmap" resultType="com.jhta.delivery.vo.ShopVo">
+	<select id="shopList" parameterType="hashmap"
+		resultType="com.jhta.delivery.vo.ShopVo">
 		select * 
 		from 
 			(select aa.*,rownum rnum 
 				from 
 					(select * 
 						from shop
-						where reg_status=1 
 						order by rownum desc) 
 			aa) 
 		where <![CDATA[ rnum>=#{startrow} and rnum<=#{endrow}]]>
